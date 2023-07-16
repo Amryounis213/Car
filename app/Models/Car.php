@@ -25,7 +25,7 @@ class Car extends Model
         return $this->belongsTo(Color::class, 'color_id_out');
     }
 
-    public function Modele()
+    public function Model()
     {
         return $this->belongsTo(CarModel::class, 'car_model_id');
     }
@@ -45,11 +45,9 @@ class Car extends Model
         return $this->belongsTo(Brand::class, 'brand_id');
     }
 
-
-
     public function GetTitleAttribute()
     {
-        return $this->Brand->name . ',' . $this->Modele->name . ',' . $this->CarTypes->name . ',' . $this->Generations->name ;
+        return $this->Brand->name . ',' . $this->Model->name . ',' . $this->CarTypes->name . ',' . $this->Generations->name ;
     }
 
 }

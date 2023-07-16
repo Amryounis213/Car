@@ -24,17 +24,16 @@ Route::get('/', function () {
     // return $car ;
     return view('website.car' , compact('car' , 'RandomCars'));
 });
-<<<<<<< HEAD
 Route::get('/account', function () {
     // return view('website.welcome');
     $user = User::first();
+    $cars = Car::all();
+    $mycars = Car::all();
 
     // return $car ;
-    return view('website.account' , compact('user'));
+    return view('website.account' , compact('user', 'cars', 'mycars'));
 });
-=======
 
 
 
 Route::post('add-to-favorite', [FrontEndController::class , 'addToFavourite'])->name('add.to.favorite');
->>>>>>> f84b0e34dcd8221c1decdf32f97110516c371d05
