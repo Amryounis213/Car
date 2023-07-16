@@ -241,3 +241,14 @@
 	</main>
 	<!-- end main content -->
 @endsection
+
+@section('script')
+<script src="https://code.jquery.com/jquery-3.7.0.min.js" ></script>
+	<script>
+		//jquery document ready
+		$(document).ready(function(){
+			alert(123);
+		});
+
+	</script>
+@endsection

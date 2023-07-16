@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Website\FrontEndController;
 use App\Models\Car;
 use Illuminate\Support\Facades\Route;
 
@@ -22,3 +23,7 @@ Route::get('/', function () {
     // return $car ;
     return view('website.car' , compact('car' , 'RandomCars'));
 });
+
+
+
+Route::post('add-to-favorite', [FrontEndController::class , 'addToFavourite'])->name('add.to.favorite');
