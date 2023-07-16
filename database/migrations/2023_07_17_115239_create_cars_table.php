@@ -40,6 +40,13 @@ return new class extends Migration
             $table->integer('length')->nullable();
             $table->string('main_image')->nullable();
             $table->json('images')->nullable();
+
+            $table->string('techenical_control')->nullable();
+            $table->boolean('first_hand')->nullable();
+            $table->date('release_date')->nullable();
+            $table->integer('trunk_volume')->nullable();
+            
+
             $table->timestamps();
         });
     }

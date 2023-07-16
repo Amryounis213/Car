@@ -56,6 +56,12 @@ class DatabaseSeeder extends Seeder
             'name' => $faker->colorName,
         ]);
 
+
+        $images = [];
+        for ($i = 0; $i < 10; $i++) {
+            $images[] = $faker->imageUrl(640, 480, 'cars', true);
+        }
+
         for ($i = 0; $i < 10; $i++) {
             Car::create([
                 'car_model_id' => 1,
@@ -81,7 +87,7 @@ class DatabaseSeeder extends Seeder
                 'seats' => $faker->numberBetween(2, 7),
                 'length' => $faker->numberBetween(3000, 5000),
                 'main_image' => $faker->imageUrl(),
-                'images' => json_encode([$faker->imageUrl(), $faker->imageUrl(), $faker->imageUrl()]),
+                'images' =>$images,
             ]);
         }
     }

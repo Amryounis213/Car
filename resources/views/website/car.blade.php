@@ -35,27 +35,24 @@
 
 							<div class="splide__track">
 								<ul class="splide__list">
+									@foreach ((array)$car->images as $image)
 									<li class="splide__slide">
-										<img src="{{ asset('assets/img/cars/1-1-big') }}.jpg" alt="">
+										<img src="{{$image}}" alt="">
 									</li>
-									<li class="splide__slide">
-										<img src="{{ asset('assets/img/cars/1-2-big') }}.jpg" alt="">
-									</li>
-									<li class="splide__slide">
-										<img src="{{ asset('assets/img/cars/1-3-big') }}.jpg" alt="">
-									</li>
-									<li class="splide__slide">
-										<img src="{{ asset('assets/img/cars/1-4-big') }}.jpg" alt="">
-									</li>
+									@endforeach
+								
 								</ul>
 							</div>
 						</div>
-
+						
 						<ul id="thumbnails" class="thumbnails">
+							@foreach ((array)$car->images as $image)
 							<li class="thumbnail">
-								<img src="{{ asset('assets/img/cars/1-1.jpg') }}" alt="">
+								<img src="{{$image}}" alt="">
 							</li>
-							<li class="thumbnail">
+							@endforeach
+							
+							{{-- <li class="thumbnail">
 								<img src="{{ asset('assets/img/cars/1-2.jpg') }}" alt="">
 							</li>
 							<li class="thumbnail">
@@ -63,7 +60,7 @@
 							</li>
 							<li class="thumbnail">
 								<img src="{{ asset('assets/img/cars/1-4.jpg') }}" alt="">
-							</li>
+							</li> --}}
 						</ul>
 					</div>
 				</div>
@@ -74,7 +71,7 @@
 					<div class="offer">
 						<span class="offer__title">Offer</span>
 						<div class="offer__wrap">
-							<span class="offer__price">$440 <sub>/ month</sub></span>
+							<span class="offer__price">{{$car->price}}</span>
 							<button class="offer__favorite" type="button" aria-label="Add to favorite"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.16,5A6.29,6.29,0,0,0,12,4.36a6.27,6.27,0,0,0-8.16,9.48l6.21,6.22a2.78,2.78,0,0,0,3.9,0l6.21-6.22A6.27,6.27,0,0,0,20.16,5Zm-1.41,7.46-6.21,6.21a.76.76,0,0,1-1.08,0L5.25,12.43a4.29,4.29,0,0,1,0-6,4.27,4.27,0,0,1,6,0,1,1,0,0,0,1.42,0,4.27,4.27,0,0,1,6,0A4.29,4.29,0,0,1,18.75,12.43Z"/></svg></button>
 							<button type="button" class="offer__rent" data-bs-toggle="modal" data-bs-target="#rent-modal"><span>Rent now</span></button>
 						</div>
@@ -87,7 +84,7 @@
 							</li>
 							<li>
 								<span class="offer__list-name">Origin</span>
-								<span class="offer__list-value">{{$car->year}}</span>
+								<span class="offer__list-value">{{$car->origin}}</span>
 							</li>
 							<li>
 								<span class="offer__list-name">Release</span>
@@ -99,11 +96,11 @@
 							</li>
 							<li>
 								<span class="offer__list-name">Number of owners</span>
-								<span class="offer__list-value offer__list-value--dark">{{$car->year}}</span>
+								<span class="offer__list-value offer__list-value--dark">{{$car->number_of_owners}}</span>
 							</li>
 							<li>
 								<span class="offer__list-name">Meter mileage</span>
-								<span class="offer__list-value offer__list-value--dark">{{$car->year}}</span>
+								<span class="offer__list-value offer__list-value--dark">{{$car->mileage}}</span>
 							</li>
 							<li>
 								<span class="offer__list-name">Gearbox</span>
@@ -141,12 +138,12 @@
 
 							<li>
 								<span class="offer__list-name">First Hand</span>
-								<span class="offer__list-value offer__list-value--dark">{{$car->year}}</span>
+								<span class="offer__list-value offer__list-value--dark">{{$car->first_hand}}</span>
 							</li>
 
 							<li>
 								<span class="offer__list-name"></span>
-								<span class="offer__list-value offer__list-value--dark">{{$car->year}}</span>
+								<span class="offer__list-value offer__list-value--dark">{{$car->tunk_volume}}</span>
 							</li>
 
 

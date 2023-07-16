@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     // return view('website.welcome');
-    $car = new Car();
+    $car = Car::first();
+
+    // return $car ;
     return view('website.car' , compact('car'));
 });
