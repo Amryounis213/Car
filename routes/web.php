@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Car;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,5 +16,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     // return view('website.welcome');
-    return view('website.index');
+    $car = new Car();
+    return view('website.car' , compact('car'));
 });
