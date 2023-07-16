@@ -12,6 +12,7 @@ class Car extends Model
     protected $casts = [
         'images' => 'json',
     ];
+    
     //realationships
     public function colorIn()
     {
@@ -22,6 +23,33 @@ class Car extends Model
     public function colorOut()
     {
         return $this->belongsTo(Color::class, 'color_id_out');
+    }
+
+    public function Modele()
+    {
+        return $this->belongsTo(CarModel::class, 'car_model_id');
+    }
+
+    public function CarTypes()
+    {
+        return $this->belongsTo(CarType::class, 'car_type_id');
+    }
+
+    public function Generations()
+    {
+        return $this->belongsTo(Generation::class, 'generation_id');
+    }
+
+    public function Brand()
+    {
+        return $this->belongsTo(Brand::class, 'brand_id');
+    }
+
+
+
+    public function GetTitleAttribute()
+    {
+        return $this->Brand->name . ',' . $this->Modele->name . ',' . $this->CarTypes->name . ',' . $this->Generations->name ;
     }
 
 }
