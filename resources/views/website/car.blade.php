@@ -1,7 +1,14 @@
 @extends('layouts.main')
-
+@section('style')
+{{-- https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css --}}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css">
+@endsection
 
 @section('content')
+@php
+	$fav = \App\Models\Favorite::where('user_id', 1 )->where('car_id',$car->id)->get()->pluck('car_id')->toArray();
+
+@endphp
 	<!-- main content -->
 	<main class="main">
 		<div class="container">
@@ -67,12 +74,13 @@
 				<!-- end details -->
 
 				<!-- offer -->
+				
 				<div class="col-12 col-lg-5">
 					<div class="offer">
 						<span class="offer__title">Offer</span>
 						<div class="offer__wrap">
 							<span class="offer__price">{{$car->price}}</span>
-							<button class="offer__favorite" type="button" aria-label="Add to favorite"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.16,5A6.29,6.29,0,0,0,12,4.36a6.27,6.27,0,0,0-8.16,9.48l6.21,6.22a2.78,2.78,0,0,0,3.9,0l6.21-6.22A6.27,6.27,0,0,0,20.16,5Zm-1.41,7.46-6.21,6.21a.76.76,0,0,1-1.08,0L5.25,12.43a4.29,4.29,0,0,1,0-6,4.27,4.27,0,0,1,6,0,1,1,0,0,0,1.42,0,4.27,4.27,0,0,1,6,0A4.29,4.29,0,0,1,18.75,12.43Z"/></svg></button>
+							<button  @if(in_array($car->id , $fav))  class="offer__favorite offer__favorite--active" @else   class="offer__favorite" @endif  data-id="{{$car->id}}" type="button" aria-label="Add to favorite"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.16,5A6.29,6.29,0,0,0,12,4.36a6.27,6.27,0,0,0-8.16,9.48l6.21,6.22a2.78,2.78,0,0,0,3.9,0l6.21-6.22A6.27,6.27,0,0,0,20.16,5Zm-1.41,7.46-6.21,6.21a.76.76,0,0,1-1.08,0L5.25,12.43a4.29,4.29,0,0,1,0-6,4.27,4.27,0,0,1,6,0,1,1,0,0,0,1.42,0,4.27,4.27,0,0,1,6,0A4.29,4.29,0,0,1,18.75,12.43Z"/></svg></button>
 							<button type="button" class="offer__rent" data-bs-toggle="modal" data-bs-target="#rent-modal"><span>Rent now</span></button>
 						</div>
 
@@ -223,8 +231,9 @@
 						
 						</ul>
 						<div class="car__footer">
+						
 							<span class="car__price">{{$randCar->price}}</span>
-							<button class="car__favorite" type="button" aria-label="Add to favorite"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.16,5A6.29,6.29,0,0,0,12,4.36a6.27,6.27,0,0,0-8.16,9.48l6.21,6.22a2.78,2.78,0,0,0,3.9,0l6.21-6.22A6.27,6.27,0,0,0,20.16,5Zm-1.41,7.46-6.21,6.21a.76.76,0,0,1-1.08,0L5.25,12.43a4.29,4.29,0,0,1,0-6,4.27,4.27,0,0,1,6,0,1,1,0,0,0,1.42,0,4.27,4.27,0,0,1,6,0A4.29,4.29,0,0,1,18.75,12.43Z"/></svg></button>
+							<button @if(in_array($car->id , $fav))  class="car__favorite offer__favorite offer__favorite--active" @else   class="car__favorite offer__favorite" @endif  data-id="{{$randCar->id}}" type="button" aria-label="Add to favorite"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.16,5A6.29,6.29,0,0,0,12,4.36a6.27,6.27,0,0,0-8.16,9.48l6.21,6.22a2.78,2.78,0,0,0,3.9,0l6.21-6.22A6.27,6.27,0,0,0,20.16,5Zm-1.41,7.46-6.21,6.21a.76.76,0,0,1-1.08,0L5.25,12.43a4.29,4.29,0,0,1,0-6,4.27,4.27,0,0,1,6,0,1,1,0,0,0,1.42,0,4.27,4.27,0,0,1,6,0A4.29,4.29,0,0,1,18.75,12.43Z"/></svg></button>
 							<a href="car.html" class="car__more"><span>More Details</span></a>
 						</div>
 					</div>
@@ -244,10 +253,38 @@
 
 @section('script')
 <script src="https://code.jquery.com/jquery-3.7.0.min.js" ></script>
+
+{{-- https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js --}}
+<script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"></script>
 	<script>
+		
 		//jquery document ready
 		$(document).ready(function(){
-			alert(123);
+			$('.offer__favorite').click(function(){
+				//if offer__favorite--active class is exist
+				if($(this).hasClass('offer__favorite--active'))
+				{
+					$(this).removeClass('offer__favorite--active');		
+				}else{
+					$(this).addClass('offer__favorite--active');
+				}
+				
+
+				//ajax request post
+				$.ajax({
+					url: "{{ route('add.to.favorite') }}",
+					type: "POST",
+					data: {
+						_token: "{{ csrf_token() }}",
+						car_id: $(this).data('id')
+					},
+					success: function(response){
+					
+						toastr.success(response.message)
+
+					}
+				});
+			});
 		});
 
 	</script>

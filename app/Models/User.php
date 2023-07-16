@@ -42,4 +42,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+
+    //Relations 
+    public function cars()
+    {
+        return $this->hasMany(Car::class);
+    }
+
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
 }
