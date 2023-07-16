@@ -13,6 +13,13 @@ class FrontEndController extends Controller
         $request->validate([
             'car_id' => 'required|exists:cars,id',
         ]);
+        $fav = Favorite::where('user_id', 1)->where('car_id', $request->car_id)->first();
+        if ($fav) {
+            Favorite::where('user_id', 1)->where('car_id', $request->car_id)->delete();
+            return response()->json([
+                'message' => 'Removed from favourite successfully',
+            ]);
+        }
         Favorite::create([
             'user_id' => 1,
             'car_id' => $request->car_id,
