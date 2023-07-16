@@ -47,7 +47,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::create([
-            'name' => $faker->name,
+            'firstname' => $faker->name,
+            'lastname' => $faker->name,
+            'username' => $faker->unique()->name,
             'email' => $faker->unique()->safeEmail,
             'password' => bcrypt('123456789'),
         ]);

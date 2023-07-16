@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Car;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,4 +22,11 @@ Route::get('/', function () {
 
     // return $car ;
     return view('website.car' , compact('car' , 'RandomCars'));
+});
+Route::get('/account', function () {
+    // return view('website.welcome');
+    $user = User::first();
+
+    // return $car ;
+    return view('website.account' , compact('user'));
 });
