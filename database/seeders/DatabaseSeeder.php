@@ -86,8 +86,13 @@ class DatabaseSeeder extends Seeder
                 'number_of_owners' => $faker->numberBetween(1, 5),
                 'seats' => $faker->numberBetween(2, 7),
                 'length' => $faker->numberBetween(3000, 5000),
+                'techenical_control' => $faker->date(),
+                'first_hand' => $faker->boolean,
+                'release_date' => $faker->date(),
+                'trunk_volume' => $faker->numberBetween(100, 1000),
+                'upholstery' => $faker->word,
                 'main_image' => $faker->imageUrl(),
-                'images' =>$images,
+                'images' => $images,
             ]);
         }
     }

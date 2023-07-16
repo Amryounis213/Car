@@ -45,6 +45,7 @@ return new class extends Migration
             $table->boolean('first_hand')->nullable();
             $table->date('release_date')->nullable();
             $table->integer('trunk_volume')->nullable();
+            $table->string('upholstery')->nullable();
             
 
             $table->timestamps();
