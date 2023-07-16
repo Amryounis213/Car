@@ -32,7 +32,7 @@ return new class extends Migration
             $table->decimal('price', 8, 2)->nullable();
             $table->text('description')->nullable();
             $table->enum('gearbox', ['manual', 'automatic'])->default('manual');
-            $table->enum('fuel', ['diesel', 'essence', 'electric'])->default('essence');
+            $table->enum('fuel', ['Diesel', 'Essence', 'Electric'])->default('Essence');
             $table->integer('number_of_doors')->nullable();
             $table->integer('number_of_places')->nullable();
             $table->integer('number_of_owners')->nullable();
