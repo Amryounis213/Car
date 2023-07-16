@@ -16,8 +16,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     // return view('website.welcome');
+    $RandomCars = Car::inRandomOrder()->take(4)->get();
     $car = Car::first();
 
     // return $car ;
-    return view('website.car' , compact('car'));
+    return view('website.car' , compact('car' , 'RandomCars'));
 });
