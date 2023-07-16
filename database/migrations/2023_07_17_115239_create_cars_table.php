@@ -15,16 +15,15 @@ return new class extends Migration
             $table->id();
             //realtion 
             $table->foreignId('car_model_id')->constrained('car_models')->onDelete('cascade');
-            $table->foreignId('brand_id')->constrained('brands')->nullOnDelete('cascade');
+            $table->foreignId('brand_id')->constrained('brands')->restrictOnDelete('cascade');
             $table->foreignId('car_type_id')->constrained('car_types')->onDelete('cascade');
             $table->foreignId('generation_id')->constrained('generations')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('color_id_in')->nullable()->constrained('colors')->nullOnDelete('cascade');
-            $table->foreignId('color_id_out')->nullable()->constrained('colors')->nullOnDelete('cascade');
+            $table->foreignId('color_id_in')->nullable()->constrained('colors')->restrictOnDelete('cascade');
+            $table->foreignId('color_id_out')->nullable()->constrained('colors')->restrictOnDelete('cascade');
             //car info
             $table->string('name')->unique();
             $table->string('origin')->nullable();
-            $table->string('energy_type')->nullable();
             //release date , techenical control , first hand , number of owners , meter , gearbox , color , number or doors , number or places , length  
             $table->integer('min_km')->nullable();
             $table->integer('max_km')->nullable();
