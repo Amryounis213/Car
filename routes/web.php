@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Website\FrontEndController;
+use App\Http\Controllers\Website\ProfileController;
 use App\Models\Car;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -22,18 +23,19 @@ Route::get('/', function () {
     $car = Car::first();
 
     // return $car ;
-    return view('website.car' , compact('car' , 'RandomCars'));
+    return view('website.cars3' , compact('car' , 'RandomCars'));
 });
-Route::get('/account', function () {
-    // return view('website.welcome');
-    $user = User::first();
-    $cars = Car::all();
-    $mycars = Car::all();
+// Route::get('/account', function () {
+//     // return view('website.welcome');
+//     $user = User::first();
+//     $cars = Car::all();
+//     $mycars = Car::all();
 
-    // return $car ;
-    return view('website.account' , compact('user', 'cars', 'mycars'));
-});
+//     // return $car ;
+//     return view('website.account' , compact('user', 'cars', 'mycars'));
+// });
 
-
+Route::resource('account', ProfileController::class);
 
 Route::post('add-to-favorite', [FrontEndController::class , 'addToFavourite'])->name('add.to.favorite');
+Route::get('getFavCars', [ProfileController::class , 'getFavCars'])->name('getFavCars');

@@ -1,6 +1,16 @@
 @extends('layouts.main')
-
+@section('style')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css">
+@endsection
 @section('content')
+    @php
+        $fav = \App\Models\Favorite::where('user_id', 1)
+            ->where('car_id', $car->id)
+            ->get()
+            ->pluck('car_id')
+            ->toArray();
+        
+    @endphp
     <!-- main content -->
     <main class="main">
         <div class="container">
@@ -38,15 +48,13 @@
                                     aria-controls="tab-2" aria-selected="false">Favorites</button>
                             </li>
 
+
                             <li class="nav-item" role="presentation">
                                 <button data-bs-toggle="tab" data-bs-target="#tab-3" type="button" role="tab"
                                     aria-controls="tab-3" aria-selected="false">Settings</button>
                             </li>
 
-                            <li class="nav-item" role="presentation">
-                                <button data-bs-toggle="tab" data-bs-target="#tab-4" type="button" role="tab"
-                                    aria-controls="tab-4" aria-selected="false">Billing</button>
-                            </li>
+
                         </ul>
                         <!-- end tabs nav -->
                     </div>
@@ -85,7 +93,8 @@
                                                                 <td>{{ $car->year }}</td>
                                                                 <td>{{ $car->gearbox }}</td>
                                                                 <td>{{ $car->fuel }}</td>
-                                                                <td><span class="cart__price">{{ $car->price }}</span></td>
+                                                                <td><span class="cart__price">{{ $car->price }}</span>
+                                                                </td>
                                                                 <td>
                                                                     <button class="cart__delete" type="button"
                                                                         aria-label="Delete">
@@ -164,9 +173,9 @@
                             <!-- end paginator -->
                         </div>
 
-                        <div class="tab-pane fade" id="tab-2" role="tabpanel" tabindex="0">
+                        <div id="tab-2" class="tab-pane fade" role="tabpanel" tabindex="0">
                             <div class="row">
-                                @foreach ($cars as $car)
+                                @foreach ($favCars as $car)
                                     <!-- car -->
                                     <div class="col-12 col-md-6 col-xl-4">
                                         <div class="car">
@@ -208,10 +217,12 @@
                                                 </li>
                                             </ul>
                                             <div class="car__footer">
-                                                <span class="car__price">{{ $car->price }} <sub>/ month</sub></span>
-                                                <button class="car__favorite car__favorite--active" type="button"
-                                                    aria-label="Remove from favorites"><svg
-                                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                                <span class="car__price">{{ $car->price }} </span>
+                                                <button
+                                                    @if (in_array($car->id, $fav)) class="car__favorite offer__favorite offer__favorite--active" @else   class="car__favorite offer__favorite" @endif
+                                                    data-id="{{ $car->id }}" type="button"
+                                                    aria-label="Add to favorite"><svg xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 24 24">
                                                         <path
                                                             d="M20.16,5A6.29,6.29,0,0,0,12,4.36a6.27,6.27,0,0,0-8.16,9.48l6.21,6.22a2.78,2.78,0,0,0,3.9,0l6.21-6.22A6.27,6.27,0,0,0,20.16,5Zm-1.41,7.46-6.21,6.21a.76.76,0,0,1-1.08,0L5.25,12.43a4.29,4.29,0,0,1,0-6,4.27,4.27,0,0,1,6,0,1,1,0,0,0,1.42,0,4.27,4.27,0,0,1,6,0A4.29,4.29,0,0,1,18.75,12.43Z" />
                                                     </svg></button>
@@ -283,15 +294,17 @@
                             <div class="row">
                                 <!-- details form -->
                                 <div class="col-12 col-lg-6">
-                                    <form action="#" class="sign__form sign__form--profile">
+                                    <form action="{{ route('account.update', $user->id) }}" method="POST"
+                                        class="sign__form sign__form--profile">
+                                        @csrf
+                                        @method('PUT')
                                         <div class="row">
                                             <div class="col-12">
                                                 <h4 class="sign__title">Profile details</h4>
                                             </div>
-
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="sign__group">
-                                                    <label class="sign__label" for="username">Login</label>
+                                                    <label class="sign__label" for="username">Username</label>
                                                     <input id="username" type="text" name="username"
                                                         class="sign__input" placeholder="User123"
                                                         value="{{ $user->username }}">
@@ -324,9 +337,18 @@
                                                         value="{{ $user->lastname }}">
                                                 </div>
                                             </div>
+                                            <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                                                <div class="sign__group">
+                                                    <label class="sign__label" for="lastname">Phone</label>
+                                                    <input id="lastname" type="text" name="phone"
+                                                        class="sign__input" placeholder="Doe"
+                                                        value="{{ $user->phone }}">
+                                                </div>
+                                            </div>
 
                                             <div class="col-12">
-                                                <button class="sign__btn" type="button"><span>Save</span></button>
+                                                <button class="sign__btn" id="change"
+                                                    type="submit"><span>Save</span></button>
                                             </div>
                                         </div>
                                     </form>
@@ -379,110 +401,17 @@
                                             </div>
 
                                             <div class="col-12">
-                                                <button class="sign__btn" type="button"><span>Change</span></button>
+                                                <button class="sign__btn" id="save-button"
+                                                    type="button"><span>Change</span></button>
                                             </div>
+
                                         </div>
                                     </form>
                                 </div>
                                 <!-- end password form -->
                             </div>
                         </div>
-                        {{-- 
-                        <div class="tab-pane fade" id="tab-4" role="tabpanel" tabindex="0">
-                            <div class="row">
-                                <div class="col-12 col-md-6 col-lg-4 order-md-2 order-lg-1">
-                                    <div class="plan">
-                                        <h3 class="plan__title">Basic plan</h3>
-                                        <span class="plan__price">$289<span> / month</span></span>
-                                        <ul class="plan__list">
-                                            <li class="green"><svg xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 24 24">
-                                                    <path
-                                                        d="M14.72,8.79l-4.29,4.3L8.78,11.44a1,1,0,1,0-1.41,1.41l2.35,2.36a1,1,0,0,0,.71.29,1,1,0,0,0,.7-.29l5-5a1,1,0,0,0,0-1.42A1,1,0,0,0,14.72,8.79ZM12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" />
-                                                </svg> Search all listings</li>
-                                            <li class="green"><svg xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 24 24">
-                                                    <path
-                                                        d="M14.72,8.79l-4.29,4.3L8.78,11.44a1,1,0,1,0-1.41,1.41l2.35,2.36a1,1,0,0,0,.71.29,1,1,0,0,0,.7-.29l5-5a1,1,0,0,0,0-1.42A1,1,0,0,0,14.72,8.79ZM12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" />
-                                                </svg> Create wishlist</li>
-                                            <li class="red"><svg xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 24 24">
-                                                    <path
-                                                        d="M15.71,8.29a1,1,0,0,0-1.42,0L12,10.59,9.71,8.29A1,1,0,0,0,8.29,9.71L10.59,12l-2.3,2.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l2.29,2.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42L13.41,12l2.3-2.29A1,1,0,0,0,15.71,8.29Zm3.36-3.36A10,10,0,1,0,4.93,19.07,10,10,0,1,0,19.07,4.93ZM17.66,17.66A8,8,0,1,1,20,12,7.95,7.95,0,0,1,17.66,17.66Z" />
-                                                </svg> See seller contact</li>
-                                            <li class="red"><svg xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 24 24">
-                                                    <path
-                                                        d="M15.71,8.29a1,1,0,0,0-1.42,0L12,10.59,9.71,8.29A1,1,0,0,0,8.29,9.71L10.59,12l-2.3,2.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l2.29,2.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42L13.41,12l2.3-2.29A1,1,0,0,0,15.71,8.29Zm3.36-3.36A10,10,0,1,0,4.93,19.07,10,10,0,1,0,19.07,4.93ZM17.66,17.66A8,8,0,1,1,20,12,7.95,7.95,0,0,1,17.66,17.66Z" />
-                                                </svg> Full listing info</li>
-                                        </ul>
-                                        <button type="button" data-bs-toggle="modal" class="plan__btn"
-                                            data-bs-target="#plan-modal"><span>Select plan</span></button>
-                                    </div>
-                                </div>
 
-                                <div class="col-12 col-lg-4 order-md-1 order-lg-2">
-                                    <div class="plan plan--active">
-                                        <h3 class="plan__title">Regular</h3>
-                                        <span class="plan__price">$389<span> / month</span></span>
-                                        <ul class="plan__list">
-                                            <li class="green"><svg xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 24 24">
-                                                    <path
-                                                        d="M14.72,8.79l-4.29,4.3L8.78,11.44a1,1,0,1,0-1.41,1.41l2.35,2.36a1,1,0,0,0,.71.29,1,1,0,0,0,.7-.29l5-5a1,1,0,0,0,0-1.42A1,1,0,0,0,14.72,8.79ZM12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" />
-                                                </svg> Search all listings</li>
-                                            <li class="green"><svg xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 24 24">
-                                                    <path
-                                                        d="M14.72,8.79l-4.29,4.3L8.78,11.44a1,1,0,1,0-1.41,1.41l2.35,2.36a1,1,0,0,0,.71.29,1,1,0,0,0,.7-.29l5-5a1,1,0,0,0,0-1.42A1,1,0,0,0,14.72,8.79ZM12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" />
-                                                </svg> Create wishlist</li>
-                                            <li class="green"><svg xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 24 24">
-                                                    <path
-                                                        d="M14.72,8.79l-4.29,4.3L8.78,11.44a1,1,0,1,0-1.41,1.41l2.35,2.36a1,1,0,0,0,.71.29,1,1,0,0,0,.7-.29l5-5a1,1,0,0,0,0-1.42A1,1,0,0,0,14.72,8.79ZM12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" />
-                                                </svg> See seller contact</li>
-                                            <li class="red"><svg xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 24 24">
-                                                    <path
-                                                        d="M15.71,8.29a1,1,0,0,0-1.42,0L12,10.59,9.71,8.29A1,1,0,0,0,8.29,9.71L10.59,12l-2.3,2.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l2.29,2.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42L13.41,12l2.3-2.29A1,1,0,0,0,15.71,8.29Zm3.36-3.36A10,10,0,1,0,4.93,19.07,10,10,0,1,0,19.07,4.93ZM17.66,17.66A8,8,0,1,1,20,12,7.95,7.95,0,0,1,17.66,17.66Z" />
-                                                </svg> Full listing info</li>
-                                        </ul>
-                                        <button class="plan__btn" type="button"><span>Current plan</span></button>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-md-6 col-lg-4 order-md-3 order-lg-3">
-                                    <div class="plan">
-                                        <h3 class="plan__title">Premium</h3>
-                                        <span class="plan__price">$489<span> / month</span></span>
-                                        <ul class="plan__list">
-                                            <li class="green"><svg xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 24 24">
-                                                    <path
-                                                        d="M14.72,8.79l-4.29,4.3L8.78,11.44a1,1,0,1,0-1.41,1.41l2.35,2.36a1,1,0,0,0,.71.29,1,1,0,0,0,.7-.29l5-5a1,1,0,0,0,0-1.42A1,1,0,0,0,14.72,8.79ZM12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" />
-                                                </svg> Search all listings</li>
-                                            <li class="green"><svg xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 24 24">
-                                                    <path
-                                                        d="M14.72,8.79l-4.29,4.3L8.78,11.44a1,1,0,1,0-1.41,1.41l2.35,2.36a1,1,0,0,0,.71.29,1,1,0,0,0,.7-.29l5-5a1,1,0,0,0,0-1.42A1,1,0,0,0,14.72,8.79ZM12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" />
-                                                </svg> Create wishlist</li>
-                                            <li class="green"><svg xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 24 24">
-                                                    <path
-                                                        d="M14.72,8.79l-4.29,4.3L8.78,11.44a1,1,0,1,0-1.41,1.41l2.35,2.36a1,1,0,0,0,.71.29,1,1,0,0,0,.7-.29l5-5a1,1,0,0,0,0-1.42A1,1,0,0,0,14.72,8.79ZM12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" />
-                                                </svg> See seller contact</li>
-                                            <li class="green"><svg xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 24 24">
-                                                    <path
-                                                        d="M14.72,8.79l-4.29,4.3L8.78,11.44a1,1,0,1,0-1.41,1.41l2.35,2.36a1,1,0,0,0,.71.29,1,1,0,0,0,.7-.29l5-5a1,1,0,0,0,0-1.42A1,1,0,0,0,14.72,8.79ZM12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" />
-                                                </svg> Full listing info</li>
-                                        </ul>
-                                        <button type="button" data-bs-toggle="modal" class="plan__btn"
-                                            data-bs-target="#plan-modal"><span>Select plan</span></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
                     </div>
                     <!-- end content tabs -->
                 </div>
@@ -490,4 +419,56 @@
         </div>
     </main>
     <!-- end main content -->
+@endsection
+@section('script')
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+    {{-- https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js --}}
+    <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"></script>
+    <script>
+        //jquery document ready
+        $(document).ready(function() {
+            $('.offer__favorite').click(function() {
+                //if offer__favorite--active class is exist
+                if ($(this).hasClass('offer__favorite--active')) {
+                    $(this).removeClass('offer__favorite--active');
+                } else {
+                    $(this).addClass('offer__favorite--active');
+                }
+
+
+                //ajax request post
+                $.ajax({
+                    url: "{{ route('add.to.favorite') }}",
+                    type: "POST",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        car_id: $(this).data('id')
+                    },
+                    success: function(response) {
+                        toastr.success(response.message)
+                    }
+                });
+
+            });
+        });
+    </script>
+    {{-- <script>
+        $(document).ready(function() {
+            $('.sign__btn').click(function() {
+                $.ajax({
+                    url: "{{ route('account.update', ':id') }}".replace(':id', id),
+                    type: "POST",
+                    data: {
+                        _method: "PUT", // Add _method field to simulate PUT request
+                        _token: "{{ csrf_token() }}",
+                        id: id,
+                    },
+                    success: function(response) {
+                        toastr.success(response.message);
+                    }
+                });
+            });
+        });
+    </script> --}}
 @endsection

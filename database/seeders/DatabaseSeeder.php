@@ -46,13 +46,16 @@ class DatabaseSeeder extends Seeder
             'name' => $faker->word,
         ]);
 
-        User::create([
-            'firstname' => $faker->name,
-            'lastname' => $faker->name,
-            'username' => $faker->unique()->name,
-            'email' => $faker->unique()->safeEmail,
-            'password' => bcrypt('123456789'),
-        ]);
+        for ($i = 0; $i < 10; $i++) {
+            User::create([
+                'firstname' => $faker->name,
+                'lastname' => $faker->name,
+                'username' => $faker->unique()->name,
+                'email' => $faker->unique()->safeEmail,
+                'phone' => "05923068",
+                'password' => bcrypt('123456789'),
+            ]);
+        }
 
         Color::create([
             'name' => $faker->colorName,
@@ -70,7 +73,7 @@ class DatabaseSeeder extends Seeder
                 'brand_id' => 1,
                 'car_type_id' => 1,
                 'generation_id' => 1,
-                'user_id' => 1,
+                'user_id' => rand(1, 10),
                 'color_id_in' => 1,
                 'color_id_out' => 1,
                 'name' => $faker->unique()->word,

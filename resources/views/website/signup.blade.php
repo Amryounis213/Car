@@ -1,26 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-	<!-- CSS -->
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/splide.min.css">
-	<link rel="stylesheet" href="css/slimselect.css">
-	<link rel="stylesheet" href="css/main.css">
-
-	<!-- Favicons -->
-	<link rel="icon" type="image/png" href="icon/favicon-32x32.png" sizes="32x32">
-	<link rel="apple-touch-icon" href="icon/favicon-32x32.png">
-
-	<meta name="description" content="Car rental HTML Template">
-	<meta name="keywords" content="">
-	<meta name="author" content="Dmitry Volkov">
-	<title>Waydex – Car rental HTML Template</title>
-
-</head>
-<body>
+@extends('layouts.main')
+@section('content')
 	<!-- main content -->
 	<main class="main main--sign" data-bg="img/bg/bg.png">
 		<!-- registration form -->
@@ -28,7 +7,7 @@
 			<div class="sign__content">
 				<form action="#" class="sign__form">
 					<a href="index.html" class="sign__logo">
-						<img src="img/logo.svg" alt="">
+						<img src="img/logo.png" alt="">
 					</a>
 
 					<div class="sign__group">
@@ -66,11 +45,4 @@
 	</main>
 	<!-- end main content -->
 
-	<!-- JS -->
-	<script src="js/bootstrap.bundle.min.js"></script>
-	<script src="js/splide.min.js"></script>
-	<script src="js/slimselect.min.js"></script>
-	<script src="js/smooth-scrollbar.js"></script>
-	<script src="js/main.js"></script>
-</body>
-</html>
+@endsection

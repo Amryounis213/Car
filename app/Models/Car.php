@@ -50,4 +50,9 @@ class Car extends Model
         return $this->Brand->name . ',' . $this->Model->name . ',' . $this->CarTypes->name . ',' . $this->Generations->name ;
     }
 
+    public function User()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }
