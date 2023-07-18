@@ -18,13 +18,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    // // return view('website.welcome');
-    // $RandomCars = Car::inRandomOrder()->take(4)->get();
-    // $car = Car::first();
+    $cars = Car::paginate(15);
+    return view('website.index' , compact('cars'));
+})->name('website.home');
 
-    // return $car ;
-    return view('website.signin');
-});
+
 Route::get('/account', function () {
     // return view('website.welcome');
     $user = User::first();

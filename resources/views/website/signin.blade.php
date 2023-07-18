@@ -3,7 +3,7 @@
 	@include('includes._head')
 <body>
 	<!-- main content -->
-	<main class="main main--sign" data-bg="img/bg/bg.png">
+	<main class="main main--sign" data-bg="{{asset('assets/img/bg/bg.png')}}">
 		<!-- sign in -->
 		<div class="sign">
 			<div class="sign__content">
@@ -32,7 +32,7 @@
 					<span class="sign__delimiter">or</span>
 
 
-					<span class="sign__text">Don't have an account? <a href="signup.html">Sign up!</a></span>
+					<span class="sign__text">Don't have an account? <a href="">Sign up!</a></span>
 
 					<span class="sign__text"><a href="forgot.html">Forgot password?</a></span>
 				</form>

@@ -42,7 +42,7 @@ class AuthController extends Controller
     public function PostLogin(Request $request)
     {
         $request->validate([
-            'phone' => 'required|phone|exists:users,phone',
+            'phone' => 'required|exists:users,phone',
             'password' => 'required|string|min:8|max:255',
         ]);
         $remember = $request->remember ? true : false;
@@ -59,21 +59,21 @@ class AuthController extends Controller
     public function PostRegister(Request $request)
     {
         $request->validate([
-            'phone' => 'required|phone|unique:users,phone',
-            'user_name' => 'required|string|min:3|max:255|unique:users,user_name',
+            'phone' => 'required|unique:users,phone',
+            'username' => 'required|string|min:3|max:255|unique:users,username',
             'password' => 'required|string|min:8|max:255|confirmed',
         ]);
         $user = \App\Models\User::create([
-            'name' => $request->name,
+            'username' => $request->username,
             'phone' => $request->phone,
-            'email' => strtolower($request->email),
             'password' => bcrypt($request->password),
             'code' => rand(1111, 9999),
         ]);
         auth()->login($user);
+      
         return redirect()->route('website.home');
     }
 
 
-    
+
 }
