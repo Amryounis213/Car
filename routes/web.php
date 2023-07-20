@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Website\AuthController;
 use App\Http\Controllers\Website\FrontEndController;
 use App\Http\Controllers\Website\ProfileController;
 use App\Models\Car;
@@ -30,6 +31,21 @@ use Illuminate\Support\Facades\Route;
 //     $user = User::first();
 //     $cars = Car::all();
 //     $mycars = Car::all();
+Route::get('/', function () {
+    $cars = Car::paginate(15);
+    return view('website.index' , compact('cars'));
+})->name('website.home');
+
+
+Route::get('/account', function () {
+    // return view('website.welcome');
+    $user = User::first();
+    $cars = Car::all();
+    $mycars = Car::all();
+
+    // return $car ;
+    return view('website.account' , compact('user', 'cars', 'mycars'));
+});
 
 //     // return $car ;
 //     return view('website.account' , compact('user', 'cars', 'mycars'));
@@ -40,3 +56,18 @@ Route::resource('account', ProfileController::class);
 Route::post('add-to-favorite', [FrontEndController::class , 'addToFavourite'])->name('add.to.favorite');
 Route::get('getFavCars', [ProfileController::class , 'getFavCars'])->name('getFavCars');
 Route::get('/showcar/{id}', [FrontEndController::class , 'showCar'])->name('showCar');
+
+
+//Login and Register Routes in Group Middleware
+Route::group(['middleware' => 'guest'], function () {
+    Route::get('login', [AuthController::class , 'Login'])->name('website.login');
+    Route::get('register', [AuthController::class , 'Register'])->name('website.register');
+    Route::get('forgot-password', [AuthController::class , 'ForgotPassword'])->name('website.forgot-password');
+    Route::get('reset-password', [AuthController::class , 'ResetPassword'])->name('website.reset-password');
+    Route::post('post-login', [AuthController::class , 'PostLogin'])->name('website.post.login');
+    Route::post('post-register', [AuthController::class , 'PostRegister'])->name('website.post.register');
+});
+
+
+
+

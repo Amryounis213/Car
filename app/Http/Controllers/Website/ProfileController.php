@@ -89,4 +89,9 @@ class ProfileController extends Controller
     {
         //
     }
+use Illuminate\Http\Request;
+
+class ProfileController extends Controller
+{
+    //
 }
