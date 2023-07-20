@@ -3,11 +3,21 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
+use App\Models\Car;
 use App\Models\Favorite;
 use Illuminate\Http\Request;
 
 class FrontEndController extends Controller
 {
+
+    public function showCar($id)
+    {
+        $car = Car::findorfail($id);
+        $RandomCars = Car::inRandomOrder()->take(10)->get();
+
+        return view('website.car', compact('car', 'RandomCars'));
+    }
+
     public function AddToFavourite(Request $request)
     {
         $request->validate([

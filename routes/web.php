@@ -17,14 +17,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    // return view('website.welcome');
-    $RandomCars = Car::inRandomOrder()->take(4)->get();
-    $car = Car::first();
+// Route::get('/', function () {
+//     // return view('website.welcome');
+//     $RandomCars = Car::inRandomOrder()->take(4)->get();
+//     $car = Car::first();
 
-    // return $car ;
-    return view('website.cars3' , compact('car' , 'RandomCars'));
-});
+//     // return $car ;
+//     return view('website.car' , compact('car' , 'RandomCars'));
+// });
 // Route::get('/account', function () {
 //     // return view('website.welcome');
 //     $user = User::first();
@@ -39,3 +39,4 @@ Route::resource('account', ProfileController::class);
 
 Route::post('add-to-favorite', [FrontEndController::class , 'addToFavourite'])->name('add.to.favorite');
 Route::get('getFavCars', [ProfileController::class , 'getFavCars'])->name('getFavCars');
+Route::get('/showcar/{id}', [FrontEndController::class , 'showCar'])->name('showCar');
