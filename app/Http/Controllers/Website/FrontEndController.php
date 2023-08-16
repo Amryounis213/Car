@@ -10,6 +10,12 @@ use Illuminate\Http\Request;
 class FrontEndController extends Controller
 {
 
+    public function index()
+    {
+        $cars = Car::all();
+        return view('website.index', compact('cars'));
+    }
+
     public function showCar($id)
     {
         $car = Car::findorfail($id);
@@ -49,4 +55,5 @@ class FrontEndController extends Controller
             'message' => 'Removed from favourite successfully',
         ]);
     }
+
 }

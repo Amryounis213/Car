@@ -10,13 +10,13 @@ class AuthController extends Controller
     //Login 
     public function Login()
     {
-        return view('website.auth.login');
+        return view('website.auth.signin');
     }
 
     //Register
     public function Register()
     {
-        return view('website.auth.register');
+        return view('website.auth.signup');
     }
 
     //Forgot Password

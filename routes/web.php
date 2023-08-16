@@ -1,11 +1,15 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PostsController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Website\AuthController;
 use App\Http\Controllers\Website\FrontEndController;
 use App\Http\Controllers\Website\ProfileController;
 use App\Models\Car;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,45 +22,33 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     // return view('website.welcome');
-//     $RandomCars = Car::inRandomOrder()->take(4)->get();
-//     $car = Car::first();
-
-//     // return $car ;
-//     return view('website.car' , compact('car' , 'RandomCars'));
-// });
-// Route::get('/account', function () {
-//     // return view('website.welcome');
-//     $user = User::first();
-//     $cars = Car::all();
-//     $mycars = Car::all();
-Route::get('/', function () {
-    $cars = Car::paginate(15);
-    return view('website.index' , compact('cars'));
-})->name('website.home');
-
-
-Route::get('/account', function () {
+Route::get('/car', function () {
     // return view('website.welcome');
-    $user = User::first();
-    $cars = Car::all();
-    $mycars = Car::all();
+    $RandomCars = Car::inRandomOrder()->take(4)->get();
+    $car = Car::first();
 
     // return $car ;
-    return view('website.account' , compact('user', 'cars', 'mycars'));
+    return view('website.car' , compact('car' , 'RandomCars'));
 });
 
-//     // return $car ;
-//     return view('website.account' , compact('user', 'cars', 'mycars'));
-// });
 
+
+
+//Website
+Route::get('/', [FrontEndController::class , 'index'])->name('website.home');
+Route::get('/post-product', [FrontEndController::class , 'createProduct'])->name('website.post');
 Route::resource('account', ProfileController::class);
-
 Route::post('add-to-favorite', [FrontEndController::class , 'addToFavourite'])->name('add.to.favorite');
 Route::get('getFavCars', [ProfileController::class , 'getFavCars'])->name('getFavCars');
 Route::get('/showcar/{id}', [FrontEndController::class , 'showCar'])->name('showCar');
 
+//Controller Panel
+Route::get('/admin', [DashboardController::class , 'index'])->name('dashboard');
+
+Route::resource('users', UserController::class);
+Route::resource('posts', PostsController::class);
+Route::post('posts/status', [PostsController::class, 'updateStatus'])->name('posts.status');
+// Route::post('product/status', [PostsController::class, 'updateCarStatus'])->name('product.status');
 
 //Login and Register Routes in Group Middleware
 Route::group(['middleware' => 'guest'], function () {
@@ -67,7 +59,6 @@ Route::group(['middleware' => 'guest'], function () {
     Route::post('post-login', [AuthController::class , 'PostLogin'])->name('website.post.login');
     Route::post('post-register', [AuthController::class , 'PostRegister'])->name('website.post.register');
 });
-
 
 
 

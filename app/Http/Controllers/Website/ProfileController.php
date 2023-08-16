@@ -27,7 +27,8 @@ class ProfileController extends Controller
         return view('website.account', compact('favCars', 'user', 'mycars', 'car'));
     }
 
-    public function getFavCars(){
+    public function getFavCars()
+    {
 
         $user = User::first(); // Auth User
 
@@ -89,9 +90,32 @@ class ProfileController extends Controller
     {
         //
     }
-use Illuminate\Http\Request;
 
-class ProfileController extends Controller
-{
-    //
+
+    public function createProduct()
+    {
+        $car = new Car();
+        return view('website.addproduct', compact('car'));
+    }
+
+    public function storeProduct(Request $request)
+    {
+        $data = $request->all();
+        dd($data);
+        // $attempts = auth()->user()->post_attempts;
+        // $attempts = $attempts - 1;
+        return redirect()->route('website.home');
+    }
+
+    public function contactus(Request $request)
+    {
+        //
+    }
+
+    public function contact(Request $request)
+    {
+        $data = $request->all();
+        //store
+        return redirect()->route('website.home');
+    }
 }

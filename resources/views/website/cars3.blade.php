@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-@extends('layouts.main')
+@extends('layouts.website')
 @section('content')
 	<!-- main content -->
 	<main class="main">
