@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\CarsController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PostsController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\UploadFilesController;
 use App\Http\Controllers\Website\AuthController;
 use App\Http\Controllers\Website\FrontEndController;
 use App\Http\Controllers\Website\ProfileController;
@@ -64,5 +65,22 @@ Route::group(['middleware' => 'guest'], function () {
     Route::post('post-register', [AuthController::class , 'PostRegister'])->name('website.post.register');
 });
 
+Route::post('upload', [UploadFilesController::class, 'upload']);
+Route::delete('/revert1', [UploadFilesController::class, 'revert1'])->name('revertFile');
 
+
+
+Route::get('test-color', function () {
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, 'https://parseapi.back4app.com/classes/Color?limit=1000&keys=name,hexCode');
+    curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+        'X-Parse-Application-Id: vei5uu7QWv5PsN3vS33pfc7MPeOPeZkrOcP24yNX', // This is the fake app's application id
+        'X-Parse-Master-Key: aImLE6lX86EFpea2nDjq9123qJnG0hxke416U7Je' // This is the fake app's readonly master key
+    ));
+    $data = json_decode(curl_exec($curl)); // Here you have the data that you need
+    print_r(json_encode($data, JSON_PRETTY_PRINT));
+    curl_close($curl);
+//    dd($data);
+
+})->name('test-color');
 

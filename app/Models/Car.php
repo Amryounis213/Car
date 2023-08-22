@@ -48,7 +48,7 @@ class Car extends Model
 
     public function GetTitleAttribute()
     {
-        return $this->Brand->name . ',' . $this->Model->name . ',' . $this->CarTypes->name . ',' . $this->Generations->name ;
+        return $this->Brand->name . ' - ' . $this->Model->name . ' - ' . $this->CarTypes->name . ' - ' . $this->Generations->name ;
     }
 
     public function User()

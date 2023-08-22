@@ -1,6 +1,14 @@
 @extends('layouts.website')
 
-@section('styles')
+@section('style')
+    <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
+    <link href="https://unpkg.com/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.css" rel="stylesheet" />
+    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet" />
+    <style>
+        .custom-file-input {
+            width: calc(100% - 0.5em);
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -20,7 +28,7 @@
                 <!-- title -->
                 <div class="col-12">
                     <div class="main__title main__title--page">
-                        <h1>Post Your Product</h1>
+                        <h1>Add Advirtisement</h1>
                     </div>
                 </div>
                 <!-- end title -->
@@ -39,11 +47,11 @@
                                 </div>
                             </div>
 
-                            <div class="col-12 col-md-6">
+                            {{-- <div class="col-12 col-md-6">
                                 <div class="sign__group">
                                     <input type="text" name="name" class="sign__input" placeholder="Name">
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="col-12 col-md-6">
                                 <div class="sign__group">
@@ -75,7 +83,7 @@
 
                             <div class="col-12 col-md-6">
                                 <div class="sign__group">
-                                    <select name="release_year" class="sign__input">
+                                    <select name="year" class="sign__input">
                                         <option value="" disabled selected>Select Release Year</option>
                                         @for ($year = date('Y'); $year >= 1912; $year--)
                                             <option value="{{ $year }}">{{ $year }}</option>
@@ -153,37 +161,38 @@
                             </div>
 
                             {{-- Select View --}}
-                            <div class="col-12 col-md-6">
-                                <div class="sign__group">
-                                    <input type="text" name="upholstery" class="sign__input" placeholder="نقاط القوة">
-                                </div>
-                            </div>
-
-                            <div class="col-12 col-md-6">
-                                <div class="sign__group">
-                                    <input type="number" min="2" max="8" name="number_of_doors"
-                                        class="sign__input" placeholder="Number Of Doors">
-                                </div>
-                            </div>
-
-
-                            <div class="col-12">
-                                <div class="sign__group">
-                                    <textarea name="text" class="sign__textarea" placeholder="Type your message"></textarea>
-                                </div>
-                            </div>
-
-                            <div class="col-12">
-                                <div class="sign__group">
-                                    <input type="file" name="images" class="sign__input" accept="image/*" multiple>
+                            <div class="col-12 col-md-12">
+                                {{-- <div class="sign__group"> --}}
+                                <label for="fuel" class="sign__label">Force Points</label>
+                                <div class="sign__group sign__group--checkbox">
+                                    @foreach ($amenities as $key => $amenity)
+                                        <input type="checkbox" name="amenities[]" value="amenity{{ $key }}"
+                                            id="amenity{{ $key }}">
+                                        <label for="amenity{{ $key }}">{{ $amenity->name }}</label>
+                                    @endforeach
+                                    {{-- </div> --}}
                                 </div>
                             </div>
 
 
-                            <div class="col-12 col-xl-3">
-                                <button type="submit" class="sign__btn"><span>Post</span></button>
+                                <div class="col-12">
+                                    <div class="sign__group">
+                                        <textarea name="text" class="sign__textarea" placeholder="Type your message"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="sign__group">
+                                        <input id="images" type="file" name="images[]" class="custom-file-input"
+                                            multiple>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-12 col-xl-3">
+                                    <button type="submit" class="sign__btn"><span>Post</span></button>
+                                </div>
                             </div>
-                        </div>
                     </form>
                 </div>
 
@@ -296,6 +305,64 @@
 @endsection
 
 @section('scripts')
+    <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js">
+    </script>
+    <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-crop/dist/filepond-plugin-image-crop.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.js"></script>
+
+    <script>
+        FilePond.registerPlugin(
+            FilePondPluginFileValidateSize,
+            FilePondPluginFileValidateType,
+            FilePondPluginImageExifOrientation,
+            FilePondPluginImagePreview,
+            FilePondPluginImageCrop,
+            FilePondPluginImageResize,
+            FilePondPluginImageTransform,
+            // FilePondPluginImageEdit
+
+        );
+
+        // Get a reference to the file input element
+        const inputElement = document.querySelector('#images');
+        // Create a FilePond instance
+        const pond = FilePond.create(inputElement, {
+
+            allowFileSizeValidation: true,
+            labelFileWaitingForSizeValidation: 'انتظر حتى يتم التحقق من حجم الملف',
+            labelFileSizeNotAvailable: 'حجم الملف غير متوفر',
+            labelFileLoading: 'جاري التحميل',
+            labelFileLoadError: 'حدث خطأ أثناء التحميل',
+            labelFileProcessing: 'جاري التحميل',
+            labelFileProcessingComplete: 'تم التحميل',
+            labelFileProcessingAborted: 'تم إلغاء التحميل',
+            labelMaxFileSizeExceeded: 'حجم الملف كبير جدا',
+            maxFileSize: '100MB',
+            minFileSize: '1b',
+            labelMinFileSizeNotMet: 'حجم الملف صغير جدا',
+            // acceptedFileTypes : ['audio/*'], 
+            labelFileTypeNotAllowed: 'نوع الملف يجب ان يكون mp3 او wav',
+        });
+
+
+        FilePond.setOptions({
+            server: {
+                process: '/upload',
+                revert: "{{-- route('revertFile') --}}",
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            }
+        });
+    </script>
+
+
     <script>
         const currentYear = new Date().getFullYear();
         document.getElementById('year-input').setAttribute('max', currentYear);

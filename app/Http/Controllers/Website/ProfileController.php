@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
+use App\Models\Amenity;
 use App\Models\Brand;
 use App\Models\Car;
 use App\Models\CarModel;
@@ -100,12 +101,13 @@ class ProfileController extends Controller
     public function createPost()
     {
         $car = new Car();
-        $models = CarModel::all();
-        $brands = Brand::all();
-        $carTypes = CarType::all();
-        $generation = Generation::all();
-        $carColors = Color::all();
-        return view('website.addproduct', compact('car', 'models', 'brands', 'carTypes', 'generation', 'carColors'));
+        $models = CarModel::select('id' , 'name')->get();
+        $brands = Brand::select('id' , 'name')->get();
+        $carTypes = CarType::select('id' , 'name')->get();
+        $generation = Generation::select('id' , 'name')->get();
+        $carColors = Color::select('id' , 'name')->get();
+        $amenities = Amenity::get();
+        return view('website.addproduct', compact('car', 'models', 'brands', 'carTypes', 'generation', 'carColors' , 'amenities'));
     }
 
     public function storePost(Request $request)

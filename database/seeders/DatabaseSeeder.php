@@ -101,10 +101,42 @@ class DatabaseSeeder extends Seeder
         //     ]);
         // }
 
-        for ($i=0; $i < 10; $i++) { 
-            CarModel::create([
-                'name' => 'Model'.$i,
-            ]);
+        $colors = [
+        ['name' => 'Red', 'hex_code' => '#FF0000'],
+        ['name' => 'Blue', 'hex_code' => '#0000FF'],
+        ['name' => 'Black', 'hex_code' => '#000000'],
+        ['name' => 'White', 'hex_code' => '#FFFFFF'],
+        ['name' => 'Silver', 'hex_code' => '#C0C0C0'],
+        ['name' => 'Gray', 'hex_code' => '#808080'],
+        ['name' => 'Green', 'hex_code' => '#00FF00'],
+        ['name' => 'Yellow', 'hex_code' => '#FFFF00'],
+        ['name' => 'Orange', 'hex_code' => '#FFA500'],
+        ['name' => 'Purple', 'hex_code' => '#800080'],
+        ['name' => 'Pink', 'hex_code' => '#FFC0CB'],
+        ['name' => 'Brown', 'hex_code' => '#A52A2A'],
+        ['name' => 'Teal', 'hex_code' => '#008080'],
+        ['name' => 'Cyan', 'hex_code' => '#00FFFF'],
+        ['name' => 'Lime', 'hex_code' => '#00FF00'],
+        ['name' => 'Magenta', 'hex_code' => '#FF00FF'],
+        ['name' => 'Indigo', 'hex_code' => '#4B0082'],
+        ['name' => 'Maroon', 'hex_code' => '#800000'],
+        ['name' => 'Olive', 'hex_code' => '#808000'],
+        ['name' => 'Navy', 'hex_code' => '#000080'],
+        ];
+        // Add more colors as needed
+
+        // for ($i=0; $i < 10; $i++) { 
+        //     CarModel::create([
+        //         'name' => 'Model'.$i,
+        //     ]);
+        // }
+
+        foreach ($colors as $color) {
+            Color::create($color);
         }
     }
 }
+
+
+
+
