@@ -14,7 +14,7 @@
     </span>
     <!--end::Svg Icon-->
     <div class="d-flex flex-column pe-0 pe-sm-10">
-        <h4 class="mb-1 text-success">نجاح</h4>
+        <h4 class="mb-1 text-success">Success</h4>
         <span>{{Session::get('success')}}</span>
     </div>
 

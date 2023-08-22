@@ -29,15 +29,15 @@ class FrontEndController extends Controller
         $request->validate([
             'car_id' => 'required|exists:cars,id',
         ]);
-        $fav = Favorite::where('user_id', 1)->where('car_id', $request->car_id)->first();
+        $fav = Favorite::where('user_id', 11)->where('car_id', $request->car_id)->first();
         if ($fav) {
-            Favorite::where('user_id', 1)->where('car_id', $request->car_id)->delete();
+            Favorite::where('user_id', 11)->where('car_id', $request->car_id)->delete();
             return response()->json([
                 'message' => 'Removed from favourite successfully',
             ]);
         }
         Favorite::create([
-            'user_id' => 1,
+            'user_id' => 11,
             'car_id' => $request->car_id,
         ]);
         return response()->json([
@@ -50,7 +50,7 @@ class FrontEndController extends Controller
         $request->validate([
             'car_id' => 'required|exists:cars,id',
         ]);
-        Favorite::where('user_id', 1)->where('car_id', $request->car_id)->delete();
+        Favorite::where('user_id', 11)->where('car_id', $request->car_id)->delete();
         return response()->json([
             'message' => 'Removed from favourite successfully',
         ]);

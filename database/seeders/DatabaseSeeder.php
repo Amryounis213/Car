@@ -30,74 +30,80 @@ class DatabaseSeeder extends Seeder
 
         $faker = Faker::create();
 
-        CarModel::create([
-            'name' => $faker->word,
-        ]);
+        // CarModel::create([
+        //     'name' => $faker->word,
+        // ]);
 
-        Brand::create([
-            'name' => $faker->word,
-        ]);
+        // Brand::create([
+        //     'name' => $faker->word,
+        // ]);
 
-        CarType::create([
-            'name' => $faker->word,
-        ]);
+        // CarType::create([
+        //     'name' => $faker->word,
+        // ]);
 
-        Generation::create([
-            'name' => $faker->word,
-        ]);
+        // Generation::create([
+        //     'name' => $faker->word,
+        // ]);
 
-        for ($i = 0; $i < 10; $i++) {
-            User::create([
-                'firstname' => $faker->name,
-                'lastname' => $faker->name,
-                'username' => $faker->unique()->name,
-                'email' => $faker->unique()->safeEmail,
-                'phone' => "05923068",
-                'password' => bcrypt('123456789'),
-            ]);
-        }
+        // for ($i = 0; $i < 10; $i++) {
+        //     User::create([
+        //         'firstname' => $faker->name,
+        //         'lastname' => $faker->name,
+        //         'username' => $faker->unique()->name,
+        //         'email' => $faker->unique()->safeEmail,
+        //         'phone' => $faker->unique()->phoneNumber,
+        //         'password' => bcrypt('123456789'),
+        //     ]);
+        // }
 
-        Color::create([
-            'name' => $faker->colorName,
-        ]);
+        // Color::create([
+        //     'name' => $faker->colorName,
+        // ]);
 
 
-        $images = [];
-        for ($i = 0; $i < 10; $i++) {
-            $images[] = $faker->imageUrl(640, 480, 'cars', true);
-        }
+        // $images = [];
+        // for ($i = 0; $i < 10; $i++) {
+        //     $images[] = $faker->imageUrl(640, 480, 'cars', true);
+        // }
 
-        for ($i = 0; $i < 10; $i++) {
-            Car::create([
-                'car_model_id' => 1,
-                'brand_id' => 1,
-                'car_type_id' => 1,
-                'generation_id' => 1,
-                'user_id' => rand(1, 10),
-                'color_id_in' => 1,
-                'color_id_out' => 1,
-                'name' => $faker->unique()->word,
-                'origin' => $faker->country,
-                'min_km' => $faker->numberBetween(1000, 5000),
-                'max_km' => $faker->numberBetween(5000, 10000),
-                'year' => $faker->year,
-                'mileage' => $faker->numberBetween(5000, 100000),
-                'price' => $faker->randomFloat(2, 1000, 50000),
-                'description' => $faker->paragraph,
-                'gearbox' => $faker->randomElement(['manual', 'automatic']),
-                'fuel' => $faker->randomElement(['diesel', 'essence', 'electric']),
-                'number_of_doors' => $faker->numberBetween(2, 5),
-                'number_of_places' => $faker->numberBetween(2, 7),
-                'number_of_owners' => $faker->numberBetween(1, 5),
-                'seats' => $faker->numberBetween(2, 7),
-                'length' => $faker->numberBetween(3000, 5000),
-                'techenical_control' => $faker->date(),
-                'first_hand' => $faker->boolean,
-                'release_date' => $faker->date(),
-                'trunk_volume' => $faker->numberBetween(100, 1000),
-                'upholstery' => $faker->word,
-                'main_image' => $faker->imageUrl(),
-                'images' => $images,
+        // for ($i = 0; $i < 10; $i++) {
+        //     Car::create([
+        //         'car_model_id' => 1,
+        //         'brand_id' => 1,
+        //         'car_type_id' => 1,
+        //         'generation_id' => 1,
+        //         'user_id' => rand(1, 3),
+        //         'color_id_in' => 1,
+        //         'color_id_out' => 1,
+        //         'name' => $faker->unique()->word,
+        //         'origin' => $faker->country,
+        //         'min_km' => $faker->numberBetween(1000, 5000),
+        //         'max_km' => $faker->numberBetween(5000, 10000),
+        //         'year' => $faker->year,
+        //         'mileage' => $faker->numberBetween(5000, 100000),
+        //         'price' => $faker->randomFloat(2, 1000, 50000),
+        //         'description' => $faker->paragraph,
+        //         'gearbox' => $faker->randomElement(['manual', 'automatic']),
+        //         'fuel' => $faker->randomElement(['diesel', 'essence', 'electric']),
+        //         'number_of_doors' => $faker->numberBetween(2, 5),
+        //         'number_of_places' => $faker->numberBetween(2, 7),
+        //         'number_of_owners' => $faker->numberBetween(1, 5),
+        //         'seats' => $faker->numberBetween(2, 7),
+        //         'length' => $faker->numberBetween(3000, 5000),
+        //         'techenical_control' => $faker->date(),
+        //         'first_hand' => $faker->boolean,
+        //         'release_date' => $faker->date(),
+        //         'trunk_volume' => $faker->numberBetween(100, 1000),
+        //         'upholstery' => $faker->word,
+        //         'main_image' => $faker->imageUrl(),
+        //         'images' => $images,
+        //     ]);
+        // }
+
+        for ($i=0; $i < 10; $i++) { 
+            CarModel::create([
+                'name' => 'Model'.$i,
             ]);
         }
     }

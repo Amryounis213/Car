@@ -22,7 +22,7 @@ class AuthController extends Controller
     //Forgot Password
     public function ForgotPassword()
     {
-        return view('website.auth.forgot-password');
+        return view('website.auth.forgot');
     }
 
     //Reset Password

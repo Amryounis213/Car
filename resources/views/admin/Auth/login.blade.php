@@ -2,7 +2,7 @@
 
 <html lang="en" dir="rtl" direction="rtl" style="direction:rtl;">
 	<head><base href="../"/>
-		<title>Easy Plus</title>
+		<title>Alsouq</title>
 		<meta dir="rtl" lang="ar">
 		<meta charset="utf-8" />
 		<meta name="description" content="The most advanced Bootstrap Admin Theme on Themeforest trusted by 100,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue, Asp.Net Core, Rails, Spring, Blazor, Django, Flask & Laravel versions. Grab your copy now and get life-time updates for free." />

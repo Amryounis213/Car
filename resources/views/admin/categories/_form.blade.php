@@ -19,11 +19,11 @@
                         <!--begin::Image input placeholder-->
                         <style>
                             .image-input-placeholder {
-                                background-image: url('{{ 'storage/'.$category->icon ? asset('storage/' . $category->icon) :  asset('assets/media/svg/files/pic.jpg') }}');
+                                background-image: url('{{ 'storage/' . $category->icon ? asset('storage/' . $category->icon) : asset('assets/media/svg/files/pic.jpg') }}');
                             }
 
                             [data-theme="dark"] .image-input-placeholder {
-                                background-image: url('{{ 'storage/'.$category->icon ? asset('storage/' . $category->icon) : asset('assets/media/svg/files/blank-image-dark.svg') }}');
+                                background-image: url('{{ 'storage/' . $category->icon ? asset('storage/' . $category->icon) : asset('assets/media/svg/files/blank-image-dark.svg') }}');
                             }
                         </style>
                         <!--end::Image input placeholder-->
@@ -80,26 +80,23 @@
 
                     <!--begin::Row-->
                     <div class="row">
-                        @foreach (config('lang') as $key => $lang)
-                            <div class="col-lg-6">
-                                <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label required fw-bold fs-6">
-                                        {{ __('dashboard.service_name') }} ({{ $lang }})
-                                    </label>
-                                    <div class="col-lg-8">
-                                        <input autocomplete="off" type="text" name="name[{{ $key }}]"
-                                            class="form-control form-control-lg form-control-solid mb-3 mb-lg-0 name"
-                                            placeholder="{{ $lang }}"
-                                            value="{{ old('name.' . $key, $category->getTranslation('name', $key)) }}">
-                                        <div class="fv-plugins-message-container invalid-feedback"></div>
-                                        @error('name')
-                                            <div class="fv-plugins-message-container invalid-feedback">{{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
+                        <div class="col-lg-6">
+                            <div class="form-group row">
+                                <label class="col-lg-4 col-form-label required fw-bold fs-6">
+                                    Post Attempts
+                                </label>
+                                <div class="col-lg-8">
+                                    <input autocomplete="off" type="text" name="post_attempts"
+                                        class="form-control form-control-lg form-control-solid mb-3 mb-lg-0 name"
+                                        placeholder="number of attempts" value="{{ $user->post_attempts }}">
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                    @error('post_attempts')
+                                        <div class="fv-plugins-message-container invalid-feedback">{{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                             </div>
-                        @endforeach
+                        </div>
                     </div>
                 </div>
                 <!--end::Col-->

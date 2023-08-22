@@ -14,7 +14,7 @@
 
 @section('content')
     @php
-        $fav = \App\Models\Favorite::where('user_id', 1)
+        $fav = \App\Models\Favorite::where('user_id', 11)
             ->where('car_id', $car->id)
             ->get()
             ->pluck('car_id')
@@ -128,8 +128,7 @@
                         <span class="offer__title">Offer</span>
                         <div class="offer__wrap">
                             <span class="offer__price">{{ $car->price }}</span>
-                            <button
-                                @if (in_array($car->id, $fav)) class="offer__favorite offer__favorite--active" @else   class="offer__favorite" @endif
+                            <button class="offer__favorite  {{ $car->isLikedByUser() ? 'offer__favorite--active' : ' ' }}"
                                 data-id="{{ $car->id }}" type="button" aria-label="Add to favorite"><svg
                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                     <path
@@ -360,13 +359,15 @@
                                             <path
                                                 d="M17,11H9.41l3.3-3.29a1,1,0,1,0-1.42-1.42l-5,5a1,1,0,0,0-.21.33,1,1,0,0,0,0,.76,1,1,0,0,0,.21.33l5,5a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42L9.41,13H17a1,1,0,0,0,0-2Z">
                                             </path>
-                                        </svg></button>
+                                        </svg>
+                                    </button>
                                     <button class="splide__arrow splide__arrow--next" type="button"><svg
                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                             <path
                                                 d="M17.92,11.62a1,1,0,0,0-.21-.33l-5-5a1,1,0,0,0-1.42,1.42L14.59,11H7a1,1,0,0,0,0,2h7.59l-3.3,3.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l5-5a1,1,0,0,0,.21-.33A1,1,0,0,0,17.92,11.62Z">
                                             </path>
-                                        </svg></button>
+                                        </svg>
+                                    </button>
                                 </div>
 
                                 <div class="splide__track">
@@ -384,7 +385,7 @@
                                 </div>
                             </div>
                             <div class="car__title">
-                                <h3 class="car__name"><a href="car.html">{{ $randCar->title }}</a></h3>
+                                <h3 class="car__name"><a href="{{ route('showCar', $randCar->id) }}">{{ $randCar->title }}</a></h3>
                                 <span class="car__year">{{ $randCar->year }}</span>
                             </div>
                             <ul class="car__list">
@@ -401,7 +402,7 @@
                             <div class="car__footer">
                                 <span class="car__price">{{ $randCar->price }}</span>
                                 <button
-                                    @if (in_array($car->id, $fav)) class="car__favorite offer__favorite offer__favorite--active" @else   class="car__favorite offer__favorite" @endif
+                                    class="car__favorite offer__favorite @if ($randCar->isLikedByUser()) offer__favorite--active @endif"
                                     data-id="{{ $randCar->id }}" type="button" aria-label="Add to favorite">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                         <path
@@ -429,8 +430,6 @@
 
 @section('scripts')
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-
-    {{-- https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js --}}
     <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"></script>
 
     <script>
@@ -443,8 +442,6 @@
                 } else {
                     $(this).addClass('offer__favorite--active');
                 }
-
-
                 //ajax request post
                 $.ajax({
                     url: "{{ route('add.to.favorite') }}",

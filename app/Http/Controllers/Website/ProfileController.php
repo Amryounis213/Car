@@ -3,7 +3,12 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
 use App\Models\Car;
+use App\Models\CarModel;
+use App\Models\CarType;
+use App\Models\Color;
+use App\Models\Generation;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -92,18 +97,24 @@ class ProfileController extends Controller
     }
 
 
-    public function createProduct()
+    public function createPost()
     {
         $car = new Car();
-        return view('website.addproduct', compact('car'));
+        $models = CarModel::all();
+        $brands = Brand::all();
+        $carTypes = CarType::all();
+        $generation = Generation::all();
+        $carColors = Color::all();
+        return view('website.addproduct', compact('car', 'models', 'brands', 'carTypes', 'generation', 'carColors'));
     }
 
-    public function storeProduct(Request $request)
+    public function storePost(Request $request)
     {
         $data = $request->all();
         dd($data);
-        // $attempts = auth()->user()->post_attempts;
-        // $attempts = $attempts - 1;
+        $user = auth()->user()->post_attempts;
+        $user->post_attempts = $user->post_attempts - 1;
+
         return redirect()->route('website.home');
     }
 

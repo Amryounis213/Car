@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\DataTables\PostsDataTables;
+use App\DataTables\PostDataTables;
 use App\Http\Controllers\Controller;
 use App\Models\Car;
 use Illuminate\Http\Request;
@@ -15,7 +15,7 @@ class PostsController extends Controller
      */
     public function index($userId)
     {
-        $dataTable = new PostsDataTables($userId);
+        $dataTable = new PostDataTables($userId);
         return $dataTable->render('admin.posts.index');
     }
 
@@ -80,34 +80,34 @@ class PostsController extends Controller
         return Controller::updateModelStatus($info);
     }
 
-    public function updateCarStatus(Request $request): \Illuminate\Http\JsonResponse
-    {
-        // $id = $request->get('id');
-        // $status = $request->get('status');
-        // $info = Car::find($id);
-        // // If the status is accepted, update the wallet balance
-        // if ($info->car_status == 'pending') {
-        //     $info->update(['car_status' => a]);
+    // public function updateCarStatus(Request $request): \Illuminate\Http\JsonResponse
+    // {
+    //     // $id = $request->get('id');
+    //     // $status = $request->get('status');
+    //     // $info = Car::find($id);
+    //     // // If the status is accepted, update the wallet balance
+    //     // if ($info->car_status == 'pending') {
+    //     //     $info->update(['car_status' => a]);
 
-        //     $transaction = WalletTransaction::create([
-        //         'wallet_id' => $wallet->id,
-        //         'type' => 2, // deposit
-        //         'amount' => $amount,
-        //     ]);
+    //     //     $transaction = WalletTransaction::create([
+    //     //         'wallet_id' => $wallet->id,
+    //     //         'type' => 2, // deposit
+    //     //         'amount' => $amount,
+    //     //     ]);
 
 
-        //     // Return a success response
-        //     return response()->json([
-        //         'status' => 'success',
-        //         'message' => trans(__('dashboard.success')),
-        //         'type' => 'yes',
-        //     ]);
-        // } else if ($info->status == 'rejected') {
-        //     return response()->json([
-        //         'status' => 'error',
-        //         'message' => trans(__('dashboard.rejected')),
-        //         'type' => 'yes',
-        //     ]);
+    //     //     // Return a success response
+    //     //     return response()->json([
+    //     //         'status' => 'success',
+    //     //         'message' => trans(__('dashboard.success')),
+    //     //         'type' => 'yes',
+    //     //     ]);
+    //     // } else if ($info->status == 'rejected') {
+    //     //     return response()->json([
+    //     //         'status' => 'error',
+    //     //         'message' => trans(__('dashboard.rejected')),
+    //     //         'type' => 'yes',
+    //     //     ]);
         // }
-    }
+    // }
 }

@@ -11,8 +11,7 @@
                     <!--begin::Page title-->
                     <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
                         <!--begin::Title-->
-                        <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">اضافة
-                            قسم جديد</h1>
+                        <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Add Post Attempts for {{ $user->firstname. ' '. $user->las }}</h1>
                         <!--end::Title-->
                         <!--begin::Breadcrumb-->
                         <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
@@ -27,16 +26,9 @@
                             </li>
                             <!--end::Item-->
                             <!--begin::Item-->
-                            <li class="breadcrumb-item text-muted">القسم</li>
+                            <li class="breadcrumb-item text-muted">Add Attempts</li>
                             <!--end::Item-->
-                            <!--begin::Item-->
-                            <li class="breadcrumb-item">
-                                <span class="bullet bg-gray-400 w-5px h-2px"></span>
-                            </li>
-                            <!--end::Item-->
-                            <!--begin::Item-->
-                            <li class="breadcrumb-item text-muted">اضافة القسم جديد</li>
-                            <!--end::Item-->
+                           
                         </ul>
                         <!--end::Breadcrumb-->
                     </div>
@@ -60,12 +52,12 @@
                     @include('layouts.sessions-messages')
                     <form id="kt_ecommerce_add_category_form" 
                         class="form d-flex flex-column flex-lg-row"
-                        action="{{ route('categories.update' , $category->id) }}" 
+                        action="{{ route('users.update' , $user->id) }}" 
                         method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
-                        @include('admin.categories._form')
+                        @include('admin.users._form')
                      
                     </form>
                 </div>

@@ -291,7 +291,8 @@ License: For each use you must have a valid license purchased only from above li
                                     <!--begin::Menu item-->
 
 
-                                    {{-- <!--end::Menu item-->
+                                    {{--
+                                         <!--end::Menu item-->
 										<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 											<!--begin:Menu link-->
 										  
@@ -334,7 +335,8 @@ License: For each use you must have a valid license purchased only from above li
 								
 											</div>
 											<!--end:Menu sub-->
-										</div> --}}
+										</div> 
+                                    --}}
                                 </div>
                                 <!--end::User account menu-->
                                 <!--end::Menu wrapper-->

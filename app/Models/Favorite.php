@@ -10,8 +10,13 @@ class Favorite extends Model
     use HasFactory;
     protected $guarded = [];
 
-    public function users()
+    public function user()
     {
-        return $this->belongsToMany(User::class, 'favorites', 'car_id', 'user_id');
+        return $this->belongsTo(User::class);
+    }
+
+    public function car()
+    {
+        return $this->belongsTo(Car::class);
     }
 }

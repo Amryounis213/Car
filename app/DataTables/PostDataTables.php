@@ -16,7 +16,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class PostsDataTables extends DataTable
+class PostDataTables extends DataTable
 {
     /**
      * Build DataTable class.
@@ -24,6 +24,13 @@ class PostsDataTables extends DataTable
      * @param QueryBuilder $query Results from query() method.
      * @return \Yajra\DataTables\EloquentDataTable
      */
+
+    protected $userId;
+
+    public function __construct($userId)
+    {
+        $this->userId = $userId;
+    }
 
     public function dataTable($query): EloquentDataTable
     {
@@ -62,7 +69,7 @@ class PostsDataTables extends DataTable
      */
     public function query(Car $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->newQuery()->where('user_id', $this->userId);
     }
 
     /**

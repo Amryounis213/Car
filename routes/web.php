@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CarsController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PostsController;
 use App\Http\Controllers\Admin\UserController;
@@ -36,7 +37,8 @@ Route::get('/car', function () {
 
 //Website
 Route::get('/', [FrontEndController::class , 'index'])->name('website.home');
-Route::get('/post-product', [FrontEndController::class , 'createProduct'])->name('website.post');
+Route::get('/post', [ProfileController::class , 'createPost'])->name('post.create');
+Route::post('/post', [ProfileController::class , 'storePost'])->name('post.store');
 Route::resource('account', ProfileController::class);
 Route::post('add-to-favorite', [FrontEndController::class , 'addToFavourite'])->name('add.to.favorite');
 Route::get('getFavCars', [ProfileController::class , 'getFavCars'])->name('getFavCars');
@@ -47,6 +49,7 @@ Route::get('/admin', [DashboardController::class , 'index'])->name('dashboard');
 
 Route::resource('users', UserController::class);
 Route::resource('posts', PostsController::class);
+Route::get('cars', [CarsController::class, 'index'])->name('cars.index');
 Route::post('posts/status', [PostsController::class, 'updateStatus'])->name('posts.status');
 // Route::post('product/status', [PostsController::class, 'updateCarStatus'])->name('product.status');
 
@@ -54,6 +57,7 @@ Route::post('posts/status', [PostsController::class, 'updateStatus'])->name('pos
 Route::group(['middleware' => 'guest'], function () {
     Route::get('login', [AuthController::class , 'Login'])->name('website.login');
     Route::get('register', [AuthController::class , 'Register'])->name('website.register');
+    Route::get('forgot', [AuthController::class , 'forgot'])->name('website.forgot');
     Route::get('forgot-password', [AuthController::class , 'ForgotPassword'])->name('website.forgot-password');
     Route::get('reset-password', [AuthController::class , 'ResetPassword'])->name('website.reset-password');
     Route::post('post-login', [AuthController::class , 'PostLogin'])->name('website.post.login');

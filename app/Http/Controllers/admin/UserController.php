@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\DataTables\PostsDataTables;
+use App\DataTables\PostDataTables;
 use App\DataTables\TransactionsDataTables;
 use App\DataTables\UsersDataTables;
 use App\DataTables\UserTransactionsDataTables;
@@ -131,7 +131,7 @@ class UserController extends Controller
      */
     public function show($userId)
     {
-        $dataTable = new PostsDataTables($userId);
+        $dataTable = new PostDataTables($userId);
         return $dataTable->render('admin.posts.index');
     }
 
@@ -144,9 +144,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        $roles = ModelsRole::select('id', 'name')->get();
-        $userRole = RoleUser::where('user_id', $user->id)->first();
-        return view('admin.users.edit', compact('user', 'roles', 'userRole'));
+        return view('admin.users.edit', compact('user'));
     }
 
     /**
@@ -161,12 +159,13 @@ class UserController extends Controller
         //validate data 
 
         $user = User::findOrFail($id);
-
+        $user->post_attempts = $request->post_attempts + $user->post_attempts;
 
         $user->update($request->except('role'));
 
         return redirect()->route('users.index')->with('success', __('dashboard.updated_successfully'));
     }
+
 
     /**
      * Remove the specified resource from storage.

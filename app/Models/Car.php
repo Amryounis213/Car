@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Car extends Model
 {
@@ -54,5 +55,24 @@ class Car extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
+    
+    //check like 
+    public function isLikedByUser()
+    {
+        $user = Auth::user();
+
+        if (!$user) {
+            return false; 
+        }
+
+        return $this->favorites()->where('user_id', $user->id)->exists();
+    }
+
 
 }

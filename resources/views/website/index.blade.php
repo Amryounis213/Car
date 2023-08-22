@@ -1,5 +1,9 @@
 @extends('layouts.website')
+@section('style')
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css">
+
+@endsection
 @section('content')
     <!-- main content -->
     <main class="main">
@@ -97,7 +101,8 @@
                                 </div>
                             </div>
                             <div class="car__title">
-                                <h3 class="car__name"><a href="">{{ $car->title }}</a></h3>
+                                <h3 class="car__name"><a href="{{ route('showCar', $car->id) }}">{{ $car->title }}</a>
+                                </h3>
                                 <span class="car__year">{{ $car->year }}</span>
                             </div>
                             <ul class="car__list">
@@ -132,11 +137,14 @@
                             </ul>
                             <div class="car__footer">
                                 <span class="car__price">{{ $car->price }} </span>
-                                <button class="car__favorite" type="button" aria-label="Add to favorite"><svg
-                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <button class="car__favorite {{ $car->isLikedByUser() ? 'car__favorite--active' : '' }}"
+                                    type="button" aria-label="Add to favorite" data-id="{{ $car->id }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24">
                                         <path
                                             d="M20.16,5A6.29,6.29,0,0,0,12,4.36a6.27,6.27,0,0,0-8.16,9.48l6.21,6.22a2.78,2.78,0,0,0,3.9,0l6.21-6.22A6.27,6.27,0,0,0,20.16,5Zm-1.41,7.46-6.21,6.21a.76.76,0,0,1-1.08,0L5.25,12.43a4.29,4.29,0,0,1,0-6,4.27,4.27,0,0,1,6,0,1,1,0,0,0,1.42,0,4.27,4.27,0,0,1,6,0A4.29,4.29,0,0,1,18.75,12.43Z" />
-                                    </svg></button>
+                                    </svg>
+                                </button>
                                 <a href="{{ route('showCar', $car->id) }}" class="car__more"><span>Show More</span></a>
                             </div>
                         </div>
@@ -215,165 +223,38 @@
             </section>
             <!-- end get started -->
         </div>
-
-        {{-- <!-- news -->
-        <div class="container">
-            <div class="row">
-                <!-- title -->
-                <div class="col-12">
-                    <div class="main__title">
-                        <h2>Our Blog</h2>
-                    </div>
-                </div>
-                <!-- end title -->
-            </div>
-        </div>
-
-        <div class="main__carousel splide splide--content">
-            <div class="splide__arrows">
-                <button class="splide__arrow splide__arrow--prev" type="button"><svg xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24">
-                        <path
-                            d="M17,11H9.41l3.3-3.29a1,1,0,1,0-1.42-1.42l-5,5a1,1,0,0,0-.21.33,1,1,0,0,0,0,.76,1,1,0,0,0,.21.33l5,5a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42L9.41,13H17a1,1,0,0,0,0-2Z">
-                        </path>
-                    </svg></button>
-                <button class="splide__arrow splide__arrow--next" type="button"><svg xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24">
-                        <path
-                            d="M17.92,11.62a1,1,0,0,0-.21-.33l-5-5a1,1,0,0,0-1.42,1.42L14.59,11H7a1,1,0,0,0,0,2h7.59l-3.3,3.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l5-5a1,1,0,0,0,.21-.33A1,1,0,0,0,17.92,11.62Z">
-                        </path>
-                    </svg></button>
-            </div>
-
-            <div class="splide__track">
-                <ul class="splide__list">
-                    <li class="splide__slide">
-                        <div class="post post--carousel">
-                            <a href="article.html" class="post__img">
-                                <img src="{{ asset('assets/img/posts/8.jpg') }}" alt="">
-                            </a>
-
-                            <div class="post__content">
-                                <a href="#" class="post__category"><span>Cars</span></a>
-                                <h3 class="post__title"><a href="article.html">What´s required when <br>renting a car?</a>
-                                </h3>
-                                <div class="post__meta">
-                                    <span class="post__date"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                            <path
-                                                d="M15,11H13V7a1,1,0,0,0-2,0v5a1,1,0,0,0,1,1h3a1,1,0,0,0,0-2ZM12,2A10,10,0,1,0,22,12,10.01114,10.01114,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8.00917,8.00917,0,0,1,12,20Z" />
-                                        </svg> January 14, 2022</span>
-                                    <span class="post__comments"><svg xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 24 24">
-                                            <path
-                                                d="M12,2A10,10,0,0,0,2,12a9.89,9.89,0,0,0,2.26,6.33l-2,2a1,1,0,0,0-.21,1.09A1,1,0,0,0,3,22h9A10,10,0,0,0,12,2Zm0,18H5.41l.93-.93a1,1,0,0,0,0-1.41A8,8,0,1,1,12,20Zm5-9H7a1,1,0,0,0,0,2H17a1,1,0,0,0,0-2Zm-2,4H9a1,1,0,0,0,0,2h6a1,1,0,0,0,0-2ZM9,9h6a1,1,0,0,0,0-2H9A1,1,0,0,0,9,9Z" />
-                                        </svg> 32</span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li class="splide__slide">
-                        <div class="post post--carousel">
-                            <a href="article.html" class="post__img">
-                                <img src="{{ asset('assets/img/posts/3.jpg') }}" alt="">
-                            </a>
-
-                            <div class="post__content">
-                                <a href="#" class="post__category"><span>Cars</span></a>
-                                <h3 class="post__title"><a href="article.html">Statistics showed which average age of
-                                        cars</a></h3>
-                                <div class="post__meta">
-                                    <span class="post__date"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                            <path
-                                                d="M15,11H13V7a1,1,0,0,0-2,0v5a1,1,0,0,0,1,1h3a1,1,0,0,0,0-2ZM12,2A10,10,0,1,0,22,12,10.01114,10.01114,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8.00917,8.00917,0,0,1,12,20Z" />
-                                        </svg> January 12, 2022</span>
-                                    <span class="post__comments"><svg xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 24 24">
-                                            <path
-                                                d="M12,2A10,10,0,0,0,2,12a9.89,9.89,0,0,0,2.26,6.33l-2,2a1,1,0,0,0-.21,1.09A1,1,0,0,0,3,22h9A10,10,0,0,0,12,2Zm0,18H5.41l.93-.93a1,1,0,0,0,0-1.41A8,8,0,1,1,12,20Zm5-9H7a1,1,0,0,0,0,2H17a1,1,0,0,0,0-2Zm-2,4H9a1,1,0,0,0,0,2h6a1,1,0,0,0,0-2ZM9,9h6a1,1,0,0,0,0-2H9A1,1,0,0,0,9,9Z" />
-                                        </svg> 44</span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li class="splide__slide">
-                        <div class="post post--carousel">
-                            <a href="article.html" class="post__img">
-                                <img src="{{ asset('assets/img/posts/1.jpg') }}" alt="">
-                            </a>
-
-                            <div class="post__content">
-                                <a href="#" class="post__category"><span>Company</span></a>
-                                <h3 class="post__title"><a href="article.html">Opening of new offices of the company
-                                        throughout the country</a></h3>
-                                <div class="post__meta">
-                                    <span class="post__date"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                            <path
-                                                d="M15,11H13V7a1,1,0,0,0-2,0v5a1,1,0,0,0,1,1h3a1,1,0,0,0,0-2ZM12,2A10,10,0,1,0,22,12,10.01114,10.01114,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8.00917,8.00917,0,0,1,12,20Z" />
-                                        </svg> January 11, 2022</span>
-                                    <span class="post__comments"><svg xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 24 24">
-                                            <path
-                                                d="M12,2A10,10,0,0,0,2,12a9.89,9.89,0,0,0,2.26,6.33l-2,2a1,1,0,0,0-.21,1.09A1,1,0,0,0,3,22h9A10,10,0,0,0,12,2Zm0,18H5.41l.93-.93a1,1,0,0,0,0-1.41A8,8,0,1,1,12,20Zm5-9H7a1,1,0,0,0,0,2H17a1,1,0,0,0,0-2Zm-2,4H9a1,1,0,0,0,0,2h6a1,1,0,0,0,0-2ZM9,9h6a1,1,0,0,0,0-2H9A1,1,0,0,0,9,9Z" />
-                                        </svg> 118</span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li class="splide__slide">
-                        <div class="post post--carousel">
-                            <a href="article.html" class="post__img">
-                                <img src="{{ asset('assets/img/posts/4.jpg') }}" alt="">
-                            </a>
-
-                            <div class="post__content">
-                                <a href="#" class="post__category"><span>Repair</span></a>
-                                <h3 class="post__title"><a href="article.html">What cars are most vulnerable <br>to
-                                        corrosion?</a></h3>
-                                <div class="post__meta">
-                                    <span class="post__date"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                            <path
-                                                d="M15,11H13V7a1,1,0,0,0-2,0v5a1,1,0,0,0,1,1h3a1,1,0,0,0,0-2ZM12,2A10,10,0,1,0,22,12,10.01114,10.01114,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8.00917,8.00917,0,0,1,12,20Z" />
-                                        </svg> January 9, 2022</span>
-                                    <span class="post__comments"><svg xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 24 24">
-                                            <path
-                                                d="M12,2A10,10,0,0,0,2,12a9.89,9.89,0,0,0,2.26,6.33l-2,2a1,1,0,0,0-.21,1.09A1,1,0,0,0,3,22h9A10,10,0,0,0,12,2Zm0,18H5.41l.93-.93a1,1,0,0,0,0-1.41A8,8,0,1,1,12,20Zm5-9H7a1,1,0,0,0,0,2H17a1,1,0,0,0,0-2Zm-2,4H9a1,1,0,0,0,0,2h6a1,1,0,0,0,0-2ZM9,9h6a1,1,0,0,0,0-2H9A1,1,0,0,0,9,9Z" />
-                                        </svg> 0</span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li class="splide__slide">
-                        <div class="post post--carousel">
-                            <a href="article.html" class="post__img">
-                                <img src="{{ asset('assets/img/posts/5.jpg') }}" alt="">
-                            </a>
-
-                            <div class="post__content">
-                                <a href="#" class="post__category"><span>Company</span></a>
-                                <h3 class="post__title"><a href="article.html">New rules for handling our cars</a></h3>
-                                <div class="post__meta">
-                                    <span class="post__date"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                            <path
-                                                d="M15,11H13V7a1,1,0,0,0-2,0v5a1,1,0,0,0,1,1h3a1,1,0,0,0,0-2ZM12,2A10,10,0,1,0,22,12,10.01114,10.01114,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8.00917,8.00917,0,0,1,12,20Z" />
-                                        </svg> January 5, 2022</span>
-                                    <span class="post__comments"><svg xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 24 24">
-                                            <path
-                                                d="M12,2A10,10,0,0,0,2,12a9.89,9.89,0,0,0,2.26,6.33l-2,2a1,1,0,0,0-.21,1.09A1,1,0,0,0,3,22h9A10,10,0,0,0,12,2Zm0,18H5.41l.93-.93a1,1,0,0,0,0-1.41A8,8,0,1,1,12,20Zm5-9H7a1,1,0,0,0,0,2H17a1,1,0,0,0,0-2Zm-2,4H9a1,1,0,0,0,0,2h6a1,1,0,0,0,0-2ZM9,9h6a1,1,0,0,0,0-2H9A1,1,0,0,0,9,9Z" />
-                                        </svg> 97</span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!-- end news --> --}}
     </main>
     <!-- end main content -->
+@endsection
+
+@section('scripts')
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"></script>
+
+    <script>
+        //jquery document ready
+        $(document).ready(function() {
+            $('.car__favorite').click(function() {
+                //if offer__favorite--active class is exist
+                if ($(this).hasClass('offer__favorite--active')) {
+                    $(this).removeClass('offer__favorite--active');
+                } else {
+                    $(this).addClass('offer__favorite--active');
+                }
+                //ajax request post
+                $.ajax({
+                    url: "{{ route('add.to.favorite') }}",
+                    type: "POST",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        car_id: $(this).data('id')
+                    },
+                    success: function(response) {
+                        console.log('Like Saved Successfully!');
+                        toastr.success(response.message)
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

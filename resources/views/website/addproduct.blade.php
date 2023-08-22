@@ -11,7 +11,7 @@
                 <!-- breadcrumb -->
                 <div class="col-12">
                     <ul class="breadcrumbs">
-                        <li class="breadcrumbs__item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumbs__item"><a href="{{ route('website.home') }}">Home</a></li>
                         <li class="breadcrumbs__item breadcrumbs__item--active">Post</li>
                     </ul>
                 </div>
@@ -28,12 +28,14 @@
 
             <div class="row">
                 <div class="col-12 col-lg-7 col-xl-7">
-                    <form action="#" class="sign__form sign__form--contacts">
+                    <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data"
+                        class="sign__form sign__form--contacts">
+                        @csrf
                         <div class="row">
                             {{-- Post Title --}}
                             <div class="col-12">
                                 <div class="sign__group">
-                                    <input type="text" name="subject" class="sign__input" placeholder="Subject">
+                                    <textarea name="subject" class="sign__textarea" placeholder="Subject .."></textarea>
                                 </div>
                             </div>
 
@@ -45,19 +47,40 @@
 
                             <div class="col-12 col-md-6">
                                 <div class="sign__group">
-                                    <input type="text" name="year" class="sign__input" placeholder="Year">
+                                    {{-- <input type="text" inputmode="numeric" pattern="[0-9]*" min="1900" max=""
+                                        name="year" class="sign__input" placeholder="Year" id="year-input"> --}}
+                                    <select name="year" class="sign__input" id="year-input">
+                                        <option value="" disabled selected>Select Year</option>
+                                        <?php
+                                        $currentYear = date('Y');
+                                        for ($year = $currentYear; $year >= 1912; $year--) {
+                                            echo "<option value='$year'>$year</option>";
+                                        }
+                                        ?>
+                                    </select>
+
                                 </div>
                             </div>
                             {{-- This Should be a Select View --}}
                             <div class="col-12 col-md-6">
                                 <div class="sign__group">
-                                    <input type="text" name="name" class="sign__input" placeholder="Car Model">
+                                    <select name="car_model_id" class="sign__input">
+                                        <option value="" disabled selected>Select Car Model</option>
+                                        @foreach ($models as $model)
+                                            <option value="{{ $model->id }}">{{ $model->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
 
                             <div class="col-12 col-md-6">
                                 <div class="sign__group">
-                                    <input type="text" name="release_date" class="sign__input" placeholder="Release">
+                                    <select name="release_year" class="sign__input">
+                                        <option value="" disabled selected>Select Release Year</option>
+                                        @for ($year = date('Y'); $year >= 1912; $year--)
+                                            <option value="{{ $year }}">{{ $year }}</option>
+                                        @endfor
+                                    </select>
                                 </div>
                             </div>
 
@@ -66,65 +89,80 @@
                             <div class="col-12 col-md-6">
                                 <div class="sign__group">
                                     <input type="text" name="techenical_control" class="sign__input"
-                                        placeholder="Techenical_control">
+                                        placeholder="Techenical Control">
                                 </div>
                             </div>
 
                             <div class="col-12 col-md-6">
                                 <div class="sign__group">
-                                    <input type="number" min="0" max="10" name="number_of_owners" class="sign__input"
-                                        placeholder="Number of Owners">
+                                    <input type="number" min="0" max="79" name="number_of_owners"
+                                        class="sign__input" placeholder="Number of Owners">
                                 </div>
                             </div>
 
                             <div class="col-12 col-md-6">
                                 <div class="sign__group">
-                                    <input type="text" name="mileage" class="sign__input" placeholder="Mileage">
+                                    <input type="number" name="mileage" class="sign__input" placeholder="Mileage"
+                                        min="0" max="999999">
                                 </div>
                             </div>
                             {{-- Gearbox is a Select View --}}
                             <div class="col-12 col-md-6">
                                 <div class="sign__group">
-                                    <input type="text" name="gearbox" class="sign__input" placeholder="Gearbox">
+                                    <select name="gearbox" class="sign__input">
+                                        <option value="" disabled selected>Select Gearbox</option>
+                                        <option value="manual">Manual</option>
+                                        <option value="automatic">Automatic</option>
+                                    </select>
                                 </div>
                             </div>
                             {{-- هادي ممكن نعملها ليستة من الالوان وخلص مش ضروري موضوع الكلر آي دي  --}}
                             <div class="col-12 col-md-6">
                                 <div class="sign__group">
-                                    <input type="text" name="inner_color" class="sign__input" placeholder="Color Inner">
+                                    <select name="color_id_in" class="sign__input">
+                                        <option value="" disabled selected>Select Color Inner</option>
+                                        @foreach ($carColors as $color)
+                                            <option value="{{ $color->id }}">{{ $color->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             {{-- هادي ممكن نعملها ليستة من الالوان وخلص مش ضروري موضوع الكلر آي دي  --}}
                             <div class="col-12 col-md-6">
                                 <div class="sign__group">
-                                    <input type="text" name="outter_color" class="sign__input" placeholder="Color Inner">
+                                    <select name="color_id_out" class="sign__input">
+                                        <option value="" disabled selected>Select Color Inner</option>
+                                        @foreach ($carColors as $color)
+                                            <option value="{{ $color->id }}">{{ $color->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             {{-- Select View --}}
-                            <div class="col-12 col-md-6">
+                            {{-- <div class="col-12 col-md-6">
                                 <div class="sign__group">
-                                    <input type="text" name="upholstery" class="sign__input"
-                                        placeholder="Upholstery">
+                                    <input type="text" name="upholstery" class="sign__input" placeholder="Upholstery">
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="col-12 col-md-6">
                                 <div class="sign__group">
-                                    <input type="number" min="2" max="8" name="number_of_doors" class="sign__input" placeholder="Number Of Doors">
+                                    <input type="number" min="1" max="8" name="number_of_doors"
+                                        class="sign__input" placeholder="Number Of Doors">
                                 </div>
                             </div>
 
                             {{-- Select View --}}
                             <div class="col-12 col-md-6">
                                 <div class="sign__group">
-                                    <input type="text" name="upholstery" class="sign__input"
-                                        placeholder="نقاط القوة">
+                                    <input type="text" name="upholstery" class="sign__input" placeholder="نقاط القوة">
                                 </div>
                             </div>
 
                             <div class="col-12 col-md-6">
                                 <div class="sign__group">
-                                    <input type="number" min="2" max="8" name="number_of_doors" class="sign__input" placeholder="Number Of Doors">
+                                    <input type="number" min="2" max="8" name="number_of_doors"
+                                        class="sign__input" placeholder="Number Of Doors">
                                 </div>
                             </div>
 
@@ -137,10 +175,10 @@
 
                             <div class="col-12">
                                 <div class="sign__group">
-                                    <input type="file" name="upload" class="sign__input" accept="image/*" multiple>
+                                    <input type="file" name="images" class="sign__input" accept="image/*" multiple>
                                 </div>
                             </div>
-                            
+
 
                             <div class="col-12 col-xl-3">
                                 <button type="submit" class="sign__btn"><span>Post</span></button>
@@ -154,9 +192,9 @@
                         <h2>Info</h2>
                         <p>We are always happy to help and provide more information about our services. You can contact us
                             through email, phone, or by filling out the form on our website. Thank you for considering us!
-                            لديك عدد (1) من المنشورات 
+                            لديك عدد ({{ auth()->user()->post_attempts ?? '1' }}) من المنشورات
                             بعد هيك راح تدفع عشان تعمل منشور ، تمام ؟
-                            
+
                         </p>
                     </div>
                     <ul class="contacts__list">
@@ -258,4 +296,28 @@
 @endsection
 
 @section('scripts')
+    <script>
+        const currentYear = new Date().getFullYear();
+        document.getElementById('year-input').setAttribute('max', currentYear);
+    </script>
+    <script>
+        const fileInput = document.querySelector('.sign__input');
+        const imagePreviewContainer = document.querySelector('.image-preview-container');
+
+        fileInput.addEventListener('change', handleFileUpload);
+
+        function handleFileUpload(event) {
+            imagePreviewContainer.innerHTML = ''; // Clear existing previews
+
+            const files = event.target.files;
+            for (let i = 0; i < Math.min(files.length, 6); i++) {
+                const imagePreview = document.createElement('div');
+                imagePreview.className = 'image-preview';
+                const image = document.createElement('img');
+                image.src = URL.createObjectURL(files[i]);
+                imagePreview.appendChild(image);
+                imagePreviewContainer.appendChild(imagePreview);
+            }
+        }
+    </script>
 @endsection

@@ -5359,6 +5359,25 @@ body::-webkit-scrollbar-thumb {
   padding: 0 20px;
   font-family: 'Nunito', sans-serif;
 }
+
+/* Prevent non-numeric characters from being entered */
+.sign__input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Firefox-specific styling for number input */
+.sign__input[type="number"]::-webkit-inner-spin-button,
+.sign__input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Prevent number input from showing arrows on hover */
+.sign__input[type="number"]:hover,
+.sign__input[type="number"]:focus {
+  outline: none;
+}
+
 .sign__input:focus,
 .sign__input:hover {
   border-color: #189cf4;
