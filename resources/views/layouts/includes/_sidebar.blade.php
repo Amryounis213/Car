@@ -97,6 +97,23 @@
                         <!--end:Menu item-->
                     </div>
                     <!--end:Menu sub-->
+                    <!--begin:Menu sub-->
+                    <div class="menu-sub menu-sub-accordion {{ request()->is('whous') ? 'activeshow' : '' }}">
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+
+                            <a class="menu-link {{ request()->is('whous') ? 'active' : '' }}"
+                                href="{{ route('whous.index') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">{{ __('dashboard.whous') }}</span>
+                            </a>
+
+                        </div>
+                        <!--end:Menu item-->
+                    </div>
+                    <!--end:Menu sub-->
                     
                 </div>
 

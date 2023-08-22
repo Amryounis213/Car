@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Car;
 use App\Models\CommonQuestion;
 use App\Models\Favorite;
+use App\Models\WhoUs;
 use Illuminate\Http\Request;
 
 class FrontEndController extends Controller
@@ -62,5 +63,11 @@ class FrontEndController extends Controller
     {
        $questions = CommonQuestion::all();
        return view('website.commonquestions', compact('questions'));
+    }
+
+    public function aboutUs()
+    {
+       $about = WhoUs::first();
+       return view('website.about', compact('about'));
     }
 }
