@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admin\AmenitiesController;
 use App\Http\Controllers\Admin\CarsController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PostsController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\CommonQuestionsController;
 use App\Http\Controllers\Website\AuthController;
 use App\Http\Controllers\Website\FrontEndController;
 use App\Http\Controllers\Website\ProfileController;
@@ -44,8 +46,16 @@ Route::post('add-to-favorite', [FrontEndController::class , 'addToFavourite'])->
 Route::get('getFavCars', [ProfileController::class , 'getFavCars'])->name('getFavCars');
 Route::get('/showcar/{id}', [FrontEndController::class , 'showCar'])->name('showCar');
 
+Route::get('/helpcenter', [FrontEndController::class , 'helpCenter'])->name('helpcenter');
+
 //Controller Panel
 Route::get('/admin', [DashboardController::class , 'index'])->name('dashboard');
+
+Route::resource('commonquestions', CommonQuestionsController::class);
+Route::post('commonquestions/status', [CommonQuestionsController::class, 'updateStatus'])->name('commonquestions.status');
+
+Route::resource('amenities', AmenitiesController::class);
+Route::post('amenities/status', [AmenitiesController::class, 'updateStatus'])->name('amenities.status');
 
 Route::resource('users', UserController::class);
 Route::resource('posts', PostsController::class);

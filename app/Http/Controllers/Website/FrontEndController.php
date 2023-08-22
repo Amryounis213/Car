@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
 use App\Models\Car;
+use App\Models\CommonQuestion;
 use App\Models\Favorite;
 use Illuminate\Http\Request;
 
@@ -29,15 +30,15 @@ class FrontEndController extends Controller
         $request->validate([
             'car_id' => 'required|exists:cars,id',
         ]);
-        $fav = Favorite::where('user_id', 11)->where('car_id', $request->car_id)->first();
+        $fav = Favorite::where('user_id', auth()->user()->id)->where('car_id', $request->car_id)->first();
         if ($fav) {
-            Favorite::where('user_id', 11)->where('car_id', $request->car_id)->delete();
+            Favorite::where('user_id', auth()->user()->id)->where('car_id', $request->car_id)->delete();
             return response()->json([
                 'message' => 'Removed from favourite successfully',
             ]);
         }
         Favorite::create([
-            'user_id' => 11,
+            'user_id' => auth()->user()->id,
             'car_id' => $request->car_id,
         ]);
         return response()->json([
@@ -56,4 +57,10 @@ class FrontEndController extends Controller
         ]);
     }
 
+
+    public function helpCenter()
+    {
+       $questions = CommonQuestion::all();
+       return view('website.commonquestions', compact('questions'));
+    }
 }
