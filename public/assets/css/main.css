@@ -5361,9 +5361,9 @@ body::-webkit-scrollbar-thumb {
 }
 
 /* Prevent non-numeric characters from being entered */
-.sign__input[type="number"] {
+/* .sign__input[type="number"] {
   -moz-appearance: textfield;
-}
+} */
 
 /* Firefox-specific styling for number input */
 .sign__input[type="number"]::-webkit-inner-spin-button,
