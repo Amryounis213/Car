@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\Admin\AmenitiesController;
 use App\Http\Controllers\Admin\CarsController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PostsController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\UploadFilesController;
+use App\Http\Controllers\Admin\CommonQuestionsController;
 use App\Http\Controllers\Website\AuthController;
 use App\Http\Controllers\Website\FrontEndController;
 use App\Http\Controllers\Website\ProfileController;
@@ -45,8 +47,16 @@ Route::post('add-to-favorite', [FrontEndController::class , 'addToFavourite'])->
 Route::get('getFavCars', [ProfileController::class , 'getFavCars'])->name('getFavCars');
 Route::get('/showcar/{id}', [FrontEndController::class , 'showCar'])->name('showCar');
 
+Route::get('/helpcenter', [FrontEndController::class , 'helpCenter'])->name('helpcenter');
+
 //Controller Panel
 Route::get('/admin', [DashboardController::class , 'index'])->name('dashboard');
+
+Route::resource('commonquestions', CommonQuestionsController::class);
+Route::post('commonquestions/status', [CommonQuestionsController::class, 'updateStatus'])->name('commonquestions.status');
+
+Route::resource('amenities', AmenitiesController::class);
+Route::post('amenities/status', [AmenitiesController::class, 'updateStatus'])->name('amenities.status');
 
 Route::resource('users', UserController::class);
 Route::resource('posts', PostsController::class);
@@ -64,6 +74,8 @@ Route::group(['middleware' => 'guest'], function () {
     Route::post('post-login', [AuthController::class , 'PostLogin'])->name('website.post.login');
     Route::post('post-register', [AuthController::class , 'PostRegister'])->name('website.post.register');
 });
+
+Route::post('search', [FrontEndController::class , 'search'])->name('search');
 
 Route::post('upload', [UploadFilesController::class, 'upload']);
 Route::delete('/revert1', [UploadFilesController::class, 'revert1'])->name('revertFile');

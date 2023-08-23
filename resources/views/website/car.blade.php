@@ -239,11 +239,11 @@
                             </li>
                             <li>
                                 <span class="offer__list-name">Color Inner</span>
-                                <span class="offer__list-value offer__list-value--dark">{{ $car->colorIn->name }}</span>
+                                <span class="offer__list-value offer__list-value--dark">{{ $car->colorIn->name ?? 'color' }}</span>
                             </li>
                             <li>
                                 <span class="offer__list-name">Color Outer</span>
-                                <span class="offer__list-value offer__list-value--dark">{{ $car->colorOut->name }}</span>
+                                <span class="offer__list-value offer__list-value--dark">{{ $car->colorOut->name ?? 'color' }}</span>
                             </li>
                             <li>
                                 <span class="offer__list-name">Upholstery</span>

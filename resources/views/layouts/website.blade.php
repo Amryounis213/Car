@@ -33,17 +33,17 @@
                                 </li>
                                 <li class="header__nav-item">
                                     <a class="header__nav-link" href="#" role="button" data-bs-toggle="dropdown"
-                                        aria-expanded="false">Explore cars <svg xmlns="http://www.w3.org/2000/svg"
+                                        aria-expanded="false">Models<svg xmlns="http://www.w3.org/2000/svg"
                                             viewBox="0 0 24 24">
                                             <path
                                                 d="M17,9.17a1,1,0,0,0-1.41,0L12,12.71,8.46,9.17a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.42l4.24,4.24a1,1,0,0,0,1.42,0L17,10.59A1,1,0,0,0,17,9.17Z" />
                                         </svg></a>
 
                                     <ul class="dropdown-menu header__nav-menu">
-                                        <li><a href="cars.html">Explore one</a></li>
-                                        <li><a href="cars2.html">Explore two</a></li>
-                                        <li><a href="cars3.html">Explore three</a></li>
-                                        <li><a href="car.html">Car details</a></li>
+                                        @foreach (\App\Models\CarModel::get() as $models)
+                                        <li><a href="{{--route()--}}">{{$models->name}}</a></li>
+                                        @endforeach
+                                       
                                     </ul>
                                 </li>
                                 <li class="header__nav-item">

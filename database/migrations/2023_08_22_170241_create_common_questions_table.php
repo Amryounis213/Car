@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('amenities', function (Blueprint $table) {
+        Schema::create('common_questions', function (Blueprint $table) {
             $table->id();
-            $table->json('name');
-            $table->string('icon')->nullable();
-            $table->boolean('status')->default(true);
+            $table->string('title')->nullable();
+            $table->text('desc')->nullable();
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('amenities');
+        Schema::dropIfExists('common_questions');
     }
 };

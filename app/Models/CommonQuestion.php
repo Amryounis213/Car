@@ -6,17 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 
-class Amenity extends Model
+class CommonQuestion extends Model
 {
-    use HasFactory , HasTranslations;
+    use HasFactory, HasTranslations;
+    protected $translatable = ['title', 'desc'];
 
     protected $guarded = [];
-    protected $translatable = ['name'];
-
-    public function getIconPathAttribute()
+    public function ScopeActive($query)
     {
-        return asset('storage/' . $this->icon);
+        return $query->where('status' , 1);
     }
-
-
 }
