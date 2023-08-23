@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\CommonQuestionsController;
 use App\Http\Controllers\Website\AuthController;
 use App\Http\Controllers\Website\FrontEndController;
 use App\Http\Controllers\Website\ProfileController;
+use App\Http\Controllers\Admin\WhoUsController;
 use App\Models\Car;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -48,6 +49,7 @@ Route::get('getFavCars', [ProfileController::class , 'getFavCars'])->name('getFa
 Route::get('/showcar/{id}', [FrontEndController::class , 'showCar'])->name('showCar');
 
 Route::get('/helpcenter', [FrontEndController::class , 'helpCenter'])->name('helpcenter');
+Route::get('/aboutus', [FrontEndController::class , 'aboutUs'])->name('aboutus');
 
 //Controller Panel
 Route::get('/admin', [DashboardController::class , 'index'])->name('dashboard');
@@ -57,6 +59,8 @@ Route::post('commonquestions/status', [CommonQuestionsController::class, 'update
 
 Route::resource('amenities', AmenitiesController::class);
 Route::post('amenities/status', [AmenitiesController::class, 'updateStatus'])->name('amenities.status');
+
+Route::resource('whous', WhoUsController::class);
 
 Route::resource('users', UserController::class);
 Route::resource('posts', PostsController::class);

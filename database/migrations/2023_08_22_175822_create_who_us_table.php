@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('who_us', function (Blueprint $table) {
             $table->id();
+            $table->string('icon');
+            $table->json('upper_text');
+            $table->string('image');
+            $table->json('text');
+            $table->json('lower_text');
+            $table->string('link_text');
             $table->timestamps();
         });
     }
