@@ -1,8 +1,24 @@
 @extends('layouts.website')
 @section('style')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.css">
+    <style>
+        /* styles.css */
+        .slider-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css">
+        .slick-slider {
+            width: 100%;
+        }
 
+        .slide img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
 @endsection
 @section('content')
     <!-- main content -->
@@ -20,25 +36,27 @@
                             <h1 class="home__title">The easy way to <br>takeover a lease</h1>
                             <p class="home__text">Live in New York, New Jerset and Connecticut!</p>
 
-                            <form class="home__search" action="#">
+                            <form class="home__search" action="{{route('search')}}" method="POST">
+                                @csrf
+
                                 <div class="home__group">
                                     <label for="search1">Car, model, or brand</label>
-                                    <input type="text" name="search1" id="search1"
-                                        placeholder="What car are you looking for?">
+                                    <input type="text" name="search" id="search1"
+                                        placeholder="What car are you looking for?" >
                                 </div>
 
                                 <div class="home__group">
-                                    <label for="search2">Max. monthly payment</label>
-                                    <input type="text" name="search2" id="search2" placeholder="Add an amount in $">
+                                    <label for="search2">Max. price</label>
+                                    <input type="text" name="amount" id="search2" placeholder="Add an amount in $">
                                 </div>
 
                                 <div class="home__group">
                                     <label for="search3">Make Year</label>
-                                    <input type="text" name="search3" id="search3"
+                                    <input type="text" name="year" id="search3"
                                         placeholder="Add a minimal make year">
                                 </div>
 
-                                <button type="button"><span>Search</span></button>
+                                <button type="submit"><span>Search</span></button>
                             </form>
                         </div>
                     </div>
@@ -48,6 +66,23 @@
         <!-- end home -->
 
         <div class="container">
+              <!-- get started -->
+              <section class="row">
+                <div class="slick-carousel multiple-items">
+
+                    <div class="slide"><img src="{{ asset('assets/img/logo.png') }}" alt="Car Brand 1"></div>
+                    <div class="slide"><img src="{{ asset('assets/img/logo.png') }}" alt="Car Brand 2"></div>
+                    <div class="slide"><img src="{{ asset('assets/img/logo.png') }}" alt="Car Brand 3"></div>
+                    <div class="slide"><img src="{{ asset('assets/img/logo.png') }}" alt="Car Brand 1"></div>
+                    <div class="slide"><img src="{{ asset('assets/img/logo.png') }}" alt="Car Brand 2"></div>
+                    <div class="slide"><img src="{{ asset('assets/img/logo.png') }}" alt="Car Brand 3"></div>
+                    <!-- Add more slide elements here if needed -->
+                </div>
+
+
+
+            </section>
+            <!-- end get started -->
             <!-- cars -->
             <section class="row">
                 <!-- title -->
@@ -139,8 +174,7 @@
                                 <span class="car__price">{{ $car->price }} </span>
                                 <button class="car__favorite {{ $car->isLikedByUser() ? 'car__favorite--active' : '' }}"
                                     type="button" aria-label="Add to favorite" data-id="{{ $car->id }}">
-                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 24 24">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                         <path
                                             d="M20.16,5A6.29,6.29,0,0,0,12,4.36a6.27,6.27,0,0,0-8.16,9.48l6.21,6.22a2.78,2.78,0,0,0,3.9,0l6.21-6.22A6.27,6.27,0,0,0,20.16,5Zm-1.41,7.46-6.21,6.21a.76.76,0,0,1-1.08,0L5.25,12.43a4.29,4.29,0,0,1,0-6,4.27,4.27,0,0,1,6,0,1,1,0,0,0,1.42,0,4.27,4.27,0,0,1,6,0A4.29,4.29,0,0,1,18.75,12.43Z" />
                                     </svg>
@@ -157,71 +191,10 @@
 
             </section>
             <!-- end cars -->
+          
+        
 
-            <!-- get started -->
-            <section class="row">
-                <!-- title -->
-                <div class="col-12">
-                    <div class="main__title">
-                        <h2>Get started with 4 simple steps</h2>
-                    </div>
-                </div>
-                <!-- end title -->
 
-                <div class="col-12 col-md-6 col-xl-3">
-                    <div class="step1">
-                        <span class="step1__icon step1__icon--pink">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <path
-                                    d="M21,10.5H20v-1a1,1,0,0,0-2,0v1H17a1,1,0,0,0,0,2h1v1a1,1,0,0,0,2,0v-1h1a1,1,0,0,0,0-2Zm-7.7,1.72A4.92,4.92,0,0,0,15,8.5a5,5,0,0,0-10,0,4.92,4.92,0,0,0,1.7,3.72A8,8,0,0,0,2,19.5a1,1,0,0,0,2,0,6,6,0,0,1,12,0,1,1,0,0,0,2,0A8,8,0,0,0,13.3,12.22ZM10,11.5a3,3,0,1,1,3-3A3,3,0,0,1,10,11.5Z" />
-                            </svg>
-                        </span>
-                        <h3 class="step1__title">Create a profile</h3>
-                        <p class="step1__text">Register on our platform to access a personalized car rental experience.</p>
-                    </div>
-                </div>
-
-                <div class="col-12 col-md-6 col-xl-3">
-                    <div class="step1">
-                        <span class="step1__icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <path
-                                    d="M6.62,13.08a.9.9,0,0,0-.54.54,1,1,0,0,0,1.3,1.3,1.15,1.15,0,0,0,.33-.21,1.15,1.15,0,0,0,.21-.33A.84.84,0,0,0,8,14a1.05,1.05,0,0,0-.29-.71A1,1,0,0,0,6.62,13.08Zm13.14-4L18.4,5.05a3,3,0,0,0-2.84-2H8.44A3,3,0,0,0,5.6,5.05L4.24,9.11A3,3,0,0,0,2,12v4a3,3,0,0,0,2,2.82V20a1,1,0,0,0,2,0V19H18v1a1,1,0,0,0,2,0V18.82A3,3,0,0,0,22,16V12A3,3,0,0,0,19.76,9.11ZM7.49,5.68A1,1,0,0,1,8.44,5h7.12a1,1,0,0,1,1,.68L17.61,9H6.39ZM20,16a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V12a1,1,0,0,1,1-1H19a1,1,0,0,1,1,1Zm-3.38-2.92a.9.9,0,0,0-.54.54,1,1,0,0,0,1.3,1.3.9.9,0,0,0,.54-.54A.84.84,0,0,0,18,14a1.05,1.05,0,0,0-.29-.71A1,1,0,0,0,16.62,13.08ZM13,13H11a1,1,0,0,0,0,2h2a1,1,0,0,0,0-2Z" />
-                            </svg>
-                        </span>
-                        <h3 class="step1__title">Tell us what car you want</h3>
-                        <p class="step1__text">Specify your preferred car model, rental period, and pick-up location.</p>
-                    </div>
-                </div>
-
-                <div class="col-12 col-md-6 col-xl-3">
-                    <div class="step1">
-                        <span class="step1__icon step1__icon--green">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <path
-                                    d="M13.3,12.22A4.92,4.92,0,0,0,15,8.5a5,5,0,0,0-10,0,4.92,4.92,0,0,0,1.7,3.72A8,8,0,0,0,2,19.5a1,1,0,0,0,2,0,6,6,0,0,1,12,0,1,1,0,0,0,2,0A8,8,0,0,0,13.3,12.22ZM10,11.5a3,3,0,1,1,3-3A3,3,0,0,1,10,11.5ZM21.71,9.13a1,1,0,0,0-1.42,0l-2,2-.62-.63a1,1,0,0,0-1.42,0,1,1,0,0,0,0,1.41l1.34,1.34a1,1,0,0,0,1.41,0l2.67-2.67A1,1,0,0,0,21.71,9.13Z" />
-                            </svg>
-                        </span>
-                        <h3 class="step1__title">Match with seller</h3>
-                        <p class="step1__text">Our algorithm will match you with the best available car rental options.</p>
-                    </div>
-                </div>
-
-                <div class="col-12 col-md-6 col-xl-3">
-                    <div class="step1">
-                        <span class="step1__icon step1__icon--purple">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <path
-                                    d="M20.71,16.71l-2.42-2.42a1,1,0,0,0-1.42,0l-3.58,3.58a1,1,0,0,0-.29.71V21a1,1,0,0,0,1,1h2.42a1,1,0,0,0,.71-.29l3.58-3.58A1,1,0,0,0,20.71,16.71ZM16,20H15V19l2.58-2.58,1,1Zm-6,0H6a1,1,0,0,1-1-1V5A1,1,0,0,1,6,4h5V7a3,3,0,0,0,3,3h3v1a1,1,0,0,0,2,0V9s0,0,0-.06a1.31,1.31,0,0,0-.06-.27l0-.09a1.07,1.07,0,0,0-.19-.28h0l-6-6h0a1.07,1.07,0,0,0-.28-.19.32.32,0,0,0-.09,0L12.06,2H6A3,3,0,0,0,3,5V19a3,3,0,0,0,3,3h4a1,1,0,0,0,0-2ZM13,5.41,15.59,8H14a1,1,0,0,1-1-1ZM8,14h6a1,1,0,0,0,0-2H8a1,1,0,0,0,0,2Zm0-4H9A1,1,0,0,0,9,8H8a1,1,0,0,0,0,2Zm2,6H8a1,1,0,0,0,0,2h2a1,1,0,0,0,0-2Z" />
-                            </svg>
-                        </span>
-                        <h3 class="step1__title">Make a deal</h3>
-                        <p class="step1__text">Finalize the rental agreement with the car owner and enjoy your hassle-free
-                            ride.</p>
-                    </div>
-                </div>
-            </section>
-            <!-- end get started -->
         </div>
     </main>
     <!-- end main content -->
@@ -230,8 +203,19 @@
 @section('scripts')
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script>
+        $('.multiple-items').slick({
+            centerMode: true,
+            infinite: true,
+           
+            slidesToShow: 5,
+            slidesToScroll: 3,
+            autoplaySpeed: 300,
+            arrows : false,
+            autoplay: true,
+            focusOnSelect: true
+        });
         //jquery document ready
         $(document).ready(function() {
             $('.car__favorite').click(function() {

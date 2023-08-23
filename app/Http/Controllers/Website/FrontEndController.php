@@ -65,6 +65,29 @@ class FrontEndController extends Controller
        return view('website.commonquestions', compact('questions'));
     }
 
+
+    //Search by car model or brand or year
+    public function search(Request $request)
+    {
+       
+        $cars = Car::when($request->search , function($q) use($request){
+            $q->whereHas('model', function ($qe) use ($request) {
+                $qe->where('name', 'like', '%' . $request->search . '%');
+            })
+            ->orWhereHas('brand', function ($qe) use ($request) {
+                $qe->where('name', 'like', '%' . $request->search . '%');
+            });
+        })
+        ->when($request->year , function($q) use($request){
+            $q->where('year', 'like', '%' . $request->year . '%');
+        })
+        //get price less than or equal to the amount
+        ->when($request->amount , function($q) use($request){
+            $q->where('price', '<=', $request->amount);
+        })
+        ->get();
+        return view('website.cars', compact('cars'));
+    }
     public function aboutUs()
     {
        $about = WhoUs::first();
