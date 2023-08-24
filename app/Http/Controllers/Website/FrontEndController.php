@@ -88,9 +88,22 @@ class FrontEndController extends Controller
         ->get();
         return view('website.cars', compact('cars'));
     }
+
+    public function showCars()
+    {
+        $cars = Car::all();
+        return view('website.cars', compact('cars'));
+    }
+
     public function aboutUs()
     {
        $about = WhoUs::first();
        return view('website.about', compact('about'));
+    }
+
+    public function terms()
+    {
+       $terms = WhoUs::first();
+       return view('website.terms', compact('terms'));
     }
 }

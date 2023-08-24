@@ -8,7 +8,7 @@
 				<!-- breadcrumb -->
 				<div class="col-12">
 					<ul class="breadcrumbs">
-						<li class="breadcrumbs__item"><a href="index.html">Home</a></li>
+						<li class="breadcrumbs__item"><a href="{{ route('website.home') }}">Home</a></li>
 						<li class="breadcrumbs__item breadcrumbs__item--active">Explore cars</li>
 					</ul>
 				</div>

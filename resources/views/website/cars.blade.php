@@ -8,7 +8,7 @@
                 <!-- breadcrumb -->
                 <div class="col-12">
                     <ul class="breadcrumbs">
-                        <li class="breadcrumbs__item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumbs__item"><a href="{{ route('website.home') }}">Home</a></li>
                         <li class="breadcrumbs__item breadcrumbs__item--active">Explore cars</li>
                     </ul>
                 </div>
@@ -212,16 +212,23 @@
                                     </ul>
                                     <div class="car__footer">
                                         <span class="car__price">{{ $car->price }} </span>
-                                        <button
-                                            class="car__favorite {{ $car->isLikedByUser() ? 'car__favorite--active' : '' }}"
-                                            type="button" aria-label="Add to favorite" data-id="{{ $car->id }}">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                                <path
-                                                    d="M20.16,5A6.29,6.29,0,0,0,12,4.36a6.27,6.27,0,0,0-8.16,9.48l6.21,6.22a2.78,2.78,0,0,0,3.9,0l6.21-6.22A6.27,6.27,0,0,0,20.16,5Zm-1.41,7.46-6.21,6.21a.76.76,0,0,1-1.08,0L5.25,12.43a4.29,4.29,0,0,1,0-6,4.27,4.27,0,0,1,6,0,1,1,0,0,0,1.42,0,4.27,4.27,0,0,1,6,0A4.29,4.29,0,0,1,18.75,12.43Z" />
-                                            </svg>
-                                        </button>
-                                        <a href="{{ route('showCar', $car->id) }}" class="car__more"><span>Show
-                                                More</span></a>
+                                        @auth
+                                            <button class="car__favorite {{ $car->isLikedByUser() ? 'car__favorite--active' : '' }}"
+                                                type="button" aria-label="Add to favorite" data-id="{{ $car->id }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M20.16,5A6.29,6.29,0,0,0,12,4.36a6.27,6.27,0,0,0-8.16,9.48l6.21,6.22a2.78,2.78,0,0,0,3.9,0l6.21-6.22A6.27,6.27,0,0,0,20.16,5Zm-1.41,7.46-6.21,6.21a.76.76,0,0,1-1.08,0L5.25,12.43a4.29,4.29,0,0,1,0-6,4.27,4.27,0,0,1,6,0,1,1,0,0,0,1.42,0,4.27,4.27,0,0,1,6,0A4.29,4.29,0,0,1,18.75,12.43Z" />
+                                                </svg>
+                                            </button>
+                                        @else
+                                            <a href="{{ route('website.login') }}" class="car__favorite" aria-label="Add to favorite">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M20.16,5A6.29,6.29,0,0,0,12,4.36a6.27,6.27,0,0,0-8.16,9.48l6.21,6.22a2.78,2.78,0,0,0,3.9,0l6.21-6.22A6.27,6.27,0,0,0,20.16,5Zm-1.41,7.46-6.21,6.21a.76.76,0,0,1-1.08,0L5.25,12.43a4.29,4.29,0,0,1,0-6,4.27,4.27,0,0,1,6,0,1,1,0,0,0,1.42,0,4.27,4.27,0,0,1,6,0A4.29,4.29,0,0,1,18.75,12.43Z" />
+                                                </svg>
+                                            </a>
+                                        @endauth
+                                        <a href="{{ route('showCar', $car->id) }}" class="car__more"><span>Show More</span></a>
                                     </div>
                                 </div>
                             </div>

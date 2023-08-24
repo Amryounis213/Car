@@ -27,7 +27,7 @@
                 <!-- breadcrumb -->
                 <div class="col-12">
                     <ul class="breadcrumbs">
-                        <li class="breadcrumbs__item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumbs__item"><a href="{{ route('website.home') }}">Home</a></li>
                         <li class="breadcrumbs__item"><a href="cars.html">Explore cars</a></li>
                         <li class="breadcrumbs__item breadcrumbs__item--active">{{ $car->title }}</li>
                     </ul>
@@ -128,13 +128,22 @@
                         <span class="offer__title">Offer</span>
                         <div class="offer__wrap">
                             <span class="offer__price">{{ $car->price }}</span>
-                            <button class="offer__favorite  {{ $car->isLikedByUser() ? 'offer__favorite--active' : ' ' }}"
-                                data-id="{{ $car->id }}" type="button" aria-label="Add to favorite"><svg
-                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                    <path
-                                        d="M20.16,5A6.29,6.29,0,0,0,12,4.36a6.27,6.27,0,0,0-8.16,9.48l6.21,6.22a2.78,2.78,0,0,0,3.9,0l6.21-6.22A6.27,6.27,0,0,0,20.16,5Zm-1.41,7.46-6.21,6.21a.76.76,0,0,1-1.08,0L5.25,12.43a4.29,4.29,0,0,1,0-6,4.27,4.27,0,0,1,6,0,1,1,0,0,0,1.42,0,4.27,4.27,0,0,1,6,0A4.29,4.29,0,0,1,18.75,12.43Z" />
-                                </svg>
-                            </button>
+                            @auth
+                                <button class="offer__favorite  {{ $car->isLikedByUser() ? 'offer__favorite--active' : ' ' }}"
+                                    data-id="{{ $car->id }}" type="button" aria-label="Add to favorite"><svg
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path
+                                            d="M20.16,5A6.29,6.29,0,0,0,12,4.36a6.27,6.27,0,0,0-8.16,9.48l6.21,6.22a2.78,2.78,0,0,0,3.9,0l6.21-6.22A6.27,6.27,0,0,0,20.16,5Zm-1.41,7.46-6.21,6.21a.76.76,0,0,1-1.08,0L5.25,12.43a4.29,4.29,0,0,1,0-6,4.27,4.27,0,0,1,6,0,1,1,0,0,0,1.42,0,4.27,4.27,0,0,1,6,0A4.29,4.29,0,0,1,18.75,12.43Z" />
+                                    </svg>
+                                </button>
+                            @else
+                                <a href="{{ route('website.login') }}" class="car__favorite" aria-label="Add to favorite">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path
+                                            d="M20.16,5A6.29,6.29,0,0,0,12,4.36a6.27,6.27,0,0,0-8.16,9.48l6.21,6.22a2.78,2.78,0,0,0,3.9,0l6.21-6.22A6.27,6.27,0,0,0,20.16,5Zm-1.41,7.46-6.21,6.21a.76.76,0,0,1-1.08,0L5.25,12.43a4.29,4.29,0,0,1,0-6,4.27,4.27,0,0,1,6,0,1,1,0,0,0,1.42,0,4.27,4.27,0,0,1,6,0A4.29,4.29,0,0,1,18.75,12.43Z" />
+                                    </svg>
+                                </a>
+                            @endauth
                             {{-- <button type="button" class="offer__rent" data-bs-toggle="modal"
                                 data-bs-target="#rent-modal"><span>Rent now</span>
                             </button> --}}
@@ -239,11 +248,13 @@
                             </li>
                             <li>
                                 <span class="offer__list-name">Color Inner</span>
-                                <span class="offer__list-value offer__list-value--dark">{{ $car->colorIn->name ?? 'color' }}</span>
+                                <span
+                                    class="offer__list-value offer__list-value--dark">{{ $car->colorIn->name ?? 'color' }}</span>
                             </li>
                             <li>
                                 <span class="offer__list-name">Color Outer</span>
-                                <span class="offer__list-value offer__list-value--dark">{{ $car->colorOut->name ?? 'color' }}</span>
+                                <span
+                                    class="offer__list-value offer__list-value--dark">{{ $car->colorOut->name ?? 'color' }}</span>
                             </li>
                             <li>
                                 <span class="offer__list-name">Upholstery</span>
@@ -336,7 +347,7 @@
                     <div class="main__title">
                         <h2>You may also like</h2>
 
-                        <a href="cars.html" class="main__link">
+                        <a href="{{ route('cars') }}" class="main__link">
                             View more
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                 <path
@@ -385,7 +396,8 @@
                                 </div>
                             </div>
                             <div class="car__title">
-                                <h3 class="car__name"><a href="{{ route('showCar', $randCar->id) }}">{{ $randCar->title }}</a></h3>
+                                <h3 class="car__name"><a
+                                        href="{{ route('showCar', $randCar->id) }}">{{ $randCar->title }}</a></h3>
                                 <span class="car__year">{{ $randCar->year }}</span>
                             </div>
                             <ul class="car__list">
@@ -401,14 +413,24 @@
                             </ul>
                             <div class="car__footer">
                                 <span class="car__price">{{ $randCar->price }}</span>
-                                <button
-                                    class="car__favorite offer__favorite @if ($randCar->isLikedByUser()) offer__favorite--active @endif"
-                                    data-id="{{ $randCar->id }}" type="button" aria-label="Add to favorite">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                        <path
-                                            d="M20.16,5A6.29,6.29,0,0,0,12,4.36a6.27,6.27,0,0,0-8.16,9.48l6.21,6.22a2.78,2.78,0,0,0,3.9,0l6.21-6.22A6.27,6.27,0,0,0,20.16,5Zm-1.41,7.46-6.21,6.21a.76.76,0,0,1-1.08,0L5.25,12.43a4.29,4.29,0,0,1,0-6,4.27,4.27,0,0,1,6,0,1,1,0,0,0,1.42,0,4.27,4.27,0,0,1,6,0A4.29,4.29,0,0,1,18.75,12.43Z" />
-                                    </svg>
-                                </button>
+                                @auth
+                                    <button
+                                        class="car__favorite offer__favorite @if ($randCar->isLikedByUser()) offer__favorite--active @endif"
+                                        data-id="{{ $randCar->id }}" type="button" aria-label="Add to favorite">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                            <path
+                                                d="M20.16,5A6.29,6.29,0,0,0,12,4.36a6.27,6.27,0,0,0-8.16,9.48l6.21,6.22a2.78,2.78,0,0,0,3.9,0l6.21-6.22A6.27,6.27,0,0,0,20.16,5Zm-1.41,7.46-6.21,6.21a.76.76,0,0,1-1.08,0L5.25,12.43a4.29,4.29,0,0,1,0-6,4.27,4.27,0,0,1,6,0,1,1,0,0,0,1.42,0,4.27,4.27,0,0,1,6,0A4.29,4.29,0,0,1,18.75,12.43Z" />
+                                        </svg>
+                                    </button>
+                                @else
+                                    <a href="{{ route('website.login') }}" class="car__favorite"
+                                        aria-label="Add to favorite">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                            <path
+                                                d="M20.16,5A6.29,6.29,0,0,0,12,4.36a6.27,6.27,0,0,0-8.16,9.48l6.21,6.22a2.78,2.78,0,0,0,3.9,0l6.21-6.22A6.27,6.27,0,0,0,20.16,5Zm-1.41,7.46-6.21,6.21a.76.76,0,0,1-1.08,0L5.25,12.43a4.29,4.29,0,0,1,0-6,4.27,4.27,0,0,1,6,0,1,1,0,0,0,1.42,0,4.27,4.27,0,0,1,6,0A4.29,4.29,0,0,1,18.75,12.43Z" />
+                                        </svg>
+                                    </a>
+                                @endauth
                                 <a href="{{ route('showCar', $randCar->id) }}" class="car__more">
                                     <span>More Details</span>
                                 </a>
@@ -436,12 +458,6 @@
         //jquery document ready
         $(document).ready(function() {
             $('.offer__favorite').click(function() {
-                //if offer__favorite--active class is exist
-                if ($(this).hasClass('offer__favorite--active')) {
-                    $(this).removeClass('offer__favorite--active');
-                } else {
-                    $(this).addClass('offer__favorite--active');
-                }
                 //ajax request post
                 $.ajax({
                     url: "{{ route('add.to.favorite') }}",

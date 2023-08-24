@@ -36,13 +36,13 @@
                             <h1 class="home__title">The easy way to <br>takeover a lease</h1>
                             <p class="home__text">Live in New York, New Jerset and Connecticut!</p>
 
-                            <form class="home__search" action="{{route('search')}}" method="POST">
+                            <form class="home__search" action="{{ route('search') }}" method="POST">
                                 @csrf
 
                                 <div class="home__group">
                                     <label for="search1">Car, model, or brand</label>
                                     <input type="text" name="search" id="search1"
-                                        placeholder="What car are you looking for?" >
+                                        placeholder="What car are you looking for?">
                                 </div>
 
                                 <div class="home__group">
@@ -66,8 +66,8 @@
         <!-- end home -->
 
         <div class="container">
-              <!-- get started -->
-              <section class="row">
+            <!-- get started -->
+            <section class="row">
                 <div class="slick-carousel multiple-items">
 
                     <div class="slide"><img src="{{ asset('assets/img/logo.png') }}" alt="Car Brand 1"></div>
@@ -90,11 +90,12 @@
                     <div class="main__title main__title--first">
                         <h2>Featured cars</h2>
 
-                        <a href="{{ route('search') }}" class="main__link">View more<svg xmlns="http://www.w3.org/2000/svg"
+                        <a href="{{ route('cars') }}" class="main__link">View more<svg xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 24 24">
                                 <path
                                     d="M17.92,11.62a1,1,0,0,0-.21-.33l-5-5a1,1,0,0,0-1.42,1.42L14.59,11H7a1,1,0,0,0,0,2h7.59l-3.3,3.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l5-5a1,1,0,0,0,.21-.33A1,1,0,0,0,17.92,11.62Z" />
-                            </svg></a>
+                            </svg>
+                        </a>
                     </div>
                 </div>
                 <!-- end title -->
@@ -170,7 +171,7 @@
                                     <span alt>{{ $car->seats }}</span>
                                 </li>
                             </ul>
-                            <div class="car__footer">
+                            {{-- <div class="car__footer">
                                 <span class="car__price">{{ $car->price }} </span>
                                 <button class="car__favorite {{ $car->isLikedByUser() ? 'car__favorite--active' : '' }}"
                                     type="button" aria-label="Add to favorite" data-id="{{ $car->id }}">
@@ -179,6 +180,26 @@
                                             d="M20.16,5A6.29,6.29,0,0,0,12,4.36a6.27,6.27,0,0,0-8.16,9.48l6.21,6.22a2.78,2.78,0,0,0,3.9,0l6.21-6.22A6.27,6.27,0,0,0,20.16,5Zm-1.41,7.46-6.21,6.21a.76.76,0,0,1-1.08,0L5.25,12.43a4.29,4.29,0,0,1,0-6,4.27,4.27,0,0,1,6,0,1,1,0,0,0,1.42,0,4.27,4.27,0,0,1,6,0A4.29,4.29,0,0,1,18.75,12.43Z" />
                                     </svg>
                                 </button>
+                                <a href="{{ route('showCar', $car->id) }}" class="car__more"><span>Show More</span></a>
+                            </div> --}}
+                            <div class="car__footer">
+                                <span class="car__price">{{ $car->price }} </span>
+                                @auth
+                                    <button class="car__favorite {{ $car->isLikedByUser() ? 'car__favorite--active' : '' }}"
+                                        type="button" aria-label="Add to favorite" data-id="{{ $car->id }}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                            <path
+                                                d="M20.16,5A6.29,6.29,0,0,0,12,4.36a6.27,6.27,0,0,0-8.16,9.48l6.21,6.22a2.78,2.78,0,0,0,3.9,0l6.21-6.22A6.27,6.27,0,0,0,20.16,5Zm-1.41,7.46-6.21,6.21a.76.76,0,0,1-1.08,0L5.25,12.43a4.29,4.29,0,0,1,0-6,4.27,4.27,0,0,1,6,0,1,1,0,0,0,1.42,0,4.27,4.27,0,0,1,6,0A4.29,4.29,0,0,1,18.75,12.43Z" />
+                                        </svg>
+                                    </button>
+                                @else
+                                    <a href="{{ route('website.login') }}" class="car__favorite" aria-label="Add to favorite">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                            <path
+                                                d="M20.16,5A6.29,6.29,0,0,0,12,4.36a6.27,6.27,0,0,0-8.16,9.48l6.21,6.22a2.78,2.78,0,0,0,3.9,0l6.21-6.22A6.27,6.27,0,0,0,20.16,5Zm-1.41,7.46-6.21,6.21a.76.76,0,0,1-1.08,0L5.25,12.43a4.29,4.29,0,0,1,0-6,4.27,4.27,0,0,1,6,0,1,1,0,0,0,1.42,0,4.27,4.27,0,0,1,6,0A4.29,4.29,0,0,1,18.75,12.43Z" />
+                                        </svg>
+                                    </a>
+                                @endauth
                                 <a href="{{ route('showCar', $car->id) }}" class="car__more"><span>Show More</span></a>
                             </div>
                         </div>
@@ -191,8 +212,8 @@
 
             </section>
             <!-- end cars -->
-          
-        
+
+
 
 
         </div>
@@ -208,11 +229,11 @@
         $('.multiple-items').slick({
             centerMode: true,
             infinite: true,
-           
+
             slidesToShow: 5,
             slidesToScroll: 3,
             autoplaySpeed: 300,
-            arrows : false,
+            arrows: false,
             autoplay: true,
             focusOnSelect: true
         });

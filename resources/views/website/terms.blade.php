@@ -1,6 +1,5 @@
 @extends('layouts.website')
 
-
 @section('content')
     <!-- main content -->
     <main class="main">
@@ -10,7 +9,7 @@
                 <div class="col-12">
                     <ul class="breadcrumbs">
                         <li class="breadcrumbs__item"><a href="{{ route('website.home') }}">Home</a></li>
-                        <li class="breadcrumbs__item breadcrumbs__item--active">About Us</li>
+                        <li class="breadcrumbs__item breadcrumbs__item--active">Terms & Conditions</li>
                     </ul>
                 </div>
                 <!-- end breadcrumb -->
@@ -18,7 +17,7 @@
                 <!-- title -->
                 <div class="col-12 col-xl-11">
                     <div class="main__title main__title--page">
-                        {!! $about->text !!}
+                        {!! $terms->text !!}
                     </div>
                 </div>
                 <!-- end title -->
@@ -27,4 +26,5 @@
     </main>
     <!-- end main content -->
 @endsection
+
 

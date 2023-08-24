@@ -114,6 +114,23 @@
                         <!--end:Menu item-->
                     </div>
                     <!--end:Menu sub-->
+                    <!--begin:Menu sub-->
+                    <div class="menu-sub menu-sub-accordion {{ request()->is('terms') ? 'activeshow' : '' }}">
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+
+                            <a class="menu-link {{ request()->is('terms') ? 'active' : '' }}"
+                                href="{{ route('terms.index') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Terms & Conditions</span>
+                            </a>
+
+                        </div>
+                        <!--end:Menu item-->
+                    </div>
+                    <!--end:Menu sub-->
                     
                 </div>
 

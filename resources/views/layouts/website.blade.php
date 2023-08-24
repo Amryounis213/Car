@@ -19,7 +19,7 @@
                         <div class="header__menu">
                             <ul class="header__nav">
                                 <li class="header__nav-item">
-                                    <a class="header__nav-link" href="#" role="button" data-bs-toggle="dropdown"
+                                    <a class="header__nav-link" href="{{ route('website.home') }}" role="button" data-bs-toggle="dropdown"
                                         aria-expanded="false">Home <svg xmlns="http://www.w3.org/2000/svg"
                                             viewBox="0 0 24 24">
                                             <path
@@ -47,7 +47,7 @@
                                     </ul>
                                 </li>
                                 <li class="header__nav-item">
-                                    <a href="faq.html" class="header__nav-link">Help center</a>
+                                    <a href="{{ route('helpcenter') }}" class="header__nav-link">Help center</a>
                                 </li>
                                 <li class="header__nav-item">
                                     <a class="header__nav-link" href="#" role="button" data-bs-toggle="dropdown"
@@ -184,7 +184,7 @@
                     class="col-6 col-md-4 col-lg-3 col-xl-2 order-1 order-md-2 order-lg-2 order-xl-3 offset-md-2 offset-lg-0">
                     <h6 class="footer__title">Company</h6>
                     <div class="footer__nav">
-                        <a href="about.html">About us</a>
+                        <a href="{{ route('aboutus') }}">About us</a>
                         <a href="pricing.html">Pricing plans</a>
                         <a href="blog.html">Our blog</a>
                         <a href="contacts.html">Contacts</a>
@@ -220,9 +220,9 @@
                 <div class="col-6 col-md-4 col-lg-3 col-xl-2 order-2 order-md-4 order-lg-3 order-xl-4">
                     <h6 class="footer__title">Support</h6>
                     <div class="footer__nav">
-                        <a href="faq.html">Help center</a>
+                        <a href="{{ route('helpcenter') }}">Help center</a>
                         <a href="contacts.html">Ask a question</a>
-                        <a href="privacy.html">Privacy policy</a>
+                        <a href="">Privacy policy</a>
                         <a href="privacy.html">Terms & conditions</a>
                     </div>
                 </div>

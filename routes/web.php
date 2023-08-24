@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\PostsController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\UploadFilesController;
 use App\Http\Controllers\Admin\CommonQuestionsController;
+use App\Http\Controllers\Admin\TermsController;
 use App\Http\Controllers\Website\AuthController;
 use App\Http\Controllers\Website\FrontEndController;
 use App\Http\Controllers\Website\ProfileController;
@@ -27,18 +28,6 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 |
 */
 
-Route::get('/car', function () {
-    // return view('website.welcome');
-    $RandomCars = Car::inRandomOrder()->take(4)->get();
-    $car = Car::first();
-
-    // return $car ;
-    return view('website.car' , compact('car' , 'RandomCars'));
-});
-
-
-
-
 //Website
 Route::get('/', [FrontEndController::class , 'index'])->name('website.home');
 Route::get('/post', [ProfileController::class , 'createPost'])->name('post.create');
@@ -47,21 +36,19 @@ Route::resource('account', ProfileController::class);
 Route::post('add-to-favorite', [FrontEndController::class , 'addToFavourite'])->name('add.to.favorite');
 Route::get('getFavCars', [ProfileController::class , 'getFavCars'])->name('getFavCars');
 Route::get('/showcar/{id}', [FrontEndController::class , 'showCar'])->name('showCar');
-
 Route::get('/helpcenter', [FrontEndController::class , 'helpCenter'])->name('helpcenter');
 Route::get('/aboutus', [FrontEndController::class , 'aboutUs'])->name('aboutus');
+Route::get('/showcars', [FrontEndController::class , 'showCars'])->name('cars');
+Route::post('search', [FrontEndController::class , 'search'])->name('search');
 
 //Controller Panel
 Route::get('/admin', [DashboardController::class , 'index'])->name('dashboard');
-
 Route::resource('commonquestions', CommonQuestionsController::class);
 Route::post('commonquestions/status', [CommonQuestionsController::class, 'updateStatus'])->name('commonquestions.status');
-
 Route::resource('amenities', AmenitiesController::class);
 Route::post('amenities/status', [AmenitiesController::class, 'updateStatus'])->name('amenities.status');
-
 Route::resource('whous', WhoUsController::class);
-
+Route::resource('terms', TermsController::class);
 Route::resource('users', UserController::class);
 Route::resource('posts', PostsController::class);
 Route::get('cars', [CarsController::class, 'index'])->name('cars.index');
@@ -79,7 +66,6 @@ Route::group(['middleware' => 'guest'], function () {
     Route::post('post-register', [AuthController::class , 'PostRegister'])->name('website.post.register');
 });
 
-Route::post('search', [FrontEndController::class , 'search'])->name('search');
 
 Route::post('upload', [UploadFilesController::class, 'upload']);
 Route::delete('/revert1', [UploadFilesController::class, 'revert1'])->name('revertFile');
