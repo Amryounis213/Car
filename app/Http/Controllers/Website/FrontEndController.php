@@ -85,6 +85,31 @@ class FrontEndController extends Controller
         ->when($request->amount , function($q) use($request){
             $q->where('price', '<=', $request->amount);
         })
+        //seats number , models , brands , colors in , color out , year , price
+        ->when($request->seats , function($q) use($request){
+            $q->where('seats', 'like', '%' . $request->seats . '%');
+        })
+        ->when($request->colorin , function($q) use($request){
+            $q->whereHas('colorIn' , function($qe) use($request){
+                $qe->where('id' , $request->colorin);
+            });
+        })
+        ->when($request->colorout , function($q) use($request){
+            $q->whereHas('colorOut' , function($qe) use($request){
+                $qe->where('id' , $request->colorout);
+            });
+        })
+        ->when($request->models , function($q) use($request){
+            $q->whereHas('model', function ($qe) use ($request) {
+                $qe->where('name', 'like', '%' . $request->models . '%');
+            });
+        })
+        ->when($request->brands , function($q) use($request){
+            $q->whereHas('brand', function ($qe) use ($request) {
+                $qe->where('name', 'like', '%' . $request->brands . '%');
+            });
+        })
+
         ->get();
         return view('website.cars', compact('cars'));
     }

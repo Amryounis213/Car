@@ -37,7 +37,7 @@
                                 <h4 class="filter__title">Filters <button type="button">Clear all</button></h4>
 
                                 <div class="filter__group">
-                                    <label class="filter__label">Keyword:</label>
+                                    <label class="filter__label">Search:</label>
                                     <input type="text" class="filter__input" placeholder="Keyword">
                                 </div>
 
@@ -46,7 +46,7 @@
 
                                     <div class="filter__select-wrap">
                                         <select name="filter__status" id="filter__status" class="filter__select">
-                                            <option value="0">Relevance</option>
+                                            {{-- <option value="0">Relevance</option> --}}
                                             <option value="1">Newest</option>
                                             <option value="2">Oldest</option>
                                         </select>
@@ -59,74 +59,78 @@
                                     <div class="filter__select-wrap">
                                         <select name="filter__category" id="filter__category" class="filter__select">
                                             <option value="All categories">All brands</option>
-                                            <option value="1">Audi</option>
-                                            <option value="2">BMW</option>
-                                            <option value="3">Cadillac</option>
-                                            <option value="4">Chevrolet</option>
-                                            <option value="5">Dodge</option>
-                                            <option value="6">Ferrari</option>
-                                            <option value="7">Ford</option>
-                                            <option value="8">Honda</option>
-                                            <option value="9">Hyundai</option>
-                                            <option value="10">Jaguar</option>
-                                            <option value="11">Jeep</option>
-                                            <option value="12">Lexus</option>
-                                            <option value="13">Mitsubishi</option>
-                                            <option value="14">Porsche</option>
-                                            <option value="15">Subaru</option>
-                                            <option value="16">Tesla</option>
-                                            <option value="17">Toyota</option>
-                                            <option value="18">Volkswagen</option>
+                                            @foreach ($brands as $brand)
+                                                <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                                
+                                            @endforeach
+                                           
+                                           
                                         </select>
                                     </div>
                                 </div>
 
-                                <div class="filter__group">
-                                    <label class="filter__label">Transmission:</label>
-                                    <ul class="filter__checkboxes">
-                                        <li>
-                                            <input id="type5" type="checkbox" name="type5" checked="">
-                                            <label for="type5">Automatic</label>
-                                        </li>
-                                        <li>
-                                            <input id="type6" type="checkbox" name="type6">
-                                            <label for="type6">Manual</label>
-                                        </li>
-                                        <li>
-                                            <input id="type7" type="checkbox" name="type7">
-                                            <label for="type7">Other</label>
-                                        </li>
-                                    </ul>
-                                </div>
 
                                 <div class="filter__group">
-                                    <label class="filter__label">Fuel:</label>
-                                    <ul class="filter__checkboxes">
-                                        <li>
-                                            <input id="type8" type="checkbox" name="type8">
-                                            <label for="type8">Diesel</label>
-                                        </li>
-                                        <li>
-                                            <input id="type9" type="checkbox" name="type9">
-                                            <label for="type9">Hybrid</label>
-                                        </li>
-                                        <li>
-                                            <input id="type10" type="checkbox" name="type10">
-                                            <label for="type10">Gas</label>
-                                        </li>
-                                        <li>
-                                            <input id="type11" type="checkbox" name="type11">
-                                            <label for="type11">Eletric</label>
-                                        </li>
-                                        <li>
-                                            <input id="type12" type="checkbox" name="type12">
-                                            <label for="type12">Other</label>
-                                        </li>
-                                    </ul>
+                                    <label for="filter__models" class="filter__label">Models:</label>
+
+                                    <div class="filter__select-wrap">
+                                        <select name="model" id="filter__models" class="filter__select">
+                                            <option value="All categories">All Models</option>
+                                            @foreach ($models as $model)
+                                                <option value="{{ $model->id }}">{{ $model->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
 
+
                                 <div class="filter__group">
-                                    <button class="filter__btn" type="button"><span>APPLY FILTER</span></button>
+                                    <label for="colorin" class="filter__label">Color In:</label>
+
+                                    <div class="filter__select-wrap">
+                                        <select name="colorin" id="colorin" class="filter__select">
+                                            <option value="All categories">All Color</option>
+                                            @foreach ($colors as $colorin)
+                                                <option value="{{ $colorin->id }}">{{ $colorin->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <div class="filter__group">
+                                    <label for="colorout" class="filter__label">Color Out:</label>
+
+                                    <div class="filter__select-wrap">
+                                        <select name="colorout" id="colorout" class="filter__select">
+                                            <option value="All categories">All Color</option>
+                                            @foreach ($colors as $colorout)
+                                            <option value="{{ $colorout->id }}" >{{ $colorout->name }}</option>
+                                        @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <div class="filter__group">
+                                    <label for="filter__category" class="filter__label">Seats:</label>
+
+                                    <div class="filter__select-wrap">
+                                        <select name="seats" id="filter__category" class="filter__select">
+                                            <option value="All categories">Seats</option>
+                                            <option value="2">2</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="4">6</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+
+                             
+                                <div class="filter__group">
+                                    <button class="filter__btn" type="submit"><span>APPLY FILTER</span></button>
                                 </div>
                             </div>
                             <!-- end filter -->
