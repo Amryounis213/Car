@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Brand;
+use App\Models\CarModel;
+use App\Models\Color;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -21,5 +24,13 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Schema::defaultStringLength(191);
+
+        $brands = Brand::get();
+        $models = CarModel::get();
+        $colors = Color::get();
+        view()->share('models', $models);
+        view()->share('brands', $brands);
+        view()->share('colors', $colors);
+        
     }
 }

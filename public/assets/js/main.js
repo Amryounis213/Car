@@ -182,6 +182,8 @@
 		});
 	}
 
+	
+
 	if (document.querySelector('#mfilter__status')) {
 		new SlimSelect({
 			select: '#mfilter__status',
