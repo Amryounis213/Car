@@ -169,4 +169,54 @@
             });
         });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('assets/js/widgets.bundle.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/widgets.js') }}"></script>
+     {{-- update status status --}}
+     <script>
+        $(document).on('click', '.accept-fld', function(e) {
+            const id = $(this).data('id');
+            const status = $(this).data('status');
+            const checkedValue = $(this).is(":checked");
+            const oTable = $('#kt_ecommerce_ad_table').DataTable();
+            //swal alert
+            Swal.fire({
+                title: "{{ __('dashboard.warning') }}",
+                text: "{{ __('dashboard.are_you_sure_you_want_to_update_data') }}",
+                icon: 'warning',
+                confirmButtonText: "{{ __('dashboard.yes_update') }}",
+                confirmButtonColor: status == 'rejected' ?  '#ee0e44' : '#50cd89',
+                cancelButtonText: "{{ __('dashboard.no_cancel') }}",
+                showCancelButton: true,
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        type: "PUT",
+                        url: "/posts/updatestatus",
+                        data: {
+                            'id': id,
+                            'status': status
+                        },
+                        success: function(data) {
+                            if (data.type === 'yes') {
+                                $(`#status_${id}`).prop("checked", true);
+                            } else if (data.type === 'no') {
+                                $(`#status_${id}`).prop("checked", false);
+                            }
+                            oTable.draw();
+                            toastr.options.positionClass = 'toast-top-left';
+                            toastr[data.status](data.message);
+                        }
+                    });
+                } else {
+                    if (checkedValue === true) {
+                        $(`#status_${id}`).prop("checked", false);
+                    } else {
+                        $(`#status_${id}`).prop("checked", true);
+                    }
+                }
+            });
+
+        });
+    </script>
 @endsection

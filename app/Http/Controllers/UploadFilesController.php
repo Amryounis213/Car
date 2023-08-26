@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Car;
 use App\Models\ContactUs;
 use App\Models\EpisodeAudio;
 use App\Models\Image;

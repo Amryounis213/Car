@@ -19,17 +19,7 @@
                         <div class="header__menu">
                             <ul class="header__nav">
                                 <li class="header__nav-item">
-                                    <a class="header__nav-link" href="{{ route('website.home') }}" role="button" data-bs-toggle="dropdown"
-                                        aria-expanded="false">Home <svg xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 24 24">
-                                            <path
-                                                d="M17,9.17a1,1,0,0,0-1.41,0L12,12.71,8.46,9.17a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.42l4.24,4.24a1,1,0,0,0,1.42,0L17,10.59A1,1,0,0,0,17,9.17Z" />
-                                        </svg></a>
-
-                                    <ul class="dropdown-menu header__nav-menu">
-                                        <li><a href="index.html">Home style 1</a></li>
-                                        <li><a href="index2.html">Home style 2</a></li>
-                                    </ul>
+                                    <a class="header__nav-link" href="{{ route('website.home') }}" >Home</a>
                                 </li>
                                 <li class="header__nav-item">
                                     <a class="header__nav-link" href="#" role="button" data-bs-toggle="dropdown"
@@ -41,54 +31,24 @@
 
                                     <ul class="dropdown-menu header__nav-menu">
                                         @foreach (\App\Models\CarModel::get() as $models)
-                                        <li><a href="{{--route()--}}">{{$models->name}}</a></li>
+                                            <li><a href="{{-- route() --}}">{{ $models->name }}</a></li>
                                         @endforeach
-                                       
+
                                     </ul>
                                 </li>
                                 <li class="header__nav-item">
                                     <a href="{{ route('helpcenter') }}" class="header__nav-link">Help center</a>
                                 </li>
                                 <li class="header__nav-item">
-                                    <a class="header__nav-link" href="#" role="button" data-bs-toggle="dropdown"
-                                        aria-expanded="false">Pages <svg xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 24 24">
-                                            <path
-                                                d="M17,9.17a1,1,0,0,0-1.41,0L12,12.71,8.46,9.17a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.42l4.24,4.24a1,1,0,0,0,1.42,0L17,10.59A1,1,0,0,0,17,9.17Z" />
-                                        </svg></a>
+                                    <a class="header__nav-link" href="{{ route('aboutus') }}">About Us</a>
 
-                                    <ul class="dropdown-menu header__nav-menu">
-                                        <li><a href="about.html">About us</a></li>
-                                        <li><a href="account.html">Account</a></li>
-                                        <li><a href="blog.html">Blog style 1</a></li>
-                                        <li><a href="blog2.html">Blog style 2</a></li>
-                                        <li><a href="article.html">Article</a></li>
-                                        <li><a href="pricing.html">Pricing plans</a></li>
-                                        <li><a href="contacts.html">Contacts</a></li>
-                                    </ul>
-                                </li>
-                                <li class="header__nav-item">
-                                    <a class="header__nav-link header__nav-link--menu" href="#" role="button"
-                                        data-bs-toggle="dropdown" aria-expanded="false"><svg
-                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                            <path
-                                                d="M12,10a2,2,0,1,0,2,2A2,2,0,0,0,12,10ZM5,10a2,2,0,1,0,2,2A2,2,0,0,0,5,10Zm14,0a2,2,0,1,0,2,2A2,2,0,0,0,19,10Z" />
-                                        </svg></a>
-
-                                    <ul class="dropdown-menu header__nav-menu">
-                                        <li><a href="signin.html">Sign in</a></li>
-                                        <li><a href="signup.html">Sign up</a></li>
-                                        <li><a href="forgot.html">Forgot password</a></li>
-                                        <li><a href="404.html">404 Page</a></li>
-                                        <li><a href="privacy.html">Privacy policy</a></li>
-                                    </ul>
-                                </li>
+                                
                             </ul>
                         </div>
 
                         <div class="header__actions">
                             <div class="header__phone">
-                                <a href="tel:88002345678">8 800 234 56 78</a>
+                                <a href="tel:88002345678">{{ $SETTING->whatsapp ?? '' }}</a>
                                 <span>Mom - Sat: 9:00 am - 6:00 pm</span>
                             </div>
 
@@ -123,8 +83,7 @@
                                                 <path
                                                     d="M19.9,12.66a1,1,0,0,1,0-1.32L21.18,9.9a1,1,0,0,0,.12-1.17l-2-3.46a1,1,0,0,0-1.07-.48l-1.88.38a1,1,0,0,1-1.15-.66l-.61-1.83A1,1,0,0,0,13.64,2h-4a1,1,0,0,0-1,.68L8.08,4.51a1,1,0,0,1-1.15.66L5,4.79A1,1,0,0,0,4,5.27L2,8.73A1,1,0,0,0,2.1,9.9l1.27,1.44a1,1,0,0,1,0,1.32L2.1,14.1A1,1,0,0,0,2,15.27l2,3.46a1,1,0,0,0,1.07.48l1.88-.38a1,1,0,0,1,1.15.66l.61,1.83a1,1,0,0,0,1,.68h4a1,1,0,0,0,.95-.68l.61-1.83a1,1,0,0,1,1.15-.66l1.88.38a1,1,0,0,0,1.07-.48l2-3.46a1,1,0,0,0-.12-1.17ZM18.41,14l.8.9-1.28,2.22-1.18-.24a3,3,0,0,0-3.45,2L12.92,20H10.36L10,18.86a3,3,0,0,0-3.45-2l-1.18.24L4.07,14.89l.8-.9a3,3,0,0,0,0-4l-.8-.9L5.35,6.89l1.18.24a3,3,0,0,0,3.45-2L10.36,4h2.56l.38,1.14a3,3,0,0,0,3.45,2l1.18-.24,1.28,2.22-.8.9A3,3,0,0,0,18.41,14ZM11.64,8a4,4,0,1,0,4,4A4,4,0,0,0,11.64,8Zm0,6a2,2,0,1,1,2-2A2,2,0,0,1,11.64,14Z" />
                                             </svg> <span>Settings</span></a></li>
-                                    <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 24 24">
+                                    <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                                 <path
                                                     d="M4,12a1,1,0,0,0,1,1h7.59l-2.3,2.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l4-4a1,1,0,0,0,.21-.33,1,1,0,0,0,0-.76,1,1,0,0,0-.21-.33l-4-4a1,1,0,1,0-1.42,1.42L12.59,11H5A1,1,0,0,0,4,12ZM17,2H7A3,3,0,0,0,4,5V8A1,1,0,0,0,6,8V5A1,1,0,0,1,7,4H17a1,1,0,0,1,1,1V19a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V16a1,1,0,0,0-2,0v3a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V5A3,3,0,0,0,17,2Z" />
                                             </svg> <span>Sign out</span></a></li>
@@ -170,12 +129,11 @@
                         </a>
 
                         <ul class="dropdown-menu footer__lang-dropdown">
-                            <li><a href="#"><img src="{{ asset('assets/img/flags/spain.svg') }}"
-                                        alt=""><span>Spanish</span></a></li>
-                            <li><a href="#"><img src="{{ asset('assets/img/flags/france.svg') }}"
-                                        alt=""><span>French</span></a></li>
-                            <li><a href="#"><img src="{{ asset('assets/img/flags/china.svg') }}"
-                                        alt=""><span>Chinese</span></a></li>
+                            <li>
+                                <a href="#"><img src="{{ asset('assets/img/flags/france.svg') }}"
+                                        alt=""><span>French</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -191,7 +149,7 @@
                     </div>
                 </div>
 
-                <div class="col-12 col-md-8 col-lg-6 col-xl-4 order-3 order-md-3 order-lg-1 order-xl-2">
+                {{-- <div class="col-12 col-md-8 col-lg-6 col-xl-4 order-3 order-md-3 order-lg-1 order-xl-2">
                     <div class="row">
                         <div class="col-12">
                             <h6 class="footer__title">Neighborhoods in New York</h6>
@@ -215,15 +173,15 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="col-6 col-md-4 col-lg-3 col-xl-2 order-2 order-md-4 order-lg-3 order-xl-4">
                     <h6 class="footer__title">Support</h6>
                     <div class="footer__nav">
                         <a href="{{ route('helpcenter') }}">Help center</a>
                         <a href="contacts.html">Ask a question</a>
-                        <a href="">Privacy policy</a>
-                        <a href="privacy.html">Terms & conditions</a>
+                        <a href="#">Privacy policy</a>
+                        <a href="{{-- route('terms') --}}">Terms & conditions</a>
                     </div>
                 </div>
             </div>
@@ -269,9 +227,7 @@
                                 </svg></a>
                         </div>
 
-                        <small class="footer__copyright">© Waydex, 2022—2023. Created by <a
-                                href="https://themeforest.net/user/dmitryvolkov/portfolio" target="_blank">Dmitry
-                                Volkov</a>.</small>
+                        <small class="footer__copyright">© Alsoq, 2022—2023</small>
                     </div>
                 </div>
             </div>

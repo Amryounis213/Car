@@ -26,7 +26,9 @@
         <!-- home -->
         <div class="home">
             <!-- home bg -->
-            <div class="home__bg"></div>
+            <div class="home__bg" style="background: url({{ asset('assets/img/main.jpg') }}) no-repeat center/cover">
+
+            </div>
             <!-- end home bg -->
 
             <div class="container">
@@ -69,17 +71,10 @@
             <!-- get started -->
             <section class="row">
                 <div class="slick-carousel multiple-items">
-
-                    <div class="slide"><img src="{{ asset('assets/img/logo.png') }}" alt="Car Brand 1"></div>
-                    <div class="slide"><img src="{{ asset('assets/img/logo.png') }}" alt="Car Brand 2"></div>
-                    <div class="slide"><img src="{{ asset('assets/img/logo.png') }}" alt="Car Brand 3"></div>
-                    <div class="slide"><img src="{{ asset('assets/img/logo.png') }}" alt="Car Brand 1"></div>
-                    <div class="slide"><img src="{{ asset('assets/img/logo.png') }}" alt="Car Brand 2"></div>
-                    <div class="slide"><img src="{{ asset('assets/img/logo.png') }}" alt="Car Brand 3"></div>
-                    <!-- Add more slide elements here if needed -->
+                    @foreach ($brands as $brand)
+                        <div class="slide"><img src="{{ $brand->icon_path }}" alt="Car Brand 1"></div>
+                    @endforeach
                 </div>
-
-
 
             </section>
             <!-- end get started -->
@@ -124,15 +119,11 @@
 
                                 <div class="splide__track">
                                     <ul class="splide__list">
-                                        <li class="splide__slide">
-                                            <img src="{{ asset('assets/img/cars/1-1.jpg') }}" alt="">
-                                        </li>
-                                        <li class="splide__slide">
-                                            <img src="{{ asset('assets/img/cars/1-2.jpg') }}" alt="">
-                                        </li>
-                                        <li class="splide__slide">
-                                            <img src="{{ asset('assets/img/cars/1-3.jpg') }}" alt="">
-                                        </li>
+                                        @foreach ($car->Images as $c)
+                                            <li class="splide__slide">
+                                                <img src="{{ asset('storage/' . $c->image) }}" alt="">
+                                            </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>

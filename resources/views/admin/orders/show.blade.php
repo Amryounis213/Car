@@ -441,11 +441,11 @@
 
                                                     <span class="text-gray-400 fw-bold m-4">Tax :
                                                         <a href="javascript::void(0)"
-                                                            class="text-gray-800 text-hover-primary fw-bold">{{ $offer->tax }}</a></span>
+                                                            class="text-gray-800 text-hover-primary fw-bold">{{ $offer->tax }}$</a></span>
 
                                                     <span class="text-gray-400 fw-bold m-4">Price :
                                                         <a href="javascript::void(0)"
-                                                            class="text-gray-800 text-hover-primary fw-bold">{{ $offer->price }}</a></span>
+                                                            class="text-gray-800 text-hover-primary fw-bold">{{ $offer->price }}$</a></span>
 
                                                     <span class="text-gray-400 fw-bold m-4">Created at :
                                                         <a href="javascript::void(0)"

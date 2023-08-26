@@ -80,6 +80,18 @@ class PostsController extends Controller
         return Controller::updateModelStatus($info);
     }
 
+    public function updatePostStatus(Request $request)
+    {
+
+        $id = $request->get('id');
+        $status = $request->get('status');
+        $info = Car::find($id);
+        $info->status = $status;
+        $info->save();
+
+        return response()->json(['status' => 'success', 'message' => trans(__('dashboard.data_updated_success')), 'type' => 'no']);
+    }
+
     // public function updateCarStatus(Request $request): \Illuminate\Http\JsonResponse
     // {
     //     // $id = $request->get('id');

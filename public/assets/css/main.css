@@ -2466,7 +2466,6 @@ body::-webkit-scrollbar-thumb {
     left: 66%;
     top: 25px;
     bottom: 40px;
-    background: url("../img/home/home.png") no-repeat center/cover;
     pointer-events: none;
   }
 }

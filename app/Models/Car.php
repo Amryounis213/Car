@@ -75,4 +75,9 @@ class Car extends Model
     }
 
 
+    public function Images()
+    {
+        return $this->hasMany(Image::class);
+    }
+
 }

@@ -43,15 +43,10 @@
                             {{-- Post Title --}}
                             <div class="col-12">
                                 <div class="sign__group">
-                                    <textarea name="subject" class="sign__textarea" placeholder="Subject .."></textarea>
+                                    <textarea name="description" class="sign__textarea" placeholder="Description .."></textarea>
                                 </div>
                             </div>
 
-                            {{-- <div class="col-12 col-md-6">
-                                <div class="sign__group">
-                                    <input type="text" name="name" class="sign__input" placeholder="Name">
-                                </div>
-                            </div> --}}
 
                             <div class="col-12 col-md-6">
                                 <div class="sign__group">
@@ -83,6 +78,39 @@
 
                             <div class="col-12 col-md-6">
                                 <div class="sign__group">
+                                    <select name="generation_id" class="sign__input">
+                                        <option value="" disabled selected>Select Car Generation</option>
+                                        @foreach ($generation as $model)
+                                            <option value="{{ $model->id }}">{{ $model->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <div class="sign__group">
+                                    <select name="car_type_id" class="sign__input">
+                                        <option value="" disabled selected>Select Car Type</option>
+                                        @foreach ($carTypes as $model)
+                                            <option value="{{ $model->id }}">{{ $model->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <div class="sign__group">
+                                    <select name="brand_id" class="sign__input">
+                                        <option value="" disabled selected>Select Car Brand</option>
+                                        @foreach ($brands as $model)
+                                            <option value="{{ $model->id }}">{{ $model->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <div class="sign__group">
                                     <select name="year" class="sign__input">
                                         <option value="" disabled selected>Select Release Year</option>
                                         @for ($year = date('Y'); $year >= 1912; $year--)
@@ -96,8 +124,7 @@
 
                             <div class="col-12 col-md-6">
                                 <div class="sign__group">
-                                    <input type="text" name="techenical_control" class="sign__input"
-                                        placeholder="Techenical Control">
+                                    <input type="number" name="price" class="sign__input" placeholder="Price">
                                 </div>
                             </div>
 
@@ -166,51 +193,60 @@
                                 <label for="fuel" class="sign__label">Force Points</label>
                                 <div class="sign__group sign__group--checkbox">
                                     @foreach ($amenities as $key => $amenity)
-                                        <input type="checkbox" name="amenities[]" value="amenity{{ $key }}"
-                                            id="amenity{{ $key }}">
-                                        <label for="amenity{{ $key }}">{{ $amenity->name }}</label>
+                                        <div style="display: flex; align-items: center;">
+
+                                            <input type="checkbox" name="amenities[]" value="amenity{{ $key }}"
+                                                id="amenity{{ $key }}">
+                                            <label for="amenity{{ $key }}"> {{ $amenity->name }}</label>
+                                            <img style="width: 20px; height: 20px; margin-left: 5px;"
+                                                src="{{ asset('storage/' . $amenity->icon) }}" alt="">
+                                        </div>
                                     @endforeach
                                     {{-- </div> --}}
                                 </div>
                             </div>
 
 
-                                <div class="col-12">
-                                    <div class="sign__group">
-                                        <textarea name="text" class="sign__textarea" placeholder="Type your message"></textarea>
-                                    </div>
+                            {{-- <div class="col-12">
+                                <div class="sign__group">
+                                    <textarea name="text" class="sign__textarea" placeholder="Type your message"></textarea>
                                 </div>
+                            </div> --}}
 
-                                <div class="col-12">
-                                    <div class="sign__group">
-                                        <input id="images" type="file" name="images[]" class="custom-file-input"
-                                            multiple>
-                                    </div>
-                                </div>
-
-
-                                <div class="col-12 col-xl-3">
-                                    <button type="submit" class="sign__btn"><span>Post</span></button>
+                            <div class="col-12">
+                                <div class="sign__group">
+                                    <input id="images" type="file" name="images[]" class="custom-file-input"
+                                        multiple>
                                 </div>
                             </div>
+
+
+                            <div class="col-12 col-xl-3">
+                                <button type="submit" class="sign__btn"><span>Post</span></button>
+                            </div>
+                        </div>
                     </form>
                 </div>
 
                 <div class="col-12 col-md-6 col-lg-5 col-xl-4 offset-xl-1">
                     <div class="main__title main__title--sidebar">
                         <h2>Info</h2>
-                        <p>We are always happy to help and provide more information about our services. You can contact us
-                            through email, phone, or by filling out the form on our website. Thank you for considering us!
-                            لديك عدد ({{ auth()->user()->post_attempts ?? '1' }}) من المنشورات
-                            بعد هيك راح تدفع عشان تعمل منشور ، تمام ؟
-
+                        <p>We understand that taking
+                            that first step is important, which is why we're delighted to offer you your inaugural posting
+                            absolutely free of charge. As part of our commitment to supporting your growth, you currently
+                            have <strong style="color: red">{{ auth()->user()->post_attempts ?? '1' }} </strong> post
+                            attempts remaining. These attempts empower
+                            you to showcase your offerings to the world. Should you wish to continue after your initial
+                            complimentary post, we offer a seamless payment process for subsequent posts. Feel free to
+                            leverage our email, phone, or website form to reach out for any guidance or queries. We're truly
+                            excited to be a part of your journey and look forward to witnessing your success.
                         </p>
                     </div>
                     <ul class="contacts__list">
-                        <li><a href="tel:88002345678">8 800 234 56 78</a></li>
-                        <li><a href="mailto:support@waydex.com">support@waydex.com</a></li>
+                        <li><a href="tel:88002345678">{{ $SETTING->whatsapp }}</a></li>
+                        <li><a href="mailto:support@waydex.com">{{ $SETTING->email }}</a></li>
                         <li><a href="https://maps.google.com/maps?q=221B+Baker+Street,+London,+United+Kingdom&amp;hl=en&amp;t=v&amp;hnear=221B+Baker+St,+London+NW1+6XE,+United+Kingdom"
-                                target="_blank">221B Baker St, Marylebone, London</a></li>
+                                target="_blank">{{ $SETTING->location }}</a></li>
                     </ul>
                     <div class="contacts__social">
                         <a href="#" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -252,47 +288,14 @@
                     <div class="partners splide" id="partners-slider">
                         <div class="splide__track">
                             <ul class="splide__list">
-                                <li class="splide__slide">
-                                    <a href="#" class="partners__img">
-                                        <img src="{{ asset('assets/img/cars/4-1.jpg') }}" alt="">
-                                    </a>
-                                </li>
+                                @foreach ($images as $carImage)
+                                    <li class="splide__slide">
+                                        <a href="{{-- route('showCar',$carImage->car_id) --}}" class="partners__img">
+                                            <img src="{{ asset('storage/' . $carImage->image) }}" alt="">
+                                        </a>
+                                    </li>
+                                @endforeach
 
-                                <li class="splide__slide">
-                                    <a href="#" class="partners__img">
-                                        <img src="{{ asset('assets/img/cars/4-1.jpg') }}" alt="">
-                                    </a>
-                                </li>
-
-                                <li class="splide__slide">
-                                    <a href="#" class="partners__img">
-                                        <img src="{{ asset('assets/img/cars/4-1.jpg') }}" alt="">
-                                    </a>
-                                </li>
-
-                                <li class="splide__slide">
-                                    <a href="#" class="partners__img">
-                                        <img src="{{ asset('assets/img/cars/4-1.jpg') }}" alt="">
-                                    </a>
-                                </li>
-
-                                <li class="splide__slide">
-                                    <a href="#" class="partners__img">
-                                        <img src="{{ asset('assets/img/cars/4-1.jpg') }}" alt="">
-                                    </a>
-                                </li>
-
-                                <li class="splide__slide">
-                                    <a href="#" class="partners__img">
-                                        <img src="{{ asset('assets/img/cars/4-1.jpg') }}" alt="">
-                                    </a>
-                                </li>
-
-                                <li class="splide__slide">
-                                    <a href="#" class="partners__img">
-                                        <img src="{{ asset('assets/img/cars/4-1.jpg') }}" alt="">
-                                    </a>
-                                </li>
                             </ul>
                         </div>
                     </div>

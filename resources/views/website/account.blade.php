@@ -217,7 +217,7 @@
                                                 </li>
                                             </ul>
                                             <div class="car__footer">
-                                                <span class="car__price">{{ $car->price }} </span>
+                                                <span class="car__price">{{ $car->price . '$' }} </span>
                                                 <button
                                                     class="car__favorite {{ $car->isLikedByUser() ? 'car__favorite--active' : '' }}"
                                                     type="button" aria-label="Add to favorite"

@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Brand;
 use App\Models\CarModel;
 use App\Models\Color;
+use App\Models\WebsiteSetting;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -31,6 +32,9 @@ class AppServiceProvider extends ServiceProvider
         view()->share('models', $models);
         view()->share('brands', $brands);
         view()->share('colors', $colors);
+        //
+        $SETTING= WebsiteSetting::first();
+        view()->share('SETTING',$SETTING);
         
     }
 }

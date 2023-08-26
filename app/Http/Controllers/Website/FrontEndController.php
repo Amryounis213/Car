@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
 use App\Models\Car;
 use App\Models\CommonQuestion;
 use App\Models\Favorite;
@@ -15,14 +16,15 @@ class FrontEndController extends Controller
     public function index()
     {
         $cars = Car::all();
-        return view('website.index', compact('cars'));
+        $brands = Brand::all();
+        return view('website.index', compact('cars', 'brands'));
     }
 
     public function showCar($id)
     {
         $car = Car::findorfail($id);
         $RandomCars = Car::inRandomOrder()->take(10)->get();
-
+        
         return view('website.car', compact('car', 'RandomCars'));
     }
 

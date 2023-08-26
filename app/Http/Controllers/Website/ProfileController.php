@@ -10,9 +10,12 @@ use App\Models\CarModel;
 use App\Models\CarType;
 use App\Models\Color;
 use App\Models\Generation;
+use App\Models\Image;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 
 class ProfileController extends Controller
 {
@@ -29,7 +32,6 @@ class ProfileController extends Controller
 
         $favCars = Car::whereIn('id', $favCarIds)->get();
 
-        // dd($favCars);
         return view('website.account', compact('favCars', 'user', 'mycars', 'car'));
     }
 
@@ -101,24 +103,69 @@ class ProfileController extends Controller
     public function createPost()
     {
         $car = new Car();
-        $models = CarModel::select('id' , 'name')->get();
-        $brands = Brand::select('id' , 'name')->get();
-        $carTypes = CarType::select('id' , 'name')->get();
-        $generation = Generation::select('id' , 'name')->get();
-        $carColors = Color::select('id' , 'name')->get();
+        $models = CarModel::select('id', 'name')->get();
+        $brands = Brand::select('id', 'name')->get();
+        $carTypes = CarType::select('id', 'name')->get();
+        $generation = Generation::select('id', 'name')->get();
+        $carColors = Color::select('id', 'name')->get();
         $amenities = Amenity::get();
-        return view('website.addproduct', compact('car', 'models', 'brands', 'carTypes', 'generation', 'carColors' , 'amenities'));
+        $images = Image::inRandomOrder()->take(10)->get();
+        return view('website.addproduct', compact('car', 'models', 'brands', 'carTypes', 'generation', 'carColors', 'amenities', 'images'));
     }
+
 
     public function storePost(Request $request)
     {
-        $data = $request->all();
-        dd($data);
+        dd($request->all());
+        // Log::info('Image ID From Post [] : ' . $this->imagesIds); 
+        // $imagesIds = Session::get('imagesIds') ;
+        // return $imagesIds;
         $user = auth()->user()->post_attempts;
-        $user->post_attempts = $user->post_attempts - 1;
 
-        return redirect()->route('website.home');
+        $car = Car::create([
+            'car_model_id' => $request->car_model_id,
+            'car_type_id' => 1,
+            'generation_id' => 1,
+            'brand_id' => 1,
+            'year' => $request->year,
+            'number_of_doors' => $request->number_of_doors,
+            'number_of_owners' => $request->number_of_owners,
+            'user_id' => auth()->id(),
+            'name' => 'sadfadsdsasddsddf' . $request->description,
+            'description' => $request->description,
+            // 'images' => $data['images']
+        ]);
+
+
+        if ($request->images) {
+            $carImages = [];
+            foreach ($request->images as $key => $image) {
+                $images = Image::where('folder', $image)->first();
+                $image->car_id = $car->id;
+                $carImages[$key] = $images->image;
+            }
+            $car->images = $carImages;
+            $car->save();
+        }
+        return redirect()->back();
     }
+
+    public function upload(Request $request)
+    {
+        if ($request->hasFile('images')) {
+            $folder = uniqid('car_', true);
+            foreach ($request->images as $key => $image) {
+                $image_path = $request->file('images')[$key]->store('uploads/images/' . $folder, 'public');
+                $imageModel = Image::create([
+                    'image' => $image_path,
+                    'folder' => $folder,
+                ]);
+            }
+
+            return $folder;
+        }
+    }
+
 
     public function contactus(Request $request)
     {

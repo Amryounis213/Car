@@ -61,10 +61,9 @@
                                             <option value="All categories">All brands</option>
                                             @foreach ($brands as $brand)
                                                 <option value="{{ $brand->id }}">{{ $brand->name }}</option>
-                                                
                                             @endforeach
-                                           
-                                           
+
+
                                         </select>
                                     </div>
                                 </div>
@@ -105,8 +104,8 @@
                                         <select name="colorout" id="colorout" class="filter__select">
                                             <option value="All categories">All Color</option>
                                             @foreach ($colors as $colorout)
-                                            <option value="{{ $colorout->id }}" >{{ $colorout->name }}</option>
-                                        @endforeach
+                                                <option value="{{ $colorout->id }}">{{ $colorout->name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -128,7 +127,7 @@
 
 
 
-                             
+
                                 <div class="filter__group">
                                     <button class="filter__btn" type="submit"><span>APPLY FILTER</span></button>
                                 </div>
@@ -166,15 +165,11 @@
 
                                         <div class="splide__track">
                                             <ul class="splide__list">
-                                                <li class="splide__slide">
-                                                    <img src="{{ asset('assets/img/cars/1-1.jpg') }}" alt="">
-                                                </li>
-                                                <li class="splide__slide">
-                                                    <img src="{{ asset('assets/img/cars/1-2.jpg') }}" alt="">
-                                                </li>
-                                                <li class="splide__slide">
-                                                    <img src="{{ asset('assets/img/cars/1-3.jpg') }}" alt="">
-                                                </li>
+                                                @foreach ($car->Images as $c)
+                                                    <li class="splide__slide">
+                                                        <img src="{{ asset('storage/' . $c->image) }}" alt="">
+                                                    </li>
+                                                @endforeach
                                             </ul>
                                         </div>
                                     </div>
@@ -217,7 +212,8 @@
                                     <div class="car__footer">
                                         <span class="car__price">{{ $car->price }} </span>
                                         @auth
-                                            <button class="car__favorite {{ $car->isLikedByUser() ? 'car__favorite--active' : '' }}"
+                                            <button
+                                                class="car__favorite {{ $car->isLikedByUser() ? 'car__favorite--active' : '' }}"
                                                 type="button" aria-label="Add to favorite" data-id="{{ $car->id }}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                                     <path
@@ -225,14 +221,16 @@
                                                 </svg>
                                             </button>
                                         @else
-                                            <a href="{{ route('website.login') }}" class="car__favorite" aria-label="Add to favorite">
+                                            <a href="{{ route('website.login') }}" class="car__favorite"
+                                                aria-label="Add to favorite">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                                     <path
                                                         d="M20.16,5A6.29,6.29,0,0,0,12,4.36a6.27,6.27,0,0,0-8.16,9.48l6.21,6.22a2.78,2.78,0,0,0,3.9,0l6.21-6.22A6.27,6.27,0,0,0,20.16,5Zm-1.41,7.46-6.21,6.21a.76.76,0,0,1-1.08,0L5.25,12.43a4.29,4.29,0,0,1,0-6,4.27,4.27,0,0,1,6,0,1,1,0,0,0,1.42,0,4.27,4.27,0,0,1,6,0A4.29,4.29,0,0,1,18.75,12.43Z" />
                                                 </svg>
                                             </a>
                                         @endauth
-                                        <a href="{{ route('showCar', $car->id) }}" class="car__more"><span>Show More</span></a>
+                                        <a href="{{ route('showCar', $car->id) }}" class="car__more"><span>Show
+                                                More</span></a>
                                     </div>
                                 </div>
                             </div>

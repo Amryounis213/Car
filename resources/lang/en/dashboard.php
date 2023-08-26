@@ -641,4 +641,6 @@ return [
     'viewOrder' => 'View Order',
     'websitestatic' => 'Login Page',
     'editloginimage' => 'Edit Login Image',
+    'brands' => 'Brands',
+    'brand' => 'Brand',
 ];

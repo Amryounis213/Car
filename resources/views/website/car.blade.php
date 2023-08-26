@@ -65,20 +65,19 @@
 
                             <div class="splide__track">
                                 <ul class="splide__list">
-                                    @foreach ((array) $car->images as $image)
+                                    @foreach ($car->Images as $c)
                                         <li class="splide__slide">
-                                            <img src="{{ $image }}" alt="">
+                                            <img src="{{ asset('storage/' . $c->image) }}" alt="">
                                         </li>
                                     @endforeach
-
                                 </ul>
                             </div>
                         </div>
 
                         <ul id="thumbnails" class="thumbnails">
-                            @foreach ((array) $car->images as $image)
+                            @foreach ($car->Images as $c)
                                 <li class="thumbnail">
-                                    <img src="{{ $image }}" alt="">
+                                    <img src="{{ asset('storage/' . $c->image) }}" alt="">
                                 </li>
                             @endforeach
                         </ul>
@@ -383,15 +382,11 @@
 
                                 <div class="splide__track">
                                     <ul class="splide__list">
-                                        <li class="splide__slide">
-                                            <img src="{{ asset('assets/img/cars/4-1.jpg') }}" alt="">
-                                        </li>
-                                        <li class="splide__slide">
-                                            <img src="{{ asset('assets/img/cars/4-2.jpg') }}" alt="">
-                                        </li>
-                                        <li class="splide__slide">
-                                            <img src="{{ asset('assets/img/cars/4-3.jpg') }}" alt="">
-                                        </li>
+                                        @foreach ($randCar->Images as $c)
+                                            <li class="splide__slide">
+                                                <img src="{{ asset('storage/' . $c->image) }}" alt="">
+                                            </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
