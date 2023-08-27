@@ -42,7 +42,7 @@ Route::get('getFavCars', [ProfileController::class, 'getFavCars'])->name('getFav
 Route::get('/showcar/{id}', [FrontEndController::class, 'showCar'])->name('showCar');
 Route::get('/showcarbyimage/{id}', [FrontEndController::class, 'showCarByImage'])->name('showCarByImage');
 Route::get('/helpcenter', [FrontEndController::class, 'helpCenter'])->name('helpcenter');
-Route::get('/terms', [FrontEndController::class, 'terms'])->name('terms');
+Route::get('/termsandconditions', [FrontEndController::class, 'terms'])->name('website.terms');
 Route::get('/aboutus', [FrontEndController::class, 'aboutUs'])->name('aboutus');
 Route::get('/showcars', [FrontEndController::class, 'showCars'])->name('cars');
 Route::post('search', [FrontEndController::class, 'search'])->name('search');

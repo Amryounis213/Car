@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Car;
 use App\Models\CommonQuestion;
+use App\Models\Contact;
 use App\Models\Favorite;
 use App\Models\WebsiteStatic;
 use App\Models\WhoUs;
@@ -143,5 +144,12 @@ class FrontEndController extends Controller
     {
         $terms = WhoUs::first();
         return view('website.terms', compact('terms'));
+    }
+
+
+    public function contacts()
+    {
+        $contact = new Contact();
+        return view('website.contact', compact('contact'));
     }
 }

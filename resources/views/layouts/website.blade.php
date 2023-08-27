@@ -114,7 +114,7 @@
                         <img src="{{ asset('storage/'. $website->logo) }}" alt="">
                     </div>
 
-                    <p class="footer__tagline">{{ $SETTING->website_desc }}</p>
+                    <p class="footer__tagline">{{ $SETTING->desc }}</p>
 
                     <div class="footer__lang">
                         <a class="footer__lang-btn" href="#" role="button" data-bs-toggle="dropdown"
@@ -142,9 +142,9 @@
                     <h6 class="footer__title">Company</h6>
                     <div class="footer__nav">
                         <a href="{{ route('aboutus') }}">About us</a>
-                        <a href="pricing.html">Pricing plans</a>
+                        {{-- <a href="pricing.html">Pricing plans</a>
                         <a href="blog.html">Our blog</a>
-                        <a href="contacts.html">Contacts</a>
+                        <a href="contacts.html">Contacts</a> --}}
                     </div>
                 </div>
 
@@ -180,7 +180,7 @@
                         <a href="{{ route('helpcenter') }}">Help center</a>
                         <a href="contacts.html">Ask a question</a>
                         <a href="#">Privacy policy</a>
-                        <a href="{{-- route('terms') --}}">Terms & conditions</a>
+                        <a href="{{ route('website.terms') }}">Terms & conditions</a>
                     </div>
                 </div>
             </div>
