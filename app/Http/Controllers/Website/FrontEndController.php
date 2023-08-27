@@ -85,7 +85,8 @@ class FrontEndController extends Controller
 
         $cars = Car::when($request->search, function ($q) use ($request) {
             $q->whereHas('model', function ($qe) use ($request) {
-                $qe->where('name', 'like', '%' . $request->search . '%');
+                $qe->where('name', 'like', '%' . $request->search . '%')
+                ->orWhere('description', 'like', '%' . $request->search . '%');
             })
                 ->orWhereHas('brand', function ($qe) use ($request) {
                     $qe->where('name', 'like', '%' . $request->search . '%');

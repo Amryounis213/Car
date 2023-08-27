@@ -97,7 +97,7 @@
             FormValidation.formValidation(
                 document.getElementById('kt_ecommerce_add_category_form'), {
                     fields: {
-                        'name[ar]': {
+                        'name[fr]': {
                             validators: {
                                 notEmpty: {
                                     message: '{{ __('dashboard.name_ar_required') }}',

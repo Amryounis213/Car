@@ -32,42 +32,6 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 |
 */
 
-// routes/web.php
-
-Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
-    //Website
-    Route::get('/', [FrontEndController::class, 'index'])->name('website.home');
-    Route::get('/post', [ProfileController::class, 'createPost'])->name('post.create');
-    Route::post('/post', [ProfileController::class, 'storePost'])->name('post.store');
-    Route::resource('account', ProfileController::class);
-    Route::post('add-to-favorite', [FrontEndController::class, 'addToFavourite'])->name('add.to.favorite');
-    Route::get('getFavCars', [ProfileController::class, 'getFavCars'])->name('getFavCars');
-    Route::get('/showcar/{id}', [FrontEndController::class, 'showCar'])->name('showCar');
-    Route::get('/showcarbyimage/{id}', [FrontEndController::class, 'showCarByImage'])->name('showCarByImage');
-    Route::get('/helpcenter', [FrontEndController::class, 'helpCenter'])->name('helpcenter');
-    Route::get('/terms', [FrontEndController::class, 'terms'])->name('terms');
-    Route::get('/aboutus', [FrontEndController::class, 'aboutUs'])->name('aboutus');
-    Route::get('/showcars', [FrontEndController::class, 'showCars'])->name('cars');
-    Route::post('search', [FrontEndController::class, 'search'])->name('search');
-
-
-    //Login and Register Routes in Group Middleware
-    Route::group(['middleware' => 'guest'], function () {
-        Route::get('signin', [AuthController::class, 'Login'])->name('website.login');
-        Route::get('signup', [AuthController::class, 'Register'])->name('website.register');
-        Route::get('forgot', [AuthController::class, 'forgot'])->name('website.forgot');
-        Route::get('forgot-password', [AuthController::class, 'ForgotPassword'])->name('website.forgot-password');
-        Route::get('reset-password', [AuthController::class, 'ResetPassword'])->name('website.reset-password');
-        Route::post('post-login', [AuthController::class, 'PostLogin'])->name('website.post.login');
-        Route::post('post-register', [AuthController::class, 'PostRegister'])->name('website.post.register');
-    });
-});
-
-/** OTHER PAGES THAT SHOULD NOT BE LOCALIZED **/
-
-
-
-
 
 
 //Controller Panel
@@ -97,11 +61,37 @@ Route::controller(WebsiteStaticsController::class)->group(function () {
 Route::post('/upload', [ProfileController::class, 'upload']);
 Route::delete('/revert1', [UploadFilesController::class, 'revert1'])->name('revertFile');
 
-Route::prefix('admin')->group(function () {
-    include __DIR__ . '/admin.php';
+
+
+
+
+Route::middleware(['auth:admin'])->group(function () {
+    //Controller Panel
+    Route::get('/admin', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('commonquestions', CommonQuestionsController::class);
+    Route::post('commonquestions/status', [CommonQuestionsController::class, 'updateStatus'])->name('commonquestions.status');
+
+    Route::resource('amenities', AmenitiesController::class);
+    Route::post('amenities/status', [AmenitiesController::class, 'updateStatus'])->name('amenities.status');
+
+    Route::resource('brands', BrandsController::class);
+    Route::post('brands/status', [BrandsController::class, 'updateStatus'])->name('brands.status');
+
+    Route::resource('whous', WhoUsController::class);
+    Route::resource('terms', TermsController::class);
+    Route::resource('users', UserController::class);
+    Route::resource('posts', PostsController::class);
+    Route::get('cars', [CarsController::class, 'index'])->name('cars.index');
+    Route::post('posts/status', [PostsController::class, 'updateStatus'])->name('posts.status');
+    Route::get('setting', [SettingController::class, 'index'])->name('setting.index');
+    Route::post('setting', [SettingController::class, 'EditWebsiteData'])->name('setting.store');
+    // Route::post('product/status', [PostsController::class, 'updateCarStatus'])->name('product.status');
+
+    Route::get('/profile', [ControllersProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ControllersProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ControllersProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
-Route::prefix('admin')->name('admin.')->group(function () {
 require __DIR__ . '/auth.php';
-});
+
+

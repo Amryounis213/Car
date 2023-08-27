@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Admin;
 use App\Models\Brand;
 use App\Models\Car;
 use App\Models\CarModel;
@@ -13,6 +14,7 @@ use App\Models\Generation;
 use App\Models\User;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 
 class DatabaseSeeder extends Seeder
@@ -135,16 +137,22 @@ class DatabaseSeeder extends Seeder
         // foreach ($colors as $color) {
         //     Color::create($color);
         // }
-        $response = Http::get('https://private-anon-18acadcf96-carsapi1.apiary-mock.com/manufacturers');
+        // $response = Http::get('https://private-anon-18acadcf96-carsapi1.apiary-mock.com/manufacturers');
 
-        $brandsData = $response->json();
+        // $brandsData = $response->json();
 
-        foreach ($brandsData as $brandData) {
-            Brand::create([
-                'name' => $brandData['name'],
-                'icon' => $brandData['img_url'],
-            ]);
-        }
+        // foreach ($brandsData as $brandData) {
+        //     Brand::create([
+        //         'name' => $brandData['name'],
+        //         'icon' => $brandData['img_url'],
+        //     ]);
+        // }
+
+        Admin::create([
+            'name' => 'SQYON',
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make('123456789'),
+        ]);
     }
 }
 

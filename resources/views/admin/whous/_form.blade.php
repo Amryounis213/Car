@@ -26,12 +26,12 @@
                     {{-- Name Arabic English --}}
                     @foreach (config('lang') as $key => $lang)
                     <div class="row mb-6">
-                        @if ($key == 'ar')
+                        @if ($key == 'fr')
                             <label for="text" class="col-md-3 col-form-label text-md-right">Paragraph Text
                                 ({{ $lang }})
                             </label>
                             <div class="col-md-6">
-                                <textarea id="editor" class="form-control @error('text') is-invalid @enderror" name="text[{{ $key }}]">{{ old('text.ar', $whous->getTranslation('text', $key) ?? '') }}</textarea>
+                                <textarea id="editor" class="form-control @error('text') is-invalid @enderror" name="text[{{ $key }}]">{{ old('text.fr', $whous->getTranslation('text', $key) ?? '') }}</textarea>
            
                                 @error('text')
                                     <span class="invalid-feedback" role="alert">
@@ -54,6 +54,18 @@
                             </div>
                         
                         @endif 
+                        {{-- <label for="text" class="col-md-3 col-form-label text-md-right">Paragraph Text
+                            ({{ $lang }})
+                        </label>
+                        <div class="col-md-6">
+                            <textarea id="editor" class="form-control @error('text') is-invalid @enderror" name="text[{{ $key }}]">{{ old('text.'. $key, $whous->getTranslation('text', $key)) }}</textarea>
+                            
+                            @error('text')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div> --}}
                     </div>
                 @endforeach
                     {{-- <!--begin::Row-->

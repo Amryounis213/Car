@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('images', function (Blueprint $table) {
-            $table->foreignId('car_id')->nullable()->constrainedOn('cars');
+        Schema::table('website_settings', function (Blueprint $table) {
+           $table->string('tiktok_url');
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('images', function (Blueprint $table) {
-            $table->dropColumn('car_id');
+        Schema::table('website_settings', function (Blueprint $table) {
+           $table->dropColumn('tiktok_url');
         });
     }
 };

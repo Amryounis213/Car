@@ -9,6 +9,6 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return redirect()->route('categories.index');
+        return redirect()->route('users.index');
     }
 }
