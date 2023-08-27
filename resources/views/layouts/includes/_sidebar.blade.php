@@ -81,6 +81,29 @@
                     </span>
                     <!--end:Menu link-->
                     <!--begin:Menu sub-->
+                    <div class="menu-sub menu-sub-accordion {{ request()->is('websitestatic') ? 'activeshow' : '' }}">
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <a class="menu-link {{ request()->is('setting') ? 'active' : '' }}"
+                                href="{{ route('setting.index') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">General Settings</span>
+                            </a>
+                            <a class="menu-link {{ request()->is('websitestatic') ? 'active' : '' }}"
+                                href="{{ route('websitestatic.index') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Website Apperance</span>
+                            </a>
+
+                        </div>
+                        <!--end:Menu item-->
+                    </div>
+                    <!--end:Menu sub-->
+                    <!--begin:Menu sub-->
                     <div class="menu-sub menu-sub-accordion {{ request()->is('commonquestions') ? 'activeshow' : '' }}">
                         <!--begin:Menu item-->
                         <div class="menu-item">

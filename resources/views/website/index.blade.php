@@ -26,7 +26,7 @@
         <!-- home -->
         <div class="home">
             <!-- home bg -->
-            <div class="home__bg" style="background: url({{ asset('assets/img/main.jpg') }}) no-repeat center/cover">
+            <div class="home__bg" style="background: url({{ asset('storage/' . $website->image) }}) no-repeat center/cover">
 
             </div>
             <!-- end home bg -->
@@ -35,8 +35,8 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="home__content">
-                            <h1 class="home__title">The easy way to <br>takeover a lease</h1>
-                            <p class="home__text">Live in New York, New Jerset and Connecticut!</p>
+                            <h1 class="home__title">{{ $website->title }}</h1>
+                            <p class="home__text">{{ $website->sub_title }}</p>
 
                             <form class="home__search" action="{{ route('search') }}" method="POST">
                                 @csrf
@@ -69,14 +69,14 @@
 
         <div class="container">
             <!-- get started -->
-            <section class="row">
+            {{-- <section class="row">
                 <div class="slick-carousel multiple-items">
                     @foreach ($brands as $brand)
                         <div class="slide"><img src="{{ $brand->icon_path }}" alt="Car Brand 1"></div>
                     @endforeach
                 </div>
 
-            </section>
+            </section> --}}
             <!-- end get started -->
             <!-- cars -->
             <section class="row">

@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\UploadFilesController;
 use App\Http\Controllers\Admin\CommonQuestionsController;
 use App\Http\Controllers\Admin\TermsController;
+use App\Http\Controllers\Admin\WebsiteStaticsController;
 use App\Http\Controllers\Website\AuthController;
 use App\Http\Controllers\Website\FrontEndController;
 use App\Http\Controllers\Website\ProfileController;
@@ -39,6 +40,7 @@ Route::resource('account', ProfileController::class);
 Route::post('add-to-favorite', [FrontEndController::class, 'addToFavourite'])->name('add.to.favorite');
 Route::get('getFavCars', [ProfileController::class, 'getFavCars'])->name('getFavCars');
 Route::get('/showcar/{id}', [FrontEndController::class, 'showCar'])->name('showCar');
+Route::get('/showcarbyimage/{id}', [FrontEndController::class, 'showCarByImage'])->name('showCarByImage');
 Route::get('/helpcenter', [FrontEndController::class, 'helpCenter'])->name('helpcenter');
 Route::get('/terms', [FrontEndController::class, 'terms'])->name('terms');
 Route::get('/aboutus', [FrontEndController::class, 'aboutUs'])->name('aboutus');
@@ -61,6 +63,10 @@ Route::get('setting', [SettingController::class, 'index'])->name('setting.index'
 Route::post('setting', [SettingController::class, 'EditWebsiteData'])->name('setting.store');
 Route::put('/posts/updatestatus', [PostsController::class, 'updatePostStatus'])->name('updatepoststatus');
 
+Route::controller(WebsiteStaticsController::class)->group(function () {
+    Route::get('/websitestatic', 'index')->name('websitestatic.index');
+    Route::put('/websitestatic', 'update')->name('websitestatic.update');
+});
 // Route::post('product/status', [PostsController::class, 'updateCarStatus'])->name('product.status');
 
 //Login and Register Routes in Group Middleware

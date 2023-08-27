@@ -13,13 +13,13 @@
 @endsection
 
 @section('content')
-    @php
+    {{-- @php
         $fav = \App\Models\Favorite::where('user_id', 11)
             ->where('car_id', $car->id)
             ->get()
             ->pluck('car_id')
             ->toArray();
-    @endphp
+    @endphp --}}
     <!-- main content -->
     <main class="main">
         <div class="container">
@@ -29,7 +29,7 @@
                     <ul class="breadcrumbs">
                         <li class="breadcrumbs__item"><a href="{{ route('website.home') }}">Home</a></li>
                         <li class="breadcrumbs__item"><a href="cars.html">Explore cars</a></li>
-                        <li class="breadcrumbs__item breadcrumbs__item--active">{{ $car->title }}</li>
+                        <li class="breadcrumbs__item breadcrumbs__item--active">{{ $car->year ?? 'Hello' }}</li>
                     </ul>
                 </div>
                 <!-- end breadcrumb -->
@@ -37,7 +37,7 @@
                 <!-- title -->
                 <div class="col-12">
                     <div class="main__title main__title--page">
-                        <h1>{{ $car->title }}</h1>
+                        <h1>{{ $car->title ?? 'hleoo' }}</h1>
                     </div>
                 </div>
                 <!-- end title -->

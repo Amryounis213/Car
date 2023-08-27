@@ -288,14 +288,13 @@
                     <div class="partners splide" id="partners-slider">
                         <div class="splide__track">
                             <ul class="splide__list">
-                                @foreach ($images as $carImage)
+                                @foreach ($images as $car)
                                     <li class="splide__slide">
-                                        <a href="{{-- route('showCar',$carImage->car_id) --}}" class="partners__img">
-                                            <img src="{{ asset('storage/' . $carImage->image) }}" alt="">
+                                        <a href="{{ route('showCarByImage', $car->id) }}" class="partners__img">
+                                                <img src="{{ asset('storage/' . $car->main_image) }}" alt="">
                                         </a>
                                     </li>
                                 @endforeach
-
                             </ul>
                         </div>
                     </div>

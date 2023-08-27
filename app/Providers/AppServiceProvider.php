@@ -6,6 +6,7 @@ use App\Models\Brand;
 use App\Models\CarModel;
 use App\Models\Color;
 use App\Models\WebsiteSetting;
+use App\Models\WebsiteStatic;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -35,6 +36,9 @@ class AppServiceProvider extends ServiceProvider
         //
         $SETTING= WebsiteSetting::first();
         view()->share('SETTING',$SETTING);
+        //
+        $website = WebsiteStatic::select('title', 'sub_title', 'image', 'logo')->first();
+        view()->share('website',$website);
         
     }
 }

@@ -109,18 +109,19 @@ class ProfileController extends Controller
         $generation = Generation::select('id', 'name')->get();
         $carColors = Color::select('id', 'name')->get();
         $amenities = Amenity::get();
-        $images = Image::inRandomOrder()->take(10)->get();
+        $images = Car::inRandomOrder()->take(10)->get(['main_image', 'id']);
+        // dd($images);
         return view('website.addproduct', compact('car', 'models', 'brands', 'carTypes', 'generation', 'carColors', 'amenities', 'images'));
     }
 
 
     public function storePost(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         // Log::info('Image ID From Post [] : ' . $this->imagesIds); 
         // $imagesIds = Session::get('imagesIds') ;
         // return $imagesIds;
-        $user = auth()->user()->post_attempts;
+        // $user = auth()->user()->post_attempts;
 
         $car = Car::create([
             'car_model_id' => $request->car_model_id,
@@ -130,8 +131,8 @@ class ProfileController extends Controller
             'year' => $request->year,
             'number_of_doors' => $request->number_of_doors,
             'number_of_owners' => $request->number_of_owners,
-            'user_id' => auth()->id(),
-            'name' => 'sadfadsdsasddsddf' . $request->description,
+            'user_id' => 1,
+            'name' => 'sadfaddssdsdsdsddsdsasddf' . $request->description,
             'description' => $request->description,
             // 'images' => $data['images']
         ]);
@@ -141,10 +142,10 @@ class ProfileController extends Controller
             $carImages = [];
             foreach ($request->images as $key => $image) {
                 $images = Image::where('folder', $image)->first();
-                $image->car_id = $car->id;
                 $carImages[$key] = $images->image;
             }
             $car->images = $carImages;
+            $car->main_image = $carImages[0];
             $car->save();
         }
         return redirect()->back();

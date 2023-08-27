@@ -4,14 +4,14 @@
 
 <body>
     <!-- header -->
-    <header class="header">
+    <header class="header" style="background-color: white">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="header__content">
                         <div class="header__logo">
                             <a href="{{ route('website.home') }}">
-                                <img style="width: 100px; height: 50px" src="{{ asset('assets/img/logo.png') }}"
+                                <img style="width: 100px; height: 50px" src="{{ asset('storage/'. $website->logo) }}"
                                     alt="">
                             </a>
                         </div>
@@ -111,11 +111,10 @@
             <div class="row">
                 <div class="col-12 col-sm-8 col-md-6 col-lg-6 col-xl-4 order-4 order-md-1 order-lg-4 order-xl-1">
                     <div class="footer__logo">
-                        <img src="{{ asset('assets/img/logo.png') }}" alt="">
+                        <img src="{{ asset('storage/'. $website->logo) }}" alt="">
                     </div>
 
-                    <p class="footer__tagline">Search for cheap rental cars in New York. <br>With a diverse fleet of
-                        19,000 vehicles, Waydex <br>offers its consumers an attractive and fun selection.</p>
+                    <p class="footer__tagline">{{ $SETTING->website_desc }}</p>
 
                     <div class="footer__lang">
                         <a class="footer__lang-btn" href="#" role="button" data-bs-toggle="dropdown"
