@@ -21,7 +21,7 @@
                         <h1>Help center</h1>
                         <p>Here you will find answers to frequently asked questions about our company and services. If you
                             don't find the answer to your question, please contact our customer support and we'll be happy
-                            to assist you. <a href="contacts.html">Ask a question</a>.</p>
+                            to assist you. <a href="{{ route('contactus') }}">Ask a question</a>.</p>
                     </div>
                 </div>
                 <!-- end title -->

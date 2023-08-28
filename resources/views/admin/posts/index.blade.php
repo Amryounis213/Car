@@ -169,11 +169,8 @@
             });
         });
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ asset('assets/js/widgets.bundle.js') }}"></script>
-    <script src="{{ asset('assets/js/custom/widgets.js') }}"></script>
-     {{-- update status status --}}
-     <script>
+
+    <script>
         $(document).on('click', '.accept-fld', function(e) {
             const id = $(this).data('id');
             const status = $(this).data('status');
@@ -185,14 +182,14 @@
                 text: "{{ __('dashboard.are_you_sure_you_want_to_update_data') }}",
                 icon: 'warning',
                 confirmButtonText: "{{ __('dashboard.yes_update') }}",
-                confirmButtonColor: status == 'rejected' ?  '#ee0e44' : '#50cd89',
+                confirmButtonColor: status == 'rejected' ? '#ee0e44' : '#50cd89',
                 cancelButtonText: "{{ __('dashboard.no_cancel') }}",
                 showCancelButton: true,
             }).then((result) => {
                 if (result.value) {
                     $.ajax({
-                        type: "PUT",
-                        url: "/posts/updatestatus",
+                        type: "POST",
+                        url: "{{ route('updatepoststatus') }}",
                         data: {
                             'id': id,
                             'status': status
@@ -217,6 +214,8 @@
                 }
             });
 
+
+            // });
         });
     </script>
 @endsection

@@ -28,7 +28,7 @@
 
             <div class="row">
                 <div class="col-12 col-lg-7 col-xl-7">
-                    <form action="{{ route('contactus.store') }}" method="POST" class="sign__form sign__form--contacts">
+                    <form action="{{ route('storecontactus') }}" method="POST" class="sign__form sign__form--contacts">
                         @csrf
                         <div class="row">
                             <div class="col-12 col-md-6">

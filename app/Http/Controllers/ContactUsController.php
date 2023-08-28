@@ -37,7 +37,8 @@ class ContactUsController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $message = Contact::findorfail($id);
+        return view('admin.contacts.show', compact('message'));
     }
 
     /**

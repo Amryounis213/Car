@@ -165,7 +165,7 @@ return [
     'users' => 'Users',
     'view_users' => 'View Users',
     'type' => 'Type',
-    'search' => 'Search',
+    // 'search' => 'Search',
     'icon' => 'Icon',
 
 
@@ -643,4 +643,36 @@ return [
     'editloginimage' => 'Edit Login Image',
     'brands' => 'Brands',
     'brand' => 'Brand',
+    //////
+    //////
+    //////
+    //////
+    //////
+    //////
+    //////
+    //////
+    //////
+    //////
+    //////
+    //////
+    'car_model_brand' => 'Car, model, or brand',
+    'max_price' => 'Max. price',
+    'make_year' => 'Make Year',
+    'search' => 'Search',
+    'featured_cars' => 'Featured cars',
+    'view_more' => 'View more',
+    'people' => 'People',
+    'show_more' => 'Show More',
+
+    'home' => 'Home',
+    'help_center' => 'Help Center',
+    'about_us' => 'About Us',
+    'post_your_product' => 'Post Your Product',
+    'my_account' => 'My Account',
+    'sign_out' => 'Sign out',
+    'support' => 'Support',
+    'terms_conditions' => 'Terms & conditions',
+    'ask_question' => 'Ask a question',
+
+
 ];

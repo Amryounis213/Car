@@ -36,7 +36,7 @@ class ContactusDataTables extends DataTable
                 return $model->subject;
             })
             ->addColumn('action', function (Contact $model) {
-                return view('admin.brands.parts._action-menu', compact('model'));
+                return view('admin.contacts.parts._action-menu', compact('model'));
             });
     }
 

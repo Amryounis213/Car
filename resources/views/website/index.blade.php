@@ -42,23 +42,23 @@
                                 @csrf
 
                                 <div class="home__group">
-                                    <label for="search1">Car, model, or brand</label>
+                                    <label for="search1">{{ __('dashbaord.car_model_brand') }}</label>
                                     <input type="text" name="search" id="search1"
                                         placeholder="What car are you looking for?">
                                 </div>
 
                                 <div class="home__group">
-                                    <label for="search2">Max. price</label>
+                                    <label for="search2">{{ __('dashboard.max_price') }}</label>
                                     <input type="text" name="amount" id="search2" placeholder="Add an amount in $">
                                 </div>
 
                                 <div class="home__group">
-                                    <label for="search3">Make Year</label>
+                                    <label for="search3">{{ __('dashboard.make_year') }}</label>
                                     <input type="text" name="year" id="search3"
                                         placeholder="Add a minimal make year">
                                 </div>
 
-                                <button type="submit"><span>Search</span></button>
+                                <button type="submit"><span>{{ __('dashboard.search') }}</span></button>
                             </form>
                         </div>
                     </div>
@@ -83,9 +83,8 @@
                 <!-- title -->
                 <div class="col-12">
                     <div class="main__title main__title--first">
-                        <h2>Featured cars</h2>
-
-                        <a href="{{ route('cars') }}" class="main__link">View more<svg xmlns="http://www.w3.org/2000/svg"
+                        <h2>{{ __('dashboard.featured_cars') }}</h2>
+                        <a href="{{ route('cars') }}" class="main__link">{{ __('dashboard.view_more') }}<svg xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 24 24">
                                 <path
                                     d="M17.92,11.62a1,1,0,0,0-.21-.33l-5-5a1,1,0,0,0-1.42,1.42L14.59,11H7a1,1,0,0,0,0,2h7.59l-3.3,3.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l5-5a1,1,0,0,0,.21-.33A1,1,0,0,0,17.92,11.62Z" />
@@ -138,7 +137,7 @@
                                         <path
                                             d="M12.3,12.22A4.92,4.92,0,0,0,14,8.5a5,5,0,0,0-10,0,4.92,4.92,0,0,0,1.7,3.72A8,8,0,0,0,1,19.5a1,1,0,0,0,2,0,6,6,0,0,1,12,0,1,1,0,0,0,2,0A8,8,0,0,0,12.3,12.22ZM9,11.5a3,3,0,1,1,3-3A3,3,0,0,1,9,11.5Zm9.74.32A5,5,0,0,0,15,3.5a1,1,0,0,0,0,2,3,3,0,0,1,3,3,3,3,0,0,1-1.5,2.59,1,1,0,0,0-.5.84,1,1,0,0,0,.45.86l.39.26.13.07a7,7,0,0,1,4,6.38,1,1,0,0,0,2,0A9,9,0,0,0,18.74,11.82Z" />
                                     </svg>
-                                    <span>{{ $car->seats }} People</span>
+                                    <span>{{ $car->seats }} {{ __('dashboard.people') }}</span>
                                 </li>
                                 <li>
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -191,7 +190,7 @@
                                         </svg>
                                     </a>
                                 @endauth
-                                <a href="{{ route('showCar', $car->id) }}" class="car__more"><span>Show More</span></a>
+                                <a href="{{ route('showCar', $car->id) }}" class="car__more"><span>{{ __('dashboard.show_more') }}</span></a>
                             </div>
                         </div>
                     </div>

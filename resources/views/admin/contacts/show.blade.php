@@ -78,7 +78,7 @@
                                         <div class="col-lg-12">
                                             <!--begin::Row-->
                                             <div class="d-flex flex-root">
-                                                <div class="d-flex flex-column flex-row-auto w-200px">
+                                                {{-- <div class="d-flex flex-column flex-row-auto w-200px">
                                                     <div class="d-flex flex-column-fluid">
                                                         <!--begin::Image input-->
                                                         <div class="image-input" data-kt-image-input="true">
@@ -90,10 +90,10 @@
                                                         </div>
                                                         <!--end::Image input-->
                                                     </div>
-                                                </div>
+                                                </div> --}}
 
                                                 <div class="d-flex flex-column flex-row-fluid mt-3">
-                                                    <h5>تفاصيل المستخدم</h5>
+                                                    <h5>Message Details</h5>
                                                     <div class="d-flex flex-row flex-column-fluid">
                                                         <div class="d-flex flex-row-fluid ">
                                                             <div class="mt-3">
@@ -103,37 +103,34 @@
                                                                         <tr class="">
                                                                             <td class="text-gray-400">
                                                                                 {{ __('dashboard.name') }}</td>
-                                                                            <td class="text-gray-800">{{ $communication->title }}
+                                                                            <td class="text-gray-800">{{ $message->name }}
+                                                                            </td>
+                                                                        </tr>
+                                                                       
+                                                                        <tr class="">
+                                                                            <td class="text-gray-400">
+                                                                                {{ __('dashboard.email') }}</td>
+                                                                            <td class="text-gray-800">{{ $message->email }}
                                                                             </td>
                                                                         </tr>
                                                                         <tr class="">
                                                                             <td class="text-gray-400">
-                                                                                {{ __('dashboard.phone') }}</td>
-                                                                            <td class="text-gray-800">{{ $communication->phone }}
+                                                                               Subject</td>
+                                                                            <td class="text-gray-800">{{ $message->subject }}
                                                                             </td>
                                                                         </tr>
+                                                                       
                                                                         <tr class="">
                                                                             <td class="text-gray-400">
-                                                                                {{ __('dashboard.gender') }}</td>
-                                                                            <td class="text-gray-800">{{ $communication->gender }}
+                                                                                Message</td>
+                                                                            <td class="text-gray-800">{{ $message->message }}
                                                                             </td>
-                                                                        </tr>
-                                                                        <tr class="">
-                                                                            <td class="text-gray-400">
-                                                                                {{ __('dashboard.id_number') }}</td>
-                                                                            <td class="text-gray-800">
-                                                                                {{ $communication->id_number }}</td>
-                                                                        </tr>
-                                                                        <tr class="">
-                                                                            <td class="text-gray-400">
-                                                                                {{ __('dashboard.license_number') }}</td>
-                                                                            <td class="text-gray-800">
-                                                                                {{ $communication->license_number }}</td>
                                                                         </tr>
                                                                     </tbody>
                                                                 </table>
 
                                                             </div>
+                                                           
                                                         </div>
                                                     </div>
                                                 </div>

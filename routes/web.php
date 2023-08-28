@@ -35,7 +35,9 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 // routes/web.php
 Route::get('contactus', [FrontEndController::class, 'contactus'])->name('contactus');
-Route::post('contactus', [FrontEndController::class, 'storeContactus'])->name('contactus.store');
+Route::post('contactus', [FrontEndController::class, 'storeContactus'])->name('storecontactus');
+Route::post('updatePostStatus', [PostsController::class, 'updatePostStatus'])->name('updatepoststatus');
+
 
 Route::group(
     [
@@ -58,6 +60,7 @@ Route::group(
     Route::get('/showcars', [FrontEndController::class, 'showCars'])->name('cars');
     Route::post('search', [FrontEndController::class, 'search'])->name('search');
     Route::post('change-password', [ProfileController::class, 'updatePassword'])->name('changepassword');
+    Route::get('/delete-user-car/{id}', [ProfileController::class, 'destroy'])->name('usercar.destroy');
 
     //Login and Register Routes in Group Middleware
     Route::group(['middleware' => 'guest'], function () {

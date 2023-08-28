@@ -43,7 +43,7 @@ class PostsDataTables extends DataTable
             ->addColumn('car_type', function (Car $model) {
                 return $model->CarTypes->name; // Assuming you have a 'CarTypes' relationship in the 'Car' model.
             })
-            ->addColumn('car_status', function (Car $model) {
+            ->addColumn('status', function (Car $model) {
                 return view('admin.posts.parts._carstatus', compact('model'));
             })
             ->addColumn('post_status', function (Car $model) {
@@ -73,7 +73,7 @@ class PostsDataTables extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->setTableId('hotelsdatatables-table')
+            ->setTableId('kt_ecommerce_ad_table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->stateSave(true)
@@ -111,7 +111,7 @@ class PostsDataTables extends DataTable
             Column::computed('brand')->title('Brand')->addClass('text-center'),
             Column::computed('model')->title('Model')->addClass('text-center'),
             Column::computed('car_type')->title('Car Type')->addClass('text-center'),
-            Column::computed('car_status')->title('Product Status')->addClass('text-center'),
+            Column::computed('status')->title('Status')->addClass('text-center'),
             Column::computed('post_status')->title('Post Status')->addClass('text-center'),
             Column::computed('action')
                 ->exportable(false)

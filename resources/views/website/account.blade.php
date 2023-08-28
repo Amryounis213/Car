@@ -103,17 +103,17 @@
                                                             <tr>
                                                                 <td>
                                                                     <div class="cart__img">
-                                                                        <img src="{{ $car->main_image }}" alt="">
+                                                                        <img src="{{ asset('storage/'.$car->main_image) }}" alt="">
                                                                     </div>
                                                                 </td>
-                                                                <td><a href="car.html">{{ $car->title }}</a></td>
+                                                                <td><a href="{{ route('showCar', $car->id) }}">{{ $car->title }}</a></td>
                                                                 <td>{{ $car->year }}</td>
                                                                 <td>{{ $car->gearbox }}</td>
                                                                 <td>{{ $car->fuel }}</td>
                                                                 <td><span class="cart__price">{{ $car->price }}</span>
                                                                 </td>
                                                                 <td>
-                                                                    <button class="cart__delete" type="button"
+                                                                    <a href="{{ route('usercar.destroy', $car->id) }}" class="cart__delete"
                                                                         aria-label="Delete">
                                                                         <svg xmlns="http://www.w3.org/2000/svg"
                                                                             viewBox="0 0 24 24">
@@ -121,7 +121,7 @@
                                                                                 d="M13.41,12l6.3-6.29a1,1,0,1,0-1.42-1.42L12,10.59,5.71,4.29A1,1,0,0,0,4.29,5.71L10.59,12l-6.3,6.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l6.29,6.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z">
                                                                             </path>
                                                                         </svg>
-                                                                    </button>
+                                                                    </a>
                                                                 </td>
                                                             </tr>
                                                         @endforeach
@@ -197,7 +197,7 @@
                                     <div class="col-12 col-md-6 col-xl-4">
                                         <div class="car">
                                             <div class="car__img">
-                                                <img src="{{ $car->main_image }}" alt="">
+                                                <img src="{{ asset('storage/'.$car->main_image) }}" alt="">
                                             </div>
                                             <div class="car__title">
                                                 <h3 class="car__name"><a href="car.html">{{ $car->title }}</a></h3>
@@ -504,4 +504,44 @@
             });
         });
     </script> --}}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            // const oTable = $('#kt_ecommerce_category_table').DataTable();
+            $(document).on('click', ".del_rec_btn", function(e) {
+                e.preventDefault();
+                const id = $(this).data('id');
+                let url = "{{ route('usercar.destroy', ':id') }}";
+                url = url.replace(':id', id);
+
+                Swal.fire({
+                    title: "{{ __('dashboard.warning') }}",
+                    text: "{{ __('dashboard.are_you_sure_you_want_to_delete_data') }}",
+                    icon: 'warning',
+                    confirmButtonText: "{{ __('dashboard.yes_delete') }}",
+                    confirmButtonColor: '#d33',
+                    cancelButtonText: "{{ __('dashboard.no_cancel') }}",
+                    showCancelButton: true,
+                }).then((result) => {
+                    if (result.value) {
+                        $.ajax({
+                            type: "DELETE",
+                            url: url,
+                            success: function(data) {
+                                oTable.draw();
+                                toastr.options.positionClass = 'toast-bottom-left';
+                                toastr[data.status](data.message);
+                            }
+                        });
+                    }
+                })
+            });
+        });
+    </script>
 @endsection

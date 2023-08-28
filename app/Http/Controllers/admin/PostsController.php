@@ -77,12 +77,22 @@ class PostsController extends Controller
     {
         $id = $request->get('id');
         $info = Car::find($id);
-        return Controller::updateModelStatus($info);
+
+        if ($info) {
+            $post_status = $info->post_status;
+            if ($post_status == 0) {
+                $info->update(['post_status' => 1]);
+            } else {
+                $info->update(['post_status' => 0]);
+            }
+            return response()->json(['post_status' => 'success', 'message' => trans(__('dashboard.data_updated_success')), 'type' => 'no']);
+        } else {
+            return response()->json(['post_status' => 'error', 'message' => trans(__('dashboard.not_updated_success'))]);
+        }
     }
 
     public function updatePostStatus(Request $request)
     {
-
         $id = $request->get('id');
         $status = $request->get('status');
         $info = Car::find($id);
@@ -91,35 +101,4 @@ class PostsController extends Controller
 
         return response()->json(['status' => 'success', 'message' => trans(__('dashboard.data_updated_success')), 'type' => 'no']);
     }
-
-    // public function updateCarStatus(Request $request): \Illuminate\Http\JsonResponse
-    // {
-    //     // $id = $request->get('id');
-    //     // $status = $request->get('status');
-    //     // $info = Car::find($id);
-    //     // // If the status is accepted, update the wallet balance
-    //     // if ($info->car_status == 'pending') {
-    //     //     $info->update(['car_status' => a]);
-
-    //     //     $transaction = WalletTransaction::create([
-    //     //         'wallet_id' => $wallet->id,
-    //     //         'type' => 2, // deposit
-    //     //         'amount' => $amount,
-    //     //     ]);
-
-
-    //     //     // Return a success response
-    //     //     return response()->json([
-    //     //         'status' => 'success',
-    //     //         'message' => trans(__('dashboard.success')),
-    //     //         'type' => 'yes',
-    //     //     ]);
-    //     // } else if ($info->status == 'rejected') {
-    //     //     return response()->json([
-    //     //         'status' => 'error',
-    //     //         'message' => trans(__('dashboard.rejected')),
-    //     //         'type' => 'yes',
-    //     //     ]);
-        // }
-    // }
 }

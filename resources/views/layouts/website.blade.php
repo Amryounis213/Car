@@ -19,7 +19,8 @@
                         <div class="header__menu">
                             <ul class="header__nav">
                                 <li class="header__nav-item">
-                                    <a class="header__nav-link" href="{{ route('website.home') }}">Home</a>
+                                    <a class="header__nav-link"
+                                        href="{{ route('website.home') }}">{{ __('dashboard.home') }}</a>
                                 </li>
                                 <li class="header__nav-item">
                                     <a class="header__nav-link" href="#" role="button" data-bs-toggle="dropdown"
@@ -31,16 +32,18 @@
 
                                     <ul class="dropdown-menu header__nav-menu">
                                         @foreach (\App\Models\CarModel::get() as $models)
-                                            <li><a href="{{-- route() --}}">{{ $models->name }}</a></li>
+                                            <li><a href="{{ Auth::logout() }}">{{ $models->name }}</a></li>
                                         @endforeach
 
                                     </ul>
                                 </li>
                                 <li class="header__nav-item">
-                                    <a href="{{ route('helpcenter') }}" class="header__nav-link">Help center</a>
+                                    <a href="{{ route('helpcenter') }}"
+                                        class="header__nav-link">{{ __('dashboard.help_center') }}</a>
                                 </li>
                                 <li class="header__nav-item">
-                                    <a class="header__nav-link" href="{{ route('aboutus') }}">About Us</a>
+                                    <a class="header__nav-link"
+                                        href="{{ route('aboutus') }}">{{ __('dashboard.about_us') }}</a>
 
 
                             </ul>
@@ -54,7 +57,7 @@
 
                             <div class="header__action">
                                 <a class="header__action-btn" href="{{ route('post.create') }}">
-                                    <span>Post Your Car</span>
+                                    <span>{{ __('dashboard.post_your_product') }}</span>
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                         <path
                                             d="M6.62,13.08a.9.9,0,0,0-.54.54,1,1,0,0,0,1.3,1.3,1.15,1.15,0,0,0,.33-.21,1.15,1.15,0,0,0,.21-.33A.84.84,0,0,0,8,14a1.05,1.05,0,0,0-.29-.71A1,1,0,0,0,6.62,13.08Zm13.14-4L18.4,5.05a3,3,0,0,0-2.84-2H8.44A3,3,0,0,0,5.6,5.05L4.24,9.11A3,3,0,0,0,2,12v4a3,3,0,0,0,2,2.82V20a1,1,0,0,0,2,0V19H18v1a1,1,0,0,0,2,0V18.82A3,3,0,0,0,22,16V12A3,3,0,0,0,19.76,9.11ZM7.49,5.68A1,1,0,0,1,8.44,5h7.12a1,1,0,0,1,1,.68L17.61,9H6.39ZM20,16a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V12a1,1,0,0,1,1-1H19a1,1,0,0,1,1,1Zm-3.38-2.92a.9.9,0,0,0-.54.54,1,1,0,0,0,1.3,1.3.9.9,0,0,0,.54-.54A.84.84,0,0,0,18,14a1.05,1.05,0,0,0-.29-.71A1,1,0,0,0,16.62,13.08ZM13,13H11a1,1,0,0,0,0,2h2a1,1,0,0,0,0-2Z" />
@@ -62,34 +65,59 @@
                                 </a>
                             </div>
                             @if (auth()->check())
-                            <div class="header__action">
-                                <a class="header__profile-btn" href="#" role="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                        <path
-                                            d="M15.71,12.71a6,6,0,1,0-7.42,0,10,10,0,0,0-6.22,8.18,1,1,0,0,0,2,.22,8,8,0,0,1,15.9,0,1,1,0,0,0,1,.89h.11a1,1,0,0,0,.88-1.1A10,10,0,0,0,15.71,12.71ZM12,12a4,4,0,1,1,4-4A4,4,0,0,1,12,12Z" />
-                                    </svg>
-                                </a>
+                                <div class="header__action">
+                                    <a class="header__profile-btn" href="#" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                            <path
+                                                d="M15.71,12.71a6,6,0,1,0-7.42,0,10,10,0,0,0-6.22,8.18,1,1,0,0,0,2,.22,8,8,0,0,1,15.9,0,1,1,0,0,0,1,.89h.11a1,1,0,0,0,.88-1.1A10,10,0,0,0,15.71,12.71ZM12,12a4,4,0,1,1,4-4A4,4,0,0,1,12,12Z" />
+                                        </svg>
+                                    </a>
 
-                                <ul class="dropdown-menu header__profile-menu">
-                                    <li><a href="{{ route('account.index') }}"><svg xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 24 24">
-                                                <path
-                                                    d="M15.71,12.71a6,6,0,1,0-7.42,0,10,10,0,0,0-6.22,8.18,1,1,0,0,0,2,.22,8,8,0,0,1,15.9,0,1,1,0,0,0,1,.89h.11a1,1,0,0,0,.88-1.1A10,10,0,0,0,15.71,12.71ZM12,12a4,4,0,1,1,4-4A4,4,0,0,1,12,12Z" />
-                                            </svg> <span>My account</span></a></li>
-                                    {{-- <li><a href="account.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9,12H7a1,1,0,0,0,0,2H9a1,1,0,0,0,0-2ZM8,10h4a1,1,0,0,0,0-2H8a1,1,0,0,0,0,2Zm1,6H7a1,1,0,0,0,0,2H9a1,1,0,0,0,0-2Zm12-4H18V3a1,1,0,0,0-.5-.87,1,1,0,0,0-1,0l-3,1.72-3-1.72a1,1,0,0,0-1,0l-3,1.72-3-1.72a1,1,0,0,0-1,0A1,1,0,0,0,2,3V19a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V13A1,1,0,0,0,21,12ZM5,20a1,1,0,0,1-1-1V4.73L6,5.87a1.08,1.08,0,0,0,1,0l3-1.72,3,1.72a1.08,1.08,0,0,0,1,0l2-1.14V19a3,3,0,0,0,.18,1Zm15-1a1,1,0,0,1-2,0V14h2Zm-6.44-2.83a.76.76,0,0,0-.18-.09.6.6,0,0,0-.19-.06,1,1,0,0,0-.9.27A1.05,1.05,0,0,0,12,17a1,1,0,0,0,.07.38,1.19,1.19,0,0,0,.22.33,1.15,1.15,0,0,0,.33.21.94.94,0,0,0,.76,0,1.15,1.15,0,0,0,.33-.21A1,1,0,0,0,14,17a1.05,1.05,0,0,0-.29-.71A1.58,1.58,0,0,0,13.56,16.17Zm.14-3.88a1,1,0,0,0-1.62.33A1,1,0,0,0,13,14a1,1,0,0,0,1-1,1,1,0,0,0-.08-.38A.91.91,0,0,0,13.7,12.29Z"/></svg> <span>Billing</span></a></li> --}}
-                                   
-                                    <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                                <path
-                                                    d="M4,12a1,1,0,0,0,1,1h7.59l-2.3,2.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l4-4a1,1,0,0,0,.21-.33,1,1,0,0,0,0-.76,1,1,0,0,0-.21-.33l-4-4a1,1,0,1,0-1.42,1.42L12.59,11H5A1,1,0,0,0,4,12ZM17,2H7A3,3,0,0,0,4,5V8A1,1,0,0,0,6,8V5A1,1,0,0,1,7,4H17a1,1,0,0,1,1,1V19a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V16a1,1,0,0,0-2,0v3a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V5A3,3,0,0,0,17,2Z" />
-                                            </svg> <span>Sign out</span></a></li>
-                                </ul>
-                            </div>
+                                    <ul class="dropdown-menu header__profile-menu">
+                                        <li>
+                                            <a href="{{ route('account.index') }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M15.71,12.71a6,6,0,1,0-7.42,0,10,10,0,0,0-6.22,8.18,1,1,0,0,0,2,.22,8,8,0,0,1,15.9,0,1,1,0,0,0,1,.89h.11a1,1,0,0,0,.88-1.1A10,10,0,0,0,15.71,12.71ZM12,12a4,4,0,1,1,4-4A4,4,0,0,1,12,12Z" />
+                                                </svg>
+                                                <span>{{ __('dashboard.my_account') }}</span>
+                                            </a>
+                                        </li>
+                                        {{-- <li><a href="account.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9,12H7a1,1,0,0,0,0,2H9a1,1,0,0,0,0-2ZM8,10h4a1,1,0,0,0,0-2H8a1,1,0,0,0,0,2Zm1,6H7a1,1,0,0,0,0,2H9a1,1,0,0,0,0-2Zm12-4H18V3a1,1,0,0,0-.5-.87,1,1,0,0,0-1,0l-3,1.72-3-1.72a1,1,0,0,0-1,0l-3,1.72-3-1.72a1,1,0,0,0-1,0A1,1,0,0,0,2,3V19a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V13A1,1,0,0,0,21,12ZM5,20a1,1,0,0,1-1-1V4.73L6,5.87a1.08,1.08,0,0,0,1,0l3-1.72,3,1.72a1.08,1.08,0,0,0,1,0l2-1.14V19a3,3,0,0,0,.18,1Zm15-1a1,1,0,0,1-2,0V14h2Zm-6.44-2.83a.76.76,0,0,0-.18-.09.6.6,0,0,0-.19-.06,1,1,0,0,0-.9.27A1.05,1.05,0,0,0,12,17a1,1,0,0,0,.07.38,1.19,1.19,0,0,0,.22.33,1.15,1.15,0,0,0,.33.21.94.94,0,0,0,.76,0,1.15,1.15,0,0,0,.33-.21A1,1,0,0,0,14,17a1.05,1.05,0,0,0-.29-.71A1.58,1.58,0,0,0,13.56,16.17Zm.14-3.88a1,1,0,0,0-1.62.33A1,1,0,0,0,13,14a1,1,0,0,0,1-1,1,1,0,0,0-.08-.38A.91.91,0,0,0,13.7,12.29Z"/></svg> <span>Billing</span></a></li> --}}
+                                        <li>
+                                            <a href="{{-- route() --}}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M4,12a1,1,0,0,0,1,1h7.59l-2.3,2.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l4-4a1,1,0,0,0,.21-.33,1,1,0,0,0,0-.76,1,1,0,0,0-.21-.33l-4-4a1,1,0,1,0-1.42,1.42L12.59,11H5A1,1,0,0,0,4,12ZM17,2H7A3,3,0,0,0,4,5V8A1,1,0,0,0,6,8V5A1,1,0,0,1,7,4H17a1,1,0,0,1,1,1V19a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V16a1,1,0,0,0-2,0v3a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V5A3,3,0,0,0,17,2Z" />
+                                                </svg>
+                                                <span>{{ __('dashboard.sign_out') }}</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             @else
-                            
-                               
+                                <div class="header__action">
+                                    <a class="header__profile-btn" href="{{ route('website.login') }}" role="button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            fill="none" viewBox="0 0 24 24" id="login">
+                                            <path fill="url(#paint0_linear_1233_4795)" fill-rule="evenodd"
+                                                d="M8 4C8 3.44772 8.44772 3 9 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H9C8.44772 21 8 20.5523 8 20V17C8 16.4477 8.44772 16 9 16C9.55228 16 10 16.4477 10 17V19H20V5H10V7C10 7.55228 9.55228 8 9 8C8.44772 8 8 7.55228 8 7V4ZM10.7929 7.79289C11.1834 7.40237 11.8166 7.40237 12.2071 7.79289L15.7071 11.2929C16.0976 11.6834 16.0976 12.3166 15.7071 12.7071L12.2071 16.2071C11.8166 16.5976 11.1834 16.5976 10.7929 16.2071C10.4024 15.8166 10.4024 15.1834 10.7929 14.7929L12.5858 13H3C2.44772 13 2 12.5523 2 12C2 11.4477 2.44772 11 3 11H12.5858L10.7929 9.20711C10.4024 8.81658 10.4024 8.18342 10.7929 7.79289Z"
+                                                clip-rule="evenodd"></path>
+                                            <defs>
+                                                <linearGradient id="paint0_linear_1233_4795" x1="12"
+                                                    x2="12" y1="3" y2="21"
+                                                    gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#57EAEA"></stop>
+                                                    <stop offset="1" stop-color="#2BC9FF"></stop>
+                                                </linearGradient>
+                                            </defs>
+                                        </svg>
+
+                                    </a>
+                                </div>
                             @endif
-                           
+
                         </div>
 
                         <button class="header__btn" type="button">
@@ -142,7 +170,7 @@
                     class="col-6 col-md-4 col-lg-3 col-xl-2 order-1 order-md-2 order-lg-2 order-xl-3 offset-md-2 offset-lg-0">
                     <h6 class="footer__title">Company</h6>
                     <div class="footer__nav">
-                        <a href="{{ route('aboutus') }}">About us</a>
+                        <a href="{{ route('aboutus') }}">{{ __('dashboard.about_us') }}</a>
                         {{-- <a href="pricing.html">Pricing plans</a>
                         <a href="blog.html">Our blog</a>
                         <a href="contacts.html">Contacts</a> --}}
@@ -176,12 +204,12 @@
                 </div> --}}
 
                 <div class="col-6 col-md-4 col-lg-3 col-xl-2 order-2 order-md-4 order-lg-3 order-xl-4">
-                    <h6 class="footer__title">Support</h6>
+                    <h6 class="footer__title">{{ __('dashboard.support') }}</h6>
                     <div class="footer__nav">
-                        <a href="{{ route('helpcenter') }}">Help center</a>
-                        {{-- <a href="{{ route('contactus') }}">Ask a question</a> --}}
+                        <a href="{{ route('helpcenter') }}">{{ __('dashboard.help_center') }}</a>
+                        <a href="{{ route('contactus') }}">{{ __('dashboard.ask_question') }}</a>
                         {{-- <a href="#">Privacy policy</a> --}}
-                        <a href="{{ route('website.terms') }}">Terms & conditions</a>
+                        <a href="{{ route('website.terms') }}">{{ __('dashboard.terms_conditions') }}</a>
                     </div>
                 </div>
             </div>

@@ -180,7 +180,7 @@ class UserController extends Controller
         DB::table('cars')->where('user_id', $id)->delete();
 
         $user->delete();
-
+        
         return response()->json(['status' => 'success', 'message' => __('dashboard.deleted_success')]);
     }
 

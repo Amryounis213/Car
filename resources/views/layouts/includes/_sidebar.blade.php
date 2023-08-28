@@ -289,7 +289,7 @@
                     <!--end:Menu sub-->
                 </div>
 
-                {{-- <!--begin:Menu item-->
+                <!--begin:Menu item-->
                 <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                     <!--begin:Menu link-->
                     <span class="menu-link">
@@ -330,7 +330,7 @@
 
                     </div>
                     <!--end:Menu sub-->
-                </div> --}}
+                </div>
 
                 {{-- Post::Begins --}}
                 <!--begin:Menu item-->
