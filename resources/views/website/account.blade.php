@@ -59,6 +59,23 @@
                         <!-- end tabs nav -->
                     </div>
 
+                    @if (session()->has('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>{{ session()->get('success') }}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                aria-label="Close"></button>
+                        </div>
+                        
+                    @endif
+
+                    @if (session()->has('error'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>{{ session()->get('error') }}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                aria-label="Close"></button>
+                        </div>
+                        
+                    @endif
                     <!-- content tabs -->
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="tab-1" role="tabpanel" tabindex="0">
@@ -310,6 +327,9 @@
                                                         class="sign__input" placeholder="User123"
                                                         value="{{ $user->username }}">
                                                 </div>
+                                                @error('username')
+                                                <div class="text-danger">{{ $message }}</div> 
+                                            @enderror
                                             </div>
 
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
@@ -319,6 +339,9 @@
                                                         class="sign__input" placeholder="email@email.com"
                                                         value="{{ $user->email }}">
                                                 </div>
+                                                @error('email')
+                                                <div class="text-danger">{{ $message }}</div> 
+                                            @enderror
                                             </div>
 
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
@@ -328,6 +351,9 @@
                                                         class="sign__input" placeholder="John"
                                                         value="{{ $user->firstname }}">
                                                 </div>
+                                                @error('firstname')
+                                                <div class="text-danger">{{ $message }}</div> 
+                                            @enderror
                                             </div>
 
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
@@ -337,6 +363,9 @@
                                                         class="sign__input" placeholder="Doe"
                                                         value="{{ $user->lastname }}">
                                                 </div>
+                                                @error('lastname')
+                                                    <div class="text-danger">{{ $message }}</div> 
+                                                @enderror
                                             </div>
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="sign__group">
@@ -345,6 +374,9 @@
                                                         class="sign__input" placeholder="Doe"
                                                         value="{{ $user->phone }}">
                                                 </div>
+                                                @error('phone')
+                                                <div class="text-danger">{{ $message }}</div> 
+                                            @enderror
                                             </div>
 
                                             <div class="col-12">
@@ -358,7 +390,8 @@
 
                                 <!-- password form -->
                                 <div class="col-12 col-lg-6">
-                                    <form action="#" class="sign__form sign__form--profile">
+                                    <form action="{{route('changepassword')}}" class="sign__form sign__form--profile" method="POST">
+                                        @csrf
                                         <div class="row">
                                             <div class="col-12">
                                                 <h4 class="sign__title">Change password</h4>
@@ -367,43 +400,42 @@
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="sign__group">
                                                     <label class="sign__label" for="oldpass">Old password</label>
-                                                    <input id="oldpass" type="password" name="oldpass"
+                                                    <input id="oldpass" type="password" name="old_password"
                                                         class="sign__input">
                                                 </div>
+                                                @error('old_password')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                    
+                                                @enderror
                                             </div>
+
 
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="sign__group">
                                                     <label class="sign__label" for="newpass">New password</label>
-                                                    <input id="newpass" type="password" name="newpass"
+                                                    <input id="newpass" type="password" name="password"
                                                         class="sign__input">
                                                 </div>
+                                                @error('password')
+                                                <div class="text-danger">{{ $message }}</div>
+                                                
+                                            @enderror
                                             </div>
 
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="sign__group">
                                                     <label class="sign__label" for="confirmpass">Confirm new
                                                         password</label>
-                                                    <input id="confirmpass" type="password" name="confirmpass"
+                                                    <input id="confirmpass" type="password" name="password_confirmation"
                                                         class="sign__input">
                                                 </div>
                                             </div>
 
-                                            <div class="col-12 col-md-6 col-lg-12 col-xl-6">
-                                                <div class="sign__group">
-                                                    <label class="sign__label" for="select">Select</label>
-                                                    <select name="select" id="select" class="sign__select">
-                                                        <option value="0">Option</option>
-                                                        <option value="1">Option 2</option>
-                                                        <option value="2">Option 3</option>
-                                                        <option value="3">Option 4</option>
-                                                    </select>
-                                                </div>
-                                            </div>
+                                          
 
                                             <div class="col-12">
                                                 <button class="sign__btn" id="save-button"
-                                                    type="button"><span>Change</span></button>
+                                                    type="submit"><span>Change</span></button>
                                             </div>
 
                                         </div>

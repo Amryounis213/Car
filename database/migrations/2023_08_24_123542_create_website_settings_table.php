@@ -28,11 +28,11 @@ return new class extends Migration
             $table->string('location')->nullable();
 
             $table->string('logo')->nullable();
-            $table->string('title')->nullable();
-            $table->string('desc')->nullable();
+            $table->json('title')->nullable();
+            $table->json('desc')->nullable();
             $table->json('key_words')->nullable();
-            $table->string('website_name')->nullable();
-            $table->string('website_desc')->nullable();
+            $table->json('website_name')->nullable();
+            $table->json('website_desc')->nullable();
 
             $table->timestamps();
         });

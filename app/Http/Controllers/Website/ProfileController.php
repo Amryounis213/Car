@@ -14,6 +14,7 @@ use App\Models\Image;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
@@ -83,12 +84,41 @@ class ProfileController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        //validate the data
+        $this->validate($request, array(
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'email' => 'required|unique:users,email,' . $id,
+            'phone' => 'required|unique:users,phone,' . $id,
+        ));
+
         $data = $request->all();
 
         $user = User::findorfail($id);
         $input = $user->update($data);
         // dd($input);
         return redirect()->back()->with('message', 'Data Updated Successfully');
+    }
+
+    public function updatePassword(Request $request)
+    {
+        // return $request->all();
+        //validate the data
+        $this->validate($request, array(
+            'old_password' => 'required',
+            'password' => 'required|min:8|confirmed',
+        ));
+        if (!(Hash::check($request->get('old_password'), Auth::user()->password))) {
+            // The passwords matches
+          
+            return redirect()->back()->with('error', "Your current password does not matches with the password you provided. Please try again.");
+        }
+        $data = $request->all();
+
+        $user = User::findorfail(Auth::id());
+        $input = $user->update($data);
+      
+        return redirect()->back()->with('success', 'Password Updated Successfully');
     }
 
     /**

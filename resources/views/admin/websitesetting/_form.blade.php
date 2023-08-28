@@ -11,10 +11,41 @@
         <!--begin::Card body-->
         <div class="card-body pt-0">
             {{-- <x-input nameInputDistance="1" title="العنوان الرئيسي" name="title" type="text" :var="$setting" col="12"/> --}}
-            <x-form-input title="{{ __('dashboard.yourwebsitename') }}" col="12" name="title" type="text" :var="$website"/>
+            <div class="col-lg-12 row">
+                <!--begin::Row-->
+                <label class="col-lg-10 col-form-label required fw-bold fs-6">
+                   Website Title
+                </label>
+                @foreach (config('lang') as $key=>$lang)
+                <div class="col-lg-6 fv-row mb-3">
+                    <input  type="text" name="title[{{$key}}]" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0  " placeholder="العنوان الرئيسي ({{$lang}})" value="{{ old('title.'. $key , $website->getTranslation('title', $key ) ?? '')}}" />
+                </div>
+                @endforeach
+
+           </div>
+           <!--end::Row-->
 
             <!--end::Col-->
-            <x-form-input title="{{ __('dashboard.desc') }}" col="12" rows="10" name="desc" type="desc" :var="$website"/>
+           
+            <div class="row mb-2">
+                <!--begin::Col-->
+                <div class="col-lg-12 row">
+                    <label class="col-lg-10 col-form-label required fw-bold fs-6">
+                        Website Description
+                     </label>
+                     <!--begin::Row-->
+                     @foreach (config('lang') as $key=>$lang)
+                     <div class="col-lg-6 fv-row mb-3">
+                         <textarea rows="10" type="text" name="desc[{{$key}}]" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0  " placeholder="وصف الصفحة ({{$lang}})">{{ old('desc.'. $key ,$website->getTranslation('desc', $key ))}}</textarea>
+                     </div>
+                     @endforeach
+
+                </div>
+                <!--end::Row-->
+
+
+            </div>
+            <!--end::Col-->
 
 
 
