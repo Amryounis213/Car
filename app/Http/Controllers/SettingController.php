@@ -35,11 +35,15 @@ class SettingController extends Controller
             'email' => 'nullable|string',
             'location' => 'nullable|string',
             'logo' => 'nullable|image',
-            'title' => 'nullable|string',
-            'desc' => 'nullable|string',
+            'title.en' => 'nullable|string',
+            'desc.en' => 'nullable|string',
+            'title.fr' => 'nullable|string',
+            'desc.fr' => 'nullable|string',
             'key_words' => 'nullable|string',
-            'website_name' => 'nullable|string',
-            'website_desc' => 'nullable|string',
+            'website_name.en' => 'nullable|string',
+            'website_name.fr' => 'nullable|string',
+            'website_desc.en' => 'nullable|string',
+            'website_desc.fr' => 'nullable|string',
         ]);
         $data = $request->all();
         $website = WebsiteSetting::first();

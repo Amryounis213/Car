@@ -37,7 +37,12 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 Route::get('contactus', [FrontEndController::class, 'contactus'])->name('contactus');
 Route::post('contactus', [FrontEndController::class, 'storeContactus'])->name('contactus.store');
 
-Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
+Route::group(
+    [
+      'prefix' => LaravelLocalization::setLocale(),
+      'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    ], function()
+  {
     //Website
     Route::get('/', [FrontEndController::class, 'index'])->name('website.home');
     Route::get('/post', [ProfileController::class, 'createPost'])->name('post.create');
@@ -52,7 +57,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
     Route::get('/aboutus', [FrontEndController::class, 'aboutUs'])->name('aboutus');
     Route::get('/showcars', [FrontEndController::class, 'showCars'])->name('cars');
     Route::post('search', [FrontEndController::class, 'search'])->name('search');
-
+    Route::post('change-password', [ProfileController::class, 'updatePassword'])->name('changepassword');
 
     //Login and Register Routes in Group Middleware
     Route::group(['middleware' => 'guest'], function () {
