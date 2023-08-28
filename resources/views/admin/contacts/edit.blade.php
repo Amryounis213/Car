@@ -11,7 +11,8 @@
                     <!--begin::Page title-->
                     <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
                         <!--begin::Title-->
-                        <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">{{ __('dashboard.edit_shoppingtype') }}</h1>
+                        <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
+                            {{ __('dashboard.edit_general_config') }}</h1>
                         <!--end::Title-->
                         <!--begin::Breadcrumb-->
                         <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
@@ -26,7 +27,7 @@
                             </li>
                             <!--end::Item-->
                             <!--begin::Item-->
-                            <li class="breadcrumb-item text-muted">{{ __('dashboard.type') }}</li>
+                            <li class="breadcrumb-item text-muted">Show Brands</li>
                             <!--end::Item-->
                             <!--begin::Item-->
                             <li class="breadcrumb-item">
@@ -34,7 +35,7 @@
                             </li>
                             <!--end::Item-->
                             <!--begin::Item-->
-                            <li class="breadcrumb-item text-muted">{{ __('dashboard.edit_shoppingtype') }}</li>
+                            <li class="breadcrumb-item text-muted">Edit Brand</li>
                             <!--end::Item-->
                         </ul>
                         <!--end::Breadcrumb-->
@@ -57,15 +58,12 @@
                 <div id="kt_app_content_container" class="app-container container-xxl">
 
                     @include('layouts.sessions-messages')
-                    <form id="kt_ecommerce_add_category_form" 
-                        class="form d-flex flex-column flex-lg-row"
-                        action="{{ route('shoppingtypes.update' , $shoppingtype->id) }}" 
-                        method="POST"
-                        enctype="multipart/form-data">
+                    <form id="kt_ecommerce_add_appconfig_form" class="form d-flex flex-column flex-lg-row"
+                        action="{{ route('brands.update', $amenity->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
-                        @include('admin.shoppingtypes._form')
-                     
+                        @include('admin.brands._form')
+
                     </form>
                 </div>
                 <!--end::Content container-->
@@ -87,31 +85,34 @@
             }
         });
     </script>
-    <script src="{{ asset('assets/js/custom/apps/ecommerce/catalog/save-shoppingtype.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/apps/ecommerce/catalog/save-appconfig.js') }}"></script>
     <script src="{{ asset('assets/js/widgets.bundle.js') }}"></script>
     <script src="{{ asset('assets/js/custom/widgets.js') }}"></script>
     <script src="{{ asset('assets/js/custom/utilities/modals/upgrade-plan.js') }}"></script>
     <script src="{{ asset('assets/js/custom/utilities/modals/create-app.js') }}"></script>
     <script src="{{ asset('assets/js/custom/utilities/modals/users-search.js') }}"></script>
-
-    
     <script>
         document.addEventListener('DOMContentLoaded', function(e) {
             FormValidation.formValidation(
                 document.getElementById('kt_ecommerce_add_category_form'), {
                     fields: {
-                        'name[fr]': {
+                        image: {
                             validators: {
                                 notEmpty: {
-                                    message: '{{ __('dashboard.name_ar_required') }}',
+                                    message: '{{ __('dashboard.image_required') }}',
+                                },
+                                file: {
+                                    extension: 'jpeg,jpg,png,gif,svg',
+                                    type: 'image/jpeg,image/png,image/gif,image/svg+xml',
+                                    maxSize: 2048 * 1024,
+                                    message: '{{ __('dashboard.invalid_image_format_or_size') }}',
                                 },
                             },
                         },
-                     
-                        'name[en]': {
+                        category_id: {
                             validators: {
                                 notEmpty: {
-                                    message: '{{ __('dashboard.name_en_required') }}',
+                                    message: '{{ __('dashboard.category_required') }}',
                                 },
                             },
                         },
@@ -123,15 +124,6 @@
                         bootstrap: new FormValidation.plugins.Bootstrap5(),
                     },
                 });
-        });
-    </script>
-    <script>
-        $(document).ready(function() {
-            const checkbox = $('#status_{{ $shoppingtype->id }}');
-            const hiddenInput = $('input[name="status"]');
-            checkbox.on('change', function() {
-                hiddenInput.val(checkbox.is(':checked') ? 1 : 0);
-            });
         });
     </script>
 @endsection

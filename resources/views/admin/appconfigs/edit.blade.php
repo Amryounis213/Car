@@ -122,7 +122,7 @@
                             },
                         },
 
-                        'title[ar]': {
+                        'title[fr]': {
                             validators: {
                                 notEmpty: {
                                     message: '{{ __('dashboard.title_ar_required') }} ',

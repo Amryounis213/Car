@@ -28,7 +28,8 @@
 
             <div class="row">
                 <div class="col-12 col-lg-7 col-xl-7">
-                    <form action="#" class="sign__form sign__form--contacts">
+                    <form action="{{ route('contactus.store') }}" method="POST" class="sign__form sign__form--contacts">
+                        @csrf
                         <div class="row">
                             <div class="col-12 col-md-6">
                                 <div class="sign__group">
@@ -50,12 +51,12 @@
 
                             <div class="col-12">
                                 <div class="sign__group">
-                                    <textarea name="text" class="sign__textarea" placeholder="Type your message"></textarea>
+                                    <textarea name="message" class="sign__textarea" placeholder="Type your message"></textarea>
                                 </div>
                             </div>
 
                             <div class="col-12 col-xl-3">
-                                <button type="button" class="sign__btn"><span>Send</span></button>
+                                <button type="submit" class="sign__btn"><span>Send</span></button>
                             </div>
                         </div>
                     </form>
@@ -114,47 +115,13 @@
                     <div class="partners splide" id="partners-slider">
                         <div class="splide__track">
                             <ul class="splide__list">
-                                <li class="splide__slide">
-                                    <a href="#" class="partners__img">
-                                        <img src="img/partners/3docean-center.png" alt="">
-                                    </a>
-                                </li>
-
-                                <li class="splide__slide">
-                                    <a href="#" class="partners__img">
-                                        <img src="img/partners/audiojungle-center.png" alt="">
-                                    </a>
-                                </li>
-
-                                <li class="splide__slide">
-                                    <a href="#" class="partners__img">
-                                        <img src="img/partners/codecanyon-center.png" alt="">
-                                    </a>
-                                </li>
-
-                                <li class="splide__slide">
-                                    <a href="#" class="partners__img">
-                                        <img src="img/partners/graphicriver-center.png" alt="">
-                                    </a>
-                                </li>
-
-                                <li class="splide__slide">
-                                    <a href="#" class="partners__img">
-                                        <img src="img/partners/photodune-center.png" alt="">
-                                    </a>
-                                </li>
-
-                                <li class="splide__slide">
-                                    <a href="#" class="partners__img">
-                                        <img src="img/partners/themeforest-center.png" alt="">
-                                    </a>
-                                </li>
-
-                                <li class="splide__slide">
-                                    <a href="#" class="partners__img">
-                                        <img src="img/partners/videohive-center.png" alt="">
-                                    </a>
-                                </li>
+                                @foreach ($images as $car)
+                                    <li class="splide__slide">
+                                        <a href="{{ route('showCarByImage', $car->id) }}" class="partners__img">
+                                                <img src="{{ asset('storage/' . $car->main_image) }}" alt="">
+                                        </a>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>

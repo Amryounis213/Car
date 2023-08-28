@@ -97,7 +97,7 @@
             FormValidation.formValidation(
                 document.getElementById('kt_ecommerce_add_category_form'), {
                     fields: {
-                        'title[ar]': {
+                        'title[fr]': {
                             validators: {
                                 notEmpty: {
                                     message: '{{ __('dashboard.title_ar_required') }} ',
@@ -112,7 +112,7 @@
                                 },
                             },
                         },
-                        'desc[ar]': {
+                        'desc[fr]': {
                             validators: {
                                 notEmpty: {
                                     message: '{{ __('dashboard.desc_ar_required') }} ',

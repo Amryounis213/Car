@@ -86,7 +86,8 @@ class FrontEndController extends Controller
 
         $cars = Car::when($request->search, function ($q) use ($request) {
             $q->whereHas('model', function ($qe) use ($request) {
-                $qe->where('name', 'like', '%' . $request->search . '%');
+                $qe->where('name', 'like', '%' . $request->search . '%')
+                ->orWhere('description', 'like', '%' . $request->search . '%');
             })
                 ->orWhereHas('brand', function ($qe) use ($request) {
                     $qe->where('name', 'like', '%' . $request->search . '%');
@@ -147,9 +148,19 @@ class FrontEndController extends Controller
     }
 
 
-    public function contacts()
+    public function contactus()
     {
         $contact = new Contact();
-        return view('website.contact', compact('contact'));
+        $images = Car::inRandomOrder()->take(10)->get(['main_image', 'id']);
+
+        return view('website.contact', compact('contact', 'images'));
+    }
+
+
+    public function storeContactus(Request $request)
+    {
+        $data = $request->all();
+        $message = Contact::create($data);
+        return redirect()->route('website.home');
     }
 }

@@ -160,7 +160,7 @@
                                     {{ __('dashboard.app_name') . ' in ' . __('dashboard.arabic_language') }}
                                 </label>
                                 <div class="col-lg-8">
-                                    <input autocomplete="off" type="text" name="title[ar]"
+                                    <input autocomplete="off" type="text" name="title[fr]"
                                         class="form-control form-control-lg form-control-solid mb-3 mb-lg-0 name"
                                         placeholder="{{ __('dashboard.arabic_language') }}"
                                         value="{{ old('title.' . 'ar', $appconfig->getTranslation('title', 'ar')) }}">
