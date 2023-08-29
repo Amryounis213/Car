@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Car;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class PostsController extends Controller
 {
@@ -73,7 +74,7 @@ class PostsController extends Controller
     }
 
 
-    public function updateStatus(Request $request): \Illuminate\Http\JsonResponse
+    public function updatePostStatus(Request $request): \Illuminate\Http\JsonResponse
     {
         $id = $request->get('id');
         $info = Car::find($id);
@@ -91,10 +92,10 @@ class PostsController extends Controller
         }
     }
 
-    public function updatePostStatus(Request $request)
+    public function updateStatus(Request $request): \Illuminate\Http\JsonResponse
     {
-        $id = $request->get('id');
-        $status = $request->get('status');
+        $id = $request->id;
+        $status = $request->status;
         $info = Car::find($id);
         $info->status = $status;
         $info->save();

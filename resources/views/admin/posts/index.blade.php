@@ -153,7 +153,7 @@
             const checkedValue = $(this).is(":checked");
             $.ajax({
                 type: "POST",
-                url: "{{ route('posts.status') }}",
+                url: "{{ route('updatepoststatus') }}",
                 data: {
                     'id': id
                 },
@@ -189,7 +189,7 @@
                 if (result.value) {
                     $.ajax({
                         type: "POST",
-                        url: "{{ route('updatepoststatus') }}",
+                        url: "{{ route('updateStatus') }}",
                         data: {
                             'id': id,
                             'status': status
@@ -213,9 +213,6 @@
                     }
                 }
             });
-
-
-            // });
         });
     </script>
 @endsection

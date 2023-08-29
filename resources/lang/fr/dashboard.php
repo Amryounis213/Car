@@ -19,5 +19,7 @@ return [
     'support' => 'Support',
     'terms_conditions' => 'Conditions générales',
 
-    
+    'ask_question' => 'Poser une question',
+    'frequently_asked_questions' => 'Questions fréquemment posées',
+    'help_center_paragraph' => 'Vous trouverez ici des réponses aux questions fréquemment posées sur notre entreprise et nos services. Si vous ne trouvez pas la réponse à votre question, veuillez contacter notre service client et nous serons ravis de vous aider.',
 ];

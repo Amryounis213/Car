@@ -49,7 +49,8 @@ Route::get('cars', [CarsController::class, 'index'])->name('cars.index');
 Route::post('posts/status', [PostsController::class, 'updateStatus'])->name('posts.status');
 Route::get('setting', [SettingController::class, 'index'])->name('setting.index');
 Route::post('setting', [SettingController::class, 'EditWebsiteData'])->name('setting.store');
-Route::put('/posts/updatestatus', [PostsController::class, 'updatePostStatus'])->name('updatepoststatus');
+Route::post('/posts/updatestatus', [PostsController::class, 'updatePostStatus'])->name('updatepoststatus');
+Route::post('updateStatus', [PostsController::class, 'updateStatus'])->name('updateStatus');
 Route::resource('contactus', ContactUsController::class);
 
 Route::controller(WebsiteStaticsController::class)->group(function () {

@@ -36,7 +36,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 // routes/web.php
 Route::get('contactus', [FrontEndController::class, 'contactus'])->name('contactus');
 Route::post('contactus', [FrontEndController::class, 'storeContactus'])->name('storecontactus');
-Route::post('updatePostStatus', [PostsController::class, 'updatePostStatus'])->name('updatepoststatus');
+
 
 
 Route::group(

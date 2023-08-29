@@ -672,7 +672,9 @@ return [
     'sign_out' => 'Sign out',
     'support' => 'Support',
     'terms_conditions' => 'Terms & conditions',
-    'ask_question' => 'Ask a question',
 
+    'ask_question' => 'Ask a question',
+    'frequently_asked_questions' => 'Frequently asked questions',
+    'help_center_paragraph' => 'Here you will find answers to frequently asked questions about our company and services. If you don\'t find the answer to your question, please contact our customer support and we\'ll be happy to assist you.',
 
 ];

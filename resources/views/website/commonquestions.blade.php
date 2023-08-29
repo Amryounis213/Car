@@ -9,8 +9,8 @@
                 <!-- breadcrumb -->
                 <div class="col-12">
                     <ul class="breadcrumbs">
-                        <li class="breadcrumbs__item"><a href="{{ route('website.home') }}">Home</a></li>
-                        <li class="breadcrumbs__item breadcrumbs__item--active">Frequently asked questions</li>
+                        <li class="breadcrumbs__item"><a href="{{ route('website.home') }}">{{ __('dashboard.home') }}</a></li>
+                        <li class="breadcrumbs__item breadcrumbs__item--active">{{ __('dashboard.frequently_asked_questions') }}</li>
                     </ul>
                 </div>
                 <!-- end breadcrumb -->
@@ -18,10 +18,8 @@
                 <!-- title -->
                 <div class="col-12 col-xl-11">
                     <div class="main__title main__title--page">
-                        <h1>Help center</h1>
-                        <p>Here you will find answers to frequently asked questions about our company and services. If you
-                            don't find the answer to your question, please contact our customer support and we'll be happy
-                            to assist you. <a href="{{ route('contactus') }}">Ask a question</a>.</p>
+                        <h1>{{ __('dashboard.help_center') }}</h1>
+                        <p>{{ __('dashboard.help_center_paragraph') }} <a href="{{ route('contactus') }}">{{ __('dashboard.ask_question') }}</a>.</p>
                     </div>
                 </div>
                 <!-- end title -->
