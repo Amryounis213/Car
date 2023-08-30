@@ -53,7 +53,7 @@ class SettingController extends Controller
             WebsiteSetting::create($data);
         
         
-        return redirect()->back()->with('success', 'تم تعديل البيانات بنجاح');
+        return redirect()->back()->with('success', 'Data Updated Successfully');
 
     }
 

@@ -36,7 +36,7 @@
                      <!--begin::Row-->
                      @foreach (config('lang') as $key=>$lang)
                      <div class="col-lg-6 fv-row mb-3">
-                         <textarea rows="10" type="text" name="desc[{{$key}}]" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0  " placeholder="وصف الصفحة ({{$lang}})">{{ old('desc.'. $key ,$website->getTranslation('desc', $key ))}}</textarea>
+                         <textarea rows="10" type="text" name="desc[{{$key}}]" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0  " placeholder="Website Description {{$lang}}">{{ old('desc.'. $key ,$website->getTranslation('desc', $key ))}}</textarea>
                      </div>
                      @endforeach
 
