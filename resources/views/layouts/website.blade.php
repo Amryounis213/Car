@@ -146,7 +146,7 @@
     <footer class="footer">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-sm-8 col-md-6 col-lg-6 col-xl-4 order-4 order-md-1 order-lg-4 order-xl-1">
+                <div class="col-6 col-sm-8 col-md-6 col-lg-6 col-xl-6 order-4 order-md-1 order-lg-4 order-xl-1">
                     <div class="footer__logo">
                         <img src="{{ asset('storage/' . $website->logo) }}" alt="">
                     </div>
@@ -205,23 +205,12 @@
                 </div>
 
                 <div
-                    class="col-6 col-md-4 col-lg-3 col-xl-2 order-1 order-md-2 order-lg-2 order-xl-3 offset-md-2 offset-lg-0">
-                    <h6 class="footer__title">Company</h6>
+                    class="col-6 col-md-6 col-lg-6 col-xl-2 order-1 order-md-2 order-lg-2 order-xl-3 offset-md-2 offset-lg-0">
+                    <h6 class="footer__title">Pages</h6>
                     <div class="footer__nav">
                         <a href="{{ route('aboutus') }}">{{ __('dashboard.about_us') }}</a>
-                        {{-- <a href="pricing.html">Pricing plans</a>
-                        <a href="blog.html">Our blog</a>
-                        <a href="contacts.html">Contacts</a> --}}
-                    </div>
-                </div>
-
-
-                <div class="col-6 col-md-4 col-lg-3 col-xl-2 order-2 order-md-4 order-lg-3 order-xl-4">
-                    <h6 class="footer__title">{{ __('dashboard.support') }}</h6>
-                    <div class="footer__nav">
                         <a href="{{ route('helpcenter') }}">{{ __('dashboard.help_center') }}</a>
                         <a href="{{ route('contactus') }}">{{ __('dashboard.ask_question') }}</a>
-                        {{-- <a href="#">Privacy policy</a> --}}
                         <a href="{{ route('website.terms') }}">{{ __('dashboard.terms_conditions') }}</a>
                     </div>
                 </div>
