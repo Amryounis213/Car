@@ -36,7 +36,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 
 //Controller Panel
-Route::get('/admin', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 Route::resource('commonquestions', CommonQuestionsController::class);
 Route::post('commonquestions/status', [CommonQuestionsController::class, 'updateStatus'])->name('commonquestions.status');
 Route::resource('amenities', AmenitiesController::class);
@@ -61,16 +61,13 @@ Route::controller(WebsiteStaticsController::class)->group(function () {
 
 
 
-Route::post('/upload', [ProfileController::class, 'upload']);
-Route::delete('/revert1', [UploadFilesController::class, 'revert1'])->name('revertFile');
-
 
 
 
 
 Route::middleware(['auth:admin'])->group(function () {
     //Controller Panel
-    Route::get('/admin', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('commonquestions', CommonQuestionsController::class);
     Route::post('commonquestions/status', [CommonQuestionsController::class, 'updateStatus'])->name('commonquestions.status');
 

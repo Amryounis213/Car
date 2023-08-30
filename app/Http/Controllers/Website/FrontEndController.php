@@ -125,7 +125,7 @@ class FrontEndController extends Controller
                 });
             })
 
-            ->get();
+            ->paginate(15);
         return view('website.cars', compact('cars'));
     }
 

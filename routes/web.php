@@ -58,9 +58,12 @@ Route::group(
     Route::get('/terms', [FrontEndController::class, 'terms'])->name('website.terms');
     Route::get('/aboutus', [FrontEndController::class, 'aboutUs'])->name('aboutus');
     Route::get('/showcars', [FrontEndController::class, 'showCars'])->name('cars');
-    Route::post('search', [FrontEndController::class, 'search'])->name('search');
+    Route::any('search', [FrontEndController::class, 'search'])->name('search');
     Route::post('change-password', [ProfileController::class, 'updatePassword'])->name('changepassword');
     Route::get('/delete-user-car/{id}', [ProfileController::class, 'destroy'])->name('usercar.destroy');
+  
+
+    Route::post('logout', [AuthController::class, 'logout'])->name('website.logout');
 
     //Login and Register Routes in Group Middleware
     Route::group(['middleware' => 'guest'], function () {
@@ -71,8 +74,16 @@ Route::group(
         Route::get('reset-password', [AuthController::class, 'ResetPassword'])->name('website.reset-password');
         Route::post('post-login', [AuthController::class, 'PostLogin'])->name('website.post.login');
         Route::post('post-register', [AuthController::class, 'PostRegister'])->name('website.post.register');
+        //logout
     });
 });
+
+
+
+
+
+
+
 
 /** OTHER PAGES THAT SHOULD NOT BE LOCALIZED **/
 
@@ -84,3 +95,6 @@ Route::prefix('admin')->group(function () {
 Route::prefix('admin')->name('admin.')->group(function () {
 require __DIR__ . '/auth.php';
 });
+
+Route::post('/upload', [UploadFilesController::class, 'upload']);
+Route::delete('/revert1', [UploadFilesController::class, 'revert1'])->name('revertFile');

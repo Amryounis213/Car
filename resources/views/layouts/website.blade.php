@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+@php
+    $lang = app()->getLocale();
+    
+@endphp
 <html lang="en">
 @include('includes._head')
 
@@ -32,7 +36,7 @@
 
                                     <ul class="dropdown-menu header__nav-menu">
                                         @foreach (\App\Models\CarModel::get() as $models)
-                                            <li><a href="{{ Auth::logout() }}">{{ $models->name }}</a></li>
+                                            <li><a href="#">{{ $models->name }}</a></li>
                                         @endforeach
 
                                     </ul>
@@ -52,7 +56,7 @@
                         <div class="header__actions">
                             <div class="header__phone">
                                 <a href="tel:88002345678">{{ $SETTING->whatsapp ?? '' }}</a>
-                                <span>Mom - Sat: 9:00 am - 6:00 pm</span>
+                                {{-- <span>Mom - Sat: 9:00 am - 6:00 pm</span> --}}
                             </div>
 
                             <div class="header__action">
@@ -86,7 +90,7 @@
                                         </li>
                                         {{-- <li><a href="account.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9,12H7a1,1,0,0,0,0,2H9a1,1,0,0,0,0-2ZM8,10h4a1,1,0,0,0,0-2H8a1,1,0,0,0,0,2Zm1,6H7a1,1,0,0,0,0,2H9a1,1,0,0,0,0-2Zm12-4H18V3a1,1,0,0,0-.5-.87,1,1,0,0,0-1,0l-3,1.72-3-1.72a1,1,0,0,0-1,0l-3,1.72-3-1.72a1,1,0,0,0-1,0A1,1,0,0,0,2,3V19a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V13A1,1,0,0,0,21,12ZM5,20a1,1,0,0,1-1-1V4.73L6,5.87a1.08,1.08,0,0,0,1,0l3-1.72,3,1.72a1.08,1.08,0,0,0,1,0l2-1.14V19a3,3,0,0,0,.18,1Zm15-1a1,1,0,0,1-2,0V14h2Zm-6.44-2.83a.76.76,0,0,0-.18-.09.6.6,0,0,0-.19-.06,1,1,0,0,0-.9.27A1.05,1.05,0,0,0,12,17a1,1,0,0,0,.07.38,1.19,1.19,0,0,0,.22.33,1.15,1.15,0,0,0,.33.21.94.94,0,0,0,.76,0,1.15,1.15,0,0,0,.33-.21A1,1,0,0,0,14,17a1.05,1.05,0,0,0-.29-.71A1.58,1.58,0,0,0,13.56,16.17Zm.14-3.88a1,1,0,0,0-1.62.33A1,1,0,0,0,13,14a1,1,0,0,0,1-1,1,1,0,0,0-.08-.38A.91.91,0,0,0,13.7,12.29Z"/></svg> <span>Billing</span></a></li> --}}
                                         <li>
-                                            <a href="{{-- route() --}}">
+                                            <a onclick="document.getElementById('logout-form').submit()">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                                     <path
                                                         d="M4,12a1,1,0,0,0,1,1h7.59l-2.3,2.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l4-4a1,1,0,0,0,.21-.33,1,1,0,0,0,0-.76,1,1,0,0,0-.21-.33l-4-4a1,1,0,1,0-1.42,1.42L12.59,11H5A1,1,0,0,0,4,12ZM17,2H7A3,3,0,0,0,4,5V8A1,1,0,0,0,6,8V5A1,1,0,0,1,7,4H17a1,1,0,0,1,1,1V19a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V16a1,1,0,0,0-2,0v3a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V5A3,3,0,0,0,17,2Z" />
@@ -94,6 +98,10 @@
                                                 <span>{{ __('dashboard.sign_out') }}</span>
                                             </a>
                                         </li>
+                                        <form id="logout-form" action="{{ route('website.logout') }}" method="POST"
+                                            style="display: none;">
+                                            @csrf
+                                        </form>
                                     </ul>
                                 </div>
                             @else
@@ -146,23 +154,53 @@
                     <p class="footer__tagline">{{ $SETTING->desc }}</p>
 
                     <div class="footer__lang">
-                        <a class="footer__lang-btn" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            <img src="{{ asset('assets/img/flags/uk.svg') }}" alt="">
-                            <span>English</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <path
-                                    d="M17,9.17a1,1,0,0,0-1.41,0L12,12.71,8.46,9.17a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.42l4.24,4.24a1,1,0,0,0,1.42,0L17,10.59A1,1,0,0,0,17,9.17Z" />
-                            </svg>
-                        </a>
 
+                      
+
+                        @if ($lang == 'en')
+                            <a class="footer__lang-btn" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <img src="{{ asset('assets/img/flags/uk.svg') }}" alt="">
+                                <span>English</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path
+                                        d="M17,9.17a1,1,0,0,0-1.41,0L12,12.71,8.46,9.17a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.42l4.24,4.24a1,1,0,0,0,1.42,0L17,10.59A1,1,0,0,0,17,9.17Z" />
+                                </svg>
+                            </a>
+                        @else
+                            <a class="footer__lang-btn" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <img src="{{ asset('assets/img/flags/france.svg') }}" alt="">
+                                <span>French</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path
+                                        d="M17,9.17a1,1,0,0,0-1.41,0L12,12.71,8.46,9.17a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.42l4.24,4.24a1,1,0,0,0,1.42,0L17,10.59A1,1,0,0,0,17,9.17Z" />
+                                </svg>
+                            </a>
+                        @endif
+
+
+
+                        @if ($lang == 'en')
                         <ul class="dropdown-menu footer__lang-dropdown">
                             <li>
-                                <a href="#"><img src="{{ asset('assets/img/flags/france.svg') }}"
+                                <a href="{{ LaravelLocalization::getLocalizedURL('fr', null, [], true) }}"><img src="{{ asset('assets/img/flags/france.svg') }}"
                                         alt=""><span>French</span>
                                 </a>
                             </li>
                         </ul>
+                    @else
+                    <ul class="dropdown-menu footer__lang-dropdown">
+                        <li>
+                            <a href="{{ LaravelLocalization::getLocalizedURL('en', null, [], true) }}"><img src="{{ asset('assets/img/flags/uk.svg') }}"
+                                    alt=""><span>English</span>
+                            </a>
+                        </li>
+                    </ul>
+                    @endif
+
+
+                       
                     </div>
                 </div>
 
@@ -177,31 +215,6 @@
                     </div>
                 </div>
 
-                {{-- <div class="col-12 col-md-8 col-lg-6 col-xl-4 order-3 order-md-3 order-lg-1 order-xl-2">
-                    <div class="row">
-                        <div class="col-12">
-                            <h6 class="footer__title">Neighborhoods in New York</h6>
-                        </div>
-
-                        <div class="col-6">
-                            <div class="footer__nav">
-                                <a href="cars.html">Manhattan</a>
-                                <a href="cars.html">Central New York City</a>
-                                <a href="cars.html">Upper East Side</a>
-                                <a href="cars.html">Queens</a>
-                            </div>
-                        </div>
-
-                        <div class="col-6">
-                            <div class="footer__nav">
-                                <a href="cars.html">Theater District</a>
-                                <a href="cars.html">Midtown</a>
-                                <a href="cars.html">SoHo</a>
-                                <a href="cars.html">Chelsea</a>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
 
                 <div class="col-6 col-md-4 col-lg-3 col-xl-2 order-2 order-md-4 order-lg-3 order-xl-4">
                     <h6 class="footer__title">{{ __('dashboard.support') }}</h6>

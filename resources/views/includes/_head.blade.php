@@ -12,10 +12,10 @@
 	<link rel="icon" type="image/png" href="{{ asset('assets/icon/favicon-32x32.png') }}" sizes="32x32">
 	<link rel="apple-touch-icon" href="{{ asset('assets/icon/favicon-32x32.png') }}">
 
-	<meta name="description" content="Cars">
-	<meta name="keywords" content="">
+	<meta name="description" content="{{$SETTING->desc}}">
+	<meta name="keywords" content="{{$SETTING->key_words}}">
 	<meta name="author" content="Dmitry Volkov">
-	<title>Alsoq – Cars</title>
+	<title>{{$SETTING->title}}</title>
 
 	@yield('style')
 </head>

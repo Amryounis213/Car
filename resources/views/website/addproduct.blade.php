@@ -36,6 +36,16 @@
 
             <div class="row">
                 <div class="col-12 col-lg-7 col-xl-7">
+                    @if (session()->has('errors'))
+                        <div class="alert alert-danger">
+                            <ul class="list-unstyled">
+                                @foreach (session()->get('errors')->all() as $error)
+                                    <li class="text-danger">{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        
+                    @endif
                     <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data"
                         class="sign__form sign__form--contacts">
                         @csrf
@@ -43,7 +53,10 @@
                             {{-- Post Title --}}
                             <div class="col-12">
                                 <div class="sign__group">
-                                    <textarea name="description" class="sign__textarea" placeholder="Description .."></textarea>
+                                    <textarea name="description" class="sign__textarea" placeholder="Description ..">{{old('description')}}</textarea>
+                                    @error('description')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
 
@@ -56,11 +69,15 @@
                                         <option value="" disabled selected>Select Year</option>
                                         <?php
                                         $currentYear = date('Y');
+                                        $selected = old('year') == $currentYear ? 'selected' : '';
                                         for ($year = $currentYear; $year >= 1912; $year--) {
-                                            echo "<option value='$year'>$year</option>";
+                                            echo "<option value='$year' $selected>$year</option>";
                                         }
                                         ?>
                                     </select>
+                                    @error('year')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
 
                                 </div>
                             </div>
@@ -70,9 +87,12 @@
                                     <select name="car_model_id" class="sign__input">
                                         <option value="" disabled selected>Select Car Model</option>
                                         @foreach ($models as $model)
-                                            <option value="{{ $model->id }}">{{ $model->name }}</option>
+                                            <option value="{{ $model->id }}" @selected(old('car_model_id') == $model->id)>{{ $model->name }}</option>
                                         @endforeach
                                     </select>
+                                    @error('car_model_id')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
 
@@ -80,10 +100,13 @@
                                 <div class="sign__group">
                                     <select name="generation_id" class="sign__input">
                                         <option value="" disabled selected>Select Car Generation</option>
-                                        @foreach ($generation as $model)
-                                            <option value="{{ $model->id }}">{{ $model->name }}</option>
+                                        @foreach ($generation as $generation)
+                                            <option value="{{ $generation->id }}" @selected(old('generation_id') == $generation->id)>{{ $generation->name }}</option>
                                         @endforeach
                                     </select>
+                                    @error('generation_id')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
 
@@ -92,10 +115,14 @@
                                     <select name="car_type_id" class="sign__input">
                                         <option value="" disabled selected>Select Car Type</option>
                                         @foreach ($carTypes as $model)
-                                            <option value="{{ $model->id }}">{{ $model->name }}</option>
+                                            <option value="{{ $model->id }}" @selected(old('car_type_id') == $model->id)>{{ $model->name }}</option>
                                         @endforeach
                                     </select>
+                                    @error('car_type_id')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                                 </div>
+                               
                             </div>
 
                             <div class="col-12 col-md-6">
@@ -103,13 +130,17 @@
                                     <select name="brand_id" class="sign__input">
                                         <option value="" disabled selected>Select Car Brand</option>
                                         @foreach ($brands as $model)
-                                            <option value="{{ $model->id }}">{{ $model->name }}</option>
+                                            <option value="{{ $model->id }}" @selected(old('brand_id') == $model->id)>{{ $model->name }}</option>
                                         @endforeach
                                     </select>
+                                    @error('brand_id')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+
                                 </div>
                             </div>
 
-                            <div class="col-12 col-md-6">
+                            {{-- <div class="col-12 col-md-6">
                                 <div class="sign__group">
                                     <select name="year" class="sign__input">
                                         <option value="" disabled selected>Select Release Year</option>
@@ -117,27 +148,33 @@
                                             <option value="{{ $year }}">{{ $year }}</option>
                                         @endfor
                                     </select>
+                                    @error('year')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
-                            </div>
+                            </div> --}}
 
                             {{-- What is Technical Control ?! --}}
 
                             <div class="col-12 col-md-6">
                                 <div class="sign__group">
-                                    <input type="number" name="price" class="sign__input" placeholder="Price">
+                                    <input type="number" name="price" class="sign__input" value="{{old('price')}}" placeholder="Price">
                                 </div>
+                                @error('price')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="col-12 col-md-6">
                                 <div class="sign__group">
-                                    <input type="number" min="0" max="79" name="number_of_owners"
+                                    <input type="number" value="{{old('number_of_owners')}}"  min="0" max="79" name="number_of_owners"
                                         class="sign__input" placeholder="Number of Owners">
                                 </div>
                             </div>
 
                             <div class="col-12 col-md-6">
                                 <div class="sign__group">
-                                    <input type="number" name="mileage" class="sign__input" placeholder="Mileage"
+                                    <input type="number" value="{{old('mileage')}}"  name="mileage" class="sign__input" placeholder="Mileage"
                                         min="0" max="999999">
                                 </div>
                             </div>
@@ -146,18 +183,35 @@
                                 <div class="sign__group">
                                     <select name="gearbox" class="sign__input">
                                         <option value="" disabled selected>Select Gearbox</option>
-                                        <option value="manual">Manual</option>
-                                        <option value="automatic">Automatic</option>
+                                        <option value="manual" @selected(old('gearbox') == 'manual')>Manual</option>
+                                        <option value="automatic" @selected(old('gearbox') == 'automatic')>Automatic</option>
                                     </select>
                                 </div>
                             </div>
+
+
+                             {{-- Gearbox is a Select View --}}
+                             <div class="col-12 col-md-6">
+                                <div class="sign__group">
+                                    <select name="fuel" class="sign__input">
+                                        <option value="" disabled selected>Select fuel</option>
+                                        <option value="Diesel" @selected(old('fuel') == 'Diesel')>Diesel</option>
+                                        <option value="Essence" @selected(old('fuel') == 'Essence')>Gasoline</option>
+                                        <option value="Electric" @selected(old('fuel') == 'Electric')>Electric</option>
+
+                                    </select>
+                                </div>
+                            </div>
+
+
+
                             {{-- هادي ممكن نعملها ليستة من الالوان وخلص مش ضروري موضوع الكلر آي دي  --}}
                             <div class="col-12 col-md-6">
                                 <div class="sign__group">
                                     <select name="color_id_in" class="sign__input">
                                         <option value="" disabled selected>Select Color Inner</option>
                                         @foreach ($carColors as $color)
-                                            <option value="{{ $color->id }}">{{ $color->name }}</option>
+                                            <option value="{{ $color->id }}" @selected(old('color_id_in') == $color->id)>{{ $color->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -168,7 +222,7 @@
                                     <select name="color_id_out" class="sign__input">
                                         <option value="" disabled selected>Select Color Inner</option>
                                         @foreach ($carColors as $color)
-                                            <option value="{{ $color->id }}">{{ $color->name }}</option>
+                                            <option value="{{ $color->id }}" @selected(old('color_id_out') == $color->id)>{{ $color->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -182,10 +236,21 @@
 
                             <div class="col-12 col-md-6">
                                 <div class="sign__group">
-                                    <input type="number" min="1" max="8" name="number_of_doors"
+                                    <input type="number"  value="{{old('number_of_doors')}}"  min="1" max="8" name="number_of_doors"
                                         class="sign__input" placeholder="Number Of Doors">
                                 </div>
                             </div>
+
+
+                            <div class="col-12 col-md-6">
+                                <div class="sign__group">
+                                    <input type="number"  value="{{old('walk_for_liter')}}"  min="1" max="400" name="walk_for_liter"
+                                        class="sign__input" placeholder="distance per liter">
+                                </div>
+                            </div>
+
+
+                            
 
                             {{-- Select View --}}
                             <div class="col-12 col-md-12">

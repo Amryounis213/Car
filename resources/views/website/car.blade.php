@@ -65,9 +65,9 @@
 
                             <div class="splide__track">
                                 <ul class="splide__list">
-                                    @foreach ($car->Images as $c)
+                                    @foreach ($car->images as $image)
                                         <li class="splide__slide">
-                                            <img src="{{ asset('storage/' . $c->image) }}" alt="">
+                                            <img src="{{ asset('storage/' . $image) }}" alt="">
                                         </li>
                                     @endforeach
                                 </ul>
@@ -75,9 +75,9 @@
                         </div>
 
                         <ul id="thumbnails" class="thumbnails">
-                            @foreach ($car->Images as $c)
+                            @foreach ($car->images as $image)
                                 <li class="thumbnail">
-                                    <img src="{{ asset('storage/' . $c->image) }}" alt="">
+                                    <img src="{{ asset('storage/' . $image) }}" alt="">
                                 </li>
                             @endforeach
                         </ul>
@@ -382,9 +382,9 @@
 
                                 <div class="splide__track">
                                     <ul class="splide__list">
-                                        @foreach ($randCar->Images as $c)
+                                        @foreach ($randCar->images as $image)
                                             <li class="splide__slide">
-                                                <img src="{{ asset('storage/' . $c->image) }}" alt="">
+                                                <img src="{{ asset('storage/' . $image) }}" alt="">
                                             </li>
                                         @endforeach
                                     </ul>

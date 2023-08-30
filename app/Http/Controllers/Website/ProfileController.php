@@ -25,14 +25,11 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $user = User::first(); // Auth User
+        $user = auth()->user(); // Auth User
         $mycars = Car::where('user_id', $user->id)->get();
         $car = Car::first();
-
         $favCarIds = $user->favorites->pluck('car_id');
-
         $favCars = Car::whereIn('id', $favCarIds)->get();
-
         return view('website.account', compact('favCars', 'user', 'mycars', 'car'));
     }
 
@@ -130,7 +127,7 @@ class ProfileController extends Controller
 
         $user->delete();
 
-        return redirect()->back()->with(['status' => 'success', 'message' => __('dashboard.deleted_success')]);
+        return redirect()->back()->with('success', 'Car Deleted Successfully');
     }
 
 
@@ -151,25 +148,88 @@ class ProfileController extends Controller
 
     public function storePost(Request $request)
     {
-        // dd($request->all());
-        // Log::info('Image ID From Post [] : ' . $this->imagesIds); 
-        // $imagesIds = Session::get('imagesIds') ;
-        // return $imagesIds;
-        // $user = auth()->user()->post_attempts;
+        $request->validate([
+            'car_model_id' => 'required|exists:car_models,id',
+            'brand_id' => 'required|exists:brands,id',
+            // 'car_type_id' => 'required|exists:car_types,id',
+            'generation_id' => 'required|exists:generations,id',
+            // 'user_id' => 'required|exists:users,id',
+            'color_id_in' => 'nullable|exists:colors,id',
+            'color_id_out' => 'nullable|exists:colors,id',
+            // 'name' => 'required|unique:cars,name',
+            'origin' => 'nullable',
+            'min_km' => 'nullable|integer|min:0',
+            'max_km' => 'nullable|integer|min:' . ($request->input('min_km') ?: 0),
+            'year' => 'nullable|integer|min:1900|max:' . date('Y'),
+            'mileage' => 'nullable|integer|min:0',
+            'price' => 'required|numeric|min:0',
+            'description' => 'required',
+            'gearbox' => 'required|in:manual,automatic',
+            // 'fuel' => 'required|in:Diesel,Essence,Electric',
+            'number_of_doors' => 'nullable|integer|min:1',
+            'number_of_places' => 'nullable|integer|min:1',
+            'number_of_owners' => 'nullable|integer|min:0',
+            'seats' => 'nullable|integer|min:1',
+            'length' => 'nullable|integer|min:1',
+            'main_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'images.*' => 'nullable',
+            'techenical_control' => 'nullable|string',
+            'first_hand' => 'nullable|boolean',
+            'release_date' => 'nullable|date',
+            'trunk_volume' => 'nullable|integer|min:0',
+            'upholstery' => 'nullable|string',
+        ], [
+            'car_model_id.required' => 'The car model field is required.',
+            'brand_id.required' => 'The brand field is required.',
+            'car_type_id.required' => 'The car type field is required.',
+            'generation_id.required' => 'The generation field is required.',
+            'user_id.required' => 'The user field is required.',
+            'name.required' => 'The name field is required.',
+            'name.unique' => 'The name already exists.',
+            'min_km.integer' => 'Minimum kilometer value must be an integer.',
+            'max_km.integer' => 'Maximum kilometer value must be an integer.',
+            'year.integer' => 'Year must be a valid year.',
+            'mileage.integer' => 'Mileage must be an integer.',
+            'price.numeric' => 'Price must be a number.',
+            'gearbox.required' => 'The gearbox field is required.',
+            'fuel.required' => 'The fuel field is required.',
+            'images.*.image' => 'The images must be an image.',
+            'images.*.mimes' => 'The images must be a file of type: jpeg, png, jpg, gif.',
+            'images.*.max' => 'The images may not be greater than 2048 kilobytes.',
+            // Add more custom error messages here for other fields
+        ]);
 
+        $user = User::find(auth()->id());
+        if($user->post_attempts <= 0)
+        {
+            return redirect()->back()->with('error', 'You have reached your maximum post limit. Please contact the administrator.');
+        }
+        
+        // $this->Brand->name . ' - ' . $this->Model->name . ' - ' . $this->CarTypes->name . ' - ' . $this->Generations->name ;
+        $name = $request->brand_id . ' - ' . $request->car_model_id . ' - ' . $request->car_type_id . ' - ' . $request->generation_id . uniqid('-');
         $car = Car::create([
             'car_model_id' => $request->car_model_id,
-            'car_type_id' => 1,
-            'generation_id' => 1,
-            'brand_id' => 1,
+            'car_type_id' => $request->car_type_id,
+            'generation_id' => $request->generation_id ,
+            'brand_id' => $request->brand_id ,
             'year' => $request->year,
             'number_of_doors' => $request->number_of_doors,
             'number_of_owners' => $request->number_of_owners,
-            'user_id' => 1,
-            'name' => 'sadfaddssdsdsdsddsdsasddf' . $request->description,
+            'name' => $name,
             'description' => $request->description,
+            'user_id' => auth()->id(),
+            'price' => $request->price,
+            'gearbox' => $request->gearbox,
+            'fuel' => $request->fuel,
+            'mileage' => $request->mileage,
+            'seats' => $request->seats,
+            'length' => $request->length,
+            
             // 'images' => $data['images']
         ]);
+
+        $user->post_attempts = $user->post_attempts - 1;
+        $user->save();
 
 
         if ($request->images) {
@@ -182,7 +242,7 @@ class ProfileController extends Controller
             $car->main_image = $carImages[0];
             $car->save();
         }
-        return redirect()->back();
+        return redirect()->route('account.index')->with('success', 'Car Added Successfully');
     }
 
     public function upload(Request $request)

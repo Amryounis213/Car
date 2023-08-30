@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('cars', function (Blueprint $table) {
-            $table->boolean('status')->default(1);
-            $table->enum('car_status', ['pending', 'active', 'not_active'])->default('pending');
+            $table->string('walk_for_liter')->nullable();
         });
     }
 
@@ -23,8 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('cars', function (Blueprint $table) {
-            $table->dropColumn('car_status');
-            $table->dropColumn('status');
+            $table->dropColumn('walk_for_liter');
         });
     }
 };
