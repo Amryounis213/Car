@@ -31,21 +31,22 @@
                             data-bs-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter"><span>Open
                                 filter</span></button>
 
-                        <div class="collapse filter-wrap__content" id="collapseFilter">
+                        <form method="POST"  action="{{route('search')}}" class="collapse filter-wrap__content" id="collapseFilter" >
+                            @csrf
                             <!-- filter -->
                             <div class="filter">
-                                <h4 class="filter__title">Filters <button type="button">Clear all</button></h4>
+                                <h4 class="filter__title">Filters <button type="reset">Clear all</button></h4>
 
                                 <div class="filter__group">
                                     <label class="filter__label">Search:</label>
-                                    <input type="text" class="filter__input" placeholder="Keyword">
+                                    <input type="text" name="name" class="filter__input" placeholder="Keyword">
                                 </div>
 
                                 <div class="filter__group">
                                     <label for="filter__status" class="filter__label">Sort by:</label>
 
                                     <div class="filter__select-wrap">
-                                        <select name="filter__status" id="filter__status" class="filter__select">
+                                        <select name="sort" id="filter__status" class="filter__select">
                                             {{-- <option value="0">Relevance</option> --}}
                                             <option value="1">Newest</option>
                                             <option value="2">Oldest</option>
@@ -57,8 +58,8 @@
                                     <label for="filter__category" class="filter__label">Brands:</label>
 
                                     <div class="filter__select-wrap">
-                                        <select name="filter__category" id="filter__category" class="filter__select">
-                                            <option value="All categories">All brands</option>
+                                        <select name="brands" id="filter__category" class="filter__select">
+                                            <option value="">All brands</option>
                                             @foreach ($brands as $brand)
                                                 <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                                             @endforeach
@@ -73,8 +74,8 @@
                                     <label for="filter__models" class="filter__label">Models:</label>
 
                                     <div class="filter__select-wrap">
-                                        <select name="model" id="filter__models" class="filter__select">
-                                            <option value="All categories">All Models</option>
+                                        <select name="models" id="filter__models" class="filter__select">
+                                            <option value="">All Models</option>
                                             @foreach ($models as $model)
                                                 <option value="{{ $model->id }}">{{ $model->name }}</option>
                                             @endforeach
@@ -88,7 +89,7 @@
 
                                     <div class="filter__select-wrap">
                                         <select name="colorin" id="colorin" class="filter__select">
-                                            <option value="All categories">All Color</option>
+                                            <option value="">All Color</option>
                                             @foreach ($colors as $colorin)
                                                 <option value="{{ $colorin->id }}">{{ $colorin->name }}</option>
                                             @endforeach
@@ -102,7 +103,7 @@
 
                                     <div class="filter__select-wrap">
                                         <select name="colorout" id="colorout" class="filter__select">
-                                            <option value="All categories">All Color</option>
+                                            <option value="">All Color</option>
                                             @foreach ($colors as $colorout)
                                                 <option value="{{ $colorout->id }}">{{ $colorout->name }}</option>
                                             @endforeach
@@ -116,7 +117,7 @@
 
                                     <div class="filter__select-wrap">
                                         <select name="seats" id="filter__category" class="filter__select">
-                                            <option value="All categories">Seats</option>
+                                            <option value="">Seats</option>
                                             <option value="2">2</option>
                                             <option value="4">4</option>
                                             <option value="5">5</option>
@@ -133,7 +134,7 @@
                                 </div>
                             </div>
                             <!-- end filter -->
-                        </div>
+                        </form>
                     </div>
                 </div>
                 <!-- end sidebar -->
@@ -165,11 +166,11 @@
 
                                         <div class="splide__track">
                                             <ul class="splide__list">
-                                                @foreach ($car->Images as $c)
-                                                    <li class="splide__slide">
-                                                        <img src="{{ asset('storage/' . $c->image) }}" alt="">
-                                                    </li>
-                                                @endforeach
+                                                @foreach ($car->images as $image)
+                                            <li class="splide__slide">
+                                                <img src="{{ asset('storage/' . $image) }}" alt="">
+                                            </li>
+                                        @endforeach
                                             </ul>
                                         </div>
                                     </div>

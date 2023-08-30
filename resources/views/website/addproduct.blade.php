@@ -36,16 +36,10 @@
 
             <div class="row">
                 <div class="col-12 col-lg-7 col-xl-7">
-                    @if (session()->has('errors'))
-                        <div class="alert alert-danger">
-                            <ul class="list-unstyled">
-                                @foreach (session()->get('errors')->all() as $error)
-                                    <li class="text-danger">{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                        
+                    @if (session()->has('error'))
+                        <div class="alert alert-danger">{{ session()->get('error') }}</div>   
                     @endif
+                    @if(auth()->user()->post_attempts > 0)
                     <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data"
                         class="sign__form sign__form--contacts">
                         @csrf
@@ -291,6 +285,9 @@
                             </div>
                         </div>
                     </form>
+                    @else
+                    <div class="alert alert-danger">You have reached your maximum post limit. Please contact the administrator.</div>
+                    @endif
                 </div>
 
                 <div class="col-12 col-md-6 col-lg-5 col-xl-4 offset-xl-1">

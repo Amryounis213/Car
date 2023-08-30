@@ -83,7 +83,7 @@ class FrontEndController extends Controller
     //Search by car model or brand or year
     public function search(Request $request)
     {
-
+        // return $request ;
         $cars = Car::when($request->search, function ($q) use ($request) {
             $q->whereHas('model', function ($qe) use ($request) {
                 $qe->where('name', 'like', '%' . $request->search . '%')
@@ -124,14 +124,24 @@ class FrontEndController extends Controller
                     $qe->where('name', 'like', '%' . $request->brands . '%');
                 });
             })
+            ->when($request->sort , function ($q) use ($request) {
+                if($request->sort == 2)
+                    $q->orderBy('created_at', 'ASC');
+                else
+                    $q->orderBy('created_at', 'DESC');
+            })
 
             ->paginate(15);
         return view('website.cars', compact('cars'));
     }
 
-    public function showCars()
+    public function showCars($modelId = null)
     {
-        $cars = Car::all();
+        if($modelId){
+            $cars = Car::where('brand_id', $modelId)->latest()->paginate(15);
+            return view('website.cars', compact('cars'));
+        }
+        $cars = Car::latest()->paginate(15);
         return view('website.cars', compact('cars'));
     }
 

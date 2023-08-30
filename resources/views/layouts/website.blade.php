@@ -35,8 +35,8 @@
                                         </svg></a>
 
                                     <ul class="dropdown-menu header__nav-menu">
-                                        @foreach (\App\Models\CarModel::get() as $models)
-                                            <li><a href="#">{{ $models->name }}</a></li>
+                                        @foreach (\App\Models\Brand::get() as $models)
+                                            <li><a href="{{route('cars' , $models->id)}}">{{ $models->name }}</a></li>
                                         @endforeach
 
                                     </ul>

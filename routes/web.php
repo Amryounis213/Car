@@ -47,17 +47,17 @@ Route::group(
   {
     //Website
     Route::get('/', [FrontEndController::class, 'index'])->name('website.home');
-    Route::get('/post', [ProfileController::class, 'createPost'])->name('post.create');
-    Route::post('/post', [ProfileController::class, 'storePost'])->name('post.store');
+    Route::get('/post', [ProfileController::class, 'createPost'])->name('post.create')->middleware('auth');
+    Route::post('/post', [ProfileController::class, 'storePost'])->name('post.store')->middleware('auth');
     Route::resource('account', ProfileController::class);
     Route::post('add-to-favorite', [FrontEndController::class, 'addToFavourite'])->name('add.to.favorite');
-    Route::get('getFavCars', [ProfileController::class, 'getFavCars'])->name('getFavCars');
+    Route::get('getFavCars', [ProfileController::class, 'getFavCars'])->name('getFavCars')->middleware('auth');
     Route::get('/showcar/{id}', [FrontEndController::class, 'showCar'])->name('showCar');
     Route::get('/showcarbyimage/{id}', [FrontEndController::class, 'showCarByImage'])->name('showCarByImage');
     Route::get('/helpcenter', [FrontEndController::class, 'helpCenter'])->name('helpcenter');
     Route::get('/terms', [FrontEndController::class, 'terms'])->name('website.terms');
     Route::get('/aboutus', [FrontEndController::class, 'aboutUs'])->name('aboutus');
-    Route::get('/showcars', [FrontEndController::class, 'showCars'])->name('cars');
+    Route::get('/showcars/{modelId?}', [FrontEndController::class, 'showCars'])->name('cars');
     Route::any('search', [FrontEndController::class, 'search'])->name('search');
     Route::post('change-password', [ProfileController::class, 'updatePassword'])->name('changepassword');
     Route::get('/delete-user-car/{id}', [ProfileController::class, 'destroy'])->name('usercar.destroy');
