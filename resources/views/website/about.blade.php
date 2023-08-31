@@ -9,8 +9,8 @@
                 <!-- breadcrumb -->
                 <div class="col-12">
                     <ul class="breadcrumbs">
-                        <li class="breadcrumbs__item"><a href="{{ route('website.home') }}">Home</a></li>
-                        <li class="breadcrumbs__item breadcrumbs__item--active">About Us</li>
+                        <li class="breadcrumbs__item"><a href="{{ route('website.home') }}">{{ __('dashboard.home') }}</a></li>
+                        <li class="breadcrumbs__item breadcrumbs__item--active">{{ __('dashboard.about_us') }}</li>
                     </ul>
                 </div>
                 <!-- end breadcrumb -->

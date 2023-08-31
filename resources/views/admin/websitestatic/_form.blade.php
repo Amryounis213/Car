@@ -172,8 +172,6 @@
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
-                        @foreach (config('lang') as $key => $lang)
                             <div class="col-lg-6">
                                 <div class="form-group row">
                                     <label class="col-lg-4 col-form-label required fw-bold fs-6">

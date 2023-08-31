@@ -42,20 +42,20 @@
                                 @csrf
 
                                 <div class="home__group">
-                                    <label for="search1">{{ __('dashbaord.car_model_brand') }}</label>
+                                    <label for="search1">{{ __('dashboard.car_model_brand') }}</label>
                                     <input type="text" name="search" id="search1"
-                                        placeholder="What car are you looking for?">
+                                        placeholder="{{ __('dashboard.what_car_are_you_looking_for') }}?">
                                 </div>
 
                                 <div class="home__group">
                                     <label for="search2">{{ __('dashboard.max_price') }}</label>
-                                    <input type="text" name="amount" id="search2" placeholder="Add an amount in $">
+                                    <input type="number" name="amount" id="search2" placeholder="{{ __('dashboard.add_an_amount_in') }} $">
                                 </div>
 
                                 <div class="home__group">
                                     <label for="search3">{{ __('dashboard.make_year') }}</label>
-                                    <input type="text" name="year" id="search3"
-                                        placeholder="Add a minimal make year">
+                                    <input type="number" min="1912" max="2023" name="year" id="search3"
+                                        placeholder="{{ __('dashboard.add_a_minimal_make_year') }}">
                                 </div>
 
                                 <button type="submit"><span>{{ __('dashboard.search') }}</span></button>

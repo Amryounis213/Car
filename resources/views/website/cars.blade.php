@@ -8,8 +8,8 @@
                 <!-- breadcrumb -->
                 <div class="col-12">
                     <ul class="breadcrumbs">
-                        <li class="breadcrumbs__item"><a href="{{ route('website.home') }}">Home</a></li>
-                        <li class="breadcrumbs__item breadcrumbs__item--active">Explore cars</li>
+                        <li class="breadcrumbs__item"><a href="{{ route('website.home') }}">{{ __('dashboard.home') }}</a></li>
+                        <li class="breadcrumbs__item breadcrumbs__item--active">{{ __('dashboard.explore_cars') }}</li>
                     </ul>
                 </div>
                 <!-- end breadcrumb -->
@@ -17,7 +17,7 @@
                 <!-- title -->
                 <div class="col-12">
                     <div class="main__title main__title--page">
-                        <h1>Choose the right lease</h1>
+                        <h1>{{ __('dashboard.choose_the_right_lease') }}</h1>
                     </div>
                 </div>
                 <!-- end title -->
@@ -29,37 +29,37 @@
                     <div class="filter-wrap">
                         <button class="filter-wrap__btn" type="button" data-bs-toggle="collapse"
                             data-bs-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter"><span>Open
-                                filter</span></button>
+                                {{ __('dashboard.filter') }}</span></button>
 
                         <form method="POST"  action="{{route('search')}}" class="collapse filter-wrap__content" id="collapseFilter" >
                             @csrf
                             <!-- filter -->
                             <div class="filter">
-                                <h4 class="filter__title">Filters <button type="reset">Clear all</button></h4>
+                                <h4 class="filter__title">{{ __('dashboard.filters') }} <button type="reset">{{ __('dashboard.clear_all') }}</button></h4>
 
                                 <div class="filter__group">
-                                    <label class="filter__label">Search:</label>
+                                    <label class="filter__label">{{ __('dashboard.search') }}:</label>
                                     <input type="text" name="name" class="filter__input" placeholder="Keyword">
                                 </div>
 
                                 <div class="filter__group">
-                                    <label for="filter__status" class="filter__label">Sort by:</label>
+                                    <label for="filter__status" class="filter__label">{{ __('dashboard.sort_by') }}:</label>
 
                                     <div class="filter__select-wrap">
                                         <select name="sort" id="filter__status" class="filter__select">
                                             {{-- <option value="0">Relevance</option> --}}
-                                            <option value="1">Newest</option>
-                                            <option value="2">Oldest</option>
+                                            <option value="1">{{ __('dashboard.newest') }}</option>
+                                            <option value="2">{{ __('dashboard.oldest') }}</option>
                                         </select>
                                     </div>
                                 </div>
 
                                 <div class="filter__group">
-                                    <label for="filter__category" class="filter__label">Brands:</label>
+                                    <label for="filter__category" class="filter__label">{{ __('dashboard.brands') }}:</label>
 
                                     <div class="filter__select-wrap">
                                         <select name="brands" id="filter__category" class="filter__select">
-                                            <option value="">All brands</option>
+                                            <option value="">{{ __('dashboard.all_brands') }}</option>
                                             @foreach ($brands as $brand)
                                                 <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                                             @endforeach
@@ -71,11 +71,11 @@
 
 
                                 <div class="filter__group">
-                                    <label for="filter__models" class="filter__label">Models:</label>
+                                    <label for="filter__models" class="filter__label">{{ __('dashboard.models') }}:</label>
 
                                     <div class="filter__select-wrap">
                                         <select name="models" id="filter__models" class="filter__select">
-                                            <option value="">All Models</option>
+                                            <option value="">{{ __('dashboard.all_models') }}</option>
                                             @foreach ($models as $model)
                                                 <option value="{{ $model->id }}">{{ $model->name }}</option>
                                             @endforeach
@@ -85,11 +85,11 @@
 
 
                                 <div class="filter__group">
-                                    <label for="colorin" class="filter__label">Color In:</label>
+                                    <label for="colorin" class="filter__label">{{ __('dashboard.color_inner') }}:</label>
 
                                     <div class="filter__select-wrap">
                                         <select name="colorin" id="colorin" class="filter__select">
-                                            <option value="">All Color</option>
+                                            <option value="">{{ __('dashboard.all_colors') }}</option>
                                             @foreach ($colors as $colorin)
                                                 <option value="{{ $colorin->id }}">{{ $colorin->name }}</option>
                                             @endforeach
@@ -99,11 +99,11 @@
 
 
                                 <div class="filter__group">
-                                    <label for="colorout" class="filter__label">Color Out:</label>
+                                    <label for="colorout" class="filter__label">{{ __('dashboard.color_outter') }}:</label>
 
                                     <div class="filter__select-wrap">
                                         <select name="colorout" id="colorout" class="filter__select">
-                                            <option value="">All Color</option>
+                                            <option value="">{{ __('dashboard.all_colors') }}</option>
                                             @foreach ($colors as $colorout)
                                                 <option value="{{ $colorout->id }}">{{ $colorout->name }}</option>
                                             @endforeach
@@ -113,11 +113,11 @@
 
 
                                 <div class="filter__group">
-                                    <label for="filter__category" class="filter__label">Seats:</label>
+                                    <label for="filter__category" class="filter__label">{{ __('dashboard.seats') }}:</label>
 
                                     <div class="filter__select-wrap">
                                         <select name="seats" id="filter__category" class="filter__select">
-                                            <option value="">Seats</option>
+                                            <option value="">{{ __('dashboard.seats') }}</option>
                                             <option value="2">2</option>
                                             <option value="4">4</option>
                                             <option value="5">5</option>
@@ -130,7 +130,7 @@
 
 
                                 <div class="filter__group">
-                                    <button class="filter__btn" type="submit"><span>APPLY FILTER</span></button>
+                                    <button class="filter__btn" type="submit"><span>{{ __('dashboard.apply_filter') }}</span></button>
                                 </div>
                             </div>
                             <!-- end filter -->
@@ -230,8 +230,7 @@
                                                 </svg>
                                             </a>
                                         @endauth
-                                        <a href="{{ route('showCar', $car->id) }}" class="car__more"><span>Show
-                                                More</span></a>
+                                        <a href="{{ route('showCar', $car->id) }}" class="car__more"><span>{{__('dashboard.show_more')}}</span></a>
                                     </div>
                                 </div>
                             </div>

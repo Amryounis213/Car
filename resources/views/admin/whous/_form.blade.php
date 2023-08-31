@@ -25,36 +25,48 @@
 
                     {{-- Name Arabic English --}}
                     @foreach (config('lang') as $key => $lang)
-                    <div class="row mb-6">
-                        @if ($key == 'fr')
-                            <label for="text" class="col-md-3 col-form-label text-md-right">Paragraph Text
-                                ({{ $lang }})
-                            </label>
-                            <div class="col-md-6">
-                                <textarea id="editor" class="form-control @error('text') is-invalid @enderror" name="text[{{ $key }}]">{{ old('text.fr', $whous->getTranslation('text', $key) ?? '') }}</textarea>
-           
-                                @error('text')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        @elseif ($key == 'en')
-                            <label for="text" class="col-md-3 col-form-label text-md-right">Paragraph Text
-                                ({{ $lang }})
-                            </label>
-                            <div class="col-md-6">
-                                <textarea id="editor2" class="form-control @error('text') is-invalid @enderror" name="text[{{ $key }}]">{{ old('text.en', $whous->getTranslation('text', $key) ?? '') }}</textarea>
-           
-                                @error('text')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        
-                        @endif 
-                        {{-- <label for="text" class="col-md-3 col-form-label text-md-right">Paragraph Text
+                        <div class="row mb-6">
+                            @if ($key == 'fr')
+                                <label for="text" class="col-md-3 col-form-label text-md-right">Paragraph Text
+                                    {{ $lang }}
+                                </label>
+                                <div class="col-md-6">
+                                    <textarea id="editor" class="form-control @error('text') is-invalid @enderror" name="text[{{ $key }}]">{{ old('text.fr', $whous->getTranslation('text', $key) ?? '') }}</textarea>
+
+                                    @error('text')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            @elseif ($key == 'en')
+                                <label for="text" class="col-md-3 col-form-label text-md-right">Paragraph Text
+                                    {{ $lang }}
+                                </label>
+                                <div class="col-md-6">
+                                    <textarea id="editor2" class="form-control @error('text') is-invalid @enderror" name="text[{{ $key }}]">{{ old('text.en', $whous->getTranslation('text', $key) ?? '') }}</textarea>
+
+                                    @error('text')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            @elseif ($key == 'ar')
+                                <label for="text" class="col-md-3 col-form-label text-md-right">Paragraph Text
+                                    {{ $lang }}
+                                </label>
+                                <div class="col-md-6">
+                                    <textarea id="editor3" class="form-control @error('text') is-invalid @enderror" name="text[{{ $key }}]">{{ old('text.en', $whous->getTranslation('text', $key) ?? '') }}</textarea>
+
+                                    @error('text')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            @endif
+                            {{-- <label for="text" class="col-md-3 col-form-label text-md-right">Paragraph Text
                             ({{ $lang }})
                         </label>
                         <div class="col-md-6">
@@ -66,8 +78,8 @@
                                 </span>
                             @enderror
                         </div> --}}
-                    </div>
-                @endforeach
+                        </div>
+                    @endforeach
                     {{-- <!--begin::Row-->
                     <div class="row">
                         @foreach (config('lang') as $key => $lang)

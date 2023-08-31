@@ -57,7 +57,7 @@ class FrontEndController extends Controller
             'car_id' => $request->car_id,
         ]);
         return response()->json([
-            'message' => 'Added to favourite successfully',
+            'message' => __('dashboard.added_to_fav_success'),
         ]);
     }
 

@@ -3,14 +3,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css">
 @endsection
 @section('content')
-    @php
+    {{-- @php
         $fav = \App\Models\Favorite::where('user_id', 1)
             ->where('car_id', $car->id)
             ->get()
             ->pluck('car_id')
             ->toArray();
         
-    @endphp
+    @endphp --}}
     <!-- main content -->
     <main class="main">
         <div class="container">
@@ -18,8 +18,8 @@
                 <!-- breadcrumb -->
                 <div class="col-12">
                     <ul class="breadcrumbs">
-                        <li class="breadcrumbs__item"><a href="{{ route('website.home') }}">Home</a></li>
-                        <li class="breadcrumbs__item breadcrumbs__item--active">My account</li>
+                        <li class="breadcrumbs__item"><a href="{{ route('website.home') }}">{{ __('dashboard.home') }}</a></li>
+                        <li class="breadcrumbs__item breadcrumbs__item--active">{{ __('dashboard.my_account') }}</li>
                     </ul>
                 </div>
                 <!-- end breadcrumb -->
@@ -27,7 +27,7 @@
                 <!-- title -->
                 <div class="col-12">
                     <div class="main__title main__title--page">
-                        <h1>My account</h1>
+                        <h1>{{ __('dashboard.my_account') }}</h1>
                     </div>
                 </div>
                 <!-- end title -->
@@ -40,18 +40,18 @@
                         <ul class="nav nav-tabs profile__tabs" id="profile__tabs" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <button class="active" data-bs-toggle="tab" data-bs-target="#tab-1" type="button"
-                                    role="tab" aria-controls="tab-1" aria-selected="true">My listing</button>
+                                    role="tab" aria-controls="tab-1" aria-selected="true">{{ __('dashboard.my_ads') }}</button>
                             </li>
 
                             <li class="nav-item" role="presentation">
                                 <button data-bs-toggle="tab" data-bs-target="#tab-2" type="button" role="tab"
-                                    aria-controls="tab-2" aria-selected="false">Favorites</button>
+                                    aria-controls="tab-2" aria-selected="false">{{ __('dashboard.favorites') }}</button>
                             </li>
 
 
                             <li class="nav-item" role="presentation">
                                 <button data-bs-toggle="tab" data-bs-target="#tab-3" type="button" role="tab"
-                                    aria-controls="tab-3" aria-selected="false">Settings</button>
+                                    aria-controls="tab-3" aria-selected="false">{{ __('dashboard.settings') }}</button>
                             </li>
 
 
@@ -88,12 +88,12 @@
                                                 <table class="cart__table">
                                                     <thead>
                                                         <tr>
-                                                            <th>Car</th>
+                                                            <th>{{ __('dashboard.item') }}</th>
                                                             <th></th>
-                                                            <th>Year</th>
-                                                            <th>Transmission</th>
-                                                            <th>Fuel type</th>
-                                                            <th>Price</th>
+                                                            <th>{{ __('dashboard.year') }}</th>
+                                                            <th>{{ __('dashboard.transmission') }}</th>
+                                                            <th>{{ __('dashboard.fuel_type') }}</th>
+                                                            <th>{{ __('dashboard.price') }}</th>
                                                             <th></th>
                                                         </tr>
                                                     </thead>
@@ -244,7 +244,7 @@
                                                             d="M20.16,5A6.29,6.29,0,0,0,12,4.36a6.27,6.27,0,0,0-8.16,9.48l6.21,6.22a2.78,2.78,0,0,0,3.9,0l6.21-6.22A6.27,6.27,0,0,0,20.16,5Zm-1.41,7.46-6.21,6.21a.76.76,0,0,1-1.08,0L5.25,12.43a4.29,4.29,0,0,1,0-6,4.27,4.27,0,0,1,6,0,1,1,0,0,0,1.42,0,4.27,4.27,0,0,1,6,0A4.29,4.29,0,0,1,18.75,12.43Z" />
                                                     </svg>
                                                 </button>
-                                                <a href="{{ route('showCar', $car->id) }}" class="car__more"><span>Buy Now</span></a>
+                                                <a href="{{ route('showCar', $car->id) }}" class="car__more"><span>Buy Now (What is this For ?)</span></a>
                                             </div>
                                         </div>
                                     </div>
@@ -318,11 +318,11 @@
                                         @method('PUT')
                                         <div class="row">
                                             <div class="col-12">
-                                                <h4 class="sign__title">Profile details</h4>
+                                                <h4 class="sign__title">{{ __('dashboard.profile_details') }}</h4>
                                             </div>
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="sign__group">
-                                                    <label class="sign__label" for="username">Username</label>
+                                                    <label class="sign__label" for="username">{{ __('dashboard.username') }}</label>
                                                     <input id="username" type="text" name="username"
                                                         class="sign__input" placeholder="User123"
                                                         value="{{ $user->username }}">
@@ -334,7 +334,7 @@
 
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="sign__group">
-                                                    <label class="sign__label" for="email1">Email</label>
+                                                    <label class="sign__label" for="email1">{{ __('dashboard.email') }}</label>
                                                     <input id="email1" type="text" name="email"
                                                         class="sign__input" placeholder="email@email.com"
                                                         value="{{ $user->email }}">
@@ -346,7 +346,7 @@
 
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="sign__group">
-                                                    <label class="sign__label" for="firstname">First name</label>
+                                                    <label class="sign__label" for="firstname">{{ __('dashboard.first_name') }}</label>
                                                     <input id="firstname" type="text" name="firstname"
                                                         class="sign__input" placeholder="John"
                                                         value="{{ $user->firstname }}">
@@ -358,7 +358,7 @@
 
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="sign__group">
-                                                    <label class="sign__label" for="lastname">Last name</label>
+                                                    <label class="sign__label" for="lastname">{{ __('dashboard.last_name') }}</label>
                                                     <input id="lastname" type="text" name="lastname"
                                                         class="sign__input" placeholder="Doe"
                                                         value="{{ $user->lastname }}">
@@ -369,7 +369,7 @@
                                             </div>
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="sign__group">
-                                                    <label class="sign__label" for="lastname">Phone</label>
+                                                    <label class="sign__label" for="lastname">{{ __('dashboard.phone') }}</label>
                                                     <input id="lastname" type="text" name="phone"
                                                         class="sign__input" placeholder="Doe"
                                                         value="{{ $user->phone }}">
@@ -381,7 +381,7 @@
 
                                             <div class="col-12">
                                                 <button class="sign__btn" id="change"
-                                                    type="submit"><span>Save</span></button>
+                                                    type="submit"><span>{{ __('dashboard.save') }}</span></button>
                                             </div>
                                         </div>
                                     </form>
@@ -394,12 +394,12 @@
                                         @csrf
                                         <div class="row">
                                             <div class="col-12">
-                                                <h4 class="sign__title">Change password</h4>
+                                                <h4 class="sign__title">{{ __('dashboard.change_password') }}</h4>
                                             </div>
 
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="sign__group">
-                                                    <label class="sign__label" for="oldpass">Old password</label>
+                                                    <label class="sign__label" for="oldpass">{{ __('dashboard.old_password') }}</label>
                                                     <input id="oldpass" type="password" name="old_password"
                                                         class="sign__input">
                                                 </div>
@@ -412,7 +412,7 @@
 
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="sign__group">
-                                                    <label class="sign__label" for="newpass">New password</label>
+                                                    <label class="sign__label" for="newpass">{{ __('dashboard.new_password') }}</label>
                                                     <input id="newpass" type="password" name="password"
                                                         class="sign__input">
                                                 </div>
@@ -424,8 +424,7 @@
 
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="sign__group">
-                                                    <label class="sign__label" for="confirmpass">Confirm new
-                                                        password</label>
+                                                    <label class="sign__label" for="confirmpass">{{ __('dashboard.confirm_new_password') }}</label>
                                                     <input id="confirmpass" type="password" name="password_confirmation"
                                                         class="sign__input">
                                                 </div>
@@ -435,7 +434,7 @@
 
                                             <div class="col-12">
                                                 <button class="sign__btn" id="save-button"
-                                                    type="submit"><span>Change</span></button>
+                                                    type="submit"><span>{{ __('dashboard.change') }}</span></button>
                                             </div>
 
                                         </div>

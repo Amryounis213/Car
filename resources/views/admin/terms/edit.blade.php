@@ -184,10 +184,25 @@
             console.error( error );
         } );
     
+    
+        ClassicEditor
+        .create( document.querySelector( '#editor3' ), {
+            extraPlugins: [ SimpleUploadAdapterPlugin  ],
+        } )
+        .then( editor => {
+            // Simulate label behavior if textarea had a label
+            if (editor.sourceElement.labels.length > 0) {
+                editor.sourceElement.labels[0].addEventListener('click', e => editor.editing.view.focus());
+            }
+        } )
+        .catch( error => {
+            console.error( error );
+        } );
+    
     </script>
     <script>
         CKEDITOR.replace('textar');
         CKEDITOR.replace('texten');
-        CKEDITOR.replace('textno');
+        CKEDITOR.replace('textfr');
     </script>
 @endsection

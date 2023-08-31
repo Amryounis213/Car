@@ -52,6 +52,19 @@
                                         </span>
                                     @enderror
                                 </div>
+                            @elseif ($key == 'ar')
+                                <label for="text" class="col-md-3 col-form-label text-md-right">Paragraph Text
+                                    ({{ $lang }})
+                                </label>
+                                <div class="col-md-6">
+                                    <textarea id="editor3" class="form-control @error('text') is-invalid @enderror" name="text[{{ $key }}]">{{ old('text.en', $terms->getTranslation('text', $key) ?? '') }}</textarea>
+
+                                    @error('text')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             @endif
                         </div>
                     @endforeach

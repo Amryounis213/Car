@@ -18,7 +18,7 @@
                 </label>
                 @foreach (config('lang') as $key=>$lang)
                 <div class="col-lg-6 fv-row mb-3">
-                    <input  type="text" name="title[{{$key}}]" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0  " placeholder="العنوان الرئيسي ({{$lang}})" value="{{ old('title.'. $key , $website->getTranslation('title', $key ) ?? '')}}" />
+                    <input  type="text" name="title[{{$key}}]" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0  " placeholder="Main Title ({{$lang}})" value="{{ old('title.'. $key , $website->getTranslation('title', $key ) ?? '')}}" />
                 </div>
                 @endforeach
 

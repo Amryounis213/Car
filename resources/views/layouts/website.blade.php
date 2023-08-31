@@ -28,7 +28,7 @@
                                 </li>
                                 <li class="header__nav-item">
                                     <a class="header__nav-link" href="#" role="button" data-bs-toggle="dropdown"
-                                        aria-expanded="false">Models<svg xmlns="http://www.w3.org/2000/svg"
+                                        aria-expanded="false">{{ __('dashboard.models') }}<svg xmlns="http://www.w3.org/2000/svg"
                                             viewBox="0 0 24 24">
                                             <path
                                                 d="M17,9.17a1,1,0,0,0-1.41,0L12,12.71,8.46,9.17a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.42l4.24,4.24a1,1,0,0,0,1.42,0L17,10.59A1,1,0,0,0,17,9.17Z" />
@@ -36,7 +36,7 @@
 
                                     <ul class="dropdown-menu header__nav-menu">
                                         @foreach (\App\Models\Brand::get() as $models)
-                                            <li><a href="{{route('cars' , $models->id)}}">{{ $models->name }}</a></li>
+                                            <li><a href="{{ route('cars', $models->id) }}">{{ $models->name }}</a></li>
                                         @endforeach
 
                                     </ul>
@@ -155,7 +155,7 @@
 
                     <div class="footer__lang">
 
-                      
+
 
                         @if ($lang == 'en')
                             <a class="footer__lang-btn" href="#" role="button" data-bs-toggle="dropdown"
@@ -167,10 +167,20 @@
                                         d="M17,9.17a1,1,0,0,0-1.41,0L12,12.71,8.46,9.17a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.42l4.24,4.24a1,1,0,0,0,1.42,0L17,10.59A1,1,0,0,0,17,9.17Z" />
                                 </svg>
                             </a>
-                        @else
+                        @elseif ($lang == 'fr')
                             <a class="footer__lang-btn" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
                                 <img src="{{ asset('assets/img/flags/france.svg') }}" alt="">
+                                <span>French</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path
+                                        d="M17,9.17a1,1,0,0,0-1.41,0L12,12.71,8.46,9.17a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.42l4.24,4.24a1,1,0,0,0,1.42,0L17,10.59A1,1,0,0,0,17,9.17Z" />
+                                </svg>
+                            </a>
+                        @else
+                            <a class="footer__lang-btn" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <img src="{{ asset('assets/img/flags/Flag_of_Algeria.svg.png') }}" alt="">
                                 <span>French</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                     <path
@@ -182,31 +192,60 @@
 
 
                         @if ($lang == 'en')
-                        <ul class="dropdown-menu footer__lang-dropdown">
-                            <li>
-                                <a href="{{ LaravelLocalization::getLocalizedURL('fr', null, [], true) }}"><img src="{{ asset('assets/img/flags/france.svg') }}"
-                                        alt=""><span>French</span>
-                                </a>
-                            </li>
-                        </ul>
-                    @else
-                    <ul class="dropdown-menu footer__lang-dropdown">
-                        <li>
-                            <a href="{{ LaravelLocalization::getLocalizedURL('en', null, [], true) }}"><img src="{{ asset('assets/img/flags/uk.svg') }}"
-                                    alt=""><span>English</span>
-                            </a>
-                        </li>
-                    </ul>
-                    @endif
+                            <ul class="dropdown-menu footer__lang-dropdown">
+                                <li>
+                                    <a href="{{ LaravelLocalization::getLocalizedURL('fr', null, [], true) }}"><img
+                                            src="{{ asset('assets/img/flags/france.svg') }}"
+                                            alt=""><span>French</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ LaravelLocalization::getLocalizedURL('ar', null, [], true) }}"><img
+                                            src="{{ asset('assets/img/flags/Flag_of_Algeria.svg.png') }}"
+                                            alt=""><span>Arabic</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        @elseif ($lang == 'fr')
+                            <ul class="dropdown-menu footer__lang-dropdown">
+                                <li>
+                                    <a href="{{ LaravelLocalization::getLocalizedURL('en', null, [], true) }}"><img
+                                            src="{{ asset('assets/img/flags/uk.svg') }}"
+                                            alt=""><span>English</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ LaravelLocalization::getLocalizedURL('ar', null, [], true) }}"><img
+                                            src="{{ asset('assets/img/flags/Flag_of_Algeria.svg.png') }}"
+                                            alt=""><span>Arabic</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        @else
+                            <ul class="dropdown-menu footer__lang-dropdown">
+                                <li>
+                                    <a href="{{ LaravelLocalization::getLocalizedURL('en', null, [], true) }}"><img
+                                            src="{{ asset('assets/img/flags/uk.svg') }}"
+                                            alt=""><span>English</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ LaravelLocalization::getLocalizedURL('fr', null, [], true) }}"><img
+                                            src="{{ asset('assets/img/flags/france.svg') }}"
+                                            alt=""><span>French</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        @endif
 
 
-                       
+
                     </div>
                 </div>
 
                 <div
                     class="col-6 col-md-6 col-lg-6 col-xl-2 order-1 order-md-2 order-lg-2 order-xl-3 offset-md-2 offset-lg-0">
-                    <h6 class="footer__title">Pages</h6>
+                    <h6 class="footer__title">{{ __('dashboard.pages') }}</h6>
                     <div class="footer__nav">
                         <a href="{{ route('aboutus') }}">{{ __('dashboard.about_us') }}</a>
                         <a href="{{ route('helpcenter') }}">{{ __('dashboard.help_center') }}</a>

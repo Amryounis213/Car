@@ -27,8 +27,8 @@
                 <!-- breadcrumb -->
                 <div class="col-12">
                     <ul class="breadcrumbs">
-                        <li class="breadcrumbs__item"><a href="{{ route('website.home') }}">Home</a></li>
-                        <li class="breadcrumbs__item"><a href="cars.html">Explore cars</a></li>
+                        <li class="breadcrumbs__item"><a href="{{ route('website.home') }}">{{ __('dashboard.home') }}</a></li>
+                        <li class="breadcrumbs__item"><a href="cars.html">{{ __('dashboard.explore_cars') }}</a></li>
                         <li class="breadcrumbs__item breadcrumbs__item--active">{{ $car->year ?? 'Hello' }}</li>
                     </ul>
                 </div>
@@ -86,7 +86,7 @@
                     <div class="user-details">
                         <div class="row">
                             <div class="col-12">
-                                <h4 class="sign__title">Seller Details</h4>
+                                <h4 class="sign__title">{{ __('dashboard.seller_details') }}</h4>
                             </div>
 
                             <div class="container">
@@ -94,20 +94,20 @@
                                     <div class="col">
                                         <div class="d-flex justify-content-between">
                                             <div class="sign__label-group">
-                                                <label class="sign__label" for="username">Username:</label>
+                                                <label class="sign__label" for="username">{{ __('dashboard.username') }}:</label>
                                                 <p class="sign__label-value">{{ $car->User->username }}</p>
                                             </div>
                                             <div class="sign__label-group">
-                                                <label class="sign__label" for="phone">Phone:</label>
+                                                <label class="sign__label" for="phone">{{ __('dashboard.phone') }}:</label>
                                                 <p class="sign__label-value">{{ $car->User->phone }}</p>
                                             </div>
                                             <div class="sign__label-group">
-                                                <label class="sign__label" for="email">Email:</label>
+                                                <label class="sign__label" for="email">{{ __('dashboard.email') }}:</label>
                                                 <p class="sign__label-value">{{ $car->User->email }}</p>
                                             </div>
                                         </div>
                                         <div class="sign__label-group">
-                                            <label class="sign__label" for="description">Car Description:</label>
+                                            <label class="sign__label" for="description">{{ __('dashboard.item_description') }}:</label>
                                             <p class="sign__label-value">{{ $car->description }}</p>
                                         </div>
                                     </div>
@@ -124,7 +124,7 @@
                 <!-- offer -->
                 <div class="col-12 col-lg-5">
                     <div class="offer">
-                        <span class="offer__title">Offer</span>
+                        <span class="offer__title">{{ __('dashboard.offer') }}</span>
                         <div class="offer__wrap">
                             <span class="offer__price">{{ $car->price }}</span>
                             @auth
@@ -160,16 +160,16 @@
                                             </svg></button>
 
                                         <form action="#" class="modal__form">
-                                            <h4 class="modal__title">Buy Car</h4>
+                                            <h4 class="modal__title">{{ __('dashboard.buy_car') }}</h4>
 
                                             <div class="sign__group">
-                                                <label for="fullname" class="sign__label sign__label--modal">Name</label>
+                                                <label for="fullname" class="sign__label sign__label--modal">{{ __('dashboard.name') }}</label>
                                                 <input id="fullname" type="text" name="name" class="sign__input"
                                                     placeholder="Full name">
                                             </div>
 
                                             <div class="sign__group">
-                                                <label for="phone" class="sign__label sign__label--modal">Phone</label>
+                                                <label for="phone" class="sign__label sign__label--modal">{{ __('dashboard.phone') }}</label>
                                                 <input id="phone" type="text" name="phone" class="sign__input"
                                                     placeholder="090 123 45 67">
                                             </div>
@@ -205,7 +205,7 @@
                                             </div> --}}
 
                                             <button type="button" class="sign__btn sign__btn--modal">
-                                                <span>Proceed</span>
+                                                <span>{{ __('dashboard.proceed') }}</span>
                                             </button>
                                         </form>
                                     </div>
@@ -214,75 +214,75 @@
                         </div>
                         <!-- end buy modal -->
 
-                        <span class="offer__title">Lease terms</span>
+                        <span class="offer__title">{{ __('dashboard.lease_terms') }}</span>
                         <ul class="offer__list">
                             <li>
-                                <span class="offer__list-name">Year </span>
+                                <span class="offer__list-name">{{ __('dashboard.year') }} </span>
                                 <span class="offer__list-value offer__list-value--dark">{{ $car->year }}</span>
                             </li>
                             <li>
-                                <span class="offer__list-name">Origin</span>
+                                <span class="offer__list-name">{{ __('dashboard.origin') }}</span>
                                 <span class="offer__list-value">{{ $car->origin }}</span>
                             </li>
-                            <li>
+                            {{-- <li>
                                 <span class="offer__list-name">Release</span>
                                 <span class="offer__list-value">{{ $car->release_date }}</span>
-                            </li>
-                            <li>
+                            </li> --}}
+                            {{-- <li>
                                 <span class="offer__list-name">Technical control</span>
                                 <span class="offer__list-value">{{ $car->year }}</span>
-                            </li>
+                            </li> --}}
                             <li>
-                                <span class="offer__list-name">Number of owners</span>
+                                <span class="offer__list-name">{{ __('dashboard.number_of_owners') }}</span>
                                 <span
                                     class="offer__list-value offer__list-value--dark">{{ $car->number_of_owners }}</span>
                             </li>
                             <li>
-                                <span class="offer__list-name">Meter mileage</span>
+                                <span class="offer__list-name">{{ __('dashboard.meter_mileage') }}</span>
                                 <span class="offer__list-value offer__list-value--dark">{{ $car->mileage }}</span>
                             </li>
                             <li>
-                                <span class="offer__list-name">Gearbox</span>
+                                <span class="offer__list-name">{{ __('dashboard.gearbox') }}</span>
                                 <span class="offer__list-value offer__list-value--dark">{{ $car->gearbox }}</span>
                             </li>
                             <li>
-                                <span class="offer__list-name">Color Inner</span>
+                                <span class="offer__list-name">{{ __('dashboard.color_inner') }}</span>
                                 <span
                                     class="offer__list-value offer__list-value--dark">{{ $car->colorIn->name ?? 'color' }}</span>
                             </li>
                             <li>
-                                <span class="offer__list-name">Color Outer</span>
+                                <span class="offer__list-name">{{ __('dashboard.color_outter') }}</span>
                                 <span
                                     class="offer__list-value offer__list-value--dark">{{ $car->colorOut->name ?? 'color' }}</span>
                             </li>
-                            <li>
+                            {{-- <li>
                                 <span class="offer__list-name">Upholstery</span>
                                 <span class="offer__list-value offer__list-value--dark">{{ $car->upholstery }}</span>
-                            </li>
+                            </li> --}}
                             <li>
-                                <span class="offer__list-name">Number of doors</span>
+                                <span class="offer__list-name">{{ __('dashboard.number_of_doors') }}</span>
                                 <span
                                     class="offer__list-value offer__list-value--dark">{{ $car->number_of_doors ?? 4 }}</span>
                             </li>
-                            <li>
+                            {{-- <li>
                                 <span class="offer__list-name">Length </span>
                                 <span class="offer__list-value offer__list-value--dark">{{ $car->length }}</span>
-                            </li>
+                            </li> --}}
 
-                            <li>
+                            {{-- <li>
                                 <span class="offer__list-name">Trunk volume </span>
                                 <span class="offer__list-value offer__list-value--dark">{{ $car->trunk_volume }}</span>
-                            </li>
+                            </li> --}}
 
-                            <li>
+                            {{-- <li>
                                 <span class="offer__list-name">First Hand</span>
                                 <span class="offer__list-value offer__list-value--dark">{{ $car->first_hand }}</span>
-                            </li>
+                            </li> --}}
 
 
                         </ul>
 
-                        <span class="offer__title">Force Points</span>
+                        <span class="offer__title">{{ __('dashboard.force_points') }}</span>
                         <ul class="offer__details">
                             <li>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -310,7 +310,7 @@
 							</li> --}}
                         </ul>
 
-                        <span class="offer__title">Share</span>
+                        {{-- <span class="offer__title">Share</span>
                         <div class="offer__share">
                             <a href="#" class="offer__share-link offer__share-link--fb"><svg width="9"
                                     height="17" viewBox="0 0 9 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -331,7 +331,7 @@
                                         d="M8,12a1,1,0,0,0,1,1h6a1,1,0,0,0,0-2H9A1,1,0,0,0,8,12Zm2,3H7A3,3,0,0,1,7,9h3a1,1,0,0,0,0-2H7A5,5,0,0,0,7,17h3a1,1,0,0,0,0-2Zm7-8H14a1,1,0,0,0,0,2h3a3,3,0,0,1,0,6H14a1,1,0,0,0,0,2h3A5,5,0,0,0,17,7Z">
                                     </path>
                                 </svg> <span>link</span></a>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <!-- end offer -->
@@ -344,10 +344,10 @@
                 <!-- title -->
                 <div class="col-12">
                     <div class="main__title">
-                        <h2>You may also like</h2>
+                        <h2>{{ __('dashboard.you_may_also_like') }}</h2>
 
                         <a href="{{ route('cars') }}" class="main__link">
-                            View more
+                            {{ __('dashboard.view_more') }}
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                 <path
                                     d="M17.92,11.62a1,1,0,0,0-.21-.33l-5-5a1,1,0,0,0-1.42,1.42L14.59,11H7a1,1,0,0,0,0,2h7.59l-3.3,3.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l5-5a1,1,0,0,0,.21-.33A1,1,0,0,0,17.92,11.62Z" />
@@ -402,7 +402,7 @@
                                         <path
                                             d="M12.3,12.22A4.92,4.92,0,0,0,14,8.5a5,5,0,0,0-10,0,4.92,4.92,0,0,0,1.7,3.72A8,8,0,0,0,1,19.5a1,1,0,0,0,2,0,6,6,0,0,1,12,0,1,1,0,0,0,2,0A8,8,0,0,0,12.3,12.22ZM9,11.5a3,3,0,1,1,3-3A3,3,0,0,1,9,11.5Zm9.74.32A5,5,0,0,0,15,3.5a1,1,0,0,0,0,2,3,3,0,0,1,3,3,3,3,0,0,1-1.5,2.59,1,1,0,0,0-.5.84,1,1,0,0,0,.45.86l.39.26.13.07a7,7,0,0,1,4,6.38,1,1,0,0,0,2,0A9,9,0,0,0,18.74,11.82Z" />
                                     </svg>
-                                    <span>{{ $randCar->seats }} People</span>
+                                    <span>{{ $randCar->seats }} {{ __('dashboard.people') }}</span>
                                 </li>
 
                             </ul>
@@ -427,7 +427,7 @@
                                     </a>
                                 @endauth
                                 <a href="{{ route('showCar', $randCar->id) }}" class="car__more">
-                                    <span>More Details</span>
+                                    <span>{{ __('dashboard.more_details') }}</span>
                                 </a>
                             </div>
                         </div>
