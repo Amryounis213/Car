@@ -6,7 +6,7 @@
     <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
         <!--begin::Logo image-->
         <a href="{{-- route('dashboard') --}}">
-            <img class="h-50px app-sidebar-logo-default" src="{{ asset('assets/media/logos/logo.png') }}"
+            <img class="h-50px app-sidebar-logo-default" src="{{ asset('storage/'. $website->logo) }}"
                 alt="logo">
         </a>
         <!--end::Logo image-->
