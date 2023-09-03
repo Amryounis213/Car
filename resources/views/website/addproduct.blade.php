@@ -44,6 +44,16 @@
                         class="sign__form sign__form--contacts">
                         @csrf
                         <div class="row">
+                            <div class="col-12 col-md-6">
+                                <div class="sign__group">
+                                    <select name="post_type" class="sign__input">
+                                        <option value="" disabled selected>Select Ad Type</option>
+                                        <option value="1" @selected(old('post_type') == 1)>Car</option>
+                                        <option value="0" @selected(old('post_type') == 0)>Mechanical Item</option>
+                                    </select>
+                                </div>
+                            </div>
+
                             {{-- Post Title --}}
                             <div class="col-12">
                                 <div class="sign__group">
@@ -214,7 +224,7 @@
                             <div class="col-12 col-md-6">
                                 <div class="sign__group">
                                     <select name="color_id_out" class="sign__input">
-                                        <option value="" disabled selected>Select Color Inner</option>
+                                        <option value="" disabled selected>Select Color Outter</option>
                                         @foreach ($carColors as $color)
                                             <option value="{{ $color->id }}" @selected(old('color_id_out') == $color->id)>{{ $color->name }}</option>
                                         @endforeach
@@ -232,6 +242,13 @@
                                 <div class="sign__group">
                                     <input type="number"  value="{{old('number_of_doors')}}"  min="1" max="8" name="number_of_doors"
                                         class="sign__input" placeholder="Number Of Doors">
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <div class="sign__group">
+                                    <input type="number"  value="{{old('seats')}}"  min="1" max="8" name="seats"
+                                        class="sign__input" placeholder="Number Of Seats">
                                 </div>
                             </div>
 
@@ -446,7 +463,7 @@
             labelFileWaitingForSizeValidation: 'انتظر حتى يتم التحقق من حجم الملف',
             labelFileSizeNotAvailable: 'حجم الملف غير متوفر',
             labelFileLoading: 'جاري التحميل',
-            labelFileLoadError: 'حدث خطأ أثناء التحميل',
+            labelFileLoadError: 'حدث Error أثناء التحميل',
             labelFileProcessing: 'جاري التحميل',
             labelFileProcessingComplete: 'تم التحميل',
             labelFileProcessingAborted: 'تم إلغاء التحميل',

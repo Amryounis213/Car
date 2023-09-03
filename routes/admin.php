@@ -43,7 +43,12 @@ Route::resource('amenities', AmenitiesController::class);
 Route::post('amenities/status', [AmenitiesController::class, 'updateStatus'])->name('amenities.status');
 Route::resource('whous', WhoUsController::class);
 Route::resource('terms', TermsController::class);
+
 Route::resource('users', UserController::class);
+Route::get('createPost', [UserController::class, 'createPost'])->name('users.createPost');
+Route::post('createPost', [UserController::class, 'storePost'])->name('users.storePost');
+
+
 Route::resource('posts', PostsController::class);
 Route::get('cars', [CarsController::class, 'index'])->name('cars.index');
 Route::post('posts/status', [PostsController::class, 'updateStatus'])->name('posts.status');
@@ -52,6 +57,10 @@ Route::post('setting', [SettingController::class, 'EditWebsiteData'])->name('set
 Route::post('/posts/updatestatus', [PostsController::class, 'updatePostStatus'])->name('updatepoststatus');
 Route::post('updateStatus', [PostsController::class, 'updateStatus'])->name('updateStatus');
 Route::resource('contactus', ContactUsController::class);
+
+Route::resource('createusers', UserController::class);
+Route::post('updatepassword', [UserController::class, 'updatepassword'])->name('admin.updatepassword');
+
 
 Route::controller(WebsiteStaticsController::class)->group(function () {
     Route::get('/websitestatic', 'index')->name('websitestatic.index');

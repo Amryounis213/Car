@@ -736,4 +736,6 @@ return [
     'add_a_minimal_make_year' => 'Add a minimal make year',
     'added_to_fav_success' => 'Added to favourite successfully',
 
+    'add_admin' => 'Add Admin',
+
 ];

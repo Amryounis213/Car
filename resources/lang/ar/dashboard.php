@@ -87,5 +87,5 @@ return [
     'add_a_minimal_make_year' => 'الحد الادنى لسنة الاصدار',
 
     'added_to_fav_success' => 'تمت الإضافة إلى المفضلة بنجاح',
-    
+    'add_admin' => 'اضافة مسؤول',
 ];

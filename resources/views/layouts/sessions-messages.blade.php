@@ -52,7 +52,7 @@
     </span>
     <!--end::Svg Icon-->
     <div class="d-flex flex-column pe-0 pe-sm-10">
-        <h4 class="mb-1 text-danger">خطأ</h4>
+        <h4 class="mb-1 text-danger">Error</h4>
 
 
         @foreach ($errors->all() as $error)
@@ -97,7 +97,7 @@
         </svg>
     </span>
     <div class="d-flex flex-column pe-0 pe-sm-10">
-        <h4 class="mb-1 text-danger">خطأ</h4>
+        <h4 class="mb-1 text-danger">Error</h4>
         <span>{{Session::get('error')}}</span>
     </div>
 

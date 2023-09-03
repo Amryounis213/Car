@@ -232,7 +232,7 @@
                                 if(data.success == 'false')
                                 {
                                     Swal.fire({
-                                        title: 'خطأ!',
+                                        title: 'Error!',
                                         text: 'لا يمكن حذف هذا البودكاست لوجود حلقات مرتبطة به',
                                         icon: 'error',
                                         confirmButtonText: 'حسناً',

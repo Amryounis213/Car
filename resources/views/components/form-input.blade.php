@@ -13,7 +13,7 @@
                 <select name="{{ $name }}" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0">
                     @foreach ($var as $v)
                         <option value="{{ $v->id }}" {{ old($name, $v->id) == $v->id ? 'selected' : '' }}>
-                            {{ $v->name }}
+                            {{ $v->name ?? $v->username }}
                         </option>
                     @endforeach
                 </select>

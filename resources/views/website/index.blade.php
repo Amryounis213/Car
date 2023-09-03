@@ -26,7 +26,8 @@
         <!-- home -->
         <div class="home">
             <!-- home bg -->
-            <div class="home__bg" style="background: url({{ asset('storage/' . $website->image) }}) no-repeat center/cover">
+
+            <div class="home__bg" style="background: url({{ asset('storage/' . $website->image) }}) no-repeat center/cover;">
 
             </div>
             <!-- end home bg -->
@@ -56,6 +57,13 @@
                                     <label for="search3">{{ __('dashboard.make_year') }}</label>
                                     <input type="number" min="1912" max="2023" name="year" id="search3"
                                         placeholder="{{ __('dashboard.add_a_minimal_make_year') }}">
+                                </div>
+                                <div class="home__group">
+                                    <label for="">{{ __('dashboard.post_type') }}</label>
+                                    <select name="post_type" id="">
+                                        <option value="1">Car</option>
+                                        <option value="0">Mechanical Item</option>
+                                    </select>
                                 </div>
 
                                 <button type="submit"><span>{{ __('dashboard.search') }}</span></button>

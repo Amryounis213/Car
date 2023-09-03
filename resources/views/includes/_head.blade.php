@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/splide.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/slimselect.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/sass/style.css') }}">
 
     <!-- Favicons -->
     <link rel="icon" type="image/png" href="{{ asset('assets/icon/favicon-32x32.png') }}" sizes="32x32">
@@ -26,6 +27,7 @@
 			body {
 				direction: rtl;
 			}
+
 		</style>
     @endif
 

@@ -224,9 +224,12 @@ class ProfileController extends Controller
             'mileage' => $request->mileage,
             'seats' => $request->seats,
             'length' => $request->length,
-            
-            // 'images' => $data['images']
         ]);
+
+        if($request->post_type == 0){
+            $car->post_type = 0;
+            $car->save();
+        }
 
         $user->post_attempts = $user->post_attempts - 1;
         $user->save();

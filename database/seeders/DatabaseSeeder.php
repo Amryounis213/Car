@@ -9,6 +9,7 @@ use App\Models\Brand;
 use App\Models\Car;
 use App\Models\CarModel;
 use App\Models\CarType;
+use App\Models\City;
 use App\Models\Color;
 use App\Models\Generation;
 use App\Models\User;
@@ -148,11 +149,18 @@ class DatabaseSeeder extends Seeder
         //     ]);
         // }
 
-        Admin::create([
-            'name' => 'SQYON',
-            'email' => 'admin@gmail.com',
-            'password' => Hash::make('123456789'),
+        // Admin::create([
+        //     'name' => 'SQYON',
+        //     'email' => 'admin@gmail.com',
+        //     'password' => Hash::make('123456789'),
+        // ]);
+
+
+
+        City::create([
+            ''
         ]);
+
     }
 }
 

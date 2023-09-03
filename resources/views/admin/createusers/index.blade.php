@@ -38,6 +38,7 @@
             <!--end::Toolbar container-->
         </div>
         <!--end::Toolbar-->
+
         <!--begin::Content-->
         <div id="kt_app_content" class="app-content flex-column-fluid">
             <!--begin::Content container-->
@@ -65,7 +66,7 @@
                                 </span>
                                 <!--end::Svg Icon-->
                                 <input type="text" id="search" class="form-control form-control-solid w-250px ps-14"
-                                    placeholder="{{ __('dashboard.search') . ' ' . __('dashboard.type') }}" />
+                                    placeholder="{{ __('dashboard.search') . ' ' . __('dashboard.admin') }}" />
                             </div>
                             <!--end::Search-->
                         </div>
@@ -76,11 +77,6 @@
                             <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
                                 <a href="{{ route('createusers.create') }}" id="showmodal" type="button"
                                     class="btn btn-dark">Add New User</a>
-                            </div>
-                            
-                            <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-                                <a href="{{ route('users.createPost') }}" id="showmodal" type="button"
-                                    class="btn btn-dark">Add Post</a>
                             </div>
                             <!--end::Toolbar-->
 
@@ -106,7 +102,7 @@
 @endsection
 @section('scripts')
     {{ $dataTable->scripts() }}
-    {{-- <script src="{{ asset('assets/js/custom/apps/user-management/users/list/table.js') }}"></script> --}}
+    {{-- <script src="{{ asset('assets/js/custom/apps/user-management/admins/list/table.js') }}"></script> --}}
     <script src="{{ asset('assets/js/widgets.bundle.js') }}"></script>
     <script src="{{ asset('assets/js/custom/widgets.js') }}"></script>
     <!-- JavaScript Bundle with Popper -->
@@ -133,7 +129,7 @@
             $(document).on('click', ".del_rec_btn", function(e) {
                 e.preventDefault();
                 const id = $(this).data('id');
-                let url = "{{ route('users.destroy', ':id') }}";
+                let url = "{{ route('createusers.destroy', ':id') }}";
                 url = url.replace(':id', id);
 
                 Swal.fire({
