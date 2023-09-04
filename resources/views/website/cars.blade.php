@@ -1,5 +1,25 @@
 @extends('layouts.website')
 
+@section('style')
+    <style>
+        .filter__scroll-view {
+            max-height: 200px;
+            /* Adjust the maximum height as needed */
+            overflow-y: auto;
+        }
+
+        .filter__checkbox-label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .filter__checkbox {
+            margin-right: 5px;
+            /* Adjust spacing between checkbox and city name */
+        }
+    </style>
+@endsection
+
 @section('content')
     <!-- main content -->
     <main class="main">
@@ -8,7 +28,8 @@
                 <!-- breadcrumb -->
                 <div class="col-12">
                     <ul class="breadcrumbs">
-                        <li class="breadcrumbs__item"><a href="{{ route('website.home') }}">{{ __('dashboard.home') }}</a></li>
+                        <li class="breadcrumbs__item"><a href="{{ route('website.home') }}">{{ __('dashboard.home') }}</a>
+                        </li>
                         <li class="breadcrumbs__item breadcrumbs__item--active">{{ __('dashboard.explore_cars') }}</li>
                     </ul>
                 </div>
@@ -31,11 +52,13 @@
                             data-bs-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter"><span>Open
                                 {{ __('dashboard.filter') }}</span></button>
 
-                        <form method="POST"  action="{{route('search')}}" class="collapse filter-wrap__content" id="collapseFilter" >
+                        <form method="POST" action="{{ route('search') }}" class="collapse filter-wrap__content"
+                            id="collapseFilter">
                             @csrf
                             <!-- filter -->
                             <div class="filter">
-                                <h4 class="filter__title">{{ __('dashboard.filters') }} <button type="reset">{{ __('dashboard.clear_all') }}</button></h4>
+                                <h4 class="filter__title">{{ __('dashboard.filters') }} <button
+                                        type="reset">{{ __('dashboard.clear_all') }}</button></h4>
 
                                 <div class="filter__group">
                                     <label class="filter__label">{{ __('dashboard.search') }}:</label>
@@ -54,8 +77,9 @@
                                     </div>
                                 </div>
                                 <div class="filter__group">
-                                    <label for="filter__category" class="filter__label">{{ __('dashboard.brands') }}:</label>
-                                
+                                    <label for="filter__category"
+                                        class="filter__label">{{ __('dashboard.brands') }}:</label>
+
                                     <div class="filter__select-wrap">
                                         <select name="brands" id="filter__category" class="filter__select">
                                             <option value="">{{ __('dashboard.all_brands') }}</option>
@@ -67,10 +91,10 @@
                                 </div>
                                 
                                 <div class="filter__group">
-                                    <label for="filter__cities" class="filter__label">{{ __('dashboard.the_cities') }}:</label>
-                                
+                                    <label for="filter__cities"
+                                        class="filter__label">{{ __('dashboard.the_cities') }}:</label>
                                     <div class="filter__select-wrap">
-                                        <select name="cities" id="filter__cities" class="filter__select">
+                                        <select name="cities[]" id="filter__cities" class="form-control" multiple>
                                             <option value="">{{ __('dashboard.all_cities') }}</option>
                                             @foreach ($cities as $city)
                                                 <option value="{{ $city->id }}">{{ $city->name }}</option>
@@ -78,20 +102,8 @@
                                         </select>
                                     </div>
                                 </div>
-                                
 
-                                <div class="filter__group">
-                                    <label for="filter__models" class="filter__label">{{ __('dashboard.models') }}:</label>
 
-                                    <div class="filter__select-wrap">
-                                        <select name="models" id="filter__models" class="filter__select">
-                                            <option value="">{{ __('dashboard.all_models') }}</option>
-                                            @foreach ($models as $model)
-                                                <option value="{{ $model->id }}">{{ $model->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
 
 
                                 <div class="filter__group">
@@ -123,7 +135,8 @@
 
 
                                 <div class="filter__group">
-                                    <label for="filter__category" class="filter__label">{{ __('dashboard.seats') }}:</label>
+                                    <label for="filter__category"
+                                        class="filter__label">{{ __('dashboard.seats') }}:</label>
 
                                     <div class="filter__select-wrap">
                                         <select name="seats" id="filter__category" class="filter__select">
@@ -140,7 +153,8 @@
 
 
                                 <div class="filter__group">
-                                    <button class="filter__btn" type="submit"><span>{{ __('dashboard.apply_filter') }}</span></button>
+                                    <button class="filter__btn"
+                                        type="submit"><span>{{ __('dashboard.apply_filter') }}</span></button>
                                 </div>
                             </div>
                             <!-- end filter -->
@@ -177,10 +191,10 @@
                                         <div class="splide__track">
                                             <ul class="splide__list">
                                                 @foreach ($car->images as $image)
-                                            <li class="splide__slide">
-                                                <img src="{{ asset('storage/' . $image) }}" alt="">
-                                            </li>
-                                        @endforeach
+                                                    <li class="splide__slide">
+                                                        <img src="{{ asset('storage/' . $image) }}" alt="">
+                                                    </li>
+                                                @endforeach
                                             </ul>
                                         </div>
                                     </div>
@@ -240,7 +254,8 @@
                                                 </svg>
                                             </a>
                                         @endauth
-                                        <a href="{{ route('showCar', $car->id) }}" class="car__more"><span>{{__('dashboard.show_more')}}</span></a>
+                                        <a href="{{ route('showCar', $car->id) }}"
+                                            class="car__more"><span>{{ __('dashboard.show_more') }}</span></a>
                                     </div>
                                 </div>
                             </div>
@@ -310,4 +325,15 @@
         </div>
     </main>
     <!-- end main content -->
+@endsection
+
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#filter__cities').select2({
+                placeholder: '{{ __('dashboard.select_cities') }}',
+                allowClear: true, // Adds a clear button
+            });
+        });
+    </script>
 @endsection
