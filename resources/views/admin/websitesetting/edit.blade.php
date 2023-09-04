@@ -14,8 +14,9 @@
                     <!--begin::Page title-->
                     <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
                         <!--begin::Title-->
-                        <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-centter my-0">{{ __('dashboard.editwebsitedata') }}</h1>
-                            
+                        <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-centter my-0">
+                            {{ __('dashboard.editwebsitedata') }}</h1>
+
                         <!--end::Title-->
                         <!--begin::Breadcrumb-->
                         <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
@@ -54,12 +55,8 @@
                 <!--begin::Content container-->
                 <div id="kt_app_content_container" class="app-container container-xxl">
                     @include('layouts.sessions-messages')
-                    <form 
-                    action="{{route('setting.store')}}" 
-                    method="POST" 
-                    class="form d-flex flex-column flex-lg-row"
-                    enctype="multipart/form-data"
-                    >
+                    <form action="{{ route('setting.store') }}" method="POST" class="form d-flex flex-column flex-lg-row"
+                        enctype="multipart/form-data">
                         @csrf
                         @include('admin.websitesetting._form')
                     </form>
@@ -74,36 +71,61 @@
     <!--end:::Main-->
 @endsection
 @section('scripts')
-   
-   
-
     <script src="{{ asset('assets/js/widgets.bundle.js') }}"></script>
     <script src="{{ asset('assets/js/custom/widgets.js') }}"></script>
-    <script src="{{ asset('assets/js/custom/apps/ecommerce/catalog/save-category.js') }}"></script>
-<script src="{{asset('assets/plugins/custom/tinymce/tinymce.bundle.js')}}"></script>
-<script>
-    tinymce.init({
-        selector: '.editor',
-        menubar: false,
-        plugins: [
-            'link',
-            'lists',
-            'paste',
-            'autolink',
-            'spellchecker'
-        ],
-        toolbar: [
-            'undo redo | bold italic underline | fontselect fontsizeselect',
-            'forecolor backcolor | alignleft aligncenter alignright alignfull | numlist bullist outdent indent'
-        ],
-        valid_elements: 'p[style],strong,em,span[style],a[href],ul,ol,li',
-        valid_styles: {
-            '*': 'font-size,font-family,color,text-decoration,text-align'
-        },
-        powerpaste_word_import: 'clean',
-        powerpaste_html_import: 'clean',
-    });
-</script>
-  
+    <script src="{{ asset('assets/plugins/custom/tinymce/tinymce.bundle.js') }}"></script>
+    <script>
+        tinymce.init({
+            selector: '.editor',
+            menubar: false,
+            plugins: [
+                'link',
+                'lists',
+                'paste',
+                'autolink',
+                'spellchecker'
+            ],
+            toolbar: [
+                'undo redo | bold italic underline | fontselect fontsizeselect',
+                'forecolor backcolor | alignleft aligncenter alignright alignfull | numlist bullist outdent indent'
+            ],
+            valid_elements: 'p[style],strong,em,span[style],a[href],ul,ol,li',
+            valid_styles: {
+                '*': 'font-size,font-family,color,text-decoration,text-align'
+            },
+            powerpaste_word_import: 'clean',
+            powerpaste_html_import: 'clean',
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#accept").click(function() {
+                // Get the current state of the checkbox
+                var isChecked = $("#acceptPostsCheckbox").prop("checked");
 
+                $.ajax({
+                    type: 'GET',
+                    url: '/admin/acceptposts',
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr('content'),
+                        isChecked: isChecked
+                    },
+                    success: function(data) {
+                        // Handle the response from the server here
+                        if (data.status === 'success') {
+                            console.log('Success');
+                            // Update the label text based on the response
+                            $('#acceptPostsLabel').text(data.type === 'auto' ? 'Auto' :
+                                'Manual');
+                        } else {
+                            console.log('Error');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.log('Error XHR');
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

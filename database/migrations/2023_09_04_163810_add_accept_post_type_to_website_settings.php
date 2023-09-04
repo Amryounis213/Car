@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('cars', function (Blueprint $table) {
-            $table->boolean('post_type')->default(1); // 1 = car , 0 = mechanical item
+        Schema::table('website_settings', function (Blueprint $table) {
+            $table->enum('accept_posts', ['manual', 'auto'])->default('auto');
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('cars', function (Blueprint $table) {
-            $table->dropColumn('post_type');
+        Schema::table('website_settings', function (Blueprint $table) {
+            $table->dropColumn('accept_posts');
         });
     }
 };

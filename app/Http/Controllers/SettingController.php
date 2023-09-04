@@ -14,7 +14,7 @@ class SettingController extends Controller
     public function index()
     {
         $website = WebsiteSetting::first();
-        if(!$website)
+        if (!$website)
             $website = new WebsiteSetting();
         return view('admin.websitesetting.edit', compact('website'));
     }
@@ -47,16 +47,29 @@ class SettingController extends Controller
         ]);
         $data = $request->all();
         $website = WebsiteSetting::first();
-        if($website)
+        if ($website)
             $website->update($data);
         else
             WebsiteSetting::create($data);
-        
-        
-        return redirect()->back()->with('success', 'Data Updated Successfully');
 
+
+        return redirect()->back()->with('success', 'Data Updated Successfully');
     }
 
 
+    public function acceptPosts()
+    {
+        $website = WebsiteSetting::first();
 
+        if ($website->accept_posts == 'manual') {
+            $website->update(['accept_posts' => 'auto']); 
+            return response()->json(['status' => 'success', 'message' => trans(__('dashboard.data_updated_success')), 'type' => 'no']);
+
+        } else {
+            $website->update(['accept_posts' => 'manual']); 
+            return response()->json(['status' => 'success', 'message' => trans(__('dashboard.data_updated_success')), 'type' => 'no']);
+        }
+
+        return response()->json(['status' => 'error', 'message' => trans(__('dashboard.data_updated_success')), 'type' => 'no']);
+    }
 }

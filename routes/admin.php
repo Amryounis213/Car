@@ -59,7 +59,10 @@ Route::post('updateStatus', [PostsController::class, 'updateStatus'])->name('upd
 Route::resource('contactus', ContactUsController::class);
 
 Route::resource('createusers', UserController::class);
-Route::post('updatepassword', [UserController::class, 'updatepassword'])->name('admin.updatepassword');
+Route::post('updatepassword', [UserController::class, 'updatepassword'])->name('updatepassword');
+
+
+Route::get('acceptposts', [SettingController::class, 'acceptPosts'])->name('admin.acceptposts');
 
 
 Route::controller(WebsiteStaticsController::class)->group(function () {

@@ -13,6 +13,7 @@ use App\Models\Color;
 use App\Models\Generation;
 use App\Models\Image;
 use App\Models\User;
+use App\Models\WebsiteSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -228,8 +229,16 @@ class ProfileController extends Controller
             'length' => $request->length,
         ]);
 
+        // If it is a Mechanical Item
         if($request->post_type == 0){
             $car->post_type = 0;
+            $car->save();
+        }
+
+        $accept_post = WebsiteSetting::get('accept_posts');
+
+        if($accept_post == 'auto'){
+            $car->status = 'accepted';
             $car->save();
         }
 
