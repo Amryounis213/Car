@@ -15,6 +15,7 @@ use App\Models\Generation;
 use App\Models\User;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 
@@ -155,15 +156,34 @@ class DatabaseSeeder extends Seeder
         //     'password' => Hash::make('123456789'),
         // ]);
 
-
-
-        City::create([
-            ''
-        ]);
-
+        $data = file_get_contents('public/assets/data/WilayaList.json');
+        $citiesData = json_decode($data, true); // Convert JSON to PHP array
+        
+        
+        foreach ($citiesData as $cityData) {
+            // Extract the relevant data for the City model
+            $cityCode = $cityData['mattricule'];
+            $cityName = $cityData['name'];
+            $cityNameAr = $cityData['name_ar'];
+            $cityNameEn = $cityData['name_en'];
+            $cityNameEn = $cityData['name_en'];
+        
+            // Assuming postal codes are available, you can extract them too
+            // $postalCodes = $cityData['postalCodes'];
+        
+            // Create a new City record
+            City::create([
+                // 'code' => $cityCode,
+                // 'name' => $cityName,
+                'name' => [
+                    'ar' => $cityNameAr,
+                    'en' => $cityNameEn,
+                ],
+                // If you have postal codes, add them here as well
+                // 'postal_code' => json_encode($postalCodes),
+            ]);
+        }
+              
+        
     }
 }
-
-
-
-

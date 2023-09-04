@@ -17,18 +17,17 @@
     <meta name="keywords" content="{{ $SETTING->key_words }}">
     <meta name="author" content="Dmitry Volkov">
     <title>{{ $SETTING->title }}</title>
-   
-   @php
+
+    @php
         $lang = app()->getLocale();
     @endphp
 
     @if ($lang == 'ar')
         <style>
-			body {
-				direction: rtl;
-			}
-
-		</style>
+            body {
+                direction: rtl;
+            }
+        </style>
     @endif
 
     @yield('style')

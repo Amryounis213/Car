@@ -53,22 +53,32 @@
                                         </select>
                                     </div>
                                 </div>
-
                                 <div class="filter__group">
                                     <label for="filter__category" class="filter__label">{{ __('dashboard.brands') }}:</label>
-
+                                
                                     <div class="filter__select-wrap">
                                         <select name="brands" id="filter__category" class="filter__select">
                                             <option value="">{{ __('dashboard.all_brands') }}</option>
                                             @foreach ($brands as $brand)
                                                 <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                                             @endforeach
-
-
                                         </select>
                                     </div>
                                 </div>
-
+                                
+                                <div class="filter__group">
+                                    <label for="filter__cities" class="filter__label">{{ __('dashboard.the_cities') }}:</label>
+                                
+                                    <div class="filter__select-wrap">
+                                        <select name="cities" id="filter__cities" class="filter__select">
+                                            <option value="">{{ __('dashboard.all_cities') }}</option>
+                                            @foreach ($cities as $city)
+                                                <option value="{{ $city->id }}">{{ $city->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                
 
                                 <div class="filter__group">
                                     <label for="filter__models" class="filter__label">{{ __('dashboard.models') }}:</label>

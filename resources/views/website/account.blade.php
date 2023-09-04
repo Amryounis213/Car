@@ -18,7 +18,8 @@
                 <!-- breadcrumb -->
                 <div class="col-12">
                     <ul class="breadcrumbs">
-                        <li class="breadcrumbs__item"><a href="{{ route('website.home') }}">{{ __('dashboard.home') }}</a></li>
+                        <li class="breadcrumbs__item"><a href="{{ route('website.home') }}">{{ __('dashboard.home') }}</a>
+                        </li>
                         <li class="breadcrumbs__item breadcrumbs__item--active">{{ __('dashboard.my_account') }}</li>
                     </ul>
                 </div>
@@ -40,7 +41,8 @@
                         <ul class="nav nav-tabs profile__tabs" id="profile__tabs" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <button class="active" data-bs-toggle="tab" data-bs-target="#tab-1" type="button"
-                                    role="tab" aria-controls="tab-1" aria-selected="true">{{ __('dashboard.my_ads') }}</button>
+                                    role="tab" aria-controls="tab-1"
+                                    aria-selected="true">{{ __('dashboard.my_ads') }}</button>
                             </li>
 
                             <li class="nav-item" role="presentation">
@@ -61,20 +63,18 @@
 
                     @if (session()->has('success'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <strong>{{ session()->get('success') }}</strong>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                aria-label="Close"></button>
+                            <strong>{{ session()->get('success') }} <a href="{{ route('website.terms') }}">Check Terms And
+                                    Conditions..</a></strong>
+                            <p></p>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
-                        
                     @endif
 
                     @if (session()->has('error'))
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             <strong>{{ session()->get('error') }}</strong>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
-                        
                     @endif
                     <!-- content tabs -->
                     <div class="tab-content">
@@ -97,35 +97,44 @@
                                                             <th></th>
                                                         </tr>
                                                     </thead>
-
-                                                    <tbody>
-                                                        @foreach ($mycars as $car)
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="cart__img">
-                                                                        <img src="{{ asset('storage/'.$car->main_image) }}" alt="">
-                                                                    </div>
-                                                                </td>
-                                                                <td><a href="{{ route('showCar', $car->id) }}">{{ $car->title }}</a></td>
-                                                                <td>{{ $car->year }}</td>
-                                                                <td>{{ $car->gearbox }}</td>
-                                                                <td>{{ $car->fuel }}</td>
-                                                                <td><span class="cart__price">{{ $car->price }}</span>
-                                                                </td>
-                                                                <td>
-                                                                    <a href="{{ route('usercar.destroy', $car->id) }}" class="cart__delete"
-                                                                        aria-label="Delete">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                            viewBox="0 0 24 24">
-                                                                            <path
-                                                                                d="M13.41,12l6.3-6.29a1,1,0,1,0-1.42-1.42L12,10.59,5.71,4.29A1,1,0,0,0,4.29,5.71L10.59,12l-6.3,6.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l6.29,6.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z">
-                                                                            </path>
-                                                                        </svg>
-                                                                    </a>
-                                                                </td>
-                                                            </tr>
-                                                        @endforeach
-                                                    </tbody>
+                                                    @if ($mycars->count() > 0)
+                                                        <tbody>
+                                                            @foreach ($mycars as $car)
+                                                                <tr>
+                                                                    <td>
+                                                                        <div class="cart__img">
+                                                                            <img src="{{ asset('storage/' . $car->main_image) }}"
+                                                                                alt="">
+                                                                        </div>
+                                                                    </td>
+                                                                    <td><a
+                                                                            href="{{ route('showCar', $car->id) }}">{{ $car->title }}</a>
+                                                                    </td>
+                                                                    <td>{{ $car->year }}</td>
+                                                                    <td>{{ $car->gearbox }}</td>
+                                                                    <td>{{ $car->fuel }}</td>
+                                                                    <td><span
+                                                                            class="cart__price">{{ $car->price }}</span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="{{ route('usercar.destroy', $car->id) }}"
+                                                                            class="cart__delete" aria-label="Delete">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                viewBox="0 0 24 24">
+                                                                                <path
+                                                                                    d="M13.41,12l6.3-6.29a1,1,0,1,0-1.42-1.42L12,10.59,5.71,4.29A1,1,0,0,0,4.29,5.71L10.59,12l-6.3,6.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l6.29,6.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z">
+                                                                                </path>
+                                                                            </svg>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    @else
+                                                        <div class="alert alert-secondary" role="alert">
+                                                            {{ __(' Your Ads will be shown here.') }}
+                                                        </div>
+                                                    @endif
                                                 </table>
                                             </div>
                                         </div>
@@ -197,7 +206,7 @@
                                     <div class="col-12 col-md-6 col-xl-4">
                                         <div class="car">
                                             <div class="car__img">
-                                                <img src="{{ asset('storage/'.$car->main_image) }}" alt="">
+                                                <img src="{{ asset('storage/' . $car->main_image) }}" alt="">
                                             </div>
                                             <div class="car__title">
                                                 <h3 class="car__name"><a href="car.html">{{ $car->title }}</a></h3>
@@ -244,7 +253,8 @@
                                                             d="M20.16,5A6.29,6.29,0,0,0,12,4.36a6.27,6.27,0,0,0-8.16,9.48l6.21,6.22a2.78,2.78,0,0,0,3.9,0l6.21-6.22A6.27,6.27,0,0,0,20.16,5Zm-1.41,7.46-6.21,6.21a.76.76,0,0,1-1.08,0L5.25,12.43a4.29,4.29,0,0,1,0-6,4.27,4.27,0,0,1,6,0,1,1,0,0,0,1.42,0,4.27,4.27,0,0,1,6,0A4.29,4.29,0,0,1,18.75,12.43Z" />
                                                     </svg>
                                                 </button>
-                                                <a href="{{ route('showCar', $car->id) }}" class="car__more"><span>Buy Now (What is this For ?)</span></a>
+                                                <a href="{{ route('showCar', $car->id) }}" class="car__more"><span>Buy
+                                                        Now (What is this For ?)</span></a>
                                             </div>
                                         </div>
                                     </div>
@@ -322,61 +332,66 @@
                                             </div>
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="sign__group">
-                                                    <label class="sign__label" for="username">{{ __('dashboard.username') }}</label>
+                                                    <label class="sign__label"
+                                                        for="username">{{ __('dashboard.username') }}</label>
                                                     <input id="username" type="text" name="username"
                                                         class="sign__input" placeholder="User123"
                                                         value="{{ $user->username }}">
                                                 </div>
                                                 @error('username')
-                                                <div class="text-danger">{{ $message }}</div> 
-                                            @enderror
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
 
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="sign__group">
-                                                    <label class="sign__label" for="email1">{{ __('dashboard.email') }}</label>
+                                                    <label class="sign__label"
+                                                        for="email1">{{ __('dashboard.email') }}</label>
                                                     <input id="email1" type="text" name="email"
                                                         class="sign__input" placeholder="email@email.com"
                                                         value="{{ $user->email }}">
                                                 </div>
                                                 @error('email')
-                                                <div class="text-danger">{{ $message }}</div> 
-                                            @enderror
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
 
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="sign__group">
-                                                    <label class="sign__label" for="firstname">{{ __('dashboard.first_name') }}</label>
+                                                    <label class="sign__label"
+                                                        for="firstname">{{ __('dashboard.first_name') }}</label>
                                                     <input id="firstname" type="text" name="firstname"
                                                         class="sign__input" placeholder="John"
                                                         value="{{ $user->firstname }}">
                                                 </div>
                                                 @error('firstname')
-                                                <div class="text-danger">{{ $message }}</div> 
-                                            @enderror
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
 
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="sign__group">
-                                                    <label class="sign__label" for="lastname">{{ __('dashboard.last_name') }}</label>
+                                                    <label class="sign__label"
+                                                        for="lastname">{{ __('dashboard.last_name') }}</label>
                                                     <input id="lastname" type="text" name="lastname"
                                                         class="sign__input" placeholder="Doe"
                                                         value="{{ $user->lastname }}">
                                                 </div>
                                                 @error('lastname')
-                                                    <div class="text-danger">{{ $message }}</div> 
+                                                    <div class="text-danger">{{ $message }}</div>
                                                 @enderror
                                             </div>
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="sign__group">
-                                                    <label class="sign__label" for="lastname">{{ __('dashboard.phone') }}</label>
+                                                    <label class="sign__label"
+                                                        for="lastname">{{ __('dashboard.phone') }}</label>
                                                     <input id="lastname" type="text" name="phone"
                                                         class="sign__input" placeholder="Doe"
                                                         value="{{ $user->phone }}">
                                                 </div>
                                                 @error('phone')
-                                                <div class="text-danger">{{ $message }}</div> 
-                                            @enderror
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
 
                                             <div class="col-12">
@@ -390,7 +405,8 @@
 
                                 <!-- password form -->
                                 <div class="col-12 col-lg-6">
-                                    <form action="{{route('changepassword')}}" class="sign__form sign__form--profile" method="POST">
+                                    <form action="{{ route('changepassword') }}" class="sign__form sign__form--profile"
+                                        method="POST">
                                         @csrf
                                         <div class="row">
                                             <div class="col-12">
@@ -399,38 +415,39 @@
 
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="sign__group">
-                                                    <label class="sign__label" for="oldpass">{{ __('dashboard.old_password') }}</label>
+                                                    <label class="sign__label"
+                                                        for="oldpass">{{ __('dashboard.old_password') }}</label>
                                                     <input id="oldpass" type="password" name="old_password"
                                                         class="sign__input">
                                                 </div>
                                                 @error('old_password')
                                                     <div class="text-danger">{{ $message }}</div>
-                                                    
                                                 @enderror
                                             </div>
 
 
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="sign__group">
-                                                    <label class="sign__label" for="newpass">{{ __('dashboard.new_password') }}</label>
+                                                    <label class="sign__label"
+                                                        for="newpass">{{ __('dashboard.new_password') }}</label>
                                                     <input id="newpass" type="password" name="password"
                                                         class="sign__input">
                                                 </div>
                                                 @error('password')
-                                                <div class="text-danger">{{ $message }}</div>
-                                                
-                                            @enderror
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
 
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="sign__group">
-                                                    <label class="sign__label" for="confirmpass">{{ __('dashboard.confirm_new_password') }}</label>
+                                                    <label class="sign__label"
+                                                        for="confirmpass">{{ __('dashboard.confirm_new_password') }}</label>
                                                     <input id="confirmpass" type="password" name="password_confirmation"
                                                         class="sign__input">
                                                 </div>
                                             </div>
 
-                                          
+
 
                                             <div class="col-12">
                                                 <button class="sign__btn" id="save-button"

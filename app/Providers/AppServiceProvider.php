@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Brand;
 use App\Models\CarModel;
+use App\Models\City;
 use App\Models\Color;
 use App\Models\WebsiteSetting;
 use App\Models\WebsiteStatic;
@@ -28,10 +29,12 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
 
         $brands = Brand::get();
+        $cities = City::get();
         $models = CarModel::get();
         $colors = Color::get();
         view()->share('models', $models);
         view()->share('brands', $brands);
+        view()->share('cities', $cities);
         view()->share('colors', $colors);
         //
         $SETTING= WebsiteSetting::first();

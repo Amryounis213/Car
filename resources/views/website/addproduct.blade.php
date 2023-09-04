@@ -37,114 +37,130 @@
             <div class="row">
                 <div class="col-12 col-lg-7 col-xl-7">
                     @if (session()->has('error'))
-                        <div class="alert alert-danger">{{ session()->get('error') }}</div>   
+                        <div class="alert alert-danger">{{ session()->get('error') }}</div>
                     @endif
-                    @if(auth()->user()->post_attempts > 0)
-                    <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data"
-                        class="sign__form sign__form--contacts">
-                        @csrf
-                        <div class="row">
-                            <div class="col-12 col-md-6">
-                                <div class="sign__group">
-                                    <select name="post_type" class="sign__input">
-                                        <option value="" disabled selected>Select Ad Type</option>
-                                        <option value="1" @selected(old('post_type') == 1)>Car</option>
-                                        <option value="0" @selected(old('post_type') == 0)>Mechanical Item</option>
-                                    </select>
+                    @if (auth()->user()->post_attempts > 0)
+                        <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data"
+                            class="sign__form sign__form--contacts">
+                            @csrf
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <div class="sign__group">
+                                        <select name="post_type" class="sign__input">
+                                            <option value="" disabled selected>Select Ad Type</option>
+                                            <option value="1" @selected(old('post_type') == 1)>Car</option>
+                                            <option value="0" @selected(old('post_type') == 0)>Mechanical Item</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
 
-                            {{-- Post Title --}}
-                            <div class="col-12">
-                                <div class="sign__group">
-                                    <textarea name="description" class="sign__textarea" placeholder="Description ..">{{old('description')}}</textarea>
-                                    @error('description')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                                {{-- Post Title --}}
+                                <div class="col-12">
+                                    <div class="sign__group">
+                                        <textarea name="description" class="sign__textarea" placeholder="Description ..">{{ old('description') }}</textarea>
+                                        @error('description')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
                                 </div>
-                            </div>
 
+                                <div class="col-12 col-md-6">
+                                    <div class="sign__group">
+                                        <select name="city_id" class="sign__input">
+                                            <option value="" disabled selected>Select City</option>
+                                            @foreach ($cities as $city)
+                                                <option value="{{ $city->id }}" @selected(old('city_id') == $city->id)>
+                                                    {{ $city->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
 
-                            <div class="col-12 col-md-6">
-                                <div class="sign__group">
-                                    {{-- <input type="text" inputmode="numeric" pattern="[0-9]*" min="1900" max=""
+                                <div class="col-12 col-md-6">
+                                    <div class="sign__group">
+                                        {{-- <input type="text" inputmode="numeric" pattern="[0-9]*" min="1900" max=""
                                         name="year" class="sign__input" placeholder="Year" id="year-input"> --}}
-                                    <select name="year" class="sign__input" id="year-input">
-                                        <option value="" disabled selected>Select Year</option>
-                                        <?php
-                                        $currentYear = date('Y');
-                                        $selected = old('year') == $currentYear ? 'selected' : '';
-                                        for ($year = $currentYear; $year >= 1912; $year--) {
-                                            echo "<option value='$year' $selected>$year</option>";
-                                        }
-                                        ?>
-                                    </select>
-                                    @error('year')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                                        <select name="year" class="sign__input" id="year-input">
+                                            <option value="" disabled selected>Select Year</option>
+                                            <?php
+                                            $currentYear = date('Y');
+                                            $selected = old('year') == $currentYear ? 'selected' : '';
+                                            for ($year = $currentYear; $year >= 1912; $year--) {
+                                                echo "<option value='$year' $selected>$year</option>";
+                                            }
+                                            ?>
+                                        </select>
+                                        @error('year')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+
+                                    </div>
+                                </div>
+                                {{-- This Should be a Select View --}}
+                                <div class="col-12 col-md-6">
+                                    <div class="sign__group">
+                                        <select name="car_model_id" class="sign__input">
+                                            <option value="" disabled selected>Select Car Model</option>
+                                            @foreach ($models as $model)
+                                                <option value="{{ $model->id }}" @selected(old('car_model_id') == $model->id)>
+                                                    {{ $model->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('car_model_id')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6">
+                                    <div class="sign__group">
+                                        <select name="generation_id" class="sign__input">
+                                            <option value="" disabled selected>Select Car Generation</option>
+                                            @foreach ($generation as $generation)
+                                                <option value="{{ $generation->id }}" @selected(old('generation_id') == $generation->id)>
+                                                    {{ $generation->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('generation_id')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6">
+                                    <div class="sign__group">
+                                        <select name="car_type_id" class="sign__input">
+                                            <option value="" disabled selected>Select Car Type</option>
+                                            @foreach ($carTypes as $model)
+                                                <option value="{{ $model->id }}" @selected(old('car_type_id') == $model->id)>
+                                                    {{ $model->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('car_type_id')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
 
                                 </div>
-                            </div>
-                            {{-- This Should be a Select View --}}
-                            <div class="col-12 col-md-6">
-                                <div class="sign__group">
-                                    <select name="car_model_id" class="sign__input">
-                                        <option value="" disabled selected>Select Car Model</option>
-                                        @foreach ($models as $model)
-                                            <option value="{{ $model->id }}" @selected(old('car_model_id') == $model->id)>{{ $model->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('car_model_id')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+
+                                <div class="col-12 col-md-6">
+                                    <div class="sign__group">
+                                        <select name="brand_id" class="sign__input">
+                                            <option value="" disabled selected>Select Car Brand</option>
+                                            @foreach ($brands as $model)
+                                                <option value="{{ $model->id }}" @selected(old('brand_id') == $model->id)>
+                                                    {{ $model->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('brand_id')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-12 col-md-6">
-                                <div class="sign__group">
-                                    <select name="generation_id" class="sign__input">
-                                        <option value="" disabled selected>Select Car Generation</option>
-                                        @foreach ($generation as $generation)
-                                            <option value="{{ $generation->id }}" @selected(old('generation_id') == $generation->id)>{{ $generation->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('generation_id')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="col-12 col-md-6">
-                                <div class="sign__group">
-                                    <select name="car_type_id" class="sign__input">
-                                        <option value="" disabled selected>Select Car Type</option>
-                                        @foreach ($carTypes as $model)
-                                            <option value="{{ $model->id }}" @selected(old('car_type_id') == $model->id)>{{ $model->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('car_type_id')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                                </div>
-                               
-                            </div>
-
-                            <div class="col-12 col-md-6">
-                                <div class="sign__group">
-                                    <select name="brand_id" class="sign__input">
-                                        <option value="" disabled selected>Select Car Brand</option>
-                                        @foreach ($brands as $model)
-                                            <option value="{{ $model->id }}" @selected(old('brand_id') == $model->id)>{{ $model->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('brand_id')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-
-                                </div>
-                            </div>
-
-                            {{-- <div class="col-12 col-md-6">
+                                {{-- <div class="col-12 col-md-6">
                                 <div class="sign__group">
                                     <select name="year" class="sign__input">
                                         <option value="" disabled selected>Select Release Year</option>
@@ -158,159 +174,169 @@
                                 </div>
                             </div> --}}
 
-                            {{-- What is Technical Control ?! --}}
+                                {{-- What is Technical Control ?! --}}
 
-                            <div class="col-12 col-md-6">
-                                <div class="sign__group">
-                                    <input type="number" name="price" class="sign__input" value="{{old('price')}}" placeholder="Price">
+                                <div class="col-12 col-md-6">
+                                    <div class="sign__group">
+                                        <input type="number" name="price" class="sign__input"
+                                            value="{{ old('price') }}" placeholder="Price">
+                                    </div>
+                                    @error('price')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
-                                @error('price')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
 
-                            <div class="col-12 col-md-6">
-                                <div class="sign__group">
-                                    <input type="number" value="{{old('number_of_owners')}}"  min="0" max="79" name="number_of_owners"
-                                        class="sign__input" placeholder="Number of Owners">
+                                <div class="col-12 col-md-6">
+                                    <div class="sign__group">
+                                        <input type="number" value="{{ old('number_of_owners') }}" min="0"
+                                            max="79" name="number_of_owners" class="sign__input"
+                                            placeholder="Number of Owners">
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-12 col-md-6">
-                                <div class="sign__group">
-                                    <input type="number" value="{{old('mileage')}}"  name="mileage" class="sign__input" placeholder="Mileage"
-                                        min="0" max="999999">
+                                <div class="col-12 col-md-6">
+                                    <div class="sign__group">
+                                        <input type="number" value="{{ old('mileage') }}" name="mileage"
+                                            class="sign__input" placeholder="Mileage" min="0" max="999999">
+                                    </div>
                                 </div>
-                            </div>
-                            {{-- Gearbox is a Select View --}}
-                            <div class="col-12 col-md-6">
-                                <div class="sign__group">
-                                    <select name="gearbox" class="sign__input">
-                                        <option value="" disabled selected>Select Gearbox</option>
-                                        <option value="manual" @selected(old('gearbox') == 'manual')>Manual</option>
-                                        <option value="automatic" @selected(old('gearbox') == 'automatic')>Automatic</option>
-                                    </select>
+                                {{-- Gearbox is a Select View --}}
+                                <div class="col-12 col-md-6">
+                                    <div class="sign__group">
+                                        <select name="gearbox" class="sign__input">
+                                            <option value="" disabled selected>Select Gearbox</option>
+                                            <option value="manual" @selected(old('gearbox') == 'manual')>Manual</option>
+                                            <option value="automatic" @selected(old('gearbox') == 'automatic')>Automatic</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
 
 
-                             {{-- Gearbox is a Select View --}}
-                             <div class="col-12 col-md-6">
-                                <div class="sign__group">
-                                    <select name="fuel" class="sign__input">
-                                        <option value="" disabled selected>Select fuel</option>
-                                        <option value="Diesel" @selected(old('fuel') == 'Diesel')>Diesel</option>
-                                        <option value="Essence" @selected(old('fuel') == 'Essence')>Gasoline</option>
-                                        <option value="Electric" @selected(old('fuel') == 'Electric')>Electric</option>
+                                {{-- Gearbox is a Select View --}}
+                                <div class="col-12 col-md-6">
+                                    <div class="sign__group">
+                                        <select name="fuel" class="sign__input">
+                                            <option value="" disabled selected>Select fuel</option>
+                                            <option value="Diesel" @selected(old('fuel') == 'Diesel')>Diesel</option>
+                                            <option value="Essence" @selected(old('fuel') == 'Essence')>Gasoline</option>
+                                            <option value="Electric" @selected(old('fuel') == 'Electric')>Electric</option>
 
-                                    </select>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
 
 
 
-                            {{-- هادي ممكن نعملها ليستة من الالوان وخلص مش ضروري موضوع الكلر آي دي  --}}
-                            <div class="col-12 col-md-6">
-                                <div class="sign__group">
-                                    <select name="color_id_in" class="sign__input">
-                                        <option value="" disabled selected>Select Color Inner</option>
-                                        @foreach ($carColors as $color)
-                                            <option value="{{ $color->id }}" @selected(old('color_id_in') == $color->id)>{{ $color->name }}</option>
-                                        @endforeach
-                                    </select>
+                                {{-- هادي ممكن نعملها ليستة من الالوان وخلص مش ضروري موضوع الكلر آي دي  --}}
+                                <div class="col-12 col-md-6">
+                                    <div class="sign__group">
+                                        <select name="color_id_in" class="sign__input">
+                                            <option value="" disabled selected>Select Color Inner</option>
+                                            @foreach ($carColors as $color)
+                                                <option value="{{ $color->id }}" @selected(old('color_id_in') == $color->id)>
+                                                    {{ $color->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            {{-- هادي ممكن نعملها ليستة من الالوان وخلص مش ضروري موضوع الكلر آي دي  --}}
-                            <div class="col-12 col-md-6">
-                                <div class="sign__group">
-                                    <select name="color_id_out" class="sign__input">
-                                        <option value="" disabled selected>Select Color Outter</option>
-                                        @foreach ($carColors as $color)
-                                            <option value="{{ $color->id }}" @selected(old('color_id_out') == $color->id)>{{ $color->name }}</option>
-                                        @endforeach
-                                    </select>
+                                {{-- هادي ممكن نعملها ليستة من الالوان وخلص مش ضروري موضوع الكلر آي دي  --}}
+                                <div class="col-12 col-md-6">
+                                    <div class="sign__group">
+                                        <select name="color_id_out" class="sign__input">
+                                            <option value="" disabled selected>Select Color Outter</option>
+                                            @foreach ($carColors as $color)
+                                                <option value="{{ $color->id }}" @selected(old('color_id_out') == $color->id)>
+                                                    {{ $color->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            {{-- Select View --}}
-                            {{-- <div class="col-12 col-md-6">
+                                {{-- Select View --}}
+                                {{-- <div class="col-12 col-md-6">
                                 <div class="sign__group">
                                     <input type="text" name="upholstery" class="sign__input" placeholder="Upholstery">
                                 </div>
                             </div> --}}
 
-                            <div class="col-12 col-md-6">
-                                <div class="sign__group">
-                                    <input type="number"  value="{{old('number_of_doors')}}"  min="1" max="8" name="number_of_doors"
-                                        class="sign__input" placeholder="Number Of Doors">
+                                <div class="col-12 col-md-6">
+                                    <div class="sign__group">
+                                        <input type="number" value="{{ old('number_of_doors') }}" min="1"
+                                            max="8" name="number_of_doors" class="sign__input"
+                                            placeholder="Number Of Doors">
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-12 col-md-6">
-                                <div class="sign__group">
-                                    <input type="number"  value="{{old('seats')}}"  min="1" max="8" name="seats"
-                                        class="sign__input" placeholder="Number Of Seats">
+                                <div class="col-12 col-md-6">
+                                    <div class="sign__group">
+                                        <input type="number" value="{{ old('seats') }}" min="1" max="8"
+                                            name="seats" class="sign__input" placeholder="Number Of Seats">
+                                    </div>
                                 </div>
-                            </div>
 
 
-                            <div class="col-12 col-md-6">
-                                <div class="sign__group">
-                                    <input type="number"  value="{{old('walk_for_liter')}}"  min="1" max="400" name="walk_for_liter"
-                                        class="sign__input" placeholder="distance per liter">
+                                <div class="col-12 col-md-6">
+                                    <div class="sign__group">
+                                        <input type="number" value="{{ old('walk_for_liter') }}" min="1"
+                                            max="400" name="walk_for_liter" class="sign__input"
+                                            placeholder="distance per liter">
+                                    </div>
                                 </div>
-                            </div>
 
 
-                            
 
-                            {{-- Select View --}}
-                            <div class="col-12 col-md-12">
-                                {{-- <div class="sign__group"> --}}
-                                <label for="fuel" class="sign__label">{{ __('dashboard.force_points') }}</label>
-                                <div class="sign__group sign__group--checkbox">
-                                    @foreach ($amenities as $key => $amenity)
-                                        <div style="display: flex; align-items: center;">
 
-                                            <input type="checkbox" name="amenities[]" value="amenity{{ $key }}"
-                                                id="amenity{{ $key }}">
-                                            <label for="amenity{{ $key }}"> {{ $amenity->name }}</label>
-                                            <img style="width: 20px; height: 20px; margin-left: 5px;"
-                                                src="{{ asset('storage/' . $amenity->icon) }}" alt="">
-                                        </div>
-                                    @endforeach
-                                    {{-- </div> --}}
+                                {{-- Select View --}}
+                                <div class="col-12 col-md-12">
+                                    {{-- <div class="sign__group"> --}}
+                                    <label for="fuel" class="sign__label">{{ __('dashboard.force_points') }}</label>
+                                    <div class="sign__group sign__group--checkbox">
+                                        @foreach ($amenities as $key => $amenity)
+                                            <div style="display: flex; align-items: center;">
+
+                                                <input type="checkbox" name="amenities[]"
+                                                    value="amenity{{ $key }}" id="amenity{{ $key }}">
+                                                <label for="amenity{{ $key }}"> {{ $amenity->name }}</label>
+                                                <img style="width: 20px; height: 20px; margin-left: 5px;"
+                                                    src="{{ asset('storage/' . $amenity->icon) }}" alt="">
+                                            </div>
+                                        @endforeach
+                                        {{-- </div> --}}
+                                    </div>
                                 </div>
-                            </div>
 
 
-                            {{-- <div class="col-12">
+                                {{-- <div class="col-12">
                                 <div class="sign__group">
                                     <textarea name="text" class="sign__textarea" placeholder="Type your message"></textarea>
                                 </div>
                             </div> --}}
 
-                            <div class="col-12">
-                                <div class="sign__group">
-                                    <input id="images" type="file" name="images[]" class="custom-file-input"
-                                        multiple>
+                                <div class="col-12">
+                                    <div class="sign__group">
+                                        <input id="images" type="file" name="images[]" class="custom-file-input"
+                                            multiple>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-12 col-xl-3">
+                                    <button type="submit"
+                                        class="sign__btn"><span>{{ __('dashboard.post') }}</span></button>
                                 </div>
                             </div>
-
-
-                            <div class="col-12 col-xl-3">
-                                <button type="submit" class="sign__btn"><span>{{ __('dashboard.post') }}</span></button>
-                            </div>
-                        </div>
-                    </form>
+                        </form>
                     @else
-                    <div class="alert alert-danger">{{ __('dashboard.you_have_reached_your_maximum_post_limit')  . " " .  $SETTING->whatsapp }}</div>
+                        <div class="alert alert-danger">
+                            {{ __('dashboard.you_have_reached_your_maximum_post_limit') . ' ' . $SETTING->whatsapp }}
+                        </div>
                     @endif
                 </div>
 
                 <div class="col-12 col-md-6 col-lg-5 col-xl-4 offset-xl-1">
                     <div class="main__title main__title--sidebar">
                         <h2>{{ __('dashboard.info') }}</h2>
-                        <p>{{ __('dashboard.we_understand_that_taking_that_first_step_is_important') }}<strong style="color: red">{{ auth()->user()->post_attempts ?? '1' }} </strong> 
+                        <p>{{ __('dashboard.we_understand_that_taking_that_first_step_is_important') }}<strong
+                                style="color: red">{{ auth()->user()->post_attempts ?? '1' }} </strong>
                             {{ __('dashboard.post_attempts_remaining') }}
                         </p>
                     </div>
@@ -352,21 +378,21 @@
                             </svg></a>
                     </div> --}}
                     <div class="contacts__social">
-                        <a href="{{ $SETTING->facebook }}" target="_blank"><svg
-                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <a href="{{ $SETTING->facebook }}" target="_blank"><svg xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24">
                                 <path
                                     d="M20.9,2H3.1A1.1,1.1,0,0,0,2,3.1V20.9A1.1,1.1,0,0,0,3.1,22h9.58V14.25h-2.6v-3h2.6V9a3.64,3.64,0,0,1,3.88-4,20.26,20.26,0,0,1,2.33.12v2.7H17.3c-1.26,0-1.5.6-1.5,1.47v1.93h3l-.39,3H15.8V22h5.1A1.1,1.1,0,0,0,22,20.9V3.1A1.1,1.1,0,0,0,20.9,2Z" />
                             </svg>
                         </a>
 
-                        <a href="{{ $SETTING->instagram }}" target="_blank"><svg
-                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <a href="{{ $SETTING->instagram }}" target="_blank"><svg xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24">
                                 <path
                                     d="M17.34,5.46h0a1.2,1.2,0,1,0,1.2,1.2A1.2,1.2,0,0,0,17.34,5.46Zm4.6,2.42a7.59,7.59,0,0,0-.46-2.43,4.94,4.94,0,0,0-1.16-1.77,4.7,4.7,0,0,0-1.77-1.15,7.3,7.3,0,0,0-2.43-.47C15.06,2,14.72,2,12,2s-3.06,0-4.12.06a7.3,7.3,0,0,0-2.43.47A4.78,4.78,0,0,0,3.68,3.68,4.7,4.7,0,0,0,2.53,5.45a7.3,7.3,0,0,0-.47,2.43C2,8.94,2,9.28,2,12s0,3.06.06,4.12a7.3,7.3,0,0,0,.47,2.43,4.7,4.7,0,0,0,1.15,1.77,4.78,4.78,0,0,0,1.77,1.15,7.3,7.3,0,0,0,2.43.47C8.94,22,9.28,22,12,22s3.06,0,4.12-.06a7.3,7.3,0,0,0,2.43-.47,4.7,4.7,0,0,0,1.77-1.15,4.85,4.85,0,0,0,1.16-1.77,7.59,7.59,0,0,0,.46-2.43c0-1.06.06-1.4.06-4.12S22,8.94,21.94,7.88ZM20.14,16a5.61,5.61,0,0,1-.34,1.86,3.06,3.06,0,0,1-.75,1.15,3.19,3.19,0,0,1-1.15.75,5.61,5.61,0,0,1-1.86.34c-1,.05-1.37.06-4,.06s-3,0-4-.06A5.73,5.73,0,0,1,6.1,19.8,3.27,3.27,0,0,1,5,19.05a3,3,0,0,1-.74-1.15A5.54,5.54,0,0,1,3.86,16c0-1-.06-1.37-.06-4s0-3,.06-4A5.54,5.54,0,0,1,4.21,6.1,3,3,0,0,1,5,5,3.14,3.14,0,0,1,6.1,4.2,5.73,5.73,0,0,1,8,3.86c1,0,1.37-.06,4-.06s3,0,4,.06a5.61,5.61,0,0,1,1.86.34A3.06,3.06,0,0,1,19.05,5,3.06,3.06,0,0,1,19.8,6.1,5.61,5.61,0,0,1,20.14,8c.05,1,.06,1.37.06,4S20.19,15,20.14,16ZM12,6.87A5.13,5.13,0,1,0,17.14,12,5.12,5.12,0,0,0,12,6.87Zm0,8.46A3.33,3.33,0,1,1,15.33,12,3.33,3.33,0,0,1,12,15.33Z" />
                             </svg></a>
 
-                        <a href="{{ $SETTING->twitter }}" target="_blank"><svg
-                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <a href="{{ $SETTING->twitter }}" target="_blank"><svg xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24">
                                 <path
                                     d="M22,5.8a8.49,8.49,0,0,1-2.36.64,4.13,4.13,0,0,0,1.81-2.27,8.21,8.21,0,0,1-2.61,1,4.1,4.1,0,0,0-7,3.74A11.64,11.64,0,0,1,3.39,4.62a4.16,4.16,0,0,0-.55,2.07A4.09,4.09,0,0,0,4.66,10.1,4.05,4.05,0,0,1,2.8,9.59v.05a4.1,4.1,0,0,0,3.3,4A3.93,3.93,0,0,1,5,13.81a4.9,4.9,0,0,1-.77-.07,4.11,4.11,0,0,0,3.83,2.84A8.22,8.22,0,0,1,3,18.34a7.93,7.93,0,0,1-1-.06,11.57,11.57,0,0,0,6.29,1.85A11.59,11.59,0,0,0,20,8.45c0-.17,0-.35,0-.53A8.43,8.43,0,0,0,22,5.8Z" />
                             </svg></a>
@@ -386,8 +412,8 @@
                             </svg>
                         </a>
 
-                        <a href="mailto:{{ $SETTING->email }}" target="_blank"><svg
-                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <a href="mailto:{{ $SETTING->email }}" target="_blank"><svg xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24">
                                 <path
                                     d="M19,4H5A3,3,0,0,0,2,7V17a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V7A3,3,0,0,0,19,4Zm-.41,2-5.88,5.88a1,1,0,0,1-1.42,0L5.41,6ZM20,17a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V7.41l5.88,5.88a3,3,0,0,0,4.24,0L20,7.41Z" />
                             </svg></a>
@@ -414,7 +440,7 @@
                                 @foreach ($images as $car)
                                     <li class="splide__slide">
                                         <a href="{{ route('showCarByImage', $car->id) }}" class="partners__img">
-                                                <img src="{{ asset('storage/' . $car->main_image) }}" alt="">
+                                            <img src="{{ asset('storage/' . $car->main_image) }}" alt="">
                                         </a>
                                     </li>
                                 @endforeach

@@ -12,6 +12,7 @@ use App\Models\Brand;
 use App\Models\Car;
 use App\Models\CarModel;
 use App\Models\CarType;
+use App\Models\City;
 use App\Models\Color;
 use App\Models\Generation;
 use App\Models\Image;
@@ -20,6 +21,7 @@ use App\Models\Role as ModelsRole;
 use App\Models\RoleUser;
 use App\Models\User;
 use App\Models\Wallet;
+use App\Rules\CheckPostAttempts;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -187,10 +189,11 @@ class UserController extends Controller
         $generation = Generation::select('id', 'name')->get();
         $carColors = Color::select('id', 'name')->get();
         $amenities = Amenity::get();
+        $cities = City::get();
         $images = Car::inRandomOrder()->take(10)->get(['main_image', 'id']);
         // dd($images);
         $users = User::where('created_by_admin', 1)->get();
-        return view('admin.users.createpost', compact('car', 'models', 'brands', 'carTypes', 'generation', 'carColors', 'amenities', 'images', 'users'));
+        return view('admin.users.createpost', compact('car', 'models', 'brands', 'carTypes', 'generation', 'carColors', 'amenities', 'images', 'users', 'cities'));
     }
 
 
@@ -202,7 +205,7 @@ class UserController extends Controller
             'brand_id' => 'required|exists:brands,id',
             // 'car_type_id' => 'required|exists:car_types,id',
             'generation_id' => 'required|exists:generations,id',
-            // 'user_id' => 'required|exists:users,id',
+            'user_id' => ['required', 'exists:users,id', new CheckPostAttempts],
             'color_id_in' => 'nullable|exists:colors,id',
             'color_id_out' => 'nullable|exists:colors,id',
             // 'name' => 'required|unique:cars,name',

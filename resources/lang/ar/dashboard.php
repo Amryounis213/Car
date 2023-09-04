@@ -69,7 +69,9 @@ return [
     'newest' => 'الأحدث',
     'oldest' => 'الأقدم',
     'models' => 'الموديلات',
-    'all_brands' => 'جميع الماركات',
+    'all_brands' => 'جميع الشركات',
+    'all_cities' => 'جميع المدن',
+    'the_cities' => 'المدن',
     'all_models' => 'جميع الموديلات',
     'all_colors' => 'جميع الألوان',
     'seats' => 'المقاعد',
@@ -88,4 +90,7 @@ return [
 
     'added_to_fav_success' => 'تمت الإضافة إلى المفضلة بنجاح',
     'add_admin' => 'اضافة مسؤول',
+
+    'post_type' => 'نوع الاعلان',
+    'select_city' => 'اختر مدينة',
 ];

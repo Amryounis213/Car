@@ -722,6 +722,7 @@ return [
     'oldest' => 'Oldest',
     'models' => 'Models',
     'all_brands' => 'All Brands',
+    'all_cities' => 'All Cities',
     'all_models' => 'All Models',
     'all_colors' => 'All Colors',
     'seats' => 'Seats',
@@ -738,4 +739,8 @@ return [
 
     'add_admin' => 'Add Admin',
 
+    'post_type' => 'Advertisement Type',
+    'select_city' => 'Select City',
+
+    'the_cities' => 'The Cities',
 ];

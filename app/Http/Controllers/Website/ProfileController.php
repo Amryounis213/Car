@@ -8,6 +8,7 @@ use App\Models\Brand;
 use App\Models\Car;
 use App\Models\CarModel;
 use App\Models\CarType;
+use App\Models\City;
 use App\Models\Color;
 use App\Models\Generation;
 use App\Models\Image;
@@ -141,8 +142,9 @@ class ProfileController extends Controller
         $carColors = Color::select('id', 'name')->get();
         $amenities = Amenity::get();
         $images = Car::inRandomOrder()->take(10)->get(['main_image', 'id']);
-        // dd($images);
-        return view('website.addproduct', compact('car', 'models', 'brands', 'carTypes', 'generation', 'carColors', 'amenities', 'images'));
+        $cities = City::select('id', 'name')->get();
+        // dd($cities);
+        return view('website.addproduct', compact('car', 'models', 'brands', 'carTypes', 'generation', 'carColors', 'amenities', 'images', 'cities'));
     }
 
 

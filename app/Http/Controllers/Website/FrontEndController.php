@@ -3,14 +3,18 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
+use App\Mail\AdminContactNotification;
 use App\Models\Brand;
 use App\Models\Car;
+use App\Models\City;
 use App\Models\CommonQuestion;
 use App\Models\Contact;
 use App\Models\Favorite;
+use App\Models\WebsiteSetting;
 use App\Models\WebsiteStatic;
 use App\Models\WhoUs;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class FrontEndController extends Controller
 {
@@ -19,8 +23,9 @@ class FrontEndController extends Controller
     {
         $cars = Car::all();
         $brands = Brand::all();
+        $cities = City::select('name', 'id')->get();
         // dd($website);
-        return view('website.index', compact('cars', 'brands'));
+        return view('website.index', compact('cars', 'brands', 'cities'));
     }
 
     public function showCar($id)
@@ -95,6 +100,9 @@ class FrontEndController extends Controller
         })
             ->when($request->year, function ($q) use ($request) {
                 $q->where('year', 'like', '%' . $request->year . '%');
+            })
+            ->when($request->city_id, function ($q) use ($request) {
+                $q->where('city_id', 'like', '%' . $request->city_id . '%');
             })
             //get price less than or equal to the amount
             ->when($request->amount, function ($q) use ($request) {
@@ -171,6 +179,13 @@ class FrontEndController extends Controller
     {
         $data = $request->all();
         $message = Contact::create($data);
-        return redirect()->route('website.home');
+        $email = WebsiteSetting::get('email');
+        try {
+            Mail::to($email)->send(new AdminContactNotification($data));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', 'An error occurred while sending the message.');
+        }
+
+        return redirect()->back()->with('success', __('Message Sent Successfully!, We will contact you as soon as possiable.'));
     }
 }

@@ -28,6 +28,17 @@
             </div>
 
             <div class="row">
+                @if (session()->has('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>{{ session()->get('success') }}</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @else
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>{{ session()->get('error') }}</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
                 <div class="col-12 col-lg-7 col-xl-7">
                     <form action="{{ route('storecontactus') }}" method="POST" class="sign__form sign__form--contacts">
                         @csrf

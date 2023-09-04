@@ -82,7 +82,9 @@ Route::group(
 
 
 
-
+Route::get('/test', function(){
+  return view('test');
+});
 
 
 /** OTHER PAGES THAT SHOULD NOT BE LOCALIZED **/

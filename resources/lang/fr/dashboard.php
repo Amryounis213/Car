@@ -71,6 +71,7 @@ return [
     'oldest' => 'Plus ancien',
     'models' => 'Modèles',
     'all_brands' => 'Toutes les marques',
+    'all_cities' => 'Toutes les villes',
     'all_models' => 'Tous les modèles',
     'all_colors' => 'Toutes les couleurs',
     'seats' => 'Places',
@@ -87,4 +88,8 @@ return [
     'add_a_minimal_make_year' => 'Ajouter une année de fabrication minimale',
     'added_to_fav_success' => 'Ajouté aux favoris avec succès',
 
+    'post_type' => 'Type d\'annonce',
+    'select_city' => 'Sélectionnez une ville',
+
+    'the_cities' => 'Les Villes',
 ];

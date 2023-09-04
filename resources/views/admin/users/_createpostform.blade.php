@@ -82,6 +82,13 @@
 
                         <!--begin::Input-->
                         <div class="col-lg-6">
+                            <x-form-input col="12" title="City" type="select" name="city_id"
+                                :var="$cities" />
+                        </div>
+                        <!--end::Input-->
+
+                        <!--begin::Input-->
+                        <div class="col-lg-6">
                             <x-form-input col="12" title="Brand" type="select" name="brand_id"
                                 :var="$brands" />
                         </div>
