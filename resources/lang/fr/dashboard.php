@@ -95,5 +95,5 @@ return [
     
     'car' => 'voiture',
     'cars' => 'voitures',
-    'mechanical_item' => 'pièces automobiles',
+    'mechanical_items' => 'pièces automobiles',
 ];

@@ -11,7 +11,7 @@ class Car extends Model
     use HasFactory;
     protected $guarded = [];
     protected $casts = [
-        'images' => 'json',
+        'images' => 'array',
     ];
     
     //realationships

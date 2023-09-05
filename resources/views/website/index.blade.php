@@ -62,6 +62,7 @@
                                 <div class="home__group">
                                     <label for="">{{ __('dashboard.post_type') }}</label>
                                     <select name="post_type" id="" class="sign__input">
+                                        <option value="">{{ __('dashboard.post_type') }}</option>
                                         <option value="1">{{ __('dashboard.cars') }}</option>
                                         <option value="0">{{ __('dashboard.mechanical_items') }}</option>
                                     </select>
@@ -135,7 +136,7 @@
 
                                 <div class="splide__track">
                                     <ul class="splide__list">
-                                        @foreach ((array)$car->images as $image)
+                                        @foreach ($car->images as $image)
                                             <li class="splide__slide">
                                                 <img src="{{ asset('storage/' . $image) }}" alt="">
                                             </li>

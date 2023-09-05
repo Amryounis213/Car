@@ -175,7 +175,7 @@ class ProfileController extends Controller
             'seats' => 'nullable|integer|min:1',
             'length' => 'nullable|integer|min:1',
             'main_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'images.*' => 'nullable',
+            'images.*' => 'required',
             'techenical_control' => 'nullable|string',
             'first_hand' => 'nullable|boolean',
             'release_date' => 'nullable|date',
@@ -197,6 +197,7 @@ class ProfileController extends Controller
             'gearbox.required' => 'The gearbox field is required.',
             'fuel.required' => 'The fuel field is required.',
             'images.*.image' => 'The images must be an image.',
+            'images.required' => 'Please add images.',
             'images.*.mimes' => 'The images must be a file of type: jpeg, png, jpg, gif.',
             'images.*.max' => 'The images may not be greater than 2048 kilobytes.',
             // Add more custom error messages here for other fields

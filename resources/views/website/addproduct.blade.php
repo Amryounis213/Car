@@ -313,7 +313,7 @@
 
                                 <div class="col-12">
                                     <div class="sign__group">
-                                        <input id="images" type="file" name="images[]" class="custom-file-input"
+                                        <input id="images" required type="file" name="images[]" class="custom-file-input"
                                             multiple>
                                     </div>
                                 </div>

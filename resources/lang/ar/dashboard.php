@@ -96,5 +96,5 @@ return [
 
     'car' => 'سيارة',
     'cars' => 'سيارات',
-    'mechanical_item' => 'قطع سيارات',
+    'mechanical_items' => 'قطع سيارات',
 ];
