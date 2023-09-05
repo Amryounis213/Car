@@ -76,7 +76,7 @@
 
             </div>
 
-            <div class="form-group row">
+            {{-- <div class="form-group row">
                 <label class="col-3 col-form-label">Accept Posts</label>
                 <div class="col-3">
                     <span class="switch switch-lg">
@@ -90,8 +90,21 @@
                 <div class="col-3">
                     <span id="acceptPostsLabel">{{ $website->accept_posts == 'auto' ? 'Auto' : 'Manual' }}</span>
                 </div>
+            </div> --}}
+            
+            <div class="col-lg-12 row">
+                <!--begin::Row-->
+                <label class="col-lg-2 col-form-label required fw-bold fs-6">
+                    Accept Posts
+                </label>
+                <div class="col-lg-2 fv-row mb-3">
+                    <div class="form-check form-switch">
+                        <input type="checkbox" class="form-check-input" id="accept" name="accept_posts" {{ $website->accept_posts == 'auto' ? 'checked' : '' }}>
+                        <label id="acceptPostsLabel" class="form-check-label" for="accept">{{ $website->accept_posts == 'auto' ? 'Auto Accept Posts' : 'Manual Accept Posts' }}</label>
+                    </div>
+                </div>
             </div>
-
+            
 
 
             <div class="separator separator-dashed my-5"></div>
