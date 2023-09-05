@@ -62,14 +62,14 @@
                                 <div class="home__group">
                                     <label for="">{{ __('dashboard.post_type') }}</label>
                                     <select name="post_type" id="" class="sign__input">
-                                        <option value="1">Car</option>
-                                        <option value="0">Mechanical Item</option>
+                                        <option value="1">{{ __('dashboard.cars') }}</option>
+                                        <option value="0">{{ __('dashboard.mechanical_items') }}</option>
                                     </select>
                                 </div>
                                 <div class="home__group">
-                                    <label for="">{{ __('Select City ') }}</label>
+                                    <label for="">{{ __('dashboard.select_city') }}</label>
                                     <select name="city_id" id="" class="sign__input">
-                                        <option value="">Select City</option>
+                                        <option value="">{{ __('dashboard.select_city') }}</option>
                                         @foreach ($cities as $city)
                                             <option value="{{ $city->id }}">{{ $city->name }}</option>
                                         @endforeach

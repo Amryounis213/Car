@@ -75,9 +75,9 @@ class Car extends Model
     }
 
 
-    // public function Images()
-    // {
-    //     return $this->hasMany(Image::class);
-    // }
+    public function City()
+    {
+        return $this->belongsTo(City::class);
+    }
 
 }

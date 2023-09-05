@@ -743,4 +743,8 @@ return [
     'select_city' => 'Select City',
 
     'the_cities' => 'The Cities',
+    
+    'car' => 'Car',
+    'cars' => 'Cars',
+    'mechanical_items' => 'Mechanical Items',
 ];

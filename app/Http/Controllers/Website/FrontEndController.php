@@ -102,7 +102,7 @@ class FrontEndController extends Controller
                 $q->where('year', 'like', '%' . $request->year . '%');
             })
             ->when($request->city_id, function ($q) use ($request) {
-                $q->where('city_id', 'like', '%' . $request->city_id . '%');
+                $q->where('city_id', $request->city_id);
             })
             //get price less than or equal to the amount
             ->when($request->amount, function ($q) use ($request) {

@@ -92,4 +92,8 @@ return [
     'select_city' => 'Sélectionnez une ville',
 
     'the_cities' => 'Les Villes',
+    
+    'car' => 'voiture',
+    'cars' => 'voitures',
+    'mechanical_item' => 'pièces automobiles',
 ];

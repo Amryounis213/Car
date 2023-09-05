@@ -13,7 +13,7 @@ return [
     'home' => 'الصفحة الرئيسية',
     'help_center' => 'مركز المساعدة',
     'about_us' => 'معلومات عنا',
-    'post_your_product' => 'انشر منتجك الآن',
+    'post_your_product' => '!قم بالإعلان الآن',
     'my_account' => 'حسابي',
     'sign_out' => 'تسجيل الخروج',
     'support' => 'الدعم',
@@ -93,4 +93,8 @@ return [
 
     'post_type' => 'نوع الاعلان',
     'select_city' => 'اختر مدينة',
+
+    'car' => 'سيارة',
+    'cars' => 'سيارات',
+    'mechanical_item' => 'قطع سيارات',
 ];
