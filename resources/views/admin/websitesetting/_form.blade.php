@@ -44,11 +44,8 @@
                                 placeholder="Website Description {{ $lang }}">{{ old('desc.' . $key, $website->getTranslation('desc', $key)) }}</textarea>
                         </div>
                     @endforeach
-
                 </div>
                 <!--end::Row-->
-
-
             </div>
             <!--end::Col-->
 
@@ -85,7 +82,7 @@
                     <span class="switch switch-lg">
                         <label>
                             <input type="checkbox" {{ $website->accept_posts == 'auto' ? 'checked' : '' }} name="accept_posts"
-                                id="acceptPostsCheckbox accept" />
+                                id="accept" />
                             <span></span>
                         </label>
                     </span>
@@ -267,8 +264,6 @@
                             placeholder="{{ __('dashboard.whatsapp') }}"
                             value="{{ old('whatsapp', $website->whatsapp) }}" />
                     </div>
-
-
                 </div>
                 <!--end::Row-->
             </div>

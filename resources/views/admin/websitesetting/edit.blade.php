@@ -99,30 +99,15 @@
     </script>
     <script>
         $(document).ready(function() {
-            $("#accept").click(function() {
-                // Get the current state of the checkbox
-                var isChecked = $("#acceptPostsCheckbox").prop("checked");
-
+            $('#accept').click(function() {
                 $.ajax({
-                    type: 'GET',
-                    url: '/admin/acceptposts',
-                    data: {
-                        _token: $('meta[name="csrf-token"]').attr('content'),
-                        isChecked: isChecked
+                    url: "{{ url('admin/acceptposts') }}",
+                    method: 'GET',
+                    success: function(response) {
+                        $('#acceptPostsLabel').html(response.statment);
                     },
-                    success: function(data) {
-                        // Handle the response from the server here
-                        if (data.status === 'success') {
-                            console.log('Success');
-                            // Update the label text based on the response
-                            $('#acceptPostsLabel').text(data.type === 'auto' ? 'Auto' :
-                                'Manual');
-                        } else {
-                            console.log('Error');
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.log('Error XHR');
+                    error: function() {
+                        $('#acceptPostsLabel').html('An error occurred.');
                     }
                 });
             });

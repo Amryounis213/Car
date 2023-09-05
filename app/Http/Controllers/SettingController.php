@@ -63,11 +63,11 @@ class SettingController extends Controller
 
         if ($website->accept_posts == 'manual') {
             $website->update(['accept_posts' => 'auto']); 
-            return response()->json(['status' => 'success', 'message' => trans(__('dashboard.data_updated_success')), 'type' => 'no']);
+            return response()->json(['status' => 'success', 'message' => trans(__('dashboard.data_updated_success')), 'type' => 'no', 'statment' => 'Auto Accept Posts']);
 
         } else {
             $website->update(['accept_posts' => 'manual']); 
-            return response()->json(['status' => 'success', 'message' => trans(__('dashboard.data_updated_success')), 'type' => 'no']);
+            return response()->json(['status' => 'success', 'message' => trans(__('dashboard.data_updated_success')), 'type' => 'no', 'statment' => 'Manual Accept Posts']);
         }
 
         return response()->json(['status' => 'error', 'message' => trans(__('dashboard.data_updated_success')), 'type' => 'no']);
