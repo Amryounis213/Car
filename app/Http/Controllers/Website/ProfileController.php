@@ -235,9 +235,9 @@ class ProfileController extends Controller
             $car->save();
         }
 
-        $accept_post = WebsiteSetting::get('accept_posts');
+        $website = WebsiteSetting::first();
 
-        if($accept_post == 'auto'){
+        if($website->accept_posts == 'auto'){
             $car->status = 'accepted';
             $car->save();
         }

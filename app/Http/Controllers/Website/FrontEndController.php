@@ -21,7 +21,7 @@ class FrontEndController extends Controller
 
     public function index()
     {
-        $cars = Car::all();
+        $cars = Car::where('status', 'accepted')->get();
         $brands = Brand::all();
         $cities = City::select('name', 'id')->get();
         // dd($website);

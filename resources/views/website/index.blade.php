@@ -135,7 +135,7 @@
 
                                 <div class="splide__track">
                                     <ul class="splide__list">
-                                        @foreach ($car->images as $image)
+                                        @foreach ((array)$car->images as $image)
                                             <li class="splide__slide">
                                                 <img src="{{ asset('storage/' . $image) }}" alt="">
                                             </li>
