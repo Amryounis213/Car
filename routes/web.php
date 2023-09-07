@@ -74,8 +74,12 @@ Route::group(
         Route::get('reset-password', [AuthController::class, 'ResetPassword'])->name('website.reset-password');
         Route::post('post-login', [AuthController::class, 'PostLogin'])->name('website.post.login');
         Route::post('post-register', [AuthController::class, 'PostRegister'])->name('website.post.register');
+        Route::post('verify', [AuthController::class, 'verifyCode'])->name('website.verifyphone');
+
         //logout
     });
+    Route::view('verify' , 'website.auth.verify')->name('website.verify');
+
 });
 
 

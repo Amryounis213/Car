@@ -12,12 +12,12 @@
 		<meta property="og:type" content="article" />
 		<meta property="og:title" content="Metronic | Bootstrap HTML, VueJS, React, Angular, Asp.Net Core, Rails, Spring, Blazor, Django, Flask & Laravel Admin Dashboard Theme" />
 		<meta property="og:url" content="https://keenthemes.com/metronic" />
-		<meta property="og:site_name" content="Keenthemes | Metronic" />
+		<meta property="og:site_name" content="Alsouq | Cars" />
 		<meta name="csrf-token" content="{{ csrf_token() }}">
 	
 		<link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
 		{{-- logo --}}
-		<link rel="shortcut icon" href="{{ asset('assets/img/logo.png') }}" />
+		<link rel="shortcut icon" href="{{ asset('storage/'.$website->logo) }}" />
 		<!--begin::Fonts(mandatory for all pages)-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
 		<!--end::Fonts-->

@@ -8,14 +8,14 @@ $dir = ($lang == 'ar') ? 'rtl' : 'ltr';
     <title>Alsouq</title>
     <meta dir="rtl" lang="ar">
     <meta charset="utf-8" />
-    <meta name="description" content="You Can Change Everything From This Control Panel" />
-    <meta name="keywords" content="Control Panel" />
+    <meta name="description" content="{{ $SETTING->desc }}">
+    <meta name="keywords" content="{{ $SETTING->key_words }}">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta property="og:locale" content="en_US" />
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content="Metronic | Bootstrap HTML, VueJS, React, Angular, Asp.Net Core, Rails, Spring, Blazor, Django, Flask & Laravel Admin Dashboard Theme" />
-    <meta property="og:url" content="https://keenthemes.com/metronic" />
-    <meta property="og:site_name" content="Keenthemes | Metronic" />
+    <meta property="og:type" content="cars" />
+    <meta property="og:title" content="{{ $SETTING->desc }}" />
+    <meta property="og:url" content="" />
+    <meta property="og:site_name" content="Alsouq | Cars" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />

@@ -15,7 +15,7 @@
                     <div class="header__content">
                         <div class="header__logo">
                             <a href="{{ route('website.home') }}">
-                                <img style="width: 100px; height: 50px" src="{{ asset('storage/' . $website->logo) }}"
+                                <img style="height: 50px" src="{{ asset('storage/' . $website->logo) }}"
                                     alt="">
                             </a>
                         </div>
@@ -308,7 +308,7 @@
                             </a>
                         </div>
 
-                        <small class="footer__copyright">© Alsoq, 2022—2023</small>
+                        <small class="footer__copyright">© Alsoq, 2023</small>
                     </div>
                 </div>
             </div>

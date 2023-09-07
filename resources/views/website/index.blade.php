@@ -24,10 +24,10 @@
     <!-- main content -->
     <main class="main">
         <!-- home -->
-        <div class="home">
+        <div class="home" style="background: url({{ asset('storage/' . $website->image) }}) no-repeat center/cover; height: 42rem">
             <!-- home bg -->
 
-            <div class="home__bg" style="background: url({{ asset('storage/' . $website->image) }}) no-repeat center/cover;">
+            <div  class="home__bg" >
 
             </div>
             <!-- end home bg -->

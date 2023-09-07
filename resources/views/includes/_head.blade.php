@@ -31,4 +31,6 @@
     @endif
 
     @yield('style')
+
+   
 </head>
