@@ -235,8 +235,10 @@
 
 @section('scripts')
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    
     <script>
         $('.multiple-items').slick({
             centerMode: true,

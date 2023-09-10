@@ -28,6 +28,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic&family=Tajawal:wght@300;400;500&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css">
 
     <meta name="description" content="{{ $SETTING->desc }}">
     <meta name="keywords" content="{{ $SETTING->key_words }}">

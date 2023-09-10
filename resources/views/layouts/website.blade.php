@@ -319,7 +319,7 @@
         </div>
     </footer>
     <!-- end footer -->
-
+    
     @include('includes._script')
     @yield('scripts')
 

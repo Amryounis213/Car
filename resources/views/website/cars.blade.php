@@ -4,6 +4,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.5.0/css/bootstrap.min.css">
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/css/bootstrap-multiselect.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css">
+    
     <style>
         * {
             /* direction: ltr; */
@@ -229,7 +231,7 @@
                                                 <path
                                                     d="M12.3,12.22A4.92,4.92,0,0,0,14,8.5a5,5,0,0,0-10,0,4.92,4.92,0,0,0,1.7,3.72A8,8,0,0,0,1,19.5a1,1,0,0,0,2,0,6,6,0,0,1,12,0,1,1,0,0,0,2,0A8,8,0,0,0,12.3,12.22ZM9,11.5a3,3,0,1,1,3-3A3,3,0,0,1,9,11.5Zm9.74.32A5,5,0,0,0,15,3.5a1,1,0,0,0,0,2,3,3,0,0,1,3,3,3,3,0,0,1-1.5,2.59,1,1,0,0,0-.5.84,1,1,0,0,0,.45.86l.39.26.13.07a7,7,0,0,1,4,6.38,1,1,0,0,0,2,0A9,9,0,0,0,18.74,11.82Z" />
                                             </svg>
-                                            <span>{{ $car->seats }} People</span>
+                                            <span>{{ $car->seats }} {{ __('dashboard.people') }}</span>
                                         </li>
                                         <li>
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -243,7 +245,7 @@
                                                 <path
                                                     d="M19.088,4.95453c-.00732-.00781-.00952-.01819-.01715-.02582s-.01819-.00995-.02606-.01733a9.97886,9.97886,0,0,0-14.08948,0c-.00787.00738-.01837.00964-.02606.01733s-.00983.018-.01715.02582a10,10,0,1,0,14.1759,0ZM12,20a7.9847,7.9847,0,0,1-6.235-3H9.78027a2.9636,2.9636,0,0,0,4.43946,0h4.01532A7.9847,7.9847,0,0,1,12,20Zm-1-5a1,1,0,1,1,1,1A1.001,1.001,0,0,1,11,15Zm8.41022.00208L19.3999,15H15a2.99507,2.99507,0,0,0-2-2.81573V9a1,1,0,0,0-2,0v3.18427A2.99507,2.99507,0,0,0,9,15H4.6001l-.01032.00208A7.93083,7.93083,0,0,1,4.06946,13H5a1,1,0,0,0,0-2H4.06946A7.95128,7.95128,0,0,1,5.68854,7.10211l.65472.65473A.99989.99989,0,1,0,7.75732,6.34277l-.65466-.65466A7.95231,7.95231,0,0,1,11,4.06946V5a1,1,0,0,0,2,0V4.06946a7.95231,7.95231,0,0,1,3.89734,1.61865l-.65466.65466a.99989.99989,0,1,0,1.41406,1.41407l.65472-.65473A7.95128,7.95128,0,0,1,19.93054,11H19a1,1,0,0,0,0,2h.93054A7.93083,7.93083,0,0,1,19.41022,15.00208Z" />
                                             </svg>
-                                            <span>6.1km / 1-litre</span>
+                                            <span>{{ $car->mileage }} km/1L</span>
                                         </li>
                                         <li>
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -256,14 +258,14 @@
                                     <div class="car__footer">
                                         <span class="car__price">{{ $car->price }} $ </span>
                                         @auth
-                                            {{-- <button
+                                            <button
                                                 class="car__favorite {{ $car->isLikedByUser() ? 'car__favorite--active' : '' }}"
                                                 type="button" aria-label="Add to favorite" data-id="{{ $car->id }}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                                     <path
                                                         d="M20.16,5A6.29,6.29,0,0,0,12,4.36a6.27,6.27,0,0,0-8.16,9.48l6.21,6.22a2.78,2.78,0,0,0,3.9,0l6.21-6.22A6.27,6.27,0,0,0,20.16,5Zm-1.41,7.46-6.21,6.21a.76.76,0,0,1-1.08,0L5.25,12.43a4.29,4.29,0,0,1,0-6,4.27,4.27,0,0,1,6,0,1,1,0,0,0,1.42,0,4.27,4.27,0,0,1,6,0A4.29,4.29,0,0,1,18.75,12.43Z" />
                                                 </svg>
-                                            </button> --}}
+                                            </button>
                                         @else
                                             <a href="{{ route('website.login') }}" class="car__favorite"
                                                 aria-label="Add to favorite">
@@ -346,22 +348,47 @@
 @endsection
 
 @section('scripts')
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             $('#filter__cities').select2({
                 placeholder: '{{ __('dashboard.select_cities') }}',
                 allowClear: true, // Adds a clear button
             });
         });
-    </script>
+    </script> --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.5.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"></script>
+
     <script>
         $(document).ready(function() {
             $('#filter__cities').multiselect({
                 enableFiltering: true, // Add a search filter
                 includeSelectAllOption: true // Include a "Select All" option
+            });
+        });
+        $(document).ready(function() {
+            $('.car__favorite').click(function() {
+                //if offer__favorite--active class is exist
+                if ($(this).hasClass('offer__favorite--active')) {
+                    $(this).removeClass('offer__favorite--active');
+                } else {
+                    $(this).addClass('offer__favorite--active');
+                }
+                //ajax request post
+                $.ajax({
+                    url: "{{ route('add.to.favorite') }}",
+                    type: "POST",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        car_id: $(this).data('id')
+                    },
+                    success: function(response) {
+                        console.log('Like Saved Successfully!');
+                        toastr.success(response.message)
+                    }
+                });
             });
         });
     </script>
