@@ -15,8 +15,7 @@
                     <div class="header__content">
                         <div class="header__logo">
                             <a href="{{ route('website.home') }}">
-                                <img style="height: 50px" src="{{ asset('storage/' . $website->logo) }}"
-                                    alt="">
+                                <img style="height: 50px" src="{{ asset('storage/' . $website->logo) }}" alt="">
                             </a>
                         </div>
 
@@ -27,6 +26,14 @@
                                         href="{{ route('website.home') }}">{{ __('dashboard.home') }}</a>
                                 </li>
                                 <li class="header__nav-item">
+                                    <a class="header__nav-link"
+                                        href="{{ route('search') }}">{{ __('dashboard.buy') }}</a>
+                                </li>
+                                <li class="header__nav-item">
+                                    <a class="header__nav-link"
+                                        href="{{ route('post.create') }}">{{ __('dashboard.sell') }}</a>
+                                </li>
+                                {{-- <li class="header__nav-item">
                                     <a class="header__nav-link" href="#" role="button" data-bs-toggle="dropdown"
                                         aria-expanded="false">{{ __('dashboard.models') }}<svg xmlns="http://www.w3.org/2000/svg"
                                             viewBox="0 0 24 24">
@@ -40,15 +47,15 @@
                                         @endforeach
 
                                     </ul>
-                                </li>
+                                </li> --}}
                                 <li class="header__nav-item">
-                                    <a href="{{ route('helpcenter') }}"
-                                        class="header__nav-link">{{ __('dashboard.help_center') }}</a>
+                                    <a href="{{ route('contactus') }}"
+                                        class="header__nav-link">{{ __('dashboard.contact_us') }}</a>
                                 </li>
                                 <li class="header__nav-item">
                                     <a class="header__nav-link"
                                         href="{{ route('aboutus') }}">{{ __('dashboard.about_us') }}</a>
-
+                                </li>
 
                             </ul>
                         </div>
@@ -153,9 +160,6 @@
                     <p class="footer__tagline">{{ $SETTING->desc }}</p>
 
                     <div class="footer__lang">
-
-
-
                         @if ($lang == 'en')
                             <a class="footer__lang-btn" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
@@ -176,11 +180,11 @@
                                         d="M17,9.17a1,1,0,0,0-1.41,0L12,12.71,8.46,9.17a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.42l4.24,4.24a1,1,0,0,0,1.42,0L17,10.59A1,1,0,0,0,17,9.17Z" />
                                 </svg>
                             </a>
-                        @else
+                        @elseif ($lang == 'ar')
                             <a class="footer__lang-btn" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
                                 <img src="{{ asset('assets/img/flags/Flag_of_Algeria.svg.png') }}" alt="">
-                                <span>French</span>
+                                <span>Arabic</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                     <path
                                         d="M17,9.17a1,1,0,0,0-1.41,0L12,12.71,8.46,9.17a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.42l4.24,4.24a1,1,0,0,0,1.42,0L17,10.59A1,1,0,0,0,17,9.17Z" />
@@ -220,7 +224,7 @@
                                     </a>
                                 </li>
                             </ul>
-                        @else
+                        @elseif ($lang == 'ar')
                             <ul class="dropdown-menu footer__lang-dropdown">
                                 <li>
                                     <a href="{{ LaravelLocalization::getLocalizedURL('en', null, [], true) }}"><img

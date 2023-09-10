@@ -24,64 +24,65 @@
     <!-- main content -->
     <main class="main">
         <!-- home -->
-        <div class="home" style="background: url({{ asset('storage/' . $website->image) }}) no-repeat center/cover; height: 42rem">
-            <!-- home bg -->
+        <div class=""
+            style="background: url({{ asset('storage/' . $website->image) }}) no-repeat center/cover; height: 42rem;">
+            <center>
 
-            <div  class="home__bg" >
 
-            </div>
-            <!-- end home bg -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="home__content">
+                                <h1 class="home__title"
+                                    style="color: white; font-family: 'Tajawal', sans-serif;">
+                                    {{ $website->title }}</h1>
+                                <p class="home__text" style="color: white;">{{ $website->sub_title }}</p>
 
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="home__content">
-                            <h1 class="home__title">{{ $website->title }}</h1>
-                            <p class="home__text">{{ $website->sub_title }}</p>
+                                <form class="home__search" action="{{ route('search') }}" method="POST">
+                                    @csrf
 
-                            <form class="home__search" action="{{ route('search') }}" method="POST">
-                                @csrf
+                                    <div class="home__group">
+                                        <label for="search1">{{ __('dashboard.car_model_brand') }}</label>
+                                        <input type="text" name="search" id="search1"
+                                            placeholder="{{ __('dashboard.what_car_are_you_looking_for') }}?">
+                                    </div>
 
-                                <div class="home__group">
-                                    <label for="search1">{{ __('dashboard.car_model_brand') }}</label>
-                                    <input type="text" name="search" id="search1"
-                                        placeholder="{{ __('dashboard.what_car_are_you_looking_for') }}?">
-                                </div>
+                                    <div class="home__group">
+                                        <label for="search2">{{ __('dashboard.max_price') }}</label>
+                                        <input type="number" name="amount" id="search2"
+                                            placeholder="{{ __('dashboard.add_an_amount_in') }} $">
+                                    </div>
 
-                                <div class="home__group">
-                                    <label for="search2">{{ __('dashboard.max_price') }}</label>
-                                    <input type="number" name="amount" id="search2"
-                                        placeholder="{{ __('dashboard.add_an_amount_in') }} $">
-                                </div>
-
-                                <div class="home__group">
-                                    <label for="search3">{{ __('dashboard.make_year') }}</label>
-                                    <input type="number" min="1912" max="2023" name="year" id="search3"
-                                        placeholder="{{ __('dashboard.add_a_minimal_make_year') }}">
-                                </div>
-                                <div class="home__group">
-                                    <label for="">{{ __('dashboard.post_type') }}</label>
-                                    <select name="post_type" id="" class="sign__input">
-                                        <option value="">{{ __('dashboard.post_type') }}</option>
-                                        <option value="1">{{ __('dashboard.cars') }}</option>
-                                        <option value="0">{{ __('dashboard.mechanical_items') }}</option>
-                                    </select>
-                                </div>
-                                <div class="home__group">
-                                    <label for="">{{ __('dashboard.select_city') }}</label>
-                                    <select name="city_id" id="" class="sign__input">
-                                        <option value="">{{ __('dashboard.select_city') }}</option>
-                                        @foreach ($cities as $city)
-                                            <option value="{{ $city->id }}">{{ $city->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <button type="submit"><span>{{ __('dashboard.search') }}</span></button>
-                            </form>
+                                    <div class="home__group">
+                                        <label for="search3">{{ __('dashboard.make_year') }}</label>
+                                        <input type="number" min="1912" max="2023" name="year" id="search3"
+                                            placeholder="{{ __('dashboard.add_a_minimal_make_year') }}">
+                                    </div>
+                                    <div class="home__group">
+                                        <label for="">{{ __('dashboard.post_type') }}</label>
+                                        <select name="post_type" id="" class="sign__input">
+                                            <option value="">{{ __('dashboard.post_type') }}</option>
+                                            <option value="1">{{ __('dashboard.cars') }}</option>
+                                            <option value="0">{{ __('dashboard.mechanical_items') }}</option>
+                                        </select>
+                                    </div>
+                                    <div class="home__group">
+                                        <label for="">{{ __('dashboard.select_city') }}</label>
+                                        <select name="city_id" id="" class="sign__input">
+                                            <option value="">{{ __('dashboard.select_city') }}</option>
+                                            @foreach ($cities as $city)
+                                                <option value="{{ $city->id }}">{{ $city->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <button type="submit"><span>{{ __('dashboard.search') }}</span></button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+
+            </center>
         </div>
         <!-- end home -->
 
@@ -102,8 +103,9 @@
                 <div class="col-12">
                     <div class="main__title main__title--first">
                         <h2>{{ __('dashboard.featured_cars') }}</h2>
-                        <a href="{{ route('cars') }}" class="main__link">{{ __('dashboard.view_more') }}<svg
-                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <a href="{{ route('cars') }}" onclick="viewMore()" class="main__link"
+                            style="z-index: 5">{{ __('dashboard.view_more') }}<svg xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24">
                                 <path
                                     d="M17.92,11.62a1,1,0,0,0-.21-.33l-5-5a1,1,0,0,0-1.42,1.42L14.59,11H7a1,1,0,0,0,0,2h7.59l-3.3,3.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l5-5a1,1,0,0,0,.21-.33A1,1,0,0,0,17.92,11.62Z" />
                             </svg>
@@ -271,5 +273,10 @@
                 });
             });
         });
+    </script>
+    <script>
+        function viewMore() {
+            console.log('Hello World');
+        }
     </script>
 @endsection

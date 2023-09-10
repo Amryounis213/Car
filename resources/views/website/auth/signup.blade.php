@@ -65,11 +65,14 @@
 </body>
 
 </html> --}}
-<html lang="en" dir="ltr">
-
 <head>
+    @php
+        $lang = app()->getLocale();
+        
+    @endphp
+    <html lang="{{ $lang }}" @if ($lang == 'ar') dir="rtl" @else dir="ltr" @endif>
     <base href="../" />
-    <title>ميثاق</title>
+    <title>Alsouq</title>
     <meta lang="ar">
     <meta charset="utf-8" />
     <meta name="description" content="{{ $SETTING->desc }}">
@@ -83,7 +86,7 @@
 
     <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
     {{-- logo --}}
-    <link rel="shortcut icon" href="{{ asset('storage/'.$website->logo) }}" />
+    <link rel="shortcut icon" href="{{ asset('storage/' . $website->logo) }}" />
     <!--begin::Fonts(mandatory for all pages)-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
     <!--end::Fonts-->
@@ -172,13 +175,14 @@
                             @csrf
                             <div class="card-body">
                                 <!--begin::Heading-->
-                                <div class="text-start mb-10">
+                                <div class="mb-10">
                                     <!--begin::Title-->
-                                    <h1 class="text-dark mb-3 fs-3x" data-kt-translate="sign-in-title">Join with Us</h1>
+                                    <h1 class="text-dark mb-3 fs-3x" data-kt-translate="sign-in-title">
+                                        {{ __('dashboard.join_with_us') }}</h1>
                                     <!--end::Title-->
                                     <!--begin::Text-->
                                     <div class="text-gray-400 fw-semibold fs-6" data-kt-translate="general-desc">
-                                        Enter your details to register to your account:
+                                        {{ __('dashboard.enter_your_details_to_login') }}
                                     </div>
                                     <!--end::Link-->
                                 </div>
@@ -186,7 +190,8 @@
                                 <!--begin::Input group=-->
                                 <div class="fv-row mb-8">
                                     <!--begin::Email-->
-                                    <input type="text" placeholder="First Name" name="firstname" value="{{old('firstname')}}" autocomplete="off"
+                                    <input type="text" placeholder="{{ __('dashboard.first_name') }}"
+                                        name="firstname" value="{{ old('firstname') }}" autocomplete="off"
                                         data-kt-translate="sign-in-input-email"
                                         class="form-control form-control-solid" />
                                     <!--end::Email-->
@@ -198,7 +203,8 @@
                                 <!--begin::Input group=-->
                                 <div class="fv-row mb-8">
                                     <!--begin::Email-->
-                                    <input type="text" placeholder="Last Name" name="lastname" value="{{old('lastname')}}" autocomplete="off"
+                                    <input type="text" placeholder="{{ __('dashboard.last_name') }}" name="lastname"
+                                        value="{{ old('lastname') }}" autocomplete="off"
                                         data-kt-translate="sign-in-input-email"
                                         class="form-control form-control-solid" />
                                     <!--end::Email-->
@@ -210,7 +216,8 @@
                                 <!--begin::Input group=-->
                                 <div class="fv-row mb-8">
                                     <!--begin::Email-->
-                                    <input type="text" placeholder="Username" name="username" value="{{old('username')}}" autocomplete="off"
+                                    <input type="text" placeholder="{{ __('dashboard.username') }}" name="username"
+                                        value="{{ old('username') }}" autocomplete="off"
                                         data-kt-translate="sign-in-input-email"
                                         class="form-control form-control-solid" />
                                     <!--end::Email-->
@@ -221,7 +228,8 @@
                                 <!--end::Input group=-->
                                 <div class="fv-row mb-8">
                                     <!--begin::Email-->
-                                    <input type="text" placeholder="Phone" name="phone" value="{{old('phone')}}" autocomplete="off"
+                                    <input type="text" placeholder="{{ __('dashboard.phone') }}" name="phone"
+                                        value="{{ old('phone') }}" autocomplete="off"
                                         data-kt-translate="sign-in-input-email"
                                         class="form-control form-control-solid" />
                                     <!--end::Email-->
@@ -233,8 +241,8 @@
 
                                 <div class="fv-row mb-7">
                                     <!--begin::Password-->
-                                    <input type="password" placeholder="Password" name="password" autocomplete="off"
-                                        data-kt-translate="sign-in-input-password"
+                                    <input type="password" placeholder="{{ __('dashboard.password') }}"
+                                        name="password" autocomplete="off" data-kt-translate="sign-in-input-password"
                                         class="form-control form-control-solid" />
 
                                     @error('password')
@@ -247,11 +255,12 @@
 
                                 <div class="fv-row mb-7">
                                     <!--begin::Password-->
-                                    <input type="password" placeholder="Confirm password" name="password_confirmation"
-                                        autocomplete="off" data-kt-translate="sign-in-input-password"
+                                    <input type="password" placeholder="{{ __('dashboard.password_confirmation') }}"
+                                        name="password_confirmation" autocomplete="off"
+                                        data-kt-translate="sign-in-input-password"
                                         class="form-control form-control-solid" />
 
-                                    
+
                                     <!--end::Password-->
                                 </div>
                                 <!--end::Input group=-->
@@ -261,8 +270,9 @@
                                 <div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-10">
                                     <div></div>
                                     <!--begin::Link-->
-                                    <a href="{{route('website.login')}}" class="link-primary"
-                                        data-kt-translate="sign-in-forgot-password">already have account  ? </a>
+                                    <a href="{{ route('website.login') }}" class="link-primary"
+                                        data-kt-translate="sign-in-forgot-password">{{ __('dashboard.already_have_account') }}
+                                    </a>
                                     <!--end::Link-->
                                 </div>
                                 <!--end::Wrapper-->
@@ -271,11 +281,13 @@
                                     <!--begin::Submit-->
                                     <button id="kt_sign_in_submit" class="btn btn-primary me-2 flex-shrink-0">
                                         <!--begin::Indicator label-->
-                                        <span class="indicator-label" data-kt-translate="sign-in-submit">Create Account</span>
+                                        <span class="indicator-label"
+                                            data-kt-translate="sign-in-submit">{{ __('dashboard.create_account') }}</span>
                                         <!--end::Indicator label-->
                                         <!--begin::Indicator progress-->
                                         <span class="indicator-progress">
-                                            <span data-kt-translate="general-progress">Please wait...</span>
+                                            <span
+                                                data-kt-translate="general-progress">{{ __('dashboard.please_wait') }}</span>
                                             <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                                         </span>
                                         <!--end::Indicator progress-->

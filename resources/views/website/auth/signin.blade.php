@@ -60,12 +60,17 @@ Dribbble: www.dribbble.com/keenthemes
 Like: www.facebook.com/keenthemes
 License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
 -->
-<html lang="en" dir="ltr">
+@php
+    $lang = app()->getLocale();
+    
+@endphp
+<html lang="{{ $lang }}" @if($lang == 'ar') dir="rtl" @else dir="ltr" @endif>
 
 <head>
+
     <base href="../" />
-    <title>ميثاق</title>
-    <meta lang="ar">
+    <title>Alsouq</title>
+    <meta lang="{{ $lang }}">
     <meta charset="utf-8" />
     <meta name="description" content="{{ $SETTING->desc }}">
     <meta name="keywords" content="{{ $SETTING->key_words }}">
@@ -80,7 +85,7 @@ License: For each use you must have a valid license purchased only from above li
 
     <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
     {{-- logo --}}
-    <link rel="shortcut icon" href="{{ asset('storage/'.$website->logo) }}" />
+    <link rel="shortcut icon" href="{{ asset('storage/' . $website->logo) }}" />
     <!--begin::Fonts(mandatory for all pages)-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
     <!--end::Fonts-->
@@ -103,6 +108,8 @@ License: For each use you must have a valid license purchased only from above li
             color: black !important;
 
         }
+        
+        
 
         .dataTables_wrapper .dataTables_paginate .paginate_button:active {
             background: none;
@@ -141,7 +148,7 @@ License: For each use you must have a valid license purchased only from above li
         <!--begin::Authentication - Sign-in -->
         <div class="d-flex flex-column flex-lg-row flex-column-fluid">
             <!--begin::Logo-->
-            <a href="../../demo1/dist/index.html" class="d-block d-lg-none mx-auto py-20">
+            <a href="{{ route('website.home') }}" class="d-block d-lg-none mx-auto py-20">
                 <img alt="Logo" src="{{ asset('storage/' . $website->logo) }}" class="theme-light-show h-100px" />
             </a>
             <!--end::Logo-->
@@ -168,13 +175,14 @@ License: For each use you must have a valid license purchased only from above li
                             @csrf
                             <div class="card-body">
                                 <!--begin::Heading-->
-                                <div class="text-start mb-10">
+                                <div class="mb-10">
                                     <!--begin::Title-->
-                                    <h1 class="text-dark mb-3 fs-3x" data-kt-translate="sign-in-title">Login</h1>
+                                    <h1 class="text-dark mb-3 fs-3x" data-kt-translate="sign-in-title">
+                                        {{ __('dashboard.login') }}</h1>
                                     <!--end::Title-->
                                     <!--begin::Text-->
                                     <div class="text-gray-400 fw-semibold fs-6" data-kt-translate="general-desc">
-                                        Enter your details to login to your account:
+                                        {{ __('dashboard.enter_your_details_to_login') }}
                                     </div>
                                     <!--end::Link-->
                                 </div>
@@ -182,16 +190,16 @@ License: For each use you must have a valid license purchased only from above li
                                 <!--begin::Input group=-->
                                 <div class="fv-row mb-8">
                                     <!--begin::Email-->
-                                    <input type="text" placeholder="Phone" name="phone" autocomplete="off"
-                                        data-kt-translate="sign-in-input-email"
+                                    <input type="text" placeholder="{{ __('dashboard.phone') }}" name="phone"
+                                        autocomplete="off" data-kt-translate="sign-in-input-email"
                                         class="form-control form-control-solid" />
                                     <!--end::Email-->
                                 </div>
                                 <!--end::Input group=-->
                                 <div class="fv-row mb-7">
                                     <!--begin::Password-->
-                                    <input type="password" placeholder="password" name="password" autocomplete="off"
-                                        data-kt-translate="sign-in-input-password"
+                                    <input type="password" placeholder="{{ __('dashboard.password') }}" name="password"
+                                        autocomplete="off" data-kt-translate="sign-in-input-password"
                                         class="form-control form-control-solid" />
                                     <!--end::Password-->
                                 </div>
@@ -201,12 +209,13 @@ License: For each use you must have a valid license purchased only from above li
                                     <div>
                                         <!--begin::Link-->
                                         <a href="" class="link-secondary text-gray-400 fw-semibold fs-6"
-                                            data-kt-translate="sign-in-forgot-password">forget password ? </a>
+                                            data-kt-translate="sign-in-forgot-password">{{ __('dashboard.forgot_password') }}
+                                        </a>
                                         <!--end::Link-->
-                                    
+
                                         <!--begin::Link-->
                                         <a href="{{ route('website.register') }}" class="link-primary"
-                                            data-kt-translate="sign-in-forgot-password">Sign Up</a>
+                                            data-kt-translate="sign-in-forgot-password">{{ __('dashboard.signup') }}</a>
                                         <!--end::Link-->
                                     </div>
                                 </div>
@@ -216,11 +225,13 @@ License: For each use you must have a valid license purchased only from above li
                                     <!--begin::Submit-->
                                     <button id="kt_sign_in_submit" class="btn btn-primary me-2 flex-shrink-0">
                                         <!--begin::Indicator label-->
-                                        <span class="indicator-label" data-kt-translate="sign-in-submit">login</span>
+                                        <span class="indicator-label"
+                                            data-kt-translate="sign-in-submit">{{ __('dashboard.login') }}</span>
                                         <!--end::Indicator label-->
                                         <!--begin::Indicator progress-->
                                         <span class="indicator-progress">
-                                            <span data-kt-translate="general-progress">Please wait...</span>
+                                            <span
+                                                data-kt-translate="general-progress">{{ __('dashboard.please_wait') }}</span>
                                             <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                                         </span>
                                         <!--end::Indicator progress-->

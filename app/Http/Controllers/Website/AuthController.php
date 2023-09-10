@@ -96,28 +96,33 @@ class AuthController extends Controller
     //verify code view 
     public function verifyCodeView()
     {
-
         return view('website.auth.verify');
     }
+
     //verify code 
     public function verifyCode(Request $request)
     {
+
         Session::get('attempts') ? Session::put('attempts', Session::get('attempts') - 1) : 0;
 
         if (Session::get('attempts') == 0) {
             return redirect()->route('website.register')->with('error', 'You have exceeded the number of attempts');
         }
 
-        $request->merge([
-            'code' => $request->code[0] . $request->code[1] . $request->code[2] . $request->code[3],
-        ]);
         $request->validate([
             'code' => 'required|numeric',
         ]);
+
+        $request->merge([
+            'code' => $request->code[0] . $request->code[1] . $request->code[2] . $request->code[3],
+        ]);
+        
         $user = User::where('phone', Session::get('user_phone'))->where('code', $request->code)->first();
+
+        dd($user);
         if ($user) {
             $user->update([
-                'code' => null,
+                // 'code' => null,
                 'status' => 1,
                 'email_verified_at' => now(),
             ]);

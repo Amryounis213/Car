@@ -39,7 +39,10 @@
                     @if (session()->has('error'))
                         <div class="alert alert-danger">{{ session()->get('error') }}</div>
                     @endif
-                    @if (auth()->user()->post_attempts > 0)
+                    @if (session()->has('verificationerror'))
+                        <div class="alert alert-danger">{{ session()->get('verificationerror') }}</div>
+                    @endif
+                    @if (auth()->user()->post_attempts > 0 && auth()->user()->email_verified_at != null)
                         <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data"
                             class="sign__form sign__form--contacts">
                             @csrf
@@ -313,8 +316,8 @@
 
                                 <div class="col-12">
                                     <div class="sign__group">
-                                        <input id="images" required type="file" name="images[]" class="custom-file-input"
-                                            multiple>
+                                        <input id="images" required type="file" name="images[]"
+                                            class="custom-file-input" multiple>
                                     </div>
                                 </div>
 
@@ -325,10 +328,15 @@
                                 </div>
                             </div>
                         </form>
-                    @else
+                    @elseif(auth()->user()->post_attempts <= 0)
                         <div class="alert alert-danger">
                             {{ __('dashboard.you_have_reached_your_maximum_post_limit') . ' ' . $SETTING->whatsapp }}
                         </div>
+                    @elseif(auth()->user()->email_verified_at == null)
+                        <div class="alert alert-danger">
+                            {{ __('dashboard.plz_verfiy_your_account') }} 
+                        </div>
+                        <a href="{{ route('website.verify') }}">{{ __('dashboard.verify_code') }}</a>
                     @endif
                 </div>
 

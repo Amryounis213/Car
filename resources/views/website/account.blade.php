@@ -51,7 +51,7 @@
                             </li>
 
 
-                            <li class="nav-item" role="presentation">
+                            <li class="nav-item" role="presentation" style="margin-right: 40px">
                                 <button data-bs-toggle="tab" data-bs-target="#tab-3" type="button" role="tab"
                                     aria-controls="tab-3" aria-selected="false">{{ __('dashboard.settings') }}</button>
                             </li>

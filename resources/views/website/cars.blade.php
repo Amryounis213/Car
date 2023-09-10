@@ -66,6 +66,17 @@
                                 </div>
 
                                 <div class="filter__group">
+                                    <label for="filter__status" class="filter__label">{{ __('dashboard.post_type') }}:</label>
+
+                                    <div class="filter__select-wrap">
+                                        <select name="post_type" id="filter__status" class="filter__select">
+                                            {{-- <option value="0">Relevance</option> --}}
+                                            <option value="0">{{ __('dashboard.mechanical_items') }}</option>
+                                            <option value="1">{{ __('dashboard.cars') }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="filter__group">
                                     <label for="filter__status" class="filter__label">{{ __('dashboard.sort_by') }}:</label>
 
                                     <div class="filter__select-wrap">

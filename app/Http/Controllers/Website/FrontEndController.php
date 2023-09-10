@@ -54,7 +54,7 @@ class FrontEndController extends Controller
         if ($fav) {
             Favorite::where('user_id', auth()->user()->id)->where('car_id', $request->car_id)->delete();
             return response()->json([
-                'message' => 'Removed from favourite successfully',
+                'message' => __('dashboard.removed_from_fav_success'),
             ]);
         }
         Favorite::create([
@@ -73,7 +73,7 @@ class FrontEndController extends Controller
         ]);
         Favorite::where('user_id', 11)->where('car_id', $request->car_id)->delete();
         return response()->json([
-            'message' => 'Removed from favourite successfully',
+            'message' => __('dashboard.removed_from_fav_success'),
         ]);
     }
 
@@ -88,7 +88,6 @@ class FrontEndController extends Controller
     //Search by car model or brand or year
     public function search(Request $request)
     {
-        // return $request ;
         $cars = Car::when($request->search, function ($q) use ($request) {
             $q->whereHas('model', function ($qe) use ($request) {
                 $qe->where('name', 'like', '%' . $request->search . '%')
@@ -138,7 +137,11 @@ class FrontEndController extends Controller
                 else
                     $q->orderBy('created_at', 'DESC');
             })
-            ->where('post_type', $request->post_type)
+            ->when($request->sort, function ($q) use ($request) {
+                if ($request->has('post_type')) {
+                    $q->where('post_type', $request->post_type);
+                }
+            })
             ->paginate(15);
         return view('website.cars', compact('cars'));
     }

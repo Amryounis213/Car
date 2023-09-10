@@ -96,7 +96,7 @@ class ProfileController extends Controller
         $user = User::findorfail($id);
         $input = $user->update($data);
         // dd($input);
-        return redirect()->back()->with('message', 'Data Updated Successfully');
+        return redirect()->back()->with('message', __('dashboard.data_updated_success'));
     }
 
     public function updatePassword(Request $request)
@@ -110,14 +110,14 @@ class ProfileController extends Controller
         if (!(Hash::check($request->get('old_password'), Auth::user()->password))) {
             // The passwords matches
           
-            return redirect()->back()->with('error', "Your current password does not matches with the password you provided. Please try again.");
+            return redirect()->back()->with('error', __('dashboard.password_doesnot_match'));
         }
         $data = $request->all();
 
         $user = User::findorfail(Auth::id());
         $input = $user->update($data);
       
-        return redirect()->back()->with('success', 'Password Updated Successfully');
+        return redirect()->back()->with('success', __('dashboard.password_updated_success'));
     }
 
     /**
@@ -129,7 +129,7 @@ class ProfileController extends Controller
 
         $user->delete();
 
-        return redirect()->back()->with('success', 'Car Deleted Successfully');
+        return redirect()->back()->with('success', __('dashboard.ad_del_success'));
     }
 
 
@@ -182,31 +182,35 @@ class ProfileController extends Controller
             'trunk_volume' => 'nullable|integer|min:0',
             'upholstery' => 'nullable|string',
         ], [
-            'car_model_id.required' => 'The car model field is required.',
-            'brand_id.required' => 'The brand field is required.',
-            'car_type_id.required' => 'The car type field is required.',
-            'generation_id.required' => 'The generation field is required.',
-            'user_id.required' => 'The user field is required.',
-            'name.required' => 'The name field is required.',
-            'name.unique' => 'The name already exists.',
-            'min_km.integer' => 'Minimum kilometer value must be an integer.',
-            'max_km.integer' => 'Maximum kilometer value must be an integer.',
-            'year.integer' => 'Year must be a valid year.',
-            'mileage.integer' => 'Mileage must be an integer.',
-            'price.numeric' => 'Price must be a number.',
-            'gearbox.required' => 'The gearbox field is required.',
-            'fuel.required' => 'The fuel field is required.',
-            'images.*.image' => 'The images must be an image.',
-            'images.required' => 'Please add images.',
-            'images.*.mimes' => 'The images must be a file of type: jpeg, png, jpg, gif.',
-            'images.*.max' => 'The images may not be greater than 2048 kilobytes.',
+            'car_model_id.required' => __('dashboard.the_car_model_field_required'),
+            'brand_id.required' => __('dashboard.the_brand_field_required'),
+            'car_type_id.required' => __('dashboard.the_car_type_field_required'),
+            'generation_id.required' => __('dashboard.the_generation_field_required'),
+            'user_id.required' => __('dashboard.the_user_field_required'),
+            'name.required' => __('dashboard.the_name_field_required'),
+            'name.unique' => __('dashboard.the_name_already_exists'),
+            'min_km.integer' => __('dashboard.mini_must_be_int'),
+            'max_km.integer' => __('dashboard.max_must_be_int'),
+            'year.integer' => __('dashboard.year_must_be_a_valid_year'),
+            'mileage.integer' => __('dashboard.mileage_must_be_int'),
+            'price.numeric' => __('dashboard.price_must_be_int'),
+            'gearbox.required' => __('dashboard.the_gearbox_field_is_required'),
+            'fuel.required' => __('dashboard.the_fuel_field_is_required'),
+            'images.*.image' => __('dashboard.the_images_must_be_an_image'),
+            'images.required' => __('dashboard.plz_add_images'),
+            'images.*.mimes' => __('dashboard.accepted_images_file'),
+            'images.*.max' => __('dashboard.images_may_not_be_greater_than'),            
             // Add more custom error messages here for other fields
         ]);
 
         $user = User::find(auth()->id());
         if($user->post_attempts <= 0)
         {
-            return redirect()->back()->with('error', 'You have reached your maximum post limit. Please contact the administrator.');
+            return redirect()->back()->with('error', __('dashboard.you_have_reached_your_maximum_post_limit'));
+        }
+        if($user->email_verified_at == null)
+        {
+            return redirect()->back()->with('verificationerror', __('dashboard.plz_verfiy_your_account'));
         }
         
         // $this->Brand->name . ' - ' . $this->Model->name . ' - ' . $this->CarTypes->name . ' - ' . $this->Generations->name ;
@@ -257,7 +261,7 @@ class ProfileController extends Controller
             $car->main_image = $carImages[0];
             $car->save();
         }
-        return redirect()->route('account.index')->with('success', 'Car Added Successfully');
+        return redirect()->route('account.index')->with('success', __('dashboard.ad_added_success'));
     }
 
     public function upload(Request $request)

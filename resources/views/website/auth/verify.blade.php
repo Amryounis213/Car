@@ -65,7 +65,11 @@
 </body>
 
 </html> --}}
-<html lang="en" dir="ltr">
+@php
+    $lang = app()->getLocale();
+    
+@endphp
+<html lang="{{ $lang }}" @if($lang == 'ar') dir="rtl" @else dir="ltr" @endif>
 
 <head>
     <base href="../" />
@@ -167,10 +171,10 @@
                             <!--begin::Heading-->
                             <div class="text-center mb-10">
                                 <!--begin::Title-->
-                                <h1 class="text-dark mb-3">Verify Code</h1>
+                                <h1 class="text-dark mb-3">{{ __('dashboard.verify_code') }}</h1>
                                 <!--end::Title-->
                                 <!--begin::Sub-title-->
-                                <div class="text-muted fw-semibold fs-5 mb-5">Enter the verification code we sent to
+                                <div class="text-muted fw-semibold fs-5 mb-5">{{ __('dashboard.enter_the_verification_code') }}
                                 </div>
                                 <!--end::Sub-title-->
                                 <!--begin::Mobile no-->
@@ -181,7 +185,7 @@
                             <!--begin::Section-->
                             <div class="mb-10">
                                 <!--begin::Label-->
-                                <div class="fw-bold text-start text-dark fs-6 mb-1 ms-1">Type your 4 digit security code
+                                <div class="fw-bold text-dark fs-6 mb-1 ms-1">{{ __('dashboard.type_your_digits') }}
                                 </div>
                                 <!--end::Label-->
                                 <!--begin::Input group-->
@@ -211,8 +215,8 @@
                             <div class="d-flex flex-center">
                                 <button type="submit" id="kt_sing_in_two_steps_submit"
                                     class="btn btn-lg btn-primary fw-bold">
-                                    <span class="indicator-label">Submit</span>
-                                    <span class="indicator-progress">Please wait...
+                                    <span class="indicator-label">{{ __("dashboard.submit") }}</span>
+                                    <span class="indicator-progress">{{ __('dashboard.please_wait') }}
                                         <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                 </button>
                             </div>
@@ -221,8 +225,8 @@
                         <!--end::Form-->
                         <!--begin::Notice-->
                         <div class="text-center fw-semibold fs-5">
-                            <span class="text-muted me-1">Didn’t get the code ?</span>
-                            <a href="#" class="link-primary fs-5 me-1">Resend</a>
+                            <span class="text-muted me-1">{{ __('dashboard.didnt_get_the_code') }}</span>
+                            <a href="#" class="link-primary fs-5 me-1">{{ __('dashboard.resend') }}</a>
 
                         </div>
                         <!--end::Notice-->

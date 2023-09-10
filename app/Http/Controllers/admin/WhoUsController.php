@@ -52,7 +52,7 @@ class WhoUsController extends Controller
 
         //store in the database
         $appconfig->update($data);
-        return redirect()->route('whous.index')->with('success', 'Data Updated Successfully');
+        return redirect()->route('whous.index')->with('success', __('dashboard.data_updated_success'));
     }
 
     /**
@@ -99,7 +99,7 @@ class WhoUsController extends Controller
 
         //store in the database
         $appconfig->update($data);
-        return redirect()->route('whous.index')->with('success', 'Data Updated Successfully');
+        return redirect()->route('whous.index')->with('success', __('dashboard.data_updated_success'));
     }
 
     /**

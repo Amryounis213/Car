@@ -52,7 +52,7 @@ class TermsController extends Controller
 
         //store in the database
         $appconfig->update($data);
-        return redirect()->route('terms.index')->with('success', 'Data Updated Successfully');
+        return redirect()->route('terms.index')->with('success', __('dashboard.data_updated_success'));
     }
 
     /**
@@ -99,7 +99,7 @@ class TermsController extends Controller
 
         //store in the database
         $appconfig->update($data);
-        return redirect()->route('terms.index')->with('success', 'Data Updated Successfully');
+        return redirect()->route('terms.index')->with('success', __('dashboard.data_updated_success'));
     }
 
     /**
