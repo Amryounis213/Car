@@ -1,7 +1,14 @@
 @extends('layouts.website')
 
 @section('style')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/css/bootstrap-multiselect.css">
     <style>
+        * {
+            /* direction: ltr; */
+        }
+
         .filter__scroll-view {
             max-height: 200px;
             /* Adjust the maximum height as needed */
@@ -66,22 +73,24 @@
                                 </div>
 
                                 <div class="filter__group">
-                                    <label for="filter__status" class="filter__label">{{ __('dashboard.post_type') }}:</label>
-
+                                    <label for="filter__posttype"
+                                        class="filter__label">{{ __('dashboard.post_type') }}:</label>
+                                    
                                     <div class="filter__select-wrap">
-                                        <select name="post_type" id="filter__status" class="filter__select">
-                                            {{-- <option value="0">Relevance</option> --}}
+                                        <select name="post_type" id="filter__posttype" class="filter__select">
+                                            <option value="">{{ __('dashboard.post_type') }}</option>
                                             <option value="0">{{ __('dashboard.mechanical_items') }}</option>
-                                            <option value="1">{{ __('dashboard.cars') }}</option>
+                                            <option value="1" selected>{{ __('dashboard.cars') }}</option>
                                         </select>
                                     </div>
                                 </div>
+
                                 <div class="filter__group">
-                                    <label for="filter__status" class="filter__label">{{ __('dashboard.sort_by') }}:</label>
+                                    <label for="filter__status"
+                                        class="filter__label">{{ __('dashboard.sort_by') }}:</label>
 
                                     <div class="filter__select-wrap">
                                         <select name="sort" id="filter__status" class="filter__select">
-                                            {{-- <option value="0">Relevance</option> --}}
                                             <option value="1">{{ __('dashboard.newest') }}</option>
                                             <option value="2">{{ __('dashboard.oldest') }}</option>
                                         </select>
@@ -100,13 +109,13 @@
                                         </select>
                                     </div>
                                 </div>
-                                
+
                                 <div class="filter__group">
-                                    <label for="filter__cities"
-                                        class="filter__label">{{ __('dashboard.the_cities') }}:</label>
+                                    <label for="filter_cities" class="filter__label">{{ __('dashboard.the_cities') }}:</label>
+
                                     <div class="filter__select-wrap">
-                                        <select name="cities[]" id="filter__cities" class="form-control" multiple>
-                                            <option value="">{{ __('dashboard.all_cities') }}</option>
+                                        <select name="city_id" id="filter_cities" class="filter__select">
+                                            <option value="" selected>{{ __('dashboard.all_cities') }}</option>
                                             @foreach ($cities as $city)
                                                 <option value="{{ $city->id }}">{{ $city->name }}</option>
                                             @endforeach
@@ -116,12 +125,11 @@
 
 
 
-
                                 <div class="filter__group">
-                                    <label for="colorin" class="filter__label">{{ __('dashboard.color_inner') }}:</label>
+                                    <label for="filter_colorin" class="filter__label">{{ __('dashboard.color_inner') }}:</label>
 
                                     <div class="filter__select-wrap">
-                                        <select name="colorin" id="colorin" class="filter__select">
+                                        <select name="colorin" id="filter_colorin" class="filter__select">
                                             <option value="">{{ __('dashboard.all_colors') }}</option>
                                             @foreach ($colors as $colorin)
                                                 <option value="{{ $colorin->id }}">{{ $colorin->name }}</option>
@@ -132,10 +140,10 @@
 
 
                                 <div class="filter__group">
-                                    <label for="colorout" class="filter__label">{{ __('dashboard.color_outter') }}:</label>
+                                    <label for="filter_colorout" class="filter__label">{{ __('dashboard.color_outter') }}:</label>
 
                                     <div class="filter__select-wrap">
-                                        <select name="colorout" id="colorout" class="filter__select">
+                                        <select name="colorout" id="filter_colorout" class="filter__select">
                                             <option value="">{{ __('dashboard.all_colors') }}</option>
                                             @foreach ($colors as $colorout)
                                                 <option value="{{ $colorout->id }}">{{ $colorout->name }}</option>
@@ -146,11 +154,11 @@
 
 
                                 <div class="filter__group">
-                                    <label for="filter__category"
+                                    <label for="filter_seats"
                                         class="filter__label">{{ __('dashboard.seats') }}:</label>
 
                                     <div class="filter__select-wrap">
-                                        <select name="seats" id="filter__category" class="filter__select">
+                                        <select name="seats" id="filter_seats" class="filter__select">
                                             <option value="">{{ __('dashboard.seats') }}</option>
                                             <option value="2">2</option>
                                             <option value="4">4</option>
@@ -246,16 +254,16 @@
                                         </li>
                                     </ul>
                                     <div class="car__footer">
-                                        <span class="car__price">{{ $car->price }} </span>
+                                        <span class="car__price">{{ $car->price }} $ </span>
                                         @auth
-                                            <button
+                                            {{-- <button
                                                 class="car__favorite {{ $car->isLikedByUser() ? 'car__favorite--active' : '' }}"
                                                 type="button" aria-label="Add to favorite" data-id="{{ $car->id }}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                                     <path
                                                         d="M20.16,5A6.29,6.29,0,0,0,12,4.36a6.27,6.27,0,0,0-8.16,9.48l6.21,6.22a2.78,2.78,0,0,0,3.9,0l6.21-6.22A6.27,6.27,0,0,0,20.16,5Zm-1.41,7.46-6.21,6.21a.76.76,0,0,1-1.08,0L5.25,12.43a4.29,4.29,0,0,1,0-6,4.27,4.27,0,0,1,6,0,1,1,0,0,0,1.42,0,4.27,4.27,0,0,1,6,0A4.29,4.29,0,0,1,18.75,12.43Z" />
                                                 </svg>
-                                            </button>
+                                            </button> --}}
                                         @else
                                             <a href="{{ route('website.login') }}" class="car__favorite"
                                                 aria-label="Add to favorite">
@@ -279,8 +287,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="paginator">
-                                <span class="paginator__pages">{{ $cars->currentPage() }} from
-                                    {{ $cars->lastPage() }}</span>
+                                <span class="paginator__pages">{{ $cars->currentPage() }} -  from - {{ $cars->lastPage() }}</span>
 
                                 <ul class="paginator__list-mobile">
                                     @if ($cars->previousPageUrl())
@@ -322,7 +329,7 @@
                                     @endif
 
                                     <li>
-                                        <a href="{{ $cars->url($cars->lastPage()) }}">{{ $cars->lastPage() }}</a>
+                                        {{-- <a href="{{ $cars->url($cars->lastPage()) }}">{{ $cars->lastPage() }}</a> --}}
                                     </li>
                                 </ul>
                             </div>
@@ -344,6 +351,17 @@
             $('#filter__cities').select2({
                 placeholder: '{{ __('dashboard.select_cities') }}',
                 allowClear: true, // Adds a clear button
+            });
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.5.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#filter__cities').multiselect({
+                enableFiltering: true, // Add a search filter
+                includeSelectAllOption: true // Include a "Select All" option
             });
         });
     </script>

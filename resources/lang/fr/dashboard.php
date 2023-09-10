@@ -53,7 +53,7 @@ return [
     'offer' => 'Offre',
     'buy_car' => 'Acheter une voiture',
     'proceed' => 'Continuer',
-    'lease_terms' => 'Conditions de location',
+    'ad_details' => 'Détails de l\'annonce',
     'origin' => 'Origine',
     'number_of_owners' => 'Nombre de propriétaires',
     'gearbox' => 'Boîte de vitesses',

@@ -114,7 +114,7 @@
                                                                     <td>{{ $car->gearbox }}</td>
                                                                     <td>{{ $car->fuel }}</td>
                                                                     <td><span
-                                                                            class="cart__price">{{ $car->price }}</span>
+                                                                            class="cart__price">{{ $car->price }} $ </span>
                                                                     </td>
                                                                     <td>
                                                                         <a href="{{ route('usercar.destroy', $car->id) }}"

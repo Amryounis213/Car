@@ -2724,8 +2724,8 @@ body::-webkit-scrollbar-thumb {
   width: 36px;
   border-radius: 12px;
   background-color: rgba(24,156,244,0.12);
-  margin-left: auto;
-  margin-right: 15px;
+  /* margin-left: auto; */
+  /* margin-right: 15px; */
 }
 .car__favorite svg {
   width: 20px;
@@ -2975,7 +2975,7 @@ body::-webkit-scrollbar-thumb {
   width: 40px;
   border-radius: 12px;
   background-color: rgba(24,156,244,0.12);
-  margin-left: auto;
+  /* margin-left: auto; */
   margin-right: 15px;
 }
 .offer__favorite svg {

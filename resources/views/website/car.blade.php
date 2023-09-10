@@ -126,7 +126,7 @@
                     <div class="offer">
                         <span class="offer__title">{{ __('dashboard.offer') }}</span>
                         <div class="offer__wrap">
-                            <span class="offer__price">{{ $car->price }}</span>
+                            <span class="offer__price">{{ $car->price }} $ </span>
                             @auth
                                 <button class="offer__favorite  {{ $car->isLikedByUser() ? 'offer__favorite--active' : ' ' }}"
                                     data-id="{{ $car->id }}" type="button" aria-label="Add to favorite"><svg
@@ -214,7 +214,7 @@
                         </div>
                         <!-- end buy modal -->
 
-                        <span class="offer__title">{{ __('dashboard.lease_terms') }}</span>
+                        <span class="offer__title">{{ __('dashboard.ad_details') }}</span>
                         <ul class="offer__list">
                             <li>
                                 <span class="offer__list-name">{{ __('dashboard.year') }} </span>
@@ -407,7 +407,7 @@
 
                             </ul>
                             <div class="car__footer">
-                                <span class="car__price">{{ $randCar->price }}</span>
+                                <span class="car__price">{{ $randCar->price }} $</span>
                                 @auth
                                     <button
                                         class="car__favorite offer__favorite @if ($randCar->isLikedByUser()) offer__favorite--active @endif"

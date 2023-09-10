@@ -175,6 +175,46 @@
 			}
 		});
 	}
+	if (document.querySelector('#filter__posttype')) {
+		new SlimSelect({
+			select: '#filter__posttype',
+			settings: {
+				showSearch: false,
+			}
+		});
+	}
+	if (document.querySelector('#filter_colorin')) {
+		new SlimSelect({
+			select: '#filter_colorin',
+			settings: {
+				showSearch: true,
+			}
+		});
+	}
+	if (document.querySelector('#filter_colorout')) {
+		new SlimSelect({
+			select: '#filter_colorout',
+			settings: {
+				showSearch: true,
+			}
+		});
+	}
+	if (document.querySelector('#filter_cities')) {
+		new SlimSelect({
+			select: '#filter_cities',
+			settings: {
+				showSearch: true,
+			}
+		});
+	}
+	if (document.querySelector('#filter_seats')) {
+		new SlimSelect({
+			select: '#filter_seats',
+			settings: {
+				showSearch: false,
+			}
+		});
+	}
 
 	if (document.querySelector('#filter__category')) {
 		new SlimSelect({

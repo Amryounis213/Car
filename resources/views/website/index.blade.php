@@ -182,7 +182,7 @@
                                 </li>
                             </ul>
                             {{-- <div class="car__footer">
-                                <span class="car__price">{{ $car->price }} </span>
+                                <span class="car__price">{{ $car->price }} $  </span>
                                 <button class="car__favorite {{ $car->isLikedByUser() ? 'car__favorite--active' : '' }}"
                                     type="button" aria-label="Add to favorite" data-id="{{ $car->id }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -193,7 +193,7 @@
                                 <a href="{{ route('showCar', $car->id) }}" class="car__more"><span>Show More</span></a>
                             </div> --}}
                             <div class="car__footer">
-                                <span class="car__price">{{ $car->price }} </span>
+                                <span class="car__price">{{ $car->price }} $ </span>
                                 @auth
                                     <button class="car__favorite {{ $car->isLikedByUser() ? 'car__favorite--active' : '' }}"
                                         type="button" aria-label="Add to favorite" data-id="{{ $car->id }}">

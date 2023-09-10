@@ -704,7 +704,7 @@ return [
     'offer' => 'Offer',
     'buy_car' => 'Buy Car',
     'proceed' => 'Proceed',
-    'lease_terms' => 'Lease terms',
+    'ad_details' => 'Ad Details',
     'origin' => 'Origin',
     'number_of_owners' => 'Number Of Owners',
     'gearbox' => 'Gearbox',
