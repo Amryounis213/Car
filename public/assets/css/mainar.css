@@ -4639,7 +4639,7 @@ body::-webkit-scrollbar-thumb {
   transition: fill 0.5s ease;
 }
 .contacts__social a:last-child {
-  margin-right: 0;
+  /* margin-right: 0; */
 }
 .contacts__social a:hover svg {
   fill: #189cf4;

@@ -147,4 +147,28 @@ return [
 
     'you_have_reached_your_maximum_post_limit' => 'لقد وصلت إلى الحد الأقصى لعدد المشاركات. الرجاء التواصل مع المسؤول.',
     'plz_verfiy_your_account' => 'يجب عليك تفعيل رقم هاتفك أولاً.',
+
+    'plz_provide_info_about_the_post' => 'يرجى تقديم معلومات دقيقة حول السيارة أو قطعة السيارة مع العلامة التجارية والموديل والمميزات والعيوب إن وجدت، مع إرفاق صور عالية الجودة وتفاصيل الصيانة إنما أمكن.',
+
+    'select_ad_type' => 'اختر نوع الإعلان',
+    'select_year' => 'اختر السنة',
+    'select_car_model' => 'اختر طراز السيارة',
+    'select_car_type' => 'اختر نوع السيارة',
+    'select_car_brand' => 'اختر ماركة السيارة',
+    'mileage' => 'عداد المسافة',
+    'select_gearbox' => 'اختر نوع الجير',
+    'manual' => 'يدوي',
+    'auto' => 'أوتوماتيك',
+    'select_fuel' => 'اختر نوع الوقود',
+    'diesel' => 'ديزل',
+    'gasoline' => 'بنزين',
+    'electric' => 'كهربائي',
+    'select_color_inner' => 'اختر لون الداخلية',
+    'select_color_outter' => 'اختر لون الخارجية',
+    'number_of_seats' => 'عدد المقاعد',
+    'distance_per_liter' => 'المسافة باللتر الواحد',
+
+    'type_your_message' => 'اكتب رسالتك ..',
+    'send' => 'ارسال',
+
 ];

@@ -45,30 +45,30 @@
                         <div class="row">
                             <div class="col-12 col-md-6">
                                 <div class="sign__group">
-                                    <input type="text" name="name" class="sign__input" placeholder="Name">
+                                    <input type="text" name="name" class="sign__input" placeholder="{{ __('dashboard.name') }}">
                                 </div>
                             </div>
 
                             <div class="col-12 col-md-6">
                                 <div class="sign__group">
-                                    <input type="text" name="email" class="sign__input" placeholder="Email">
+                                    <input type="text" name="email" class="sign__input" placeholder="{{ __('dashboard.email') }}">
                                 </div>
                             </div>
 
                             <div class="col-12">
                                 <div class="sign__group">
-                                    <input type="text" name="subject" class="sign__input" placeholder="Subject">
+                                    <input type="text" name="subject" class="sign__input" placeholder="{{ __('dashboard.subject') }}">
                                 </div>
                             </div>
 
                             <div class="col-12">
                                 <div class="sign__group">
-                                    <textarea name="message" class="sign__textarea" placeholder="Type your message"></textarea>
+                                    <textarea name="message" class="sign__textarea" placeholder="{{ __('dashboard.type_your_message') }}"></textarea>
                                 </div>
                             </div>
 
                             <div class="col-12 col-xl-3">
-                                <button type="submit" class="sign__btn"><span>Send</span></button>
+                                <button type="submit" class="sign__btn"><span>{{ __('dashboard.send') }}</span></button>
                             </div>
                         </div>
                     </form>

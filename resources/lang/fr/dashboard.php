@@ -146,4 +146,28 @@ return [
 
     'you_have_reached_your_maximum_post_limit' => 'Vous avez atteint votre limite de publication maximale. Veuillez contacter l\'administrateur.',
     'plz_verfiy_your_account' => 'Vous devez d\'abord vérifier votre numéro de téléphone.',
+
+    'plz_provide_info_about_the_post' => 'Veuillez fournir des informations précises sur la voiture ou la pièce de voiture, y compris la marque, le modèle, les caractéristiques et les éventuels défauts, ainsi que joindre des photos de haute qualité et des détails d\'entretien si possible.',
+
+    'select_ad_type' => 'Sélectionnez le type d\'annonce',
+    'select_year' => 'Sélectionnez l\'année',
+    'select_car_model' => 'Sélectionnez le modèle de voiture',
+    'select_car_type' => 'Sélectionnez le type de voiture',
+    'select_car_brand' => 'Sélectionnez la marque de voiture',
+    'mileage' => 'Kilométrage',
+    'select_gearbox' => 'Sélectionnez la boîte de vitesses',
+    'manual' => 'Manuelle',
+    'auto' => 'Automatique',
+    'select_fuel' => 'Sélectionnez le carburant',
+    'diesel' => 'Diesel',
+    'gasoline' => 'Essence',
+    'electric' => 'Électrique',
+    'select_color_inner' => 'Sélectionnez la couleur intérieure',
+    'select_color_outter' => 'Sélectionnez la couleur extérieure',
+    'number_of_seats' => 'Nombre de sièges',
+    'distance_per_liter' => 'Distance par litre',
+   
+    'type_your_message' => 'Tapez votre message',
+    'send' => 'Envoyer',
+    
 ];

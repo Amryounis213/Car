@@ -796,6 +796,28 @@ return [
 
     'you_have_reached_your_maximum_post_limit' => 'You have reached your maximum post limit. Please contact the administrator.',
     'plz_verfiy_your_account' => 'You have to verify your phone number first.',
+    'plz_provide_info_about_the_post' => 'Please provide accurate information about the car or car part, including the brand, model, features, and any defects if applicable, along with attaching high-quality photos and maintenance details if possible.',
+
+    'select_ad_type' => 'Select Ad Type',
+    'select_year' => 'Select Year',
+    'select_car_model' => 'Select Car Model',
+    'select_car_type' => 'Select Car Type',
+    'select_car_brand' => 'Select Car Brand',
+    'mileage' => 'Mileage',
+    'select_gearbox' => 'Select Gearbox',
+    'manual' => 'Manual',
+    'auto' => 'Automatic',
+    'select_fuel' => 'Select fuel',
+    'diesel' => 'Diesel',
+    'gasoline' => 'Gasoline',
+    'electric' => 'Electric',
+    'select_color_inner' => 'Select Color Inner',
+    'select_color_outter' => 'Select Color Outter',
+    'number_of_seats' => 'Number Of Seats',
+    'distance_per_liter' => 'Distance Per Liter',
+   
+    'type_your_message' => 'Type Your Message',
+    'send' => 'Send',
 
 
 ];

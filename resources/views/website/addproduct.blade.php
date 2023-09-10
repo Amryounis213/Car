@@ -19,8 +19,8 @@
                 <!-- breadcrumb -->
                 <div class="col-12">
                     <ul class="breadcrumbs">
-                        <li class="breadcrumbs__item"><a href="{{ route('website.home') }}">Home</a></li>
-                        <li class="breadcrumbs__item breadcrumbs__item--active">Post</li>
+                        <li class="breadcrumbs__item"><a href="{{ route('website.home') }}">{{ __('dashboard.home') }}</a></li>
+                        <li class="breadcrumbs__item breadcrumbs__item--active">{{ __('dashboard.post') }}</li>
                     </ul>
                 </div>
                 <!-- end breadcrumb -->
@@ -47,20 +47,21 @@
                             class="sign__form sign__form--contacts">
                             @csrf
                             <div class="row">
+                                <p>{{ __('dashboard.plz_provide_info_about_the_post') }}</p>
                                 <div class="col-12 col-md-6">
                                     <div class="sign__group">
                                         <select name="post_type" class="sign__input">
-                                            <option value="" disabled selected>Select Ad Type</option>
-                                            <option value="1" @selected(old('post_type') == 1)>Car</option>
-                                            <option value="0" @selected(old('post_type') == 0)>Mechanical Item</option>
+                                            <option value="" disabled selected>{{ __('dashboard.select_ad_type') }}</option>
+                                            <option value="1" @selected(old('post_type') == 1)>{{ __('dashboard.cars') }}</option>
+                                            <option value="0" @selected(old('post_type') == 0)>{{ __('dashboard.mechanical_items') }}</option>
                                         </select>
                                     </div>
                                 </div>
-
+                                
                                 {{-- Post Title --}}
                                 <div class="col-12">
                                     <div class="sign__group">
-                                        <textarea name="description" class="sign__textarea" placeholder="Description ..">{{ old('description') }}</textarea>
+                                        <textarea name="description" class="sign__textarea" placeholder="{{ __('dashboard.desc') }}">{{ old('description') }}</textarea>
                                         @error('description')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -70,7 +71,7 @@
                                 <div class="col-12 col-md-6">
                                     <div class="sign__group">
                                         <select name="city_id" class="sign__input">
-                                            <option value="" disabled selected>Select City</option>
+                                            <option value="" disabled selected>{{ __('dashboard.select_city') }}</option>
                                             @foreach ($cities as $city)
                                                 <option value="{{ $city->id }}" @selected(old('city_id') == $city->id)>
                                                     {{ $city->name }}
@@ -85,7 +86,7 @@
                                         {{-- <input type="text" inputmode="numeric" pattern="[0-9]*" min="1900" max=""
                                         name="year" class="sign__input" placeholder="Year" id="year-input"> --}}
                                         <select name="year" class="sign__input" id="year-input">
-                                            <option value="" disabled selected>Select Year</option>
+                                            <option value="" disabled selected>{{ __('dashboard.select_year') }}</option>
                                             <?php
                                             $currentYear = date('Y');
                                             $selected = old('year') == $currentYear ? 'selected' : '';
@@ -104,7 +105,7 @@
                                 <div class="col-12 col-md-6">
                                     <div class="sign__group">
                                         <select name="car_model_id" class="sign__input">
-                                            <option value="" disabled selected>Select Car Model</option>
+                                            <option value="" disabled selected>{{ __('dashboard.select_car_model') }}</option>
                                             @foreach ($models as $model)
                                                 <option value="{{ $model->id }}" @selected(old('car_model_id') == $model->id)>
                                                     {{ $model->name }}</option>
@@ -116,10 +117,10 @@
                                     </div>
                                 </div>
 
-                                <div class="col-12 col-md-6">
+                                {{-- <div class="col-12 col-md-6">
                                     <div class="sign__group">
                                         <select name="generation_id" class="sign__input">
-                                            <option value="" disabled selected>Select Car Generation</option>
+                                            <option value="" disabled selected>{{ __() }}</option>
                                             @foreach ($generation as $generation)
                                                 <option value="{{ $generation->id }}" @selected(old('generation_id') == $generation->id)>
                                                     {{ $generation->name }}</option>
@@ -129,12 +130,12 @@
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 <div class="col-12 col-md-6">
                                     <div class="sign__group">
                                         <select name="car_type_id" class="sign__input">
-                                            <option value="" disabled selected>Select Car Type</option>
+                                            <option value="" disabled selected>{{ __('dashboard.select_car_type') }}</option>
                                             @foreach ($carTypes as $model)
                                                 <option value="{{ $model->id }}" @selected(old('car_type_id') == $model->id)>
                                                     {{ $model->name }}</option>
@@ -150,7 +151,7 @@
                                 <div class="col-12 col-md-6">
                                     <div class="sign__group">
                                         <select name="brand_id" class="sign__input">
-                                            <option value="" disabled selected>Select Car Brand</option>
+                                            <option value="" disabled selected>{{ __('dashboard.select_car_brand') }}</option>
                                             @foreach ($brands as $model)
                                                 <option value="{{ $model->id }}" @selected(old('brand_id') == $model->id)>
                                                     {{ $model->name }}</option>
@@ -182,7 +183,7 @@
                                 <div class="col-12 col-md-6">
                                     <div class="sign__group">
                                         <input type="number" name="price" class="sign__input"
-                                            value="{{ old('price') }}" placeholder="Price">
+                                            value="{{ old('price') }}" placeholder="{{ __('dashboard.price') }}">
                                     </div>
                                     @error('price')
                                         <span class="text-danger">{{ $message }}</span>
@@ -193,23 +194,23 @@
                                     <div class="sign__group">
                                         <input type="number" value="{{ old('number_of_owners') }}" min="0"
                                             max="79" name="number_of_owners" class="sign__input"
-                                            placeholder="Number of Owners">
+                                            placeholder="{{ __('dashboard.number_of_owners') }}">
                                     </div>
                                 </div>
 
                                 <div class="col-12 col-md-6">
                                     <div class="sign__group">
                                         <input type="number" value="{{ old('mileage') }}" name="mileage"
-                                            class="sign__input" placeholder="Mileage" min="0" max="999999">
+                                            class="sign__input" placeholder="{{ __('dashboard.mileage') }}" min="0" max="999999">
                                     </div>
                                 </div>
                                 {{-- Gearbox is a Select View --}}
                                 <div class="col-12 col-md-6">
                                     <div class="sign__group">
                                         <select name="gearbox" class="sign__input">
-                                            <option value="" disabled selected>Select Gearbox</option>
-                                            <option value="manual" @selected(old('gearbox') == 'manual')>Manual</option>
-                                            <option value="automatic" @selected(old('gearbox') == 'automatic')>Automatic</option>
+                                            <option value="" disabled selected>{{ __('dashboard.select_gearbox') }}</option>
+                                            <option value="manual" @selected(old('gearbox') == 'manual')>{{ __('dashboard.manual') }}</option>
+                                            <option value="automatic" @selected(old('gearbox') == 'automatic')>{{ __('dashboard.auto') }}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -219,10 +220,10 @@
                                 <div class="col-12 col-md-6">
                                     <div class="sign__group">
                                         <select name="fuel" class="sign__input">
-                                            <option value="" disabled selected>Select fuel</option>
-                                            <option value="Diesel" @selected(old('fuel') == 'Diesel')>Diesel</option>
-                                            <option value="Essence" @selected(old('fuel') == 'Essence')>Gasoline</option>
-                                            <option value="Electric" @selected(old('fuel') == 'Electric')>Electric</option>
+                                            <option value="" disabled selected>{{ __('dashboard.select_fuel') }}</option>
+                                            <option value="Diesel" @selected(old('fuel') == 'Diesel')>{{ __('dashboard.diesel') }}</option>
+                                            <option value="Essence" @selected(old('fuel') == 'Essence')>{{ __('dashboard.gasoline') }}</option>
+                                            <option value="Electric" @selected(old('fuel') == 'Electric')>{{ __('dashboard.electric') }}</option>
 
                                         </select>
                                     </div>
@@ -234,7 +235,7 @@
                                 <div class="col-12 col-md-6">
                                     <div class="sign__group">
                                         <select name="color_id_in" class="sign__input">
-                                            <option value="" disabled selected>Select Color Inner</option>
+                                            <option value="" disabled selected>{{ __('dashboard.select_color_inner') }}</option>
                                             @foreach ($carColors as $color)
                                                 <option value="{{ $color->id }}" @selected(old('color_id_in') == $color->id)>
                                                     {{ $color->name }}</option>
@@ -246,7 +247,7 @@
                                 <div class="col-12 col-md-6">
                                     <div class="sign__group">
                                         <select name="color_id_out" class="sign__input">
-                                            <option value="" disabled selected>Select Color Outter</option>
+                                            <option value="" disabled selected>{{ __('dashboard.select_color_outter') }}</option>
                                             @foreach ($carColors as $color)
                                                 <option value="{{ $color->id }}" @selected(old('color_id_out') == $color->id)>
                                                     {{ $color->name }}</option>
@@ -265,14 +266,14 @@
                                     <div class="sign__group">
                                         <input type="number" value="{{ old('number_of_doors') }}" min="1"
                                             max="8" name="number_of_doors" class="sign__input"
-                                            placeholder="Number Of Doors">
+                                            placeholder="{{ __('dashboard.number_of_doors') }}">
                                     </div>
                                 </div>
 
                                 <div class="col-12 col-md-6">
                                     <div class="sign__group">
                                         <input type="number" value="{{ old('seats') }}" min="1" max="8"
-                                            name="seats" class="sign__input" placeholder="Number Of Seats">
+                                            name="seats" class="sign__input" placeholder="{{ __('dashboard.number_of_seats') }}">
                                     </div>
                                 </div>
 
@@ -281,7 +282,7 @@
                                     <div class="sign__group">
                                         <input type="number" value="{{ old('walk_for_liter') }}" min="1"
                                             max="400" name="walk_for_liter" class="sign__input"
-                                            placeholder="distance per liter">
+                                            placeholder="{{ __('dashboard.distance_per_liter') }}">
                                     </div>
                                 </div>
 
@@ -440,7 +441,7 @@
             </div>
 
             <!-- partners -->
-            <div class="row">
+            <div class="row" dir="ltr">
                 <div class="col-12">
                     <div class="partners splide" id="partners-slider">
                         <div class="splide__track">
