@@ -61,7 +61,7 @@ return [
     'number_of_doors' => 'عدد الأبواب',
     'you_may_also_like' => 'قد تعجبك أيضًا',
     'more_details' => 'التفاصيل',
-    'choose_the_right_lease' => 'اختر الإيجار المناسب',
+    'choose_the_right_ad' => 'اختر الإعلان المناسب',
     'filter' => 'تصفية',
     'clear_all' => 'مسح الكل',
     'filters' => 'الفلاتر',
@@ -170,5 +170,11 @@ return [
 
     'type_your_message' => 'اكتب رسالتك ..',
     'send' => 'ارسال',
+
+    'accepted' => 'مقبول',
+    'rejected' => 'مرفوض',
+    'pending' => 'قيد الانتظار',
+
+    'keyword' => 'كلمة مفتاحية ..'
 
 ];

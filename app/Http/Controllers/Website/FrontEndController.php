@@ -142,7 +142,7 @@ class FrontEndController extends Controller
                     $q->where('post_type', $request->post_type);
                 }
             })
-            ->paginate(8);
+            ->paginate(6);
         return view('website.cars', compact('cars'));
     }
 

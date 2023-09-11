@@ -98,9 +98,9 @@
             </section> --}}
             <!-- end get started -->
             <!-- cars -->
-            <section class="row">
+            <section class="row" style="direction: ltr">
                 <!-- title -->
-                <div class="col-12">
+                <div class="col-12" style="">
                     <div class="main__title main__title--first">
                         <h2>{{ __('dashboard.featured_cars') }}</h2>
                         <a href="{{ route('cars') }}" onclick="viewMore()" class="main__link"

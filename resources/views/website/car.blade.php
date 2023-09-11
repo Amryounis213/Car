@@ -43,7 +43,7 @@
                 <!-- end title -->
 
                 <!-- details -->
-                <div class="col-12 col-lg-7">
+                <div class="col-12 col-lg-7" style="direction: ltr">
                     <div class="details">
                         <div class="splide splide--details details__slider">
                             <div class="splide__arrows">
@@ -359,7 +359,7 @@
 
                 <!-- car -->
                 @foreach ($RandomCars as $randCar)
-                    <div class="col-12 col-md-6 col-xl-4">
+                    <div class="col-12 col-md-6 col-xl-4" style="direction: ltr">
 
                         <div class="car">
                             <div class="splide splide--card car__slider">

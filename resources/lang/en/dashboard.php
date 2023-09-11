@@ -409,9 +409,7 @@ return [
     'logo_icon_required' => 'Logo icon is required',
     'pullrequests' => 'Pull Requests',
     'show_pullrequests' => 'Show Pull Requests',
-    'accepted' => 'accepted',
-    'rejected' => 'rejected',
-    'pending' => 'pending',
+    
 
     'reject' => 'Reject',
     'accept' => 'Accept',
@@ -713,7 +711,7 @@ return [
     'number_of_doors' => 'Number of doors',
     'you_may_also_like' => 'You may also like',
     'more_details' => 'More Details',
-    'choose_the_right_lease' => 'Choose the right lease',
+    'choose_the_right_ad' => 'Choose The Right Ad',
     'filter' => 'Filter',
     'clear_all' => 'Clear all',
     'filters' => 'Filters',
@@ -820,4 +818,9 @@ return [
     'send' => 'Send',
 
 
+    'accepted' => 'Accepted',
+    'rejected' => 'Rejected',
+    'pending' => 'Pending',
+
+    'keyword' => 'Keyword'
 ];

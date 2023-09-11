@@ -1,4 +1,16 @@
 @extends('layouts.main')
+
+@section('styles')
+    <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
+    <link href="https://unpkg.com/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.css" rel="stylesheet" />
+    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet" />
+    <style>
+        .custom-file-input {
+            width: calc(100% - 0.5em);
+        }
+    </style>
+@endsection
+
 @section('content')
     <!--begin::Main-->
     <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
@@ -156,7 +168,7 @@
         const currentYear = new Date().getFullYear();
         document.getElementById('year-input').setAttribute('max', currentYear);
     </script>
-    
+
     <script>
         const fileInput = document.querySelector('.custom-file-input');
         const imagePreviewContainer = document.querySelector('.image-preview-container');
@@ -177,6 +189,4 @@
             }
         }
     </script>
-
-
 @endsection

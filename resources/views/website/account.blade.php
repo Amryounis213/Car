@@ -90,6 +90,7 @@
                                                         <tr>
                                                             <th>{{ __('dashboard.item') }}</th>
                                                             <th></th>
+                                                            <th>{{ __('dashboard.status') }}</th>
                                                             <th>{{ __('dashboard.year') }}</th>
                                                             <th>{{ __('dashboard.transmission') }}</th>
                                                             <th>{{ __('dashboard.fuel_type') }}</th>
@@ -110,11 +111,20 @@
                                                                     <td><a
                                                                             href="{{ route('showCar', $car->id) }}">{{ $car->title }}</a>
                                                                     </td>
+                                                                    <td>
+                                                                        @if ($car->status == 'accepted')
+                                                                            {{ __('dashboard.accepted') }}
+                                                                        @elseif ($car->status == 'rejected')
+                                                                            {{ __('dashboard.rejected') }}
+                                                                        @elseif ($car->status == 'pending')
+                                                                            {{ __('dashboard.pending') }}
+                                                                        @endif
+                                                                    </td>
                                                                     <td>{{ $car->year }}</td>
                                                                     <td>{{ $car->gearbox }}</td>
                                                                     <td>{{ $car->fuel }}</td>
-                                                                    <td><span
-                                                                            class="cart__price">{{ $car->price }} $ </span>
+                                                                    <td><span class="cart__price">{{ $car->price }} $
+                                                                        </span>
                                                                     </td>
                                                                     <td>
                                                                         <a href="{{ route('usercar.destroy', $car->id) }}"

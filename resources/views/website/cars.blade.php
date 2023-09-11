@@ -4,8 +4,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.5.0/css/bootstrap.min.css">
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/css/bootstrap-multiselect.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css">
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css">
+
     <style>
         * {
             /* direction: ltr; */
@@ -47,15 +47,15 @@
                 <!-- title -->
                 <div class="col-12">
                     <div class="main__title main__title--page">
-                        <h1>{{ __('dashboard.choose_the_right_lease') }}</h1>
+                        <h1>{{ __('dashboard.choose_the_right_ad') }}</h1>
                     </div>
                 </div>
                 <!-- end title -->
             </div>
 
-            <div class="row">
+            <div class="row" style="direction: ltr">
                 <!-- sidebar -->
-                <div class="col-12 col-xl-3 order-xl-2">
+                <div class="col-12 col-xl-3 order-xl-2" style="@if (app()->getLocale() == 'ar') direction: rtl @endif">
                     <div class="filter-wrap">
                         <button class="filter-wrap__btn" type="button" data-bs-toggle="collapse"
                             data-bs-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter"><span>Open
@@ -71,13 +71,13 @@
 
                                 <div class="filter__group">
                                     <label class="filter__label">{{ __('dashboard.search') }}:</label>
-                                    <input type="text" name="name" class="filter__input" placeholder="Keyword">
+                                    <input type="text" name="name" class="filter__input" placeholder="{{ __('dashboard.keyword') }}">
                                 </div>
 
                                 <div class="filter__group">
                                     <label for="filter__posttype"
                                         class="filter__label">{{ __('dashboard.post_type') }}:</label>
-                                    
+
                                     <div class="filter__select-wrap">
                                         <select name="post_type" id="filter__posttype" class="filter__select">
                                             <option value="">{{ __('dashboard.post_type') }}</option>
@@ -113,7 +113,8 @@
                                 </div>
 
                                 <div class="filter__group">
-                                    <label for="filter_cities" class="filter__label">{{ __('dashboard.the_cities') }}:</label>
+                                    <label for="filter_cities"
+                                        class="filter__label">{{ __('dashboard.the_cities') }}:</label>
 
                                     <div class="filter__select-wrap">
                                         <select name="city_id" id="filter_cities" class="filter__select">
@@ -128,7 +129,8 @@
 
 
                                 <div class="filter__group">
-                                    <label for="filter_colorin" class="filter__label">{{ __('dashboard.color_inner') }}:</label>
+                                    <label for="filter_colorin"
+                                        class="filter__label">{{ __('dashboard.color_inner') }}:</label>
 
                                     <div class="filter__select-wrap">
                                         <select name="colorin" id="filter_colorin" class="filter__select">
@@ -142,7 +144,8 @@
 
 
                                 <div class="filter__group">
-                                    <label for="filter_colorout" class="filter__label">{{ __('dashboard.color_outter') }}:</label>
+                                    <label for="filter_colorout"
+                                        class="filter__label">{{ __('dashboard.color_outter') }}:</label>
 
                                     <div class="filter__select-wrap">
                                         <select name="colorout" id="filter_colorout" class="filter__select">
@@ -156,8 +159,7 @@
 
 
                                 <div class="filter__group">
-                                    <label for="filter_seats"
-                                        class="filter__label">{{ __('dashboard.seats') }}:</label>
+                                    <label for="filter_seats" class="filter__label">{{ __('dashboard.seats') }}:</label>
 
                                     <div class="filter__select-wrap">
                                         <select name="seats" id="filter_seats" class="filter__select">
@@ -289,7 +291,8 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="paginator">
-                                <span class="paginator__pages">{{ $cars->currentPage() }} -  from - {{ $cars->lastPage() }}</span>
+                                <span class="paginator__pages">{{ $cars->currentPage() }} - from -
+                                    {{ $cars->lastPage() }}</span>
 
                                 <ul class="paginator__list-mobile">
                                     @if ($cars->previousPageUrl())

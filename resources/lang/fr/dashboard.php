@@ -62,7 +62,7 @@ return [
     'number_of_doors' => 'Nombre de portes',
     'you_may_also_like' => 'Vous pourriez également aimer',
     'more_details' => 'Plus de détails',
-    'choose_the_right_lease' => 'Choisissez la bonne location',
+    'choose_the_right_ad' => 'Choisissez l\'annonce appropriée',
     'filter' => 'Filtrer',
     'clear_all' => 'Tout effacer',
     'filters' => 'Filtres',
@@ -166,8 +166,13 @@ return [
     'select_color_outter' => 'Sélectionnez la couleur extérieure',
     'number_of_seats' => 'Nombre de sièges',
     'distance_per_liter' => 'Distance par litre',
-   
+
     'type_your_message' => 'Tapez votre message',
     'send' => 'Envoyer',
-    
+
+    'accepted' => 'Accepté',
+    'rejected' => 'Rejeté',
+    'pending' => 'En attente',
+
+    'keyword' => 'mot-clé..',
 ];
